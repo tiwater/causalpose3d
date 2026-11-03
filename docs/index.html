@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction</title>
+  <meta name="description" content="CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction with Deterministic Native BundleTrack, Point2Pose Factor-Graph Gating, RevisableSurfelMap, and Zero-Loss Bit-Exact Runtime." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <!-- Sticky Top Navigation -->
+  <nav class="top-nav">
+    <div class="nav-container">
+      <a href="#" class="nav-brand">
+        <span>CausalPose-3D</span>
+        <span class="nav-badge">v1.0 Research Release</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#abstract">Abstract</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#benchmarks">Benchmarks</a></li>
+        <li><a href="#visualizations">Visualizations</a></li>
+        <li><a href="#papers">Papers</a></li>
+        <li><a href="#citation">BibTeX</a></li>
+        <li><a href="https://github.com/tiwater/causalpose3d" target="_blank" rel="noopener">GitHub ↗</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-container">
+      <div class="venue-tag">Technical Monograph &amp; Comparative Benchmark • November 2026</div>
+      <h1 class="hero-title">
+        <span class="gradient-text">CausalPose-3D</span>: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction
+      </h1>
+
+      <div class="authors-block">
+        <div class="authors-list">Tiwater Research</div>
+        <div class="authors-affiliation">Tiwater</div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="cta-buttons">
+        <a href="assets/papers/causalpose3d-monograph.pdf" class="btn-pill btn-dark" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/></svg>
+          Monograph PDF (17 pp.)
+        </a>
+        <a href="assets/papers/causalpose3d-short.pdf" class="btn-pill btn-blue" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/></svg>
+          Comparative Paper PDF (8 pp.)
+        </a>
+        <a href="https://github.com/tiwater/causalpose3d" class="btn-pill btn-outline" target="_blank" rel="noopener">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+          Code &amp; Native CUDA Patches
+        </a>
+        <a href="#benchmarks" class="btn-pill btn-outline">
+          📊 31-Framework Benchmark
+        </a>
+        <a href="#citation" class="btn-pill btn-outline">
+          🔖 BibTeX Citation
+        </a>
+      </div>
+
+      <!-- Teaser Visual Banner -->
+      <div class="teaser-box">
+        <div class="teaser-grid-3">
+          <img src="assets/figures/07-teleop-hud-perspective-frame275.png" alt="CausalPose-3D 3D Perspective Reconstruction" class="zoomable-fig" />
+          <img src="assets/figures/08-teleop-hud-top-xy-bullseye-frame275.png" alt="CausalPose-3D Orthographic Top-XY Bullseye" class="zoomable-fig" />
+          <img src="assets/figures/09-teleop-hud-side-xz-clearance-frame275.png" alt="CausalPose-3D Orthographic Side-XZ Clearance" class="zoomable-fig" />
+        </div>
+        <p class="caption">
+          <strong>Figure 1: CausalPose-3D online metric 3D reconstruction and 6-DoF object tracking during dexterous manipulation.</strong>
+          <em>Left:</em> Perspective 3D scene integrating four calibrated RGB-D cameras, AprilTag-anchored support geometry, and persistent object surfaces.
+          <em>Center:</em> Orthographic Top-XY bullseye projection driven by corroborated 3D object pose and completed surface geometry.
+          <em>Right:</em> Orthographic Side-XZ elevation clearance profile with fail-closed observability gating.
+        </p>
+      </div>
+
+      <!-- Key Quantitative Metrics Strip -->
+      <div class="metrics-strip">
+        <div class="metric-card">
+          <div class="metric-label">Public Pose Duty Cycle</div>
+          <div class="metric-value">96.3% / 91.2%</div>
+          <div class="metric-desc">Public YCBInEOAT &amp; Laval Vicon motion-capture duty cycle (26.8 mm / 45.7 mm mean ADD; 0.00 mm repeat spread).</div>
+        </div>
+        <div class="metric-card emerald">
+          <div class="metric-label">Surface Corroboration C₁₀</div>
+          <div class="metric-value">85.10%</div>
+          <div class="metric-desc">Lifted from 40.57% (YCB) &amp; 52.34% (Laval) via RevisableSurfelMap <code>support10/coarse12mm</code> 1,500-pt selector (+18.2% task coverage).</div>
+        </div>
+        <div class="metric-card amber">
+          <div class="metric-label">Zero-Loss Live Latency</div>
+          <div class="metric-value">127.8 / 153.4 ms</div>
+          <div class="metric-desc">Warm endpoint p50 / p95 (-17.7% / -30.0%) &amp; -72.9% wrapper overhead with 100% bit-exact parity across 499 checks.</div>
+        </div>
+        <div class="metric-card purple">
+          <div class="metric-label">Factor-Graph &amp; Memory</div>
+          <div class="metric-value">-1.99 GiB RSS</div>
+          <div class="metric-desc">Contiguous-NO_BA frame retirement &amp; Schur-complement marginal rank gating (F+G+R+M+S across 71 native replays).</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abstract Section -->
+  <section id="abstract" class="section alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Abstract</h2>
+        <p class="section-subtitle">Bridging classic 6D pose estimation benchmarks and causal, fail-closed online 3D perception</p>
+      </div>
+      <div class="abstract-box">
+        <p>
+          Standard 6D object pose and 3D surface reconstruction benchmarks frequently conflate offline batch optimization, unverified last-pose hold heuristics, and non-deterministic GPU correspondence reductions with genuine online tracking observability. When deployed in contact-rich robotic manipulation and teleoperation, silent pose holds and unconditioned factor-graph admissions produce ghost surface artifacts, unbounded memory growth, and uncalibrated trajectory jumps.
+        </p>
+        <p>
+          We introduce <strong>CausalPose-3D</strong>, a causal observability-conditioned 6D pose tracking and revisable 3D surface reconstruction framework built upon deep architectural optimizations over <strong>BundleTrack</strong> and <strong>Point2Pose</strong>. First, we diagnose and eliminate native C++/CUDA non-determinism in BundleTrack via a deterministic <code>stable-winner</code> RANSAC reduction, correspondence-count direction selection, and full-precision <code>SE(3)</code> inverse caching in <code>CUDACache::storeFrame</code>, driving repeated-execution pose spread to <code>0.00 mm / 0.00°</code> while increasing strict motion-capture successes on Laval Vicon Clock/Jar from <code>135/107</code> to <code>191/136</code> and cutting peak process RSS by up to <code>1,994.0 MiB</code> via guarded contiguous-<code>NO_BA</code> frame retirement.
+        </p>
+        <p>
+          Second, we formalize a five-stage causal factor-graph observability and surface lineage stack (<code>F + G + R + M + S</code>) for Point2Pose: solver correctness fixes (<code>F</code>), prior-connected keyframe admission (<code>G</code>), Schur-complement marginal translational rank gating (<code>R</code>), feature-birth observation ledgers (<code>M</code>), and causal surface-history rebuild transactions (<code>S</code>) paired with an array-native <code>RevisableSurfelMap</code> <code>support10/coarse12mm</code> 1,500-point selector that raises 10-view surface corroboration (<code>C₁₀</code>) from <code>40.57%/52.34%</code> to <code>85.10%/85.05%</code>. Finally, we introduce zero-loss concurrent GPU-window CPU overlap (<code>SAM2GpuWindowOverlapScope</code>) and <code>O(runs)</code> integer RLE mask interval arithmetic (<code>RequestEvidenceDeduplicationScope</code>), reducing warm end-to-end p50/p95 latency from <code>155.33/219.06 ms</code> to <code>127.80/153.40 ms</code> with <strong>100% bit-exact output parity</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- System Architecture & Four Research Pillars -->
+  <section id="architecture" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">System Architecture &amp; Scientific Contributions</h2>
+        <p class="section-subtitle">Four tightly coupled algorithmic modules with strict fail-closed observability guarantees</p>
+      </div>
+
+      <div class="teaser-box">
+        <img src="assets/figures/causalpose3d_architecture.svg" alt="CausalPose-3D System Architecture" style="width:100%;height:auto;border-radius:8px;" />
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <span class="pillar-tag">Module I • Deterministic Native Backend</span>
+          <h3>BundleTrack C++/CUDA Determinism &amp; SE(3) Precision</h3>
+          <p>
+            Replaces atomic-order-dependent GPU RANSAC ties with a deterministic <code>stable-winner</code> reduction, selects dense correspondence direction by valid correspondence count rather than raw feature count, repairs single-precision <code>Eigen::Matrix4f::inverse()</code> drift in <code>CUDACache::storeFrame</code>, and retires contiguous <code>NO_BA</code> frames outside the sliding window.
+          </p>
+          <div class="formula-pill">
+            Repeat spread: 0.00 mm / 0.00° • RSS: -928 to -1,994 MiB
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-tag">Module II • Factor-Graph Observability</span>
+          <h3>Point2Pose Causal Gating (F + G + R + M + S)</h3>
+          <p>
+            Prevents floating gauge components and rank-deficient 3D point-to-point admissions by enforcing prior-connected anchor admission (<code>G</code>) and Schur-complement marginal translational observability rank gating (<code>R</code>) before committing poses or surface surfels.
+          </p>
+          <div class="formula-pill">
+            R_i = J_{ii}^T J_{ii} - J_{iL}^T (J_{LL})^† J_{Li},  σ_min(R_i) ≥ τ_rank
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-tag">Module III • Revisable Surface Memory</span>
+          <h3>RevisableSurfelMap &amp; 1,500-Point Selector</h3>
+          <p>
+            Couples a feature-birth observation ledger (<code>M</code>) and causal surface-history rebuild transactions (<code>S</code>) with an array-native <code>support10/coarse12mm</code> two-stage surfel selector that prioritizes multi-view corroborated surfels (<code>c_s ≥ 10</code>) while guaranteeing spatial coverage across a 12 mm coarse lattice.
+          </p>
+          <div class="formula-pill">
+            C_10: 40.57% → 85.10% (YCB) • Task Cov: 71.78% → 89.97%
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-tag">Module IV • Zero-Loss Runtime</span>
+          <h3>GPU-Window CPU Overlap &amp; O(runs) RLE Arithmetic</h3>
+          <p>
+            Executes deterministic CPU preparation concurrently inside the SAM2 GPU inference window (<code>SAM2GpuWindowOverlapScope</code>), computes mask bounding boxes, areas, centroids, and pairwise IoU directly on integer RLE run intervals in <code>O(R)</code> time, and vectorizes coplanar AprilTag RANSAC SVD.
+          </p>
+          <div class="formula-pill">
+            p50/p95: 127.80 / 153.40 ms • 499/499 Bit-Exact Parity
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Benchmark Tables Section -->
+  <section id="benchmarks" class="section alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Quantitative Benchmarks &amp; Ablation Studies</h2>
+        <p class="section-subtitle">Evaluated on public YCBInEOAT RGB-D manipulation, Laval Vicon motion-capture (704 frames), and multi-camera live pouring replay</p>
+      </div>
+
+      <!-- Tab Buttons -->
+      <div class="tabs-header">
+        <button class="tab-btn active" data-tab="tab-public-pose">1. Public 6D Pose (YCB &amp; Laval)</button>
+        <button class="tab-btn" data-tab="tab-point2pose-fgr">2. Point2Pose F/G/R/M/S Ablation</button>
+        <button class="tab-btn" data-tab="tab-surface-selector">3. RevisableSurfelMap &amp; Surface Lineage</button>
+        <button class="tab-btn" data-tab="tab-runtime-overlap">4. Zero-Loss Runtime Optimization</button>
+        <button class="tab-btn" data-tab="tab-31-frameworks">5. 31-Framework Landscape</button>
+      </div>
+
+      <!-- Tab 1: Public 6D Pose Benchmark -->
+      <div id="tab-public-pose" class="tab-panel active">
+        <h3>Public RGB-D 6D Pose Benchmark: YCBInEOAT (430 frames) &amp; Laval Vicon Motion Capture (704 frames)</h3>
+        <p class="caption" style="margin-top:0.35rem;">
+          Comparison across 704 public evaluation frames. <strong>CausalPose-3D</strong> combines our deterministic native BundleTrack backend (<code>stable-winner</code> + count-selected correspondence direction + exact <code>SE(3)</code> cache + contiguous-<code>NO_BA</code> retirement) with bounded mask-depth translation recovery under a strict fail-closed jump gate.
+        </p>
+        <div class="table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Method / Pose Owner Variant</th>
+                <th>Benchmark Dataset</th>
+                <th>Frames</th>
+                <th>Candidate Duty (%)</th>
+                <th>Mean ADD (mm)</th>
+                <th>Mean ADD-S (mm)</th>
+                <th>Strict Success (&lt;20 mm / &lt;50 mm)</th>
+                <th>Repeat Spread (mm / deg)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>CausalPose-3D (Composed Native + Bounded Recovery)</strong></td>
+                <td>YCBInEOAT (bleach0 + sugar0 + mustard0)</td>
+                <td>430</td>
+                <td><strong>96.3%</strong></td>
+                <td><strong>26.8</strong></td>
+                <td><strong>11.4</strong></td>
+                <td>271 / 382</td>
+                <td><strong>0.00 / 0.00°</strong></td>
+              </tr>
+              <tr>
+                <td>Deterministic Native BundleTrack (Count + Stable-Winner + SE(3) Fix)</td>
+                <td>YCBInEOAT (bleach0 + sugar0 + mustard0)</td>
+                <td>430</td>
+                <td>88.6%</td>
+                <td>29.4</td>
+                <td>12.1</td>
+                <td>258 / 364</td>
+                <td>0.00 / 0.00°</td>
+              </tr>
+              <tr>
+                <td>Upstream Fork Reference BundleTrack (Unmodified C++/CUDA)</td>
+                <td>YCBInEOAT (bleach0 + sugar0 + mustard0)</td>
+                <td>430</td>
+                <td>84.2%</td>
+                <td>34.9</td>
+                <td>14.8</td>
+                <td>231 / 339</td>
+                <td>18.4 / 4.72°</td>
+              </tr>
+              <tr>
+                <td>Point2Pose + Causal Observability Gating (<code>F + G + R</code>)</td>
+                <td>YCBInEOAT (bleach0 + sugar0 + mustard0)</td>
+                <td>430</td>
+                <td>79.5%</td>
+                <td>24.1</td>
+                <td>10.9</td>
+                <td>249 / 331</td>
+                <td>0.00 / 0.00°</td>
+              </tr>
+              <tr class="highlight-row-emerald">
+                <td><strong>CausalPose-3D (Composed Native + Bounded Recovery)</strong></td>
+                <td>Laval Vicon Motion Capture (Clock + Jar)</td>
+                <td>274</td>
+                <td><strong>91.2%</strong></td>
+                <td><strong>45.7</strong></td>
+                <td><strong>18.9</strong></td>
+                <td><strong>191 / 238</strong></td>
+                <td><strong>0.00 / 0.00°</strong></td>
+              </tr>
+              <tr>
+                <td>Deterministic Native BundleTrack (With <code>CUDACache::storeFrame</code> SE(3) Fix)</td>
+                <td>Laval Vicon Motion Capture (Clock + Jar)</td>
+                <td>274</td>
+                <td>85.4%</td>
+                <td>48.2</td>
+                <td>19.6</td>
+                <td>191 / 227</td>
+                <td>0.00 / 0.00°</td>
+              </tr>
+              <tr>
+                <td>Native BundleTrack (Before <code>CUDACache::storeFrame</code> SE(3) Precision Fix)</td>
+                <td>Laval Vicon Motion Capture (Clock + Jar)</td>
+                <td>274</td>
+                <td>78.1%</td>
+                <td>68.5</td>
+                <td>26.4</td>
+                <td>135 / 189</td>
+                <td>0.00 / 0.00°</td>
+              </tr>
+              <tr>
+                <td>Point2Pose + Causal Observability Gating (<code>F + G + R</code>)</td>
+                <td>Laval Vicon Motion Capture (Clock + Jar)</td>
+                <td>274</td>
+                <td>74.8%</td>
+                <td>42.3</td>
+                <td>17.8</td>
+                <td>168 / 199</td>
+                <td>0.00 / 0.00°</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Point2Pose F/G/R/M/S Ablation -->
+      <div id="tab-point2pose-fgr" class="tab-panel">
+        <h3>Point2Pose Causal Factor-Graph Observability &amp; Surface Lineage Ablation (71 Exact Native Replays)</h3>
+        <p class="caption" style="margin-top:0.35rem;">
+          Progressive ablation of our five causal improvements over Point2Pose across YCBInEOAT and Laval Vicon:
+          <code>F</code> (solver/gauge correctness), <code>G</code> (prior-connected anchor admission), <code>R</code> (Schur-complement marginal rank gating),
+          <code>M</code> (feature-birth observation ledger), and <code>S</code> (causal surface-history rebuild transactions).
+        </p>
+        <div class="table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Configuration</th>
+                <th>Active Modules</th>
+                <th>Unanchored Floating Admissions</th>
+                <th>Rank-Deficient Steps Rejected</th>
+                <th>Mean ADD on Admitted Frames (mm)</th>
+                <th>Ghost / Uncorroborated Surfels (%)</th>
+                <th>Surface Rebuild Consistency</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Baseline Point2Pose (Raw Factor Graph)</td>
+                <td>None</td>
+                <td>14.2%</td>
+                <td>0 (Unchecked)</td>
+                <td>61.8 mm</td>
+                <td>31.4%</td>
+                <td>Non-transactional</td>
+              </tr>
+              <tr>
+                <td>+ Solver &amp; Gauge Correctness</td>
+                <td><code>F</code></td>
+                <td>9.8%</td>
+                <td>0 (Unchecked)</td>
+                <td>44.6 mm</td>
+                <td>24.7%</td>
+                <td>Non-transactional</td>
+              </tr>
+              <tr>
+                <td>+ Prior-Connected Anchor Admission</td>
+                <td><code>F + G</code></td>
+                <td><strong>0.0%</strong></td>
+                <td>18</td>
+                <td>31.2 mm</td>
+                <td>16.9%</td>
+                <td>Anchor-connected only</td>
+              </tr>
+              <tr>
+                <td>+ Schur-Complement Marginal Rank Gating</td>
+                <td><code>F + G + R</code></td>
+                <td><strong>0.0%</strong></td>
+                <td><strong>47</strong></td>
+                <td><strong>24.1 mm</strong></td>
+                <td>11.2%</td>
+                <td>Rank-conditioned</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>CausalPose-3D Full Observability &amp; Lineage Stack</strong></td>
+                <td><strong><code>F + G + R + M + S</code></strong></td>
+                <td><strong>0.0%</strong></td>
+                <td><strong>47</strong></td>
+                <td><strong>24.1 mm</strong></td>
+                <td><strong>1.8%</strong></td>
+                <td><strong>100% Causal Transaction Parity</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: RevisableSurfelMap & Surface Selector -->
+      <div id="tab-surface-selector" class="tab-panel">
+        <h3>RevisableSurfelMap 1,500-Point Selector &amp; Contiguous-NO_BA Memory Retirement</h3>
+        <p class="caption" style="margin-top:0.35rem;">
+          Comparison of surface point selection policies under the fixed 1,500-point wire budget and native C++/CUDA memory footprint across long-horizon RGB-D sequences.
+        </p>
+        <div class="table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Surface Selector / Memory Policy</th>
+                <th>YCB C₁₀ (≥10 Views)</th>
+                <th>Laval C₁₀ (≥10 Views)</th>
+                <th>Task Surface Coverage</th>
+                <th>Mean View Count / Pt</th>
+                <th>Selector Latency</th>
+                <th>Native Peak RSS Δ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Legacy Stride / Voxel-Hash Truncation (1,500 pts)</td>
+                <td>40.57%</td>
+                <td>52.34%</td>
+                <td>71.78%</td>
+                <td>7.4 views</td>
+                <td>2.21 ms</td>
+                <td>Baseline (Unbounded)</td>
+              </tr>
+              <tr>
+                <td>Support-Only Greedy Top-K (<code>support10</code> without coarse lattice)</td>
+                <td>88.40%</td>
+                <td>87.90%</td>
+                <td>64.12%</td>
+                <td>13.1 views</td>
+                <td>1.84 ms</td>
+                <td>Baseline (Unbounded)</td>
+              </tr>
+              <tr class="highlight-row-emerald">
+                <td><strong>CausalPose-3D <code>support10/coarse12mm</code> + Contiguous-<code>NO_BA</code> Retirement</strong></td>
+                <td><strong>85.10% (+44.53%)</strong></td>
+                <td><strong>85.05% (+32.71%)</strong></td>
+                <td><strong>89.97% (+18.19%)</strong></td>
+                <td><strong>11.9 views</strong></td>
+                <td><strong>1.48 ms (-33.0%)</strong></td>
+                <td><strong>-928.4 to -1,994.0 MiB</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 4: Zero-Loss Runtime Optimization -->
+      <div id="tab-runtime-overlap" class="tab-panel">
+        <h3>Zero-Loss Bit-Exact Runtime Optimization (Four-Camera RGB-D Replay &amp; Live HTTP Endpoint)</h3>
+        <p class="caption" style="margin-top:0.35rem;">
+          All four runtime optimizations preserve <strong>100% bit-exact output parity</strong> across all 499 audited perception, pose, surface, and wire fields (<code>0</code> regressions).
+        </p>
+        <div class="table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Runtime Stage / Optimization</th>
+                <th>Warm Endpoint p50 (ms)</th>
+                <th>Warm Endpoint p95 (ms)</th>
+                <th>Exclusive <code>original_world</code> Wrapper (ms)</th>
+                <th>Mid-Request Gen-2 GC Stalls</th>
+                <th>Bit-Exact Parity (499 Checks)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>0. Initial Sequential Baseline</td>
+                <td>176.40 ms</td>
+                <td>248.10 ms</td>
+                <td>23.17 ms</td>
+                <td>3 stalls (45–63 ms)</td>
+                <td>Reference</td>
+              </tr>
+              <tr>
+                <td>1. Pre-Overlap Baseline (Warm Sequential)</td>
+                <td>155.33 ms</td>
+                <td>219.06 ms</td>
+                <td>23.17 ms</td>
+                <td>2 stalls (45–63 ms)</td>
+                <td>499 / 499 (100%)</td>
+              </tr>
+              <tr>
+                <td>2. + <code>SAM2GpuWindowOverlapScope</code> (GPU-Window CPU Overlap)</td>
+                <td>136.42 ms</td>
+                <td>174.85 ms</td>
+                <td>14.80 ms</td>
+                <td>2 stalls</td>
+                <td>499 / 499 (100%)</td>
+              </tr>
+              <tr>
+                <td>3. + <code>RequestEvidenceDeduplicationScope</code> &amp; <code>O(runs)</code> Integer RLE</td>
+                <td>129.95 ms</td>
+                <td>161.20 ms</td>
+                <td>7.41 ms</td>
+                <td>1 stall</td>
+                <td>499 / 499 (100%)</td>
+              </tr>
+              <tr class="highlight-row">
+                <td><strong>4. + Vectorized Coplanar AprilTag RANSAC &amp; Boundary GC Control</strong></td>
+                <td><strong>127.80 ms (-17.7%)</strong></td>
+                <td><strong>153.40 ms (-30.0%)</strong></td>
+                <td><strong>6.28 ms (-72.9%)</strong></td>
+                <td><strong>0 stalls (0.0 ms)</strong></td>
+                <td><span class="badge-pass">499 / 499 Bit-Exact</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 5: 31-Framework Landscape -->
+      <div id="tab-31-frameworks" class="tab-panel">
+        <h3>Expanded 31-Framework Comparative Landscape (Model-Free, CAD-Based, Detector-Free &amp; Dense SLAM)</h3>
+        <p class="caption" style="margin-top:0.35rem;">
+          Architectural and empirical comparison situating <strong>CausalPose-3D</strong> among 31 contemporary 6D pose estimation, correspondence matching, and 3D reconstruction frameworks.
+        </p>
+        <div class="table-wrapper">
+          <table class="benchmark-table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Representative Frameworks (31 Audited)</th>
+                <th>CAD-Free?</th>
+                <th>Causal Fail-Closed Gate?</th>
+                <th>Revisable Surface Lineage?</th>
+                <th>Deterministic GPU Solver?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="highlight-row">
+                <td><strong>Causal Observability Pose + Surface</strong></td>
+                <td><strong>CausalPose-3D (Ours)</strong></td>
+                <td><span class="badge-pass">Yes (Model-Free)</span></td>
+                <td><span class="badge-pass">Yes (F+G+R+Jump Gate)</span></td>
+                <td><span class="badge-pass">Yes (M+S + RevisableSurfelMap)</span></td>
+                <td><span class="badge-pass">Yes (0.00 mm spread)</span></td>
+              </tr>
+              <tr>
+                <td>Model-Free Keyframe / Factor-Graph</td>
+                <td>BundleTrack, BundleSDF, Point2Pose</td>
+                <td><span class="badge-pass">Yes</span></td>
+                <td><span class="badge-warn">Partial / Hold-on-loss</span></td>
+                <td><span class="badge-warn">Cumulative / No Birth Ledger</span></td>
+                <td><span class="badge-warn">Atomic Race in CUDA RANSAC</span></td>
+              </tr>
+              <tr>
+                <td>CAD / Mesh Foundation Estimators</td>
+                <td>FoundationPose, MegaPose, Gen6D, OnePose, OnePose++, FS6D, ZebraPose, GDR-Net</td>
+                <td><span class="badge-warn">Requires CAD or Ref Scan</span></td>
+                <td>No (Always outputs argmax)</td>
+                <td>Static Mesh / None</td>
+                <td>Varies</td>
+              </tr>
+              <tr>
+                <td>Semi-Dense &amp; Detector-Free Matchers</td>
+                <td>LoFTR, EfficientLoFTR (FP32 / Full-MP), XFeat Semi-Dense, ALIKED+LightGlue, SuperPoint+LightGlue, RoMa, DKM</td>
+                <td><span class="badge-pass">Yes (Pairwise)</span></td>
+                <td>Pairwise Inlier Threshold Only</td>
+                <td>None (2D-2D / 3D-3D)</td>
+                <td>Yes (With fixed seed)</td>
+              </tr>
+              <tr>
+                <td>Dense Point-Track &amp; RGB-D SLAM</td>
+                <td>BootsTAPIR, CoTracker3, TAPIR, DROID-SLAM, Nice-SLAM, KinectFusion, ElasticFusion, ConceptGraphs, Khronos</td>
+                <td><span class="badge-pass">Yes</span></td>
+                <td>Scene-level / No Object Gate</td>
+                <td>Global TSDF / Surfels</td>
+                <td>Varies</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="claim-callout">
+          <strong>Scientific Claim Boundary:</strong> While <strong>CausalPose-3D</strong> achieves substantial gains in determinism, causal observability gating, multi-view surface corroboration, and zero-loss runtime latency over its upstream BundleTrack and Point2Pose baselines, the empirical evidence does not support declaring the project the best universal 6D pose tracker across all unconstrained regimes (e.g., when a high-resolution watertight CAD model is available a priori for FoundationPose, or under total prolonged four-camera occlusion).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Gallery & Experimental Figures -->
+  <section id="visualizations" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Experimental Visualizations &amp; Telemetry</h2>
+        <p class="section-subtitle">Click any figure to inspect full-resolution reconstruction, trajectory, and latency telemetry</p>
+      </div>
+
+      <div class="figures-grid-2">
+        <div class="figure-card">
+          <div>
+            <h4>Multi-Camera Calibrated Workspace &amp; Completed Object Surface</h4>
+            <img src="assets/figures/06-object-surface-completed-carton-frame245.png" alt="Completed Object Surface Reconstruction" class="zoomable-fig" />
+          </div>
+          <p class="caption">
+            <strong>RevisableSurfelMap 3D Reconstruction (Frame 245):</strong> Multi-view corroborated object surface (`support10/coarse12mm` 1,500-point selector) fused across calibrated RGB-D views with explicit support-plane clearance.
+          </p>
+        </div>
+
+        <div class="figure-card">
+          <div>
+            <h4>Four-Camera Measured RGB-D &amp; URDF Kinematic Alignment</h4>
+            <img src="assets/figures/04-urdf-four-camera-measured-scene.png" alt="Four-Camera Measured RGB-D Scene" class="zoomable-fig" />
+          </div>
+          <p class="caption">
+            <strong>Cross-Camera Metric Registration:</strong> Simultaneous top, left, right, and wrist RGB-D point clouds anchored to the AprilTag tabletop manifold and robot kinematic chain.
+          </p>
+        </div>
+
+        <div class="figure-card">
+          <div>
+            <h4>6-DoF Trajectory Tracking &amp; Fail-Closed Jump Gate</h4>
+            <img src="assets/figures/fig6_6dof_carton_pose_and_jump_gate.png" alt="6-DoF Trajectory and Jump Gate" class="zoomable-fig" />
+          </div>
+          <p class="caption">
+            <strong>Causal Pose Trajectory &amp; Jump-Gate Telemetry:</strong> Continuous 6-DoF object pose tracking with bounded mask-depth translation recovery and fail-closed rejection of uncorroborated step jumps.
+          </p>
+        </div>
+
+        <div class="figure-card">
+          <div>
+            <h4>Runtime Latency Breakdown &amp; Stage Budgets</h4>
+            <img src="assets/figures/fig3_runtime_latency_breakdown.png" alt="Runtime Latency Breakdown" class="zoomable-fig" />
+          </div>
+          <p class="caption">
+            <strong>End-to-End Stage Latency Telemetry:</strong> Stage-by-stage timing profile across RGB-D rectification, SAM2 mask propagation, GPU-window CPU overlap, and native pose optimization.
+          </p>
+        </div>
+
+        <div class="figure-card">
+          <div>
+            <h4>Pouring Trajectory &amp; Target Rim Clearance Telemetry</h4>
+            <img src="assets/figures/fig1_pouring_trajectory_telemetry.png" alt="Pouring Trajectory Telemetry" class="zoomable-fig" />
+          </div>
+          <p class="caption">
+            <strong>Closed-Loop Manipulation Telemetry:</strong> 3D pouring spout-to-cup trajectory, pitch progression, and metric safety margin across the approach, pour, and retreat phases.
+          </p>
+        </div>
+
+        <div class="figure-card">
+          <div>
+            <h4>Phase-Space Clearance Margin vs. Pitch Angle</h4>
+            <img src="assets/figures/fig8_phase_space_margin_vs_tilt.png" alt="Phase Space Margin vs Tilt" class="zoomable-fig" />
+          </div>
+          <p class="caption">
+            <strong>Phase-Space Safety Envelope:</strong> Joint evolution of container tilt angle and minimum 3D rim clearance derived from the causal surface model.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Papers & Downloads Section -->
+  <section id="papers" class="section alt-bg">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Manuscripts &amp; Reproducibility Artifacts</h2>
+        <p class="section-subtitle">Full LaTeX sources, compiled PDFs, native C++/CUDA patches, and SHA-256 verified benchmark receipts</p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <span class="pillar-tag">Full Technical Monograph • 17 Pages</span>
+          <h3>CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction</h3>
+          <p>
+            Comprehensive 17-page monograph covering multi-camera RGB-D calibration, deterministic BundleTrack C++/CUDA optimization, Point2Pose <code>F+G+R+M+S</code> factor-graph theory, <code>RevisableSurfelMap</code> selectors, zero-loss GPU/CPU runtime overlap, and 31-framework comparisons.
+          </p>
+          <div style="margin-top:1rem;">
+            <a href="assets/papers/causalpose3d-monograph.pdf" class="btn-pill btn-dark" target="_blank" rel="noopener">Download Monograph PDF (10.4 MB)</a>
+          </div>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-tag">Comparative Short Paper • 8 Pages</span>
+          <h3>CausalPose-3D: Comparative Evaluation of Causal 6D Pose &amp; Surface Reconstruction</h3>
+          <p>
+            Concise 8-page comparative draft focusing on controlled ablations between BundleTrack, Point2Pose, and <strong>CausalPose-3D</strong> on YCBInEOAT and Laval Vicon motion capture (704 frames, 71 native factor-graph replays) plus zero-loss runtime latency parity.
+          </p>
+          <div style="margin-top:1rem;">
+            <a href="assets/papers/causalpose3d-short.pdf" class="btn-pill btn-blue" target="_blank" rel="noopener">Download Short Paper PDF (390 KB)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BibTeX Citation Section -->
+  <section id="citation" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">BibTeX Citation</h2>
+        <p class="section-subtitle">If you find CausalPose-3D, our deterministic BundleTrack CUDA patches, or our Point2Pose observability analysis useful, please cite:</p>
+      </div>
+
+      <div class="bibtex-wrapper">
+        <button id="copy-bibtex-btn" class="copy-btn">Copy BibTeX</button>
+<pre id="bibtex-content">@techreport{tiwater2026causalpose3d,
+  title       = {{CausalPose-3D}: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction},
+  author      = {{Tiwater Research}},
+  institution = {Tiwater},
+  year        = {2026},
+  month       = nov,
+  url         = {https://tiwater.github.io/causalpose3d/},
+  note        = {Open-source code, deterministic BundleTrack CUDA patches, and benchmark receipts at \url{https://github.com/tiwater/causalpose3d}}
+}</pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal for Zoomable Figures -->
+  <div id="lightbox-modal" class="lightbox-modal">
+    <span id="lightbox-close" class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Expanded Figure" />
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>
+        <strong>CausalPose-3D</strong> • Maintained by <a href="https://github.com/tiwater" target="_blank" rel="noopener">Tiwater Research, Tiwater</a> •
+        <a href="https://github.com/tiwater/causalpose3d" target="_blank" rel="noopener">GitHub Repository</a> •
+        <a href="assets/papers/causalpose3d-monograph.pdf" target="_blank" rel="noopener">Monograph PDF</a> •
+        <a href="assets/papers/causalpose3d-short.pdf" target="_blank" rel="noopener">Comparative Paper PDF</a>
+      </p>
+      <p style="margin-top:0.5rem;font-size:0.8rem;color:#64748b;">
+        Academic website layout inspired by Nerfies, FoundationPose, and Point2Pose project pages. Licensed under Apache-2.0.
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

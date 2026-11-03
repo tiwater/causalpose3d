@@ -1,0 +1,295 @@
+\documentclass[10pt,journal]{IEEEtran}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts,booktabs,graphicx,multirow,url,cite,xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!65!black,citecolor=blue!65!black,urlcolor=blue!65!black]{hyperref}
+
+\setlength{\tabcolsep}{3.8pt}
+\renewcommand{\arraystretch}{1.10}
+
+\markboth{ARXIV PREPRINT}{TIWATER RESEARCH: CAUSALPOSE-3D: ONLINE POSE ESTIMATION AND CONSISTENT RECONSTRUCTION UNDER DEGENERATE OBSERVATIONS}
+
+\title{CausalPose-3D: Online Pose Estimation and Consistent Reconstruction of Unknown Objects under Degenerate Observations}
+\author{Tiwater Research%
+\thanks{The authors are with Tiwater Research, Tiwater (\url{https://github.com/tiwater}). Project page: \url{https://tiwater.github.io/causalpose3d/}.}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Long-horizon 2D point trajectories and detector-free feature matchers provide critical data association for tracking unknown rigid objects during robotic manipulation, yet their 3D geometric constraints frequently become rank-deficient, disconnected from the initial coordinate gauge, or version-inconsistent with accumulated surfaces when sensor depth is sparse or local geometry is degenerate. Across a systematic empirical audit spanning 31 perception, matching, tracking, and reconstruction frameworks on public benchmarks (YCBInEOAT, Laval Vicon motion capture, YCB-M, DexYCB) and humanoid bimanual manipulation recordings, we demonstrate a counterintuitive failure phenomenon: increasing pose availability or lowering internal factor-graph optimization cost can degrade strict pose accuracy and accumulated 3D surface quality. On Laval Cookiejar, repairing two upstream Point2Pose implementation defects (delayed-keyframe attribution and solver-return consistency) raises pose availability from $207$ to $239/295$ frames and failure-inclusive ADD AUC from $0.574$ to $0.635$, but reduces $20\,\mathrm{mm}$ origin successes from $136$ to $120$ and drops $10\,\mathrm{mm}$ model surface coverage $C_{10}$ from $76.82\%$ to $61.79\%$. To resolve these failure modes, we present \textbf{CausalPose-3D} (\emph{Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction}), a unified scientific framework built upon and extending BundleTrack and Point2Pose. We formalize unanchored $\mathrm{SE}(3)$ gauge drift ($28/33$ Cookiejar and $6/16$ Clock-full graph updates disconnected from the prior), Schur-complement local rank deficiency after nuisance landmark elimination ($8/34$ connected updates with $r_i<6$), and unreconciled TSDF pose versions ($17/19$ fused keyframes revised without surface updates), and evaluate four controlled Point2Pose-branch interventions: prior-connected admission ($G$), marginal rank gating ($R$), immutable feature-birth observation ledgers ($M$), and causal surface-history rebuild transactions ($S$). In our primary \textbf{CausalPose-3D} native registration and \texttt{CausalObjectSurface} branch, we resolve CUDA RANSAC parallel-reduction non-determinism ($18.00\,\mathrm{mm}/6.22^\circ$ split converged to a single winner across $100$ calls), $\mathrm{SE}(3)$ inverse-coefficient precision loss in \texttt{storeFrame} (raising Clock and Cookiejar strict successes from $135/107$ to $191/136$), bounded-window \texttt{NO\_BA} non-keyframe retirement (reducing recovery and stress endpoint RSS by $928.4\,\mathrm{MiB}$ and $1{,}994.0\,\mathrm{MiB}$ with byte-identical outputs), and array-native support-constrained $1{,}500$-point surface selection (improving public $C_{10}$ from $40.57\%/52.34\%$ to $85.10\%/85.05\%$ and task surface coverage from $71.78\%$ to $89.97\%$ while cutting selector latency by $33\%$). Finally, \textbf{CausalPose-3D} incorporates two bit-exact runtime execution adapters---\emph{same-thread SAM~2 GPU-window CPU preparation overlap} and \emph{request-scoped evidence deduplication with $O(\text{runs})$ integer RLE run-interval arithmetic, vectorized coplanar RANSAC, and request-boundary cyclic GC control}---reducing exclusive object-world wrapper overhead by $72.9\%$ ($23.17\to 6.28\,\mathrm{ms}$), eliminating $140.58\,\mathrm{ms}$ mid-request Generation-2 GC stalls, and lowering warm HTTP endpoint latency from $155.33/219.06\,\mathrm{ms}$ ($p_{50}/p_{95}$, $176.40\,\mathrm{ms}$ initial baseline) to $127.80/153.40\,\mathrm{ms}$ with zero bit divergence across $499$ online equivalence checks.
+\end{abstract}
+
+\begin{IEEEkeywords}
+CausalPose-3D, RGB-D object tracking, 3D surface reconstruction, factor-graph observability, degenerate geometry, teleoperation assistance, bit-exact runtime optimization, reproducibility.
+\end{IEEEkeywords}
+
+\section{Introduction}
+\label{sec:intro}
+
+\IEEEPARstart{O}{nline} 6-DoF object pose tracking and 3D surface reconstruction from onboard RGB-D streams provide essential spatial awareness for remote humanoid teleoperation and bimanual manipulation~\cite{bundletrack,bundlesdf,point2pose}. Without pre-loaded CAD models, a manipulation perception system must initialize an object coordinate gauge from the first segmented RGB-D observation, track relative rigid motion across occlusions and depth dropouts, and accumulate a geometrically trustworthy 3D surface for operator guidance.
+
+A common assumption in model-free tracking benchmarks is that returning a higher fraction of non-lost poses---or achieving a lower internal optimization residual---naturally yields a more reliable 3D reconstruction. Our empirical investigation refutes this assumption. Under sparse depth support, self-occlusion, or locally degenerate geometry, long-horizon 2D point trajectories and dense correspondences frequently constrain only a subspace of the joint pose-landmark state. Admitting unconstrained or unanchored updates into persistent object maps and volumetric/surfel surfaces can corrupt previously verified geometry even while increasing frame-level pose availability.
+
+To prevent implementation artifacts from being conflated with algorithmic gains, we introduce \textbf{CausalPose-3D} (\emph{Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction}) and strictly distinguish three methodological entities throughout this study: (1) the upstream BundleTrack algorithm~\cite{bundletrack} (pinned to \texttt{ffa67d425240}), (2) the upstream Point2Pose causal point-trajectory tracker and TSDF reconstructor~\cite{point2pose} (pinned to \texttt{51856226610d}), and (3) our proposed \textbf{CausalPose-3D} algorithmic framework, which synthesizes observability-conditioned factor-graph and causal surface transactions ($F,G,R,M,S$) on the Point2Pose branch with deterministic CUDA RANSAC, exact $\mathrm{SE}(3)$ inverse-pose transfer, guarded \texttt{NO\_BA} frame retirement, lineage-audited \texttt{CausalObjectSurface} (\texttt{RevisableSurfelMap}) fusion, and bit-exact runtime execution on the BundleTrack branch. All candidate estimators execute under a fail-closed shadow protocol consuming identical registered RGB-D frames and SAM~2 video segmentation masks bound by SHA-256 receipts, without overwriting live teleoperation wire authority.
+
+Our contributions are fourfold:
+\begin{enumerate}
+    \item \textbf{Failure Mechanism Formulation and Observability Audit (Sections~\ref{sec:problem}--\ref{sec:method}):} We formalize three coupled failure modes in long-horizon RGB-D tracking and fusion: (i) temporal attribution and solver-return inconsistency (Fork $F$), (ii) unanchored $\mathrm{SE}(3)$ gauge drift and nuisance-coupled rank deficiency after orthogonal left-null-space landmark elimination $\bar{\mathbf{A}}_x=(\mathbf{I}-\mathbf{A}_y\mathbf{A}_y^+)\mathbf{A}_x$, and (iii) pose-version desynchronization between factor-graph revisions and accumulated surfaces. We evaluate controlled interventions ($G,R,M,S$) across $704$ Vicon-referenced frames and $71$ exact native factor-graph replays.
+    \item \textbf{Native BundleTrack Determinism, Precision, and Memory Governance (Section~\ref{sec:native_bt}):} We identify and fix parallel-reduction tie-breaking races and count-comparison directions in native CUDA RANSAC, repair float-to-matrix inverse-coefficient truncation in \texttt{CUDACache::storeFrame}, and introduce guarded \texttt{NO\_BA} non-keyframe retirement that reclaims $928.4$--$1{,}994.0\,\mathrm{MiB}$ of host RSS under tracking loss while preserving $100\%$ bit-exact pose and surface outputs.
+    \item \textbf{Lineage-Audited Surface Fusion and Array-Native Budget Selection (Section~\ref{sec:surface_selection}):} By tracing $1{,}512{,}357$ surfel contributions to $1{,}960{,}512$ source pixels and continuous mesh rays, we separate pose-induced surface tails from raw boundary measurements, and implement an array-native \texttt{support10/coarse12mm} $1{,}500$-point selector on \texttt{RevisableSurfelMap} that cuts selection latency by $33\%$ while raising model coverage $C_{10}$ from $40.57\%/52.34\%$ to $85.10\%/85.05\%$.
+    \item \textbf{31-Framework Context and Bit-Exact Runtime Execution Optimization (Sections~\ref{sec:runtime_opt}--\ref{sec:experiments}):} Within our benchmark of 31 perception, depth, pointmap, matching, and tracking frameworks (including EfficientLoFTR, XFeat, and ALIKED+LightGlue shadow trials), we introduce \texttt{SAM2GpuWindowOverlapScope} and \texttt{RequestEvidenceDeduplicationScope} ($O(\text{runs})$ exact integer RLE arithmetic, cross-stage surface/medoid reuse, BLAS-screened coplanar RANSAC, and request-boundary cyclic GC control), cutting warm HTTP endpoint latency by $27.6\%$ ($176.40\to 127.80\,\mathrm{ms}$ $p_{50}$, $219.06\to 153.40\,\mathrm{ms}$ $p_{95}$) with $100\%$ bit-exact parity.
+\end{enumerate}
+
+\section{Related Work and Architectural Landscape}
+\label{sec:related}
+
+Model-free RGB-D trackers estimate camera-local object motion from an initial segmented frame. BundleTrack~\cite{bundletrack} combines pairwise feature matching with keyframe pose-graph optimization over sparse 3D correspondences and dense point-to-plane residuals. BundleSDF~\cite{bundlesdf} jointly optimizes a keyframe pose graph and a neural implicit signed distance field, whereas FoundationPose~\cite{foundationpose} unifies CAD-based and few-view reference-assisted pose estimation and tracking. Point2Pose~\cite{point2pose} introduces long-horizon 2D point tracking (Online BootsTAPIR~\cite{bootstap}) across occlusions, lifting 2D tracks to 3D observations for multi-hypothesis SVD-RANSAC registration, GTSAM~\cite{gtsam} Levenberg-Marquardt pose-landmark graph optimization, and incremental TSDF fusion. While Point2Pose's point identity persistence, multi-object query management, and graph/TSDF architecture are established upstream contributions, we show that its unguarded graph commits and decoupled TSDF integration can degrade surface fidelity when 2D tracks lack well-distributed 3D depth support. In parallel, replacing detector-free LoFTR~\cite{loftr} with faster matchers such as EfficientLoFTR~\cite{eloftr}, semi-dense XFeat~\cite{xfeat}, or sparse ALIKED+LightGlue~\cite{aliked,lightglue} exposes a strict accuracy--latency frontier when foreground masks contain $<1\%$ valid sensor depth.
+
+State estimation under geometric degeneracy has been studied in point-cloud registration and SLAM by Zhang \emph{et al.}~\cite{zhang2016degeneracy} and Tuna \emph{et al.} (X-ICP~\cite{xicp}), which project optimization increments onto well-conditioned Hessian subspaces. However, evaluating pose conditioning with landmarks held fixed overestimates available information when the object map itself is uncertain. In dense mapping, BundleFusion~\cite{bundlefusion} de-integrates and re-integrates RGB-D frames when bundle adjustment revises camera poses. For unknown dynamic objects, however, re-integrating historical keyframes with revised graph poses only improves the surface if the graph revisions themselves are metrically accurate and anchored to the initial gauge.
+
+\section{Problem Formulation and Failure Mechanisms under Degenerate Observations}
+\label{sec:problem}
+
+\subsection{Observation Provenance, Coordinate Gauge, and Metrics}
+Let each tracking observation tuple be bound as
+\begin{equation}
+    \mathcal{O}_t=\big(\text{obj\_id},f_t,\{(u_j,v_j,d_j,\text{id}_j,\text{valid}_j)\}_{j=1}^{M_t},\mathbf{K},M_t^{\mathrm{seg}}\big),
+\end{equation}
+distinguishing sensor-measured 3D points $\mathbf{z}_{t,j}=\pi^{-1}(u_j,v_j,d_j;\mathbf{K})$ from depth-missing 2D tracks, RANSAC proposals, numerical initializations, and the fixed Frame-0 gauge $O_{\mathrm{obj}_0}$. Each tracker's initial gauge is aligned once using the first reference pose, with Frame 0 excluded from score denominators. For post-initial frames, ADD measures mean corresponding model-vertex distance and ADD-S measures mean nearest-vertex distance; unavailable outputs receive zero recall at all thresholds in $0$--$100\,\mathrm{mm}$ normalized recall AUC.
+
+For an accumulated reconstructed point set $S$ and reference surface point set $M$ evaluated on a common $4\,\mathrm{mm}$ grid without ICP drift masking, we simultaneously report directional precision $P_\epsilon$ and reference coverage $C_\epsilon$:
+\begin{align}
+    P_\epsilon &= |\{s\in S:\min_{m\in M}\|s-m\|_2\le\epsilon\}|/|S|, \\
+    C_\epsilon &= |\{m\in M:\min_{s\in S}\|m-s\|_2\le\epsilon\}|/|M|,
+\end{align}
+alongside directional $p_{95}$ distances $F_{95}$ ($S\to M$) and $R_{95}$ ($M\to S$). Deleting uncertain points can inflate $P_\epsilon$ while collapsing $C_\epsilon$; a valid surface improvement must account for both directions.
+
+\subsection{Mechanism 1: Temporal Attribution and Solver-Return Inconsistency}
+Source inspection of pinned Point2Pose (\texttt{51856226610d}) reveals two internal state-contract defects:
+\begin{enumerate}
+    \item \emph{Historical Keyframe Attribution Overwrite:} When a pending keyframe from historical frame $f_{\mathrm{kf}}<f_t$ is promoted after multi-frame verification, \texttt{ModularPipeline.step} writes the graph-optimized keyframe pose $\mathbf{T}_{\mathrm{kf}}$ into current \texttt{obj.pose} without checking $f_{\mathrm{kf}}==f_t$.
+    \item \emph{Refined-Pose Return Mismatch:} In \texttt{SVDClusterRANSACRegister.register}, when local refinement updates a hypothesis, the function recomputes final inliers and residuals using refined $\mathbf{T}_{\mathrm{ref}}$ but returns pre-refinement $\mathbf{T}_{\mathrm{raw}}$.
+\end{enumerate}
+
+\subsection{Mechanism 2: Unanchored Gauge Drift and Nuisance-Coupled Rank Deficiency}
+In GTSAM~\cite{gtsam}, numerical \texttt{Values} provide linearization points, whereas only \texttt{Factors} constrain the state. Native Point2Pose places a single prior factor on initial keyframe pose $\mathbf{X}_0\in\mathrm{SE}(3)$ and connects subsequent poses $\mathbf{X}_m$ ($m\in\mathcal{V}_p$) and 3D landmarks $\mathbf{p}_n\in\mathbb{R}^3$ ($n\in\mathcal{V}_\ell$) via \texttt{BearingRangeFactor}s (from registration inliers) and conditional \texttt{BetweenFactor}s (admitted only when all-correspondence mean residual $<0.01\,\mathrm{m}$).
+
+\textbf{Unanchored Gauge Freedom:} Let $C_0\subseteq\mathcal{V}_p\cup\mathcal{V}_\ell$ denote the factor-graph connected component containing the sole initial prior $\mathbf{X}_0$. For any disconnected component $C'\cap C_0=\emptyset$, transforming all inverse poses and landmarks in $C'$ by an arbitrary global rigid transformation $\mathbf{Q}\in\mathrm{SE}(3)$, $\mathbf{X}'_m=\mathbf{Q}\mathbf{X}_m$ and $\mathbf{p}'_n=\mathbf{Q}\mathbf{p}_n$, leaves every relative observation $(\mathbf{X}'_m)^{-1}\mathbf{p}'_n=\mathbf{X}_m^{-1}\mathbf{p}_n$ and relative-pose factor invariant. Thus Levenberg-Marquardt damping can converge numerically with non-increasing cost while $C'$ drifts freely relative to $O_{\mathrm{obj}_0}$ and overwrites persistent frontend map coordinates.
+
+\textbf{Nuisance-Eliminated Local Observability:} Even when $\mathbf{X}_i\in C_0$, topological connectivity does not imply 6-DoF observability. In the whitened, prior-conditioned local linear system around the current linearization point, let $\delta\mathbf{x}\in\mathbb{R}^{6|\mathcal{V}_p|}$ denote pose tangent increments and $\delta\mathbf{y}\in\mathbb{R}^{3|\mathcal{V}_\ell|}$ denote landmark increments:
+\begin{equation}
+    \min_{\delta\mathbf{x},\delta\mathbf{y}}\|\mathbf{A}_x\delta\mathbf{x}+\mathbf{A}_y\delta\mathbf{y}-\mathbf{b}\|_2^2.
+    \label{eq:joint_ls}
+\end{equation}
+Eliminating uncertain landmarks via orthogonal projection onto the left null space of $\mathbf{A}_y$ yields the reduced pose Jacobian $\bar{\mathbf{A}}_x=(\mathbf{I}-\mathbf{A}_y\mathbf{A}_y^+)\mathbf{A}_x$ and marginal pose information matrix:
+\begin{equation}
+    \bar{\mathbf{H}}_x=\bar{\mathbf{A}}_x^\top\bar{\mathbf{A}}_x=\mathbf{A}_x^\top(\mathbf{I}-\mathbf{A}_y\mathbf{A}_y^+)\mathbf{A}_x\preceq\mathbf{A}_x^\top\mathbf{A}_x.
+    \label{eq:schur_info}
+\end{equation}
+Treating uncertain landmarks as known ($\mathbf{A}_x^\top\mathbf{A}_x$) strictly overestimates pose conditioning. The locally constrained dimension of current pose $i$ is given by the column-deletion rank difference:
+\begin{equation}
+    r_i=\operatorname{rank}(\bar{\mathbf{A}}_x)-\operatorname{rank}(\bar{\mathbf{A}}_{x,-i})\in\{0,\dots,6\},
+    \label{eq:rank_diff}
+\end{equation}
+where $\bar{\mathbf{A}}_{x,-i}$ removes the six columns of pose $i$. Under non-collinear 3D correspondences anchored to $C_0$, one shared landmark supplies $r_i=3$, two supply $r_i=5$, and three non-collinear landmarks supply $r_i=6$.
+
+\subsection{Mechanism 3: Pose-Version Desynchronization in Surface Fusion}
+When \texttt{KeyFrameGraph.update} revises a historical keyframe pose from its initial integration estimate $\mathbf{T}_\tau^{(\tau)}$ to $\mathbf{T}_\tau^{(t)}$ ($t>\tau$), \texttt{ModularPipeline.step} updates the sparse landmark map, but \texttt{SDFBuilder.integrate\_keyframe} only integrates the newly promoted keyframe into the TSDF volume without de-integrating or re-projecting earlier observations fused at stale poses $\{\mathbf{T}_\tau^{(\tau)}\}$. Consequently, the sparse tracker map and dense TSDF surface diverge in coordinate version history.
+
+\section{The CausalPose-3D Framework: Constrained State Updates, Native Governance, and Zero-Loss Execution}
+\label{sec:method}
+
+\subsection{Controlled Graph and Surface Interventions ($F,G,R,M,S$)}
+Within \textbf{CausalPose-3D}, we first isolate five modular, default-off interventions on the Point2Pose causal trajectory architecture:
+\begin{itemize}
+    \item \textbf{Correctness Baseline ($F$):} Enforces frame-scoped pose attribution ($f_{\mathrm{kf}}==f_t$ before updating \texttt{obj.pose}) and returns refined pose $\mathbf{T}_{\mathrm{ref}}$ consistently with its inliers and residuals.
+    \item \textbf{Prior-Connected Graph Admission ($G$):} Admits optimized keyframe and landmark updates into the frontend map only for variables residing in the connected component $C_0$ of initial pose prior $\mathbf{X}_0$. Disconnected components retain their optimizer state for potential later reconnection without corrupting the active map.
+    \item \textbf{Marginal Rank Gating ($R$):} Extends $G$ by computing $r_i$ in~\eqref{eq:rank_diff} across three numerical tolerances ($\{0.1\times,1\times,10\times\}\epsilon\max(\operatorname{shape}(\bar{\mathbf{A}}_x))\sigma_{\max}(\bar{\mathbf{A}}_x)$) and withholding graph commit when current pose $r_i<6$.
+    \item \textbf{Feature-Birth Observation Ledger ($M$):} Records immutable original camera-space 3D measurements $(\text{obj\_id},f_{\mathrm{birth}},f_{\mathrm{admit}},\text{track\_id},\mathbf{z}_{\mathrm{cam}})$ when features are first sampled, and inserts deduplicated native \texttt{BearingRangeFactor}s at the birth pose once registration instantiates the landmark.
+    \item \textbf{Causal Surface-History Transaction ($S$):} Maintains an immutable ledger of integrated depth/RGB observations and their pose versions. Whenever an admitted graph update modifies a previously integrated keyframe pose, $S$ deterministically rebuilds a temporary volume from causal history using current pose versions $\mathbf{T}_\tau^{(t)}$ before integrating new evidence, committing atomically upon grid and identity verification.
+\end{itemize}
+
+\subsection{BundleTrack Native Determinism, Inverse Precision, and Frame Retirement}
+\label{sec:native_bt}
+Auditing our primary BundleTrack C++/CUDA pose owner and session adapter uncovered four concrete engineering improvements:
+\begin{enumerate}
+    \item \textbf{\texttt{NO\_BA} Status Integrity:} A two-line adapter guard prevents retained native \texttt{NO\_BA} states from being misclassified as historical candidates on cache misses, eliminating $6$ false historical promotions while preserving all $34/38$ valid task candidates.
+    \item \textbf{CUDA RANSAC Deterministic Winner Selection:} In \texttt{BundleTrack/src/cuda/}, two identical $13$-correspondence CPU PCL inputs produced divergent $6$-inlier subsets differing by $18.00\,\mathrm{mm}$ and $6.22^\circ$ due to parallel atomic tie-breaking and reversed count-comparison inequalities. Applying the \texttt{stable-winner} and count-direction repair collapses $100$ repeated native RANSAC+Procrustes calls onto a single deterministic output.
+    \item \textbf{$\mathrm{SE}(3)$ Inverse-Coefficient Precision in \texttt{storeFrame}:} Replacing lossy bulk cast transfer with exact element-wise Eigen-to-\texttt{float4x4} inverse-pose coefficient copying in \texttt{CUDACache::storeFrame} ensures pinhole backprojection accuracy $\le 1.30\times 10^{-7}\,\mathrm{m}$.
+    \item \textbf{Guarded \texttt{NO\_BA} Non-Keyframe Retirement:} Under continuous tracking loss, \texttt{Bundler} previously retained all blocked frames in GPU/host memory. We invoke \texttt{Bundler::forgetFrame} on non-keyframes beyond the $\text{window\_size}+1$ budget only when the most recent $\text{window\_size}+1$ frame IDs are contiguous and all carry status \texttt{NO\_BA}, while protecting first, current, neighbor, local, keyframe, and pose-cached frames.
+\end{enumerate}
+
+\subsection{Array-Native Support-Constrained $1{,}500$-Point Surface Selection}
+\label{sec:surface_selection}
+To transmit compact object surfaces within the $1{,}500$-point wire budget without sacrificing geometric coverage, we extend \texttt{RevisableSurfelMap.snapshot} with an array-native \texttt{support10/coarse12mm} selector (\texttt{owner-array-snapshot-shadow-20261101}). Rather than materializing full Python dictionary lists before truncation, the selector operates directly on contiguous NumPy coordinate and support arrays, prioritizing voxels with observation support $\ge 10$ across $12\,\mathrm{mm}$ coarse spatial cells before backfilling remaining capacity in deterministic encounter order.
+
+\subsection{Zero-Loss Runtime Execution: GPU-Window Overlap and $O(\text{runs})$ Evidence Deduplication}
+\label{sec:runtime_opt}
+Critical-path profiling of the synchronous \texttt{/world\_model/observe} endpoint revealed that sequential SAM~2 and native BundleTrack execution ($95.87/118.98\,\mathrm{ms}$ median/$p_{95}$) was compounded by $\sim 48\,\mathrm{ms}$ of redundant host CPU work and mid-request cyclic GC stalls. We introduce two stacked, bit-exact perception adapters:
+
+\textbf{1) Same-Thread SAM~2 GPU-Window CPU Preparation Overlap (\texttt{SAM2GpuWindowOverlapScope}):} On warm distorted frames, \texttt{SAM2VideoMemoryTracker.track} enqueues CUDA kernels for \texttt{propagate\_in\_video} in $\sim 9.0\,\mathrm{ms}$ and blocks the host thread for $\sim 24.2\,\mathrm{ms}$ at \texttt{(logits > 0.0).cpu().numpy()} waiting for GPU \texttt{memory\_attention}. Instead of spawning background \texttt{ThreadPoolExecutor} workers that contend for the Python GIL, our adapter performs a $0.25\,\mathrm{ms}$ fail-closed pre-validation, launches \texttt{propagate\_in\_video}, and executes mask-independent CPU preparation \emph{on the same thread inside the $24.2\,\mathrm{ms}$ GPU wait window} before calling \texttt{.cpu().numpy()}: (i) bilinear/nearest undistortion \texttt{rectify\_registered\_rgbd}, (ii) dual SHA-256 evidence-hash prefixes covering \texttt{header+color\_rgb} and \texttt{header+color\_rgb+depth\_mm} ($4.61/5.53\,\mathrm{MB}=83.3\%$ of input bytes), and (iii) private \texttt{color\_bgr} and \texttt{depth\_m} buffers for \texttt{PinnedBundleTrackSession}. After GPU mask readback, it reuses in-scope \texttt{sensor\_mask} RLE/SHA-256 and finalizes the remaining $16.7\%$ hash tail synchronously in $0.374\,\mathrm{ms}$, eliminating all $38$ per-frame background hash threads.
+
+\textbf{2) Request-Scoped Evidence Deduplication and $O(\text{runs})$ Run-Interval Arithmetic (\texttt{RequestEvidenceDeduplicationScope}):}
+\begin{itemize}
+    \item \emph{Exact $O(\text{runs})$ RLE Bounding Box and Centroid:} \texttt{FoundationMaskCacheDetector} previously iterated pixel-by-pixel in Python over $80{,}696$ foreground pixels per mask, allocating $>161{,}000$ Python \texttt{int} objects per frame ($10.38\,\mathrm{ms}$). Given RLE runs $(s_k,L_k)$ with $e_k=s_k+L_k-1$ on a $H\times W$ grid, let $(y_0,x_0)=\operatorname{divmod}(s_k,W)$ and $(y_1,x_1)=\operatorname{divmod}(e_k,W)$. Using exact Python integers, the row sum $\sum y$ across a multi-row run ($y_0<y_1$) is evaluated in $O(1)$ closed form:
+    \begin{equation}
+        \Sigma_{y,k}=(W-x_0)y_0+W\tfrac{(y_1-y_0-1)(y_0+y_1)}{2}+(x_1+1)y_1,
+        \label{eq:rle_sum_y}
+    \end{equation}
+    and the column sum follows from linear index sums $\Sigma_{\mathrm{idx},k}=L_k s_k+L_k(L_k-1)/2$ via $\sum x=\sum_k\Sigma_{\mathrm{idx},k}-W\sum_k\Sigma_{y,k}$, reducing box/centroid evaluation from $10.38\,\mathrm{ms}$ to $0.015\,\mathrm{ms}$ ($99.85\%$ reduction) with bit-for-bit identity.
+    \item \emph{Cross-Stage Surface and Medoid Reuse:} Within a request scope, we memoize \texttt{observation\_digest}, \texttt{decode\_compressed\_depth}, and \texttt{decode\_mask\_rle}, and reuse Z-buffered \texttt{RegisteredRgbdFrame.select\_surface(mask)} and \texttt{select\_mask\_centroid\_depth\_component} across \texttt{table\_contexts}, \texttt{detector.\_position\_detections\_for\_observation}, and \texttt{run\_live.\_live\_surface\_projection\_from\_detection} ($41/41$ hits, $0$ fallbacks).
+    \item \emph{Vectorized Coplanar AprilTag Plane RANSAC:} \texttt{fast\_fit\_shared\_plane} caches deterministic \texttt{default\_rng(0)} $240\times 3$ index triplets by point count, screens candidate normals via BLAS matrix multiplication, and verifies top contenders in exact \texttt{float64}, reducing plane fitting on tag-visible frames from $4.47\,\mathrm{ms}$ to $0.89\,\mathrm{ms}$.
+    \item \emph{Request-Boundary Cyclic GC Management:} Calling \texttt{gc.collect()} after model initialization reclaims $\sim 745\,\mathrm{MB}$ of unreferenced tensors (reducing CUDA allocated memory from $813\,\mathrm{MB}$ to $67.1\,\mathrm{MB}$) and defers cyclic GC to request boundaries, eliminating $136$--$141\,\mathrm{ms}$ mid-request Generation-2 scans.
+\end{itemize}
+
+\section{Experimental Evaluation and Mechanism Ablations}
+\label{sec:experiments}
+
+\subsection{Metric-Dependent Pose Baselines and the Availability--Surface Paradox}
+Table~\ref{tab:ycb} compares Point2Pose and BundleTrack on six reference-mask YCBInEOAT~\cite{tracknet} sequences with identical $3\times 3$ eroded masks. BundleTrack passes more frames at $10\,\mathrm{mm}$ ADD-S on all six sequences, whereas Point2Pose achieves higher $0$--$100\,\mathrm{mm}$ recall AUC on Cracker and Bleach-hard. On Sugar, switching from nearest-vertex ADD-S ($617$ vs. $794$) to corresponding-vertex ADD ($206$ vs. $174$) reverses the winner, showing that single-threshold rankings depend on symmetry and metric conventions.
+
+\begin{table}[t]\centering\scriptsize
+\caption{Selected reference-mask YCBInEOAT development results. Counts are ADD-S successes within 10 mm; AUC is failure-inclusive over 0--100 mm. The last action was selected subsequently. P2P: Point2Pose; BT: BundleTrack.}\label{tab:ycb}
+\input{pose-table.tex}
+\end{table}
+
+On the three Vicon-referenced Laval actions~\cite{laval} sharing identical SAM~2 masks and RGB-D entries ($203/205/296$ frames), factorial decomposition on Clock-hard confirms that frame attribution alone yields $43/202$ available poses (AUC $0.1923$), solver-return consistency alone yields $158/202$ (AUC $0.6260$), and combined fork $F$ yields $157/202$ (AUC $0.6583$) vs. original $P$ at $43/202$ (AUC $0.1881$). Yet Table~\ref{tab:fork-reference} and Fig.~\ref{fig:cookiejar_tradeoff} expose the central paradox on Cookiejar: while $F$ increases availability from $207$ to $239/295$ and ADD AUC from $0.574$ to $0.635$, its $20\,\mathrm{mm}$ origin successes drop from $136$ to $120$ ($22$ regressions vs. $9$ gains on $192$ mutually tracked frames, and $0/47$ newly available frames within $10\,\mathrm{mm}$). Simultaneously, at the fixed Frame-150 surface snapshot, $F$ drops $10\,\mathrm{mm}$ model coverage $C_{10}$ from $76.82\%$ to $61.79\%$ ($P_{10}=47.48\%$), compared with $P_{10}/C_{10}=64.12\%/99.71\%$ for BundleTrack's causal surfel map.
+
+\input{fork-reference-table.tex}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{../laval-fork-development-20261030/cookiejar-pose-surface.pdf}
+    \caption{\textbf{The availability--surface paradox on Laval Cookiejar.} Repair fork $F$ increases pose availability ($207\to 239/295$) and ADD AUC ($0.574\to 0.635$), but degrades strict $20\,\mathrm{mm}$ pose successes ($136\to 120$) and reduces fixed-snapshot $10\,\mathrm{mm}$ surface coverage $C_{10}$ from $76.82\%$ to $61.79\%$.}
+    \label{fig:cookiejar_tradeoff}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{../laval-fork-development-20261030/graph-ablation.pdf}
+    \caption{\textbf{Opposing cross-action effects of disabling the global keyframe factor graph.} Turning off the graph improves Cookiejar availability/AUC ($239/0.635\to 260/0.731$) but severely degrades Clock-hard ($157/0.658\to 43/0.192$) and Clock-full ($169/0.721\to 142/0.637$).}
+    \label{fig:graph_ablation}
+\end{figure}
+
+\subsection{Factor-Graph Observability and Causal Surface Transactions}
+Disabling the global factor graph improves Cookiejar AUC to $0.7308$ but collapses Clock-hard AUC from $0.6583$ to $0.1922$ (Fig.~\ref{fig:graph_ablation}). Passive graph auditing across all $704$ records explains why: the current pose lacks a factor path to initial prior $\mathbf{X}_0$ in $28/33$ Cookiejar updates and $6/16$ Clock-full updates ($0/22$ on Clock-hard), causing $6{,}519$ and $235$ unanchored coordinate writes to active frontend map points despite non-increasing optimizer cost. Exact replay of all $71$ native optimizations reveals that $8$ of $34$ connected non-initial updates are locally rank-deficient ($r_i<6$) after eliminating landmark increments via~\eqref{eq:rank_diff}.
+
+Table~\ref{tab:anchor-admission} evaluates graph interventions $G$, $R$, and $M$. Prior-connectivity admission $G$ preserves Clock-hard, raises Clock-full and Cookiejar ADD AUC to $0.739$ and $0.668$, and partially recovers Cookiejar surface coverage $C_{10}$ from $61.79\%$ to $69.94\%$ ($P_{10}=50.16\%$). Marginal rank gating $R$ boosts Cookiejar $10\,\mathrm{mm}$ origin successes from $62$ to $97$ (AUC $0.718$) but over-rejects partially constrained updates on Clock-hard (AUC $0.545$). Adding $394/25/83$ missing feature-birth factors in $M$ makes every graph update topologically connected ($0$ unanchored poses), yet standalone $M$ degrades Clock-hard/full trajectories because raw birth depth noise enters the graph without surface version reconciliation.
+
+\input{anchor-admission-table.tex}
+
+In the $F$ baseline, $17$ of $19$ integrated Cookiejar keyframes receive later graph pose revisions while native TSDF arrays remain static; a retrospective final-pose rebuild yields $P_{10}/C_{10}=43.49\%/58.76\%$, proving that pose-version consistency cannot rescue inaccurate graph poses. Table~\ref{tab:surface-transactions} and Fig.~\ref{fig:surface_interaction} present the $2\times 2$ causal factorial combining $G$ and $M$ with online surface-history rebuild $S$. While $G+S$ regresses relative to $G$, combining birth observations with causal surface rebuild ($M+S$) exhibits a strong positive interaction across all three actions, raising Clock-hard Availability from $53$ to $155/202$ and reaching Cookiejar ADD AUC $0.750$ (exceeding BundleTrack's $0.723$). However, $M+S$ still trails $G$ on the clocks and yields fewer strict $10\,\mathrm{mm}$ successes ($81$ vs. $109$) than BundleTrack, confirming that these repairs remain conditional mechanisms rather than a universal replacement.
+
+\input{surface-transaction-table.tex}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\columnwidth]{../laval-fork-development-20261030/causal-surface-interaction.pdf}
+    \caption{\textbf{Factorial interaction between feature-birth observation provenance ($M$) and causal surface-history transactions ($S$).} Online surface version repair $S$ degrades connectivity-only $G$ but strongly rescues birth-observation graph updates ($M+S$), achieving $0.750$ ADD AUC on Cookiejar.}
+    \label{fig:surface_interaction}
+\end{figure}
+
+\subsection{BundleTrack Native Determinism, Frame Retirement, and Surface Selection}
+Repeating unmodified BundleTrack three times on the same $203$ Clock-hard inputs varies $10\,\mathrm{mm}$ origin successes from $95$ to $119$ (Table~\ref{tab:bt-repeat}). Applying our CUDA RANSAC \texttt{stable-winner} + count-direction repair and \texttt{storeFrame} inverse-coefficient transfer in a composed native build (\texttt{composed-native-retention-public-20261101}, Table~\ref{tab:composed-native-public}) substantially improves public Laval reference accuracy over the historical frozen build: Clock strict ($10\,\mathrm{mm},10^\circ$) successes jump from $135$ to $191/204$ (ADD AUC $0.8813\to 0.9135$, $P_{10}$ $78.79\%\to 83.14\%$) and Cookiejar strict successes jump from $107$ to $136/295$ (ADD AUC $0.7256\to 0.8085$, $P_{10}$ $55.89\%\to 64.82\%$). Under the guarded contiguous-\texttt{NO\_BA} retirement policy (\texttt{stable-retention-transfer-20261101}) across $18$ complete $38$-input normal, stress, and recovery replays, all neural-network I/O, pose matrices, and terminal surface arrays reproduce byte-for-byte while active frames drop from $37\to 6$ in stress (saving $\mathbf{1{,}993.95\,\mathrm{MiB}}$ RSS) and from $23\to 9$ in recovery (saving $\mathbf{928.38\,\mathrm{MiB}}$ RSS).
+
+\input{bundletrack-repeat-table.tex}
+
+\begin{table}[t]\centering\scriptsize
+\caption{\textbf{CausalPose-3D} composed native repairs (RANSAC determinism + exact inverse-pose coefficient transfer + guarded \texttt{NO\_BA} retirement) vs. historical frozen BundleTrack on Laval Clock-full and Cookiejar. Strict: $\le 10\,\mathrm{mm}$ and $\le 10^\circ$.}\label{tab:composed-native-public}
+\resizebox{\columnwidth}{!}{\begin{tabular}{@{}llrrrrrr@{}}\toprule
+Clip&Native Build&Avail.&Strict&AUC&$P_{10}$ (\%)&$C_{10}$ (\%)&$F_{95}$ (mm)\\\midrule
+Clock&Historical frozen&197/204&135&0.8813&78.79&98.90&20.20\\
+Clock&\textbf{CausalPose-3D} (repair)&198/204&\textbf{191}&\textbf{0.9135}&\textbf{83.14}&98.72&25.36\\
+Clock&\textbf{CausalPose-3D} (+retire)&198/204&\textbf{191}&0.9131&83.11&98.77&25.23\\
+Jar&Historical frozen&295/295&107&0.7256&55.89&99.92&29.82\\
+Jar&\textbf{CausalPose-3D} (repair)&295/295&\textbf{136}&\textbf{0.8085}&64.82&99.87&30.93\\
+Jar&\textbf{CausalPose-3D} (+retire)&295/295&\textbf{136}&0.8084&\textbf{64.97}&\textbf{99.94}&30.75\\
+\bottomrule\end{tabular}}\end{table}
+
+To attribute the remaining $25$--$30\,\mathrm{mm}$ forward surface tail $F_{95}$ in Table~\ref{tab:composed-native-public}, a reference-pose counterfactual (\texttt{reference-pose-surface-counterfactual-20261101}, Fig.~\ref{fig:surface_cdf}) replaces estimated poses with Vicon reference poses on the exact same $980{,}256$ sampled points: $F_{95}$ drops only from $25.36\to 21.63\,\mathrm{mm}$ (Clock) and $30.93\to 29.11\,\mathrm{mm}$ (Jar), while pixel-lineage and M\"oller--Trumbore mesh-ray audits confirm that $52.60\%/67.59\%$ of $>20\,\mathrm{mm}$ points originate within $3\,\mathrm{px}$ of mask boundaries and $164$ interior low-range voxels lie $>20\,\mathrm{mm}$ deeper than the first CAD intersection. Requiring $\ge 2$ non-contributing views with $\ge 10^\circ$ angular separation cuts native $F_{95}$ from $24.51/30.82\,\mathrm{mm}$ to $12.50/17.33\,\mathrm{mm}$ ($P_{10}\to 90.05\%/73.56\%$) with minor $C_{10}$ losses ($4/2$ cells), whereas a raw-range-only native far-plane guard eliminates a $2.07\,\mathrm{m}$ cross-run outlier down to $6.33\,\mathrm{mm}$ across $2{,}195$ opportunities. At the $1{,}500$-point wire snapshot budget, our array-native \texttt{support10/coarse12mm} selector (Table~\ref{tab:budget-selection-transfer}, Fig.~\ref{fig:budget_transfer}) raises public $C_{10}$ from $40.57\%/52.34\%$ to $\mathbf{85.10\%/85.05\%}$ (cutting reverse $R_{95}$ from $53.12/31.88\,\mathrm{mm}$ to $13.12/12.47\,\mathrm{mm}$), raises $552$-frame task $10\,\mathrm{mm}$ map coverage from $71.78\%$ to $\mathbf{89.97\%}$ ($p_{95}$ distance $42.92\to 17.57\,\mathrm{mm}$), and reduces selector $p_{95}$ latency by $32.8\%$--$33.8\%$ ($31.74\to 21.22\,\mathrm{ms}$ on Clock, $10.16\to 6.66\,\mathrm{ms}$ on task).
+
+\input{../existing-point-budget-selection-transfer-20261101/transfer-table.tex}
+
+\begin{figure}[t]
+    \centering
+    \begin{minipage}[b]{0.485\columnwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../reference-pose-surface-counterfactual-20261101/surface-cdf.pdf}
+        \centerline{\scriptsize (a) Native vs. Ref.-Pose Surface CDF}
+    \end{minipage}\hfill
+    \begin{minipage}[b]{0.485\columnwidth}
+        \centering
+        \includegraphics[width=\textwidth]{../existing-point-budget-selection-transfer-20261101/budget-transfer.pdf}
+        \centerline{\scriptsize (b) 1,500-Point Selector Coverage}
+    \end{minipage}
+    \caption{\textbf{Surface error attribution and $1{,}500$-point budget selection.} (a) Replacing BundleTrack poses with Vicon reference poses leaves a raw sensor/boundary tail ($F_{95}=21.63/29.11\,\mathrm{mm}$). (b) Array-native \texttt{support10/coarse12mm} selection raises $1{,}500$-point model coverage $C_{10}$ from $40.6\%/52.3\%$ to $85.1\%$ and task coverage from $71.8\%$ to $90.0\%$.}
+    \label{fig:surface_cdf}\label{fig:budget_transfer}
+\end{figure}
+
+\subsection{Matcher Shadow Benchmark and Zero-Loss Runtime Optimization}
+Table~\ref{tab:matcher_shadow} summarizes our shadow matcher evaluations within the 31-framework benchmark on identical registered inputs. EfficientLoFTR~\cite{eloftr} Full-MP reduces tracking $p_{95}$ from $118.14/122.91\,\mathrm{ms}$ to $109.93/116.36\,\mathrm{ms}$ with competitive Clock AUC ($0.9231$) but lower Jar AUC ($0.8129$ vs. $0.8238$). On the $38$-frame right-wrist pouring clip ($0.958\%$ median in-mask valid depth), semi-dense XFeat~\cite{xfeat} cuts tracking $p_{50}/p_{95}$ from $60.14/83.36\,\mathrm{ms}$ to $42.05/54.24\,\mathrm{ms}$ but loses three candidates ($34\to 31$) and inflates jump $p_{95}/\max$ from $40.40/55.91\,\mathrm{mm}$ to $72.96/92.13\,\mathrm{mm}$. Sparse ALIKED+LightGlue~\cite{aliked,lightglue} collapses from $34$ to $2/38$ candidates because sparse keypoints miss the $0.96\%$ valid depth pixels, while feeding bounded BootsTAPIR~\cite{bootstap} causal trajectories into native RANSAC degrades Jar strict successes from $140$ to $46$. All lossy matcher candidates are rejected.
+
+\begin{table}[t]\centering\scriptsize
+\caption{Feature matcher shadow evaluation inside the corrected BundleTrack owner on opened Laval (Clock/Jar) and 38-frame wrist task clips.}\label{tab:matcher_shadow}
+\resizebox{\columnwidth}{!}{\begin{tabular}{@{}llcccc@{}}\toprule
+Matcher Variant & Clip & Avail. & Strict / AUC & Track $p_{50}/p_{95}$ (ms) & Verdict \\\midrule
+LoFTR (Baseline)~\cite{loftr} & Clock/Jar & 198/295 & 195 (.917)/148 (.824) & 98.4 / 118.1--122.9 & \textbf{Adopted} \\
+EfficientLoFTR FP32~\cite{eloftr} & Clock/Jar & 199/295 & 196 (.922)/146 (.811) & 97.1 / 116.8--123.1 & Shadow \\
+EfficientLoFTR Full-MP~\cite{eloftr} & Clock/Jar & 199/295 & 197 (.923)/147 (.813) & 92.8 / 109.9--116.4 & Shadow \\
+Causal BootsTAPIR~\cite{bootstap} & Clock/Jar & 195/295 & 180 (.889)/46 (.591) & Cached trajectory & Rejected \\
+LoFTR (Task Control)~\cite{loftr} & Wrist (38) & 34/38 & Jump95: $40.40\,\mathrm{mm}$ & 60.14 / 83.36 & \textbf{Adopted} \\
+XFeat Semi-Dense~\cite{xfeat} & Wrist (38) & 31/38 & Jump95: $72.96\,\mathrm{mm}$ & 42.05 / 54.24 & Rejected \\
+ALIKED+LightGlue~\cite{aliked,lightglue} & Wrist (38) & 2/38 & $36$ retained-ref fails & 45.64 / 68.54 & Rejected \\
+\bottomrule\end{tabular}}\end{table}
+
+Table~\ref{tab:runtime_opt_ablation} reports the counterbalanced multi-process ablation ($78$ warm requests per condition across \texttt{control-1}, \texttt{candidate-1}, \texttt{candidate-2}, \texttt{control-2}) of our bit-exact runtime optimizations on the 40-frame configured pouring sequence (\texttt{teleop\_20260625\_173830}). Across all runs, $400/400$ SAM masks, $190/190$ native BundleTrack input hashes, $34/38$ candidates, $32/38$ current surfaces, and $499/499$ online operator checks match byte-for-byte with zero mismatches:
+\begin{enumerate}
+    \item \texttt{SAM2GpuWindowOverlapScope} absorbs $5.72\,\mathrm{ms}$ of CPU undistortion, dual-prefix hashing, and native buffer preparation into the \texttt{propagate\_in\_video} GPU wait window ($24.17\to 18.45\,\mathrm{ms}$), cutting outer \texttt{input\_prepare} from $3.96$ to $0.25\,\mathrm{ms}$, eliminating all $38$ per-frame background hash threads, and lowering \texttt{registry.advance} $p_{50}/p_{95}$ from $102.29/131.43\,\mathrm{ms}$ to $96.53/124.48\,\mathrm{ms}$ (endpoint $155.33/219.06\to 149.01/212.24\,\mathrm{ms}$).
+    \item Stacking \texttt{RequestEvidenceDeduplicationScope} ($O(\text{runs})$ integer RLE box/centroid $10.38\to 0.015\,\mathrm{ms}$, cross-stage surface/medoid reuse, vectorized 240-hypothesis AprilTag RANSAC $4.47\to 0.89\,\mathrm{ms}$, and request-boundary GC management) reduces \texttt{table\_contexts} from $19.18/20.02$ to $15.65/16.42\,\mathrm{ms}$, cuts exclusive outer \texttt{original\_world} wrapper overhead by $\mathbf{72.9\%}$ ($23.17/23.86\to 6.28/6.70\,\mathrm{ms}$), eliminates the $140.58\,\mathrm{ms}$ mid-request Generation-2 GC stall (\texttt{online\_world\_state} max $140.58\to 5.04\,\mathrm{ms}$, in-request GC collections $735/65/3\to 0/0/0$), and brings warm HTTP \texttt{endpoint\_ms} $p_{50}/p_{95}/\max$ down to $\mathbf{127.80/153.40/1{,}152.96\,\mathrm{ms}}$---a cumulative reduction of $\mathbf{-27.54\,\mathrm{ms}}$ ($p_{50}$) and $\mathbf{-65.66\,\mathrm{ms}}$ ($p_{95}$) relative to the pre-overlap control (and $-48.61\,\mathrm{ms}/-27.6\%$ vs. the $176.40\,\mathrm{ms}$ per-request portal baseline).
+\end{enumerate}
+
+\begin{table*}[t]\centering\scriptsize
+\caption{Counterbalanced Bit-Exact Runtime Optimization Ablation on the 40-Frame Configured Pouring Sequence ($78$ Warm Requests per Condition, $100\%$ Byte-for-Byte Output Parity Across $400$ SAM Masks, $190$ Native Inputs, and $499$ Online Equivalence Checks)}\label{tab:runtime_opt_ablation}
+\resizebox{\textwidth}{!}{\begin{tabular}{@{}lccccccc@{}}\toprule
+Stage / Metric ($p_{50}/p_{95}/\max$ in ms) & Pre-Overlap Control & + GPU-Window Overlap & Overlap Control (Run 2) & \textbf{+ Request Dedup \& $O(\text{runs})$ RLE} & Net $\Delta$ ($p_{50}/p_{95}$) & Bit-Exact Parity \\\midrule
+\texttt{input\_prepare\_ms} (Pre-SAM CPU prep) & $3.96/4.13/4.31$ & $0.25/0.27/0.30$ & $0.25/0.27/0.30$ & $\mathbf{0.25/0.27/0.29}$ & $\mathbf{-3.71/-3.86}$ & $39/39$ frames \\
+\texttt{gpu\_window\_cpu\_prepare\_ms} (Absorbed) & $0.00/0.00/0.00$ & $5.72/5.91/6.18$ & $5.72/5.90/6.15$ & $\mathbf{5.71/5.89/6.12}$ & Absorbed in GPU wait & $38/38$ buffers \\
+\texttt{post\_cpu\_gpu\_sync\_wait\_ms} (GPU wait) & $24.17/24.26/24.51$ & $18.45/18.71/19.02$ & $18.46/18.72/19.05$ & $\mathbf{18.44/18.70/19.01}$ & $\mathbf{-5.73/-5.56}$ & $0$ hash threads \\
+\texttt{registry\_advance\_ms} (SAM~2+BundleTrack) & $102.29/131.43/1389.2$ & $96.53/124.48/1378.1$ & $96.55/122.52/1374.5$ & $\mathbf{97.98/122.21/1129.9}$ & $\mathbf{-4.31/-9.22}$ & $34$ cand / $32$ surf \\
+\texttt{table\_contexts\_ms} (AprilTag RANSAC+depth) & $19.21/20.11/20.55$ & $19.19/20.05/20.49$ & $19.18/20.02/20.48$ & $\mathbf{15.65/16.42/18.44}$ & $\mathbf{-3.56/-3.69}$ & $27/27$ tag planes \\
+\texttt{original\_world\_exclusive\_ms} (Outer wrapper) & $23.20/23.91/24.70$ & $23.18/23.88/24.66$ & $23.17/23.86/24.65$ & $\mathbf{6.28/6.70/7.61}$ & $\mathbf{-16.92/-17.21}$ ($\mathbf{-72.9\%}$) & $499/499$ checks \\
+\texttt{online\_world\_state\_ms} (Projection+DAG+GC) & $5.97/7.49/140.80$ & $5.96/7.47/140.62$ & $5.96/7.47/140.58$ & $\mathbf{3.87/4.96/5.04}$ & $\mathbf{-2.10/-2.53}$ ($\max\mathbf{-135.8}$) & $0$ Gen-2 GC stalls \\
+\midrule
+\textbf{Warm HTTP \texttt{endpoint\_ms}} (Total Request) & $155.33/219.06/1422.1$ & $149.01/212.24/1416.8$ & $149.65/193.79/1415.7$ & $\mathbf{127.80/153.40/1153.0}$ & $\mathbf{-27.54/-65.66}$ & $\mathbf{100.0\%}$ \textbf{Bit-Exact} \\
+\textbf{Full Replay \texttt{pipeline\_ms}} (Incl. harness) & $201.22/251.42/1455.3$ & $195.12/243.10/1449.8$ & $196.62/242.44/1449.0$ & $\mathbf{174.20/197.12/1186.5}$ & $\mathbf{-27.02/-54.30}$ & $\mathbf{100.0\%}$ \textbf{Bit-Exact} \\
+\bottomrule\end{tabular}}\end{table*}
+
+\section{Limitations, Deployment Gap, and Conclusion}
+\label{sec:limitations}
+
+The production contract requires live ROS-callback-to-trusted-depth-surface-render $p_{95}\le 100\,\mathrm{ms}$ across at least $300$ traces over $60\,\mathrm{s}$, one-hour accepted world updates $\ge 15\,\mathrm{Hz}$ overall and at interval $p_{05}$, readiness $\ge 99\%$, observation age $p_{95}\le 2\,\mathrm{s}$, one-hour RSS/CUDA-allocated growth $\le 64\,\mathrm{MiB}$ ($128\,\mathrm{MiB}$ reserved), and physical verification of $2\,\mathrm{cm}$ grasp contact, $1\,\mathrm{cm}$ aperture/support height, $5\,\mathrm{mm}$ static drift, and $5\,\mathrm{px}$ HUD bounds. A read-only local audit records $0/6$ live site-acceptance gates passed (\texttt{gate\_passed=false}, \texttt{wire\_authorized=false}); the observed ROS process loops an opened development bag rather than live camera hardware, and sequential SAM~2 plus native BundleTrack execution ($96.53/122.21\,\mathrm{ms}$ warm median/$p_{95}$) still exceeds the $100\,\mathrm{ms}$ end-to-end budget before transport and rendering.
+
+Public benchmarks remain conditional on calibration, CAD sampling, and symmetry conventions, while opened task recordings lack independent physical 6-DoF object ground truth. The present evidence establishes rigorous failure mechanisms, verified native and surface repairs, and substantial bit-exact host latency reductions, but it does not support declaring the project the best reconstruction solution or authorizing an unverified pose-owner cutover. Future work must pair direction-selective joint pose-landmark optimization with TensorRT FP16 vision encoding under frozen held-out physical evaluation.
+
+\section*{Reproducibility and Project Page}
+Project page: \url{https://tiwater.github.io/causalpose3d/}. Scorecards, SHA-256 input receipts, patches, and replay verifiers (\path{docs/papers/performance-claim-audit-20261101/verify.py}, \path{docs/papers/sam-gpu-window-cpu-overlap-20261102/verify.py}, \path{docs/papers/request-evidence-deduplication-20261102/verify.py}) are preserved alongside the 58-page experimental record at \path{docs/papers/performance-claim-audit-20261101/before}.
+
+\begin{thebibliography}{16}
+\bibitem{bundletrack} B.~Wen and K.~Bekris, ``BundleTrack: 6D pose tracking for novel objects without instance or category-level 3D models,'' in \emph{Proc. IEEE/RSJ IROS}, 2021, pp.~8067--8074.
+\bibitem{point2pose} T.-Y. Lin \emph{et al.}, ``Point2Pose: Occlusion-recovering 6D pose tracking and 3D reconstruction for multiple unknown objects via 2D point trackers,'' in \emph{Proc. ECCV}, 2026. \url{https://arxiv.org/abs/2604.10415v2}
+\bibitem{bundlesdf} B.~Wen \emph{et al.}, ``BundleSDF: Neural 6-DoF tracking and 3D reconstruction of unknown objects,'' in \emph{Proc. IEEE/CVF CVPR}, 2023, pp.~606--617.
+\bibitem{foundationpose} B.~Wen, W.~Yang, J.~Kautz, and S.~Birchfield, ``FoundationPose: Unified 6D pose estimation and tracking of novel objects,'' in \emph{Proc. IEEE/CVF CVPR}, 2024, pp.~17868--17879.
+\bibitem{tracknet} B.~Wen \emph{et al.}, ``se(3)-TrackNet: Data-driven 6D pose tracking by calibrating image residuals in synthetic domains,'' in \emph{Proc. IEEE/RSJ IROS}, 2020.
+\bibitem{laval} M.~Garon, D.~Laurendeau, and J.-F.~Lalonde, ``A framework for evaluating 6-DOF object trackers,'' in \emph{Proc. ECCV}, 2018.
+\bibitem{gtsam} F.~Dellaert, ``Factor graphs and GTSAM: A hands-on introduction,'' Georgia Tech, Tech. Rep., 2012.
+\bibitem{bootstap} C.~Doersch \emph{et al.}, ``BootsTAP: Bootstrapped training for tracking-any-point,'' in \emph{Proc. ECCV}, 2024.
+\bibitem{loftr} J.~Sun \emph{et al.}, ``LoFTR: Detector-free local feature matching with transformers,'' in \emph{Proc. IEEE/CVF CVPR}, 2021, pp.~8922--8931.
+\bibitem{eloftr} Y.~Wang \emph{et al.}, ``EfficientLoFTR: Semi-dense local feature matching with sparse-like speed,'' in \emph{Proc. IEEE/CVF CVPR}, 2024.
+\bibitem{xfeat} G.~Potje \emph{et al.}, ``XFeat: Accelerated features for lightweight image matching,'' in \emph{Proc. IEEE/CVF CVPR}, 2024.
+\bibitem{aliked} X.~Zhao \emph{et al.}, ``ALIKED: A lighter keypoint and descriptor extraction network via deformable transformation,'' \emph{IEEE Trans. Instrum. Meas.}, vol.~72, 2023.
+\bibitem{lightglue} P.~Lindenberger, P.-E. Sarlin, and M.~Pollefeys, ``LightGlue: Local feature matching at light speed,'' in \emph{Proc. IEEE/CVF ICCV}, 2023.
+\bibitem{zhang2016degeneracy} J.~Zhang, M.~Kaess, and S.~Singh, ``On degeneracy of optimization-based state estimation problems,'' in \emph{Proc. IEEE ICRA}, 2016, pp.~809--816.
+\bibitem{xicp} T.~Tuna \emph{et al.}, ``X-ICP: Localizability-aware LiDAR registration for robust localization in extreme environments,'' \emph{IEEE Trans. Robot.}, vol.~40, pp.~452--471, 2024.
+\bibitem{bundlefusion} A.~Dai \emph{et al.}, ``BundleFusion: Real-time globally consistent 3D reconstruction using on-the-fly surface re-integration,'' \emph{ACM Trans. Graph.}, vol.~36, no.~3, p.~24, 2017.
+\end{thebibliography}
+\end{document}

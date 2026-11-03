@@ -1,0 +1,10 @@
+--- a/BundleTrack/src/FeatureManager.cpp
++++ b/BundleTrack/src/FeatureManager.cpp
+@@ -1708,6 +1708,7 @@
+     cutilSafeCall(cudaFree(normalsB_gpu[i]));
+     cutilSafeCall(cudaFree(uvA_gpu[i]));
+     cutilSafeCall(cudaFree(uvB_gpu[i]));
++    cutilSafeCall(cudaFree(confs_gpu[i]));
+   }
+ 
+ 

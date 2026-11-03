@@ -1,0 +1,16 @@
+\begin{table}[t]
+\centering\scriptsize
+\caption{Opened Vicon-reference development sequences. Counts use all post-initialization frames; AUC counts unavailable poses as zero. B: BundleTrack; P: original Point2Pose; F: cumulative correctness fork. These are not held-out results.}
+\label{tab:fork-reference}
+\begin{tabular}{llrrrrr}\toprule
+Sequence & Method & Avail. & $\leq$10 mm & $\leq$20 mm & $\leq10^\circ$ & AUC\\\midrule
+Clock-hard & B & 202/202 & 119/202 & 199/202 & 162/202 & 0.887\\
+Clock-hard & P & 43/202 & 25/202 & 40/202 & 28/202 & 0.188\\
+Clock-hard & F & 157/202 & 27/202 & 137/202 & 122/202 & 0.658\\
+Clock-full & B & 197/204 & 150/204 & 197/204 & 197/204 & 0.885\\
+Clock-full & P & 112/204 & 64/204 & 101/204 & 60/204 & 0.458\\
+Clock-full & F & 169/204 & 156/204 & 169/204 & 85/204 & 0.721\\
+Cookiejar & B & 295/295 & 109/295 & 214/295 & 112/295 & 0.723\\
+Cookiejar & P & 207/295 & 54/295 & 136/295 & 140/295 & 0.574\\
+Cookiejar & F & 239/295 & 64/295 & 120/295 & 142/295 & 0.635\\
+\bottomrule\end{tabular}\end{table}

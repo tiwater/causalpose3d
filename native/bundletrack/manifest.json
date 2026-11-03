@@ -1,0 +1,23 @@
+{
+  "schema_version": "bundlesdf-vendor-v1",
+  "upstream": {
+    "url": "https://github.com/NVlabs/BundleSDF.git",
+    "revision": "ffa67d425240b5b76d2e387a7dd3d3735a7cf1a1"
+  },
+  "patches": [
+    {
+      "path": "patches/0001-cmake-sm120-compatibility.patch",
+      "sha256": "1ad2c7fa5b00a135d10da55adf85d1764528bfa511f609191e0cce3951918bea"
+    },
+    {
+      "path": "patches/0002-support-disabled-pose-optimization.patch",
+      "sha256": "14f8440695564e479be62e553f438e422e14eba69500a7765443b24dc2ad978b"
+    }
+  ],
+  "forbidden_ad_hoc_modifications": [
+    "BUNDLESDF_SKIP_BA",
+    "FEATURE_RESIZE",
+    "threshold changes",
+    "disable NeRF"
+  ]
+}

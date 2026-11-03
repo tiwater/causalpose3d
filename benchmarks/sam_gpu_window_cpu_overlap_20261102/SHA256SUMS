@@ -1,0 +1,13 @@
+299487cb12016f74fa04fab3e531375325b68ddb401afe04361a603d8dbaa109  docs/plans/2026-11-02-sam-gpu-window-cpu-overlap.md
+978b42a5b5d3bd3c12178a41e7c32cdfa8b862e5c02ef887b604fefc7139e32a  apps/scene-runtime/ticos_vision/perception/sam2_gpu_window_overlap.py
+b322378e73826a292ebc4a4a7e8af4c61d742126a192b653a0679afbb5894505  apps/scene-runtime/tests/perception/test_sam2_gpu_window_overlap.py
+421c1f055da87282cc328bf218b5be3b0cc6b638c3caf92d2830977933ea6c93  docs/papers/sam-gpu-window-cpu-overlap-20261102/worker.py
+0d3fc1896d6e48f0206553f092580c87880713fff31f2f4fdca26f3f96ec239a  docs/papers/sam-gpu-window-cpu-overlap-20261102/execute.py
+39d8bdb475c227b5804c3c6287c726fb516dd29ad18bed837865f09e81f388e5  docs/papers/sam-gpu-window-cpu-overlap-20261102/score.py
+ae505576189d595a156896e6f1061249a0607acec4af42d35608b729ba94e4c1  docs/papers/sam-gpu-window-cpu-overlap-20261102/verify.py
+d054f87c175592b4f94d64745ccecbc4425143e33b44a1fa13c2947b953b93b2  docs/papers/sam-gpu-window-cpu-overlap-20261102/results.json
+7776c2121262a4e4e35802e62c48ce82a60d0af0617b5e54d7874216efdc510b  docs/papers/sam-gpu-window-cpu-overlap-20261102/verification.json
+42f21a36aa7a2ad7f69ff465e70e29b5057788101519a488b676d06d02c4ffad  docs/papers/sam-gpu-window-cpu-overlap-20261102/README.md
+82be244b874b0b7e14e1ceabf3e1a3d2c5b1f9eb18550eec27ce49f9ebdffa52  artifacts/evaluation/sam-gpu-window-cpu-overlap-20261102/execution.json
+d054f87c175592b4f94d64745ccecbc4425143e33b44a1fa13c2947b953b93b2  artifacts/evaluation/sam-gpu-window-cpu-overlap-20261102/results.json
+7776c2121262a4e4e35802e62c48ce82a60d0af0617b5e54d7874216efdc510b  artifacts/evaluation/sam-gpu-window-cpu-overlap-20261102/verification.json

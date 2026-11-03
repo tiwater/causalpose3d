@@ -1,0 +1,12 @@
+\begin{table}[t]\centering\scriptsize
+\caption{No-candidate RANSAC retry. G: connectivity control; G+R: isolated 1,000-draw retry only after empty original search.}
+\label{tab:ransac-empty-retry}
+\begin{tabular}{llrrrrr}\toprule
+Action & Arm & Avail. & $\leq$10 mm & $\leq$20 mm & $\leq10^\circ$ & AUC\\\midrule
+Clock-hard & G & 157/202 & 27/202 & 137/202 & 122/202 & 0.658\\
+Clock-hard & G+R & 150/202 & 26/202 & 118/202 & 111/202 & 0.620\\
+Clock-full & G & 170/204 & 152/204 & 169/204 & 105/204 & 0.739\\
+Clock-full & G+R & 170/204 & 152/204 & 169/204 & 105/204 & 0.739\\
+Cookiejar & G & 250/295 & 62/295 & 127/295 & 133/295 & 0.668\\
+Cookiejar & G+R & 250/295 & 62/295 & 127/295 & 133/295 & 0.668\\
+\bottomrule\end{tabular}\end{table}

@@ -1,0 +1,71 @@
+{
+  "scope": "post-hoc descriptive aggregate of five selected development sequences",
+  "source_generator_sha256": "f771aa325af59237ef7fbdb2b2a3cea1147f63de0e31e856f806bd4626115cd3",
+  "sequence_count": 5,
+  "post_initial_frames": 4080,
+  "equal_sequence_weighted": {
+    "point2pose_success_fraction": 0.7616561591804063,
+    "bundletrack_success_fraction": 0.8484310664214394,
+    "point2pose_auc": 0.9153950874642316,
+    "bundletrack_auc": 0.9264184417822792
+  },
+  "frame_weighted": {
+    "point2pose_success_fraction": 0.7754901960784314,
+    "bundletrack_success_fraction": 0.8595588235294118
+  },
+  "selected_sequences": [
+    {
+      "sequence": "Cracker",
+      "n": 374,
+      "point2pose_success_fraction": 0.9759358288770054,
+      "bundletrack_success_fraction": 0.9973262032085561,
+      "point2pose_auc": 0.9606150481810377,
+      "bundletrack_auc": 0.9516850549160796
+    },
+    {
+      "sequence": "Mustard",
+      "n": 736,
+      "point2pose_success_fraction": 0.9864130434782609,
+      "bundletrack_success_fraction": 1.0,
+      "point2pose_auc": 0.9464832527233795,
+      "bundletrack_auc": 0.9510660546456049
+    },
+    {
+      "sequence": "Bleach",
+      "n": 662,
+      "point2pose_success_fraction": 0.23413897280966767,
+      "bundletrack_success_fraction": 0.45468277945619334,
+      "point2pose_auc": 0.7982055104830956,
+      "bundletrack_auc": 0.8509914717525705
+    },
+    {
+      "sequence": "Sugar",
+      "n": 1001,
+      "point2pose_success_fraction": 0.6163836163836164,
+      "bundletrack_success_fraction": 0.7932067932067932,
+      "point2pose_auc": 0.9151639736801493,
+      "bundletrack_auc": 0.9198421819500429
+    },
+    {
+      "sequence": "Tomato",
+      "n": 1307,
+      "point2pose_success_fraction": 0.9954093343534812,
+      "bundletrack_success_fraction": 0.9969395562356542,
+      "point2pose_auc": 0.9565076522534961,
+      "bundletrack_auc": 0.9585074456470978
+    }
+  ],
+  "subsequently_selected_not_in_aggregate": {
+    "sequence": "Bleach-hard*",
+    "n": 440,
+    "point2pose_success_fraction": 0.9454545454545454,
+    "bundletrack_success_fraction": 0.95,
+    "point2pose_auc": 0.9478764490759344,
+    "bundletrack_auc": 0.9303488626377925
+  },
+  "limits": [
+    "selected correlated development videos are not random independent trials",
+    "10 mm threshold is post-hoc and uses reference masks and first-frame gauge alignment",
+    "no confidence intervals, general population claims, or physical truth are established"
+  ]
+}

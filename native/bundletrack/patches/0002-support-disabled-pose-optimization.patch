@@ -1,0 +1,20 @@
+diff --git a/Utils.py b/Utils.py
+index 9fcebe3..a52da6b 100644
+--- a/Utils.py
++++ b/Utils.py
+@@ -487,9 +487,12 @@ def get_optimized_poses_in_real_world(poses_normalized, pose_array, sc_factor, t
+     original_poses[:, :3, 3] /= sc_factor   # To true world scale
+     original_poses[:, :3, 3] -= translation
+ 
+-    # Apply pose transformation
+-    tf = pose_array.get_matrices(np.arange(len(poses_normalized))).reshape(-1,4,4).data.cpu().numpy()
+-    optimized_poses = tf@poses_normalized
++    # Preserve BundleTrack poses when NeRF pose refinement is disabled.
++    if pose_array is None:
++      optimized_poses = poses_normalized.copy()
++    else:
++      tf = pose_array.get_matrices(np.arange(len(poses_normalized))).reshape(-1,4,4).data.cpu().numpy()
++      optimized_poses = tf@poses_normalized
+ 
+     optimized_poses = np.array(optimized_poses).astype(np.float32)
+     optimized_poses[:, :3, 3] /= sc_factor

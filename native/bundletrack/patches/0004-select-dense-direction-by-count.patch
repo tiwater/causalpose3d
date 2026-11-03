@@ -1,0 +1,17 @@
+--- a/BundleTrack/src/cuda/Solver/SolverBundling.cu
++++ b/BundleTrack/src/cuda/Solver/SolverBundling.cu
+@@ -31,12 +31,12 @@
+ 	j = blockIdx.y; // all pairwise
+ 	if (i == j)
+ 		return;
+-	if (input.d_cacheFrames[i].d_num_valid_points == input.d_cacheFrames[j].d_num_valid_points)
++	if ((*input.d_cacheFrames[i].d_num_valid_points) == (*input.d_cacheFrames[j].d_num_valid_points))
+ 	{
+ 		if (i >= j)
+ 			return;
+ 	}
+-	else if (input.d_cacheFrames[i].d_num_valid_points < input.d_cacheFrames[j].d_num_valid_points) // src points should be less than tgt
++	else if ((*input.d_cacheFrames[i].d_num_valid_points) < (*input.d_cacheFrames[j].d_num_valid_points)) // src points should be less than tgt
+ 	{
+ 		// printf("i>=j return\n");
+ 		return;

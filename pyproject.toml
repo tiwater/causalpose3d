@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "causalpose3d"
+version = "1.0.0"
+description = "CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+authors = [
+    { name = "Tiwater Research, Tiwater" }
+]
+keywords = [
+    "6D-pose-tracking",
+    "3D-surface-reconstruction",
+    "factor-graph-observability",
+    "BundleTrack",
+    "Point2Pose",
+    "SAM2",
+    "RGB-D",
+    "robotic-manipulation",
+]
+dependencies = [
+    "numpy>=1.26.0",
+    "scipy>=1.11.0",
+]
+
+[project.urls]
+Homepage = "https://tiwater.github.io/causalpose3d/"
+Repository = "https://github.com/tiwater/causalpose3d"
+Documentation = "https://tiwater.github.io/causalpose3d/"
+Paper = "https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-monograph.pdf"
+
+[tool.setuptools.packages.find]
+include = ["causalpose3d*"]

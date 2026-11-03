@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "study": "sam-gpu-window-cpu-overlap-20261102",
+  "runs_verified": 5,
+  "total_masks_verified": 400,
+  "total_native_inputs_verified": 190,
+  "total_native_omp_checks": 190,
+  "source_owner_evidence_identical_across_all_5_runs": true,
+  "strict_warm_frames_byte_identical": 39,
+  "strict_native_warm_frames_byte_identical": 38,
+  "warm_evidence_hash_threads_eliminated_per_run": 38,
+  "background_worker_threads_created": 0,
+  "root_production_sources_unchanged": true,
+  "live_acceptance_gates_passed": "0/6",
+  "gate_passed": false,
+  "wire_authorized": false
+}
