@@ -10,14 +10,21 @@ import hashlib
 
 import numpy as np
 
-from ticos_vision.geometry.object_bound_evidence import bound_witness
-from ticos_vision.runtime.task_profile import PhysicalBounds
+from causalpose3d.primitives.object_bound_evidence import bound_witness
+from causalpose3d.primitives.task_profile import PhysicalBounds
 
-from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput, PreparedFeatureSourceBinding
-from ticos_replay.object_frame_gauge_trajectory import _validate_rigid_transform
-from ticos_replay.object_frame_surface_proxy_evaluation import (
-    DEFAULT_PIXEL_STRIDE, DEFAULT_VOXEL_SIZE_M, DEFAULT_MAXIMUM_SURFACE_POINT_COUNT,
-    DEFAULT_MINIMUM_FRAME_SUPPORT, _backproject_masked_depth, _transform_points,
+from causalpose3d.primitives.bundletrack_live_input import (
+    PreparedFeatureSourceBinding,
+    RegisteredBundleTrackInput,
+)
+from causalpose3d.primitives.geometry import (
+    DEFAULT_MAXIMUM_SURFACE_POINT_COUNT,
+    DEFAULT_MINIMUM_FRAME_SUPPORT,
+    DEFAULT_PIXEL_STRIDE,
+    DEFAULT_VOXEL_SIZE_M,
+    _backproject_masked_depth,
+    _transform_points,
+    _validate_rigid_transform,
 )
 from causalpose3d.surface.object_surface_fusion import RevisableSurfelMap, measured_free_space_margin
 
@@ -539,7 +546,10 @@ class CausalObjectSurface:
                (supplemental_frame, supplemental_bridge, supplemental_maximum_skew_ns)):
             if not self._shadow_supplemental_observations:
                 raise ValueError('supplemental observations require explicit shadow opt-in')
-            from ticos_replay.supplemental_surface_observation import prepare_packet
+            try:
+                from ticos_replay.supplemental_surface_observation import prepare_packet
+            except Exception:
+                from causalpose3d.surface.supplemental_surface_observation import prepare_packet
             supplemental = prepare_packet(frame, supplemental_frame, candidate,
                 supplemental_bridge, maximum_skew_ns=supplemental_maximum_skew_ns)
             if self._supplemental_latest is not None:
@@ -641,7 +651,10 @@ class CausalObjectSurface:
             import json
             current['feature_history_bytes'] = len(json.dumps(measured_task_features, allow_nan=False).encode('utf-8'))
         if self._shadow_feature_continuity is not None:
-            from ticos_replay.feature_continuity_shadow import advance_checkpoint
+            try:
+                from ticos_replay.feature_continuity_shadow import advance_checkpoint
+            except Exception:
+                from causalpose3d.primitives.feature_continuity_shadow import advance_checkpoint
             previous = self._records.get(f'{index-1:06d}')
             checkpoint = previous.get('feature_continuity_checkpoint') if previous is not None else None
             camera_pose = candidate.get('camera_from_object')
@@ -929,7 +942,10 @@ class CausalObjectSurface:
         """
         if self._closed:
             raise RuntimeError("object surface closed")
-        from ticos_replay.shadow_surface_snapshot_selection import select_existing_points_shadow
+        try:
+            from ticos_replay.shadow_surface_snapshot_selection import select_existing_points_shadow
+        except Exception:
+            from causalpose3d.surface.shadow_surface_snapshot_selection import select_existing_points_shadow
         xyz, support, cameras, keys = self._map.snapshot(
             minimum_observation_support=DEFAULT_MINIMUM_FRAME_SUPPORT,
             maximum_point_count=self._map.maximum_voxels, include_voxel_keys=True)

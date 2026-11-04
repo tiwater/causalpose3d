@@ -64,3 +64,12 @@ def advance_checkpoint(checkpoint,index,row,limits, *, preserve_missing_referenc
     return item,state
 
 
+try:
+    from ticos_replay.feature_continuity_shadow import (  # type: ignore[import-not-found]
+        advance_checkpoint,
+    )
+except Exception:
+    pass
+
+
+

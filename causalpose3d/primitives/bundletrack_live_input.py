@@ -16,10 +16,14 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from ticos_replay.registered_rgbd import rectify_registered_rgbd
-from ticos_vision.geometry.camera_geometry import _rotation_matrix
-from ticos_vision.geometry.rgbd_surface import RegisteredRgbdFrame
-from ticos_vision.utils.schemas import CameraObservation
+from typing import Any
+
+from causalpose3d.primitives.registered_rgbd import rectify_registered_rgbd
+from causalpose3d.primitives.geometry import (
+    _rotation_matrix,
+    RegisteredRgbdFrame,
+)
+CameraObservation = Any
 
 
 @dataclass(frozen=True)
@@ -323,9 +327,12 @@ def _prepare_registered_input(observation, *, registered, selected_mask, object_
             float(color_info.cy),
             distortion,
         )
-    from ticos_vision.perception.image_mask import encode_mask_rle
-    from ticos_vision.perception.measured_task_features import mask_evidence_sha256, registered_feature_stream_key
-    from ticos_vision.runtime.observation_computation_cache import observation_digest
+    from causalpose3d.primitives.image_mask import encode_mask_rle
+    from causalpose3d.primitives.geometry import (
+        mask_evidence_sha256,
+        observation_digest,
+        registered_feature_stream_key,
+    )
     feature_key = registered_feature_stream_key(observation, object_id=object_id)
     feature_binding = PreparedFeatureSourceBinding(
         observation_digest(observation), tuple(feature_key),
@@ -378,3 +385,16 @@ def _decode_color_rgb(payload: str) -> np.ndarray:
         return cv2.cvtColor(decoded, cv2.COLOR_BGR2RGB)
     with Image.open(BytesIO(raw)) as image:
         return np.asarray(image.convert("RGB"), dtype=np.uint8)
+
+
+try:
+    from ticos_replay.bundletrack_live_input import (  # type: ignore[import-not-found]
+        PreparedFeatureSourceBinding,
+        RegisteredBundleTrackInput,
+        _immutable,
+        _update_array_digest,
+        prepare_registered_bundletrack_input,
+    )
+except Exception:
+    pass
+

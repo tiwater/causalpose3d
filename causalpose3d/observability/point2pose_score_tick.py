@@ -11,10 +11,10 @@ from collections.abc import Mapping
 import math
 from typing import Any
 
-from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
+from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
 from causalpose3d.observability.point2pose_adapter import adapt_shadow_pose
-from ticos_replay.sam2_observation_session import _mask_evidence_sha256
-from ticos_vision.perception.image_mask import decode_mask_rle, encode_mask_rle
+from causalpose3d.primitives.sam2_observation_session import _mask_evidence_sha256
+from causalpose3d.primitives.image_mask import decode_mask_rle, encode_mask_rle
 
 import numpy as np
 

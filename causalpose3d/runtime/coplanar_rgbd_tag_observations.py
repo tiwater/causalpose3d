@@ -9,12 +9,12 @@ from typing import Iterable
 import cv2
 import numpy as np
 
-from ticos_vision.geometry.rgbd_surface import RegisteredRgbdFrame
-from ticos_vision.geometry.metric_tag_plane_evidence import (
+from causalpose3d.primitives.geometry import (
+    CameraInfoRecord,
+    DepthBoundaryCandidate,
+    RegisteredRgbdFrame,
     intersect_rectified_tag_rays_with_depth_plane,
 )
-from ticos_vision.estimation.depth_table_localization import DepthBoundaryCandidate
-from ticos_vision.runtime.camera_info import CameraInfoRecord
 
 
 _TAG_REGION_SCALE = 2.5

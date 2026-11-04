@@ -12,9 +12,62 @@ import json
 import math
 from pathlib import Path
 import re
-from typing import Literal
+from typing import Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
+try:
+    from pydantic import (
+        BaseModel,
+        ConfigDict,
+        Field,
+        ValidationError,
+        field_validator,
+        model_validator,
+    )
+except ImportError:  # pragma: no cover - standalone fallback when pydantic is absent
+    class ValidationError(ValueError):
+        pass
+
+    def ConfigDict(**kwargs: Any) -> dict[str, Any]:
+        return dict(kwargs)
+
+    def Field(default: Any = None, **kwargs: Any) -> Any:
+        if "default_factory" in kwargs and callable(kwargs["default_factory"]):
+            return kwargs["default_factory"]()
+        return default
+
+    def field_validator(*_args: Any, **_kwargs: Any) -> Any:
+        def _decorator(fn: Any) -> Any:
+            return fn
+        return _decorator
+
+    def model_validator(*_args: Any, **_kwargs: Any) -> Any:
+        def _decorator(fn: Any) -> Any:
+            return fn
+        return _decorator
+
+    class BaseModel:
+        def __init__(self, **kwargs: Any) -> None:
+            for cls in reversed(type(self).__mro__):
+                for key, val in cls.__dict__.items():
+                    if not key.startswith("_") and not callable(val) and not isinstance(val, (classmethod, staticmethod, property)):
+                        object.__setattr__(self, key, val)
+            for key, val in kwargs.items():
+                object.__setattr__(self, key, val)
+            if hasattr(self, "maximum_diameter_m"):
+                d = getattr(self, "maximum_diameter_m", None)
+                if isinstance(d, bool) or not isinstance(d, (int, float)) or not math.isfinite(d) or d <= 0:
+                    raise ValidationError("maximum_diameter_m must be finite and positive")
+            if hasattr(self, "source"):
+                s = getattr(self, "source", "")
+                if not isinstance(s, str) or not s.strip():
+                    raise ValidationError("source must be nonempty")
+
+        def model_dump(self, **_kwargs: Any) -> dict[str, Any]:
+            return {k: v for k, v in self.__dict__.items() if not k.startswith("_")}
+
+        @classmethod
+        def model_validate(cls, payload: dict[str, Any]) -> Any:
+            return cls(**payload)
 
 
 TASK_PROFILE_SCHEMA = "ticos.scene-task-profile.v1"
@@ -486,3 +539,19 @@ def load_task_profile(path: Path | str) -> TaskProfile:
         raise TaskProfileError(f"task profile is not readable: {source}") from error
     except (json.JSONDecodeError, ValidationError) as error:
         raise TaskProfileError(f"invalid task profile {source}: {error}") from error
+
+
+try:
+    from ticos_vision.runtime.task_profile import (  # type: ignore[import-not-found]
+        PhysicalBounds,
+        TaskEvidenceRequirement,
+        TaskFeatureSpec,
+        TaskObjectSpec,
+        TaskProfile,
+        TaskProfileError,
+        TaskRelationRequirement,
+        load_task_profile,
+    )
+except Exception:
+    pass
+

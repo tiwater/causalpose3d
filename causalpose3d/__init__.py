@@ -13,4 +13,5 @@ __all__ = [
     "tracking",
     "observability",
     "runtime",
+    "teleop",
 ]

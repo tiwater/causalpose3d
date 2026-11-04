@@ -17,7 +17,7 @@ import time
 
 import numpy as np
 
-from ticos_vision.perception.mask_depth_pca_pose import (
+from causalpose3d.primitives.mask_depth_pca_pose import (
     DEFAULT_MAXIMUM_TRANSLATION_STEP_M,
     DEFAULT_MASK_DEPTH_RECOVERY_CENTROID_ESTIMATOR,
     DEFAULT_MASK_DEPTH_RECOVERY_METHOD,

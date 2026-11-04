@@ -7,6 +7,7 @@
 [![Project Page](https://img.shields.io/badge/Project_Page-tiwater.github.io%2Fcausalpose3d-2563eb?style=flat-square&logo=googlechrome&logoColor=white)](https://tiwater.github.io/causalpose3d/)
 [![Monograph Preprint](https://img.shields.io/badge/Paper-Monograph_(17_pp.)-b31b1b?style=flat-square&logo=arxiv&logoColor=white)](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-monograph.pdf)
 [![Short Paper](https://img.shields.io/badge/Paper-Comparative_Study_(8_pp.)-059669?style=flat-square&logo=arxiv&logoColor=white)](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-short.pdf)
+[![CI](https://img.shields.io/github/actions/workflow/status/tiwater/causalpose3d/ci.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI)](https://github.com/tiwater/causalpose3d/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/badge/Release-v1.0.0-0f172a?style=flat-square&logo=github)](https://github.com/tiwater/causalpose3d/releases/tag/v1.0.0)
 [![License](https://img.shields.io/badge/License-Apache_2.0-d97706?style=flat-square)](LICENSE)
 
@@ -89,6 +90,12 @@ Naive TSDF or point-cloud accumulation permanently bakes transient pose errors i
 To sustain real-time closed-loop perception without sacrificing bit-exactness:
 - **$O(\text{runs})$ Run-Length Mask Algebra:** Binary segmentation masks are represented as sorted 1D run intervals $\mathcal{R} = \{[s_m, e_m)\}_{m=1}^{R}$. Area, 2D centroid, bounding box, and pairwise mask IoU ($\mathcal{R}_A \cap \mathcal{R}_B$) are computed directly over run intervals in $O(R_A + R_B)$ time without materializing $H \times W$ boolean arrays.
 - **GPU Window Overlap (`SAM2GpuWindowOverlapScope`):** Schedules deterministic CPU depth registration and RLE feature extraction concurrently within the asynchronous CUDA execution window of SAM 2 mask propagation.
+
+### 5. Causal $\mathrm{SE}(3)$ Trajectory Prediction & L2 Teleoperation Safety (`causalpose3d.teleop`)
+To support fail-closed **L2 Teleoperation Assistance** (e.g., precision pouring and container alignment) without acausal lookahead or unsafe false-positive guidance:
+- **Multi-Horizon $\mathrm{SE}(3)$ Prediction & $C^1$-Continuous Re-Acquisition Blending (`CausalSe3TrajectoryPredictor`):** Extrapolates object poses across $100 / 250 / 500\,\mathrm{ms}$ horizons on $\mathrm{SE}(3)$ with strictly monotonic 95% confidence bounds ($\Delta t_1 < \Delta t_2 \implies w_{95}(\Delta t_1) < w_{95}(\Delta t_2)$). Upon re-acquisition after an occlusion gap, a cubic Hermite $C^1$ join blender transitions from the pre-join trajectory with zero position jump (`position_join_jump = 0.0 m`) and bounded velocity innovation.
+- **3D Task-Feature Rim Consensus & First-Order $\mathrm{SE}(3)$ Covariance Propagation (`causalpose3d.teleop.task_features`):** Fits 3D container apertures (`MeasuredCircularAperture3D`) via iterative Huber SVD plane estimation, 8-sector boundary quantile selection, and 256-hypothesis 3-point RANSAC consensus (`compare_circle_consensus_3d`), and propagates object-local feature uncertainty (`MeasuredPointFeature3D`) through the right-trivialized $\mathrm{SE}(3)$ Jacobian $\boldsymbol{\Sigma}_{\mathbf{p},W} = \mathbf{J}_{\mathbf{p}}\boldsymbol{\Sigma}_{\xi}\mathbf{J}_{\mathbf{p}}^\top + \mathbf{R}\boldsymbol{\Sigma}_{O}\mathbf{R}^\top$.
+- **Ballistic Liquid Stream Locus & Fail-Closed Rim-Clearance Gate (`causalpose3d.teleop.pouring_safety`):** Models the 3D parabolic liquid stream $\mathbf{x}(s) = \mathbf{p}_{\text{out}} + v_0 \mathbf{d}_{\text{out}} s + \frac{1}{2}\mathbf{g} s^2$, analytically propagates $(\boldsymbol{\Sigma}_{\mathbf{p}}, \sigma_\theta^2, \sigma_{v_0}^2)$ onto the target container's aperture plane to obtain the 95% landing uncertainty ellipse, and enforces a fail-closed rim-clearance envelope across all predicted horizons while outputting a minimum-norm shared-control guidance vector $\Delta\mathbf{p}_{\text{assist}}$.
 
 ---
 
@@ -192,6 +199,29 @@ points_m, obs_support, cam_support = surfel_map.snapshot(
     maximum_point_count=1500,
 )
 print(f"Fused surfels: {len(points_m)}, multi-view support: {obs_support.tolist()}")
+
+# 3. Fail-Closed L2 Teleoperation Pouring Safety Verification
+from causalpose3d.teleop import (
+    MeasuredPointFeature3D,
+    fit_circular_aperture_3d,
+    verify_l2_pouring_safety_envelope,
+)
+
+angles = np.linspace(-np.pi, np.pi, 120, endpoint=False)
+rim_pts = np.column_stack([0.30 + 0.045 * np.cos(angles), 0.045 * np.sin(angles), np.full(120, 0.05)])
+aperture = fit_circular_aperture_3d(rim_pts, coordinate_frame="table")
+spout = MeasuredPointFeature3D(
+    feature_id="pour_outlet",
+    point_m=np.array([0.285, 0.0, 0.15]),
+    direction=np.array([0.25, 0.0, -0.9682458]),
+    covariance_3x3_m2=np.eye(3) * 4e-6,
+    direction_std_rad=0.02,
+    support_pixel_count=40,
+    timestamp_ns=1_000_000_000,
+    coordinate_frame="table",
+)
+verdict = verify_l2_pouring_safety_envelope(pour_outlet_world=spout, target_aperture_world=aperture)
+print(f"L2 Status: {verdict.l2_pour_safety_status}, Rim Clearance (95%): {verdict.current_rim_clearance_95_m*1000:.1f} mm")
 ```
 
 ### 3. Native C++/CUDA `BundleTrack` Patches (`native/bundletrack/`)
@@ -230,11 +260,12 @@ tectonic papers/causalpose3d-monograph/main.tex
 
 ```text
 causalpose3d/
-├── causalpose3d/                  # Core Python library
-│   ├── surface/                   # RevisableSurfelMap, CausalObjectSurface (M, S), multi-view surface fusion
-│   ├── tracking/                  # PinnedBundleTrackRunner, ObjectCentricObservationSession, BootSTAPIR features
+├── causalpose3d/                  # Core Python library (100% standalone)
+│   ├── surface/                   # RevisableSurfelMap, CausalObjectSurface (M, S), multi-camera surface fusion
+│   ├── tracking/                  # PinnedBundleTrackRunner, 3-camera pose runtime, constrained Top XY refinement
 │   ├── observability/             # Point2Pose F/G/R Schur-complement gating & pose-owner A/B evaluators
 │   ├── runtime/                   # SAM2GpuWindowOverlapScope, O(runs) RLE algebra, vectorized plane RANSAC
+│   ├── teleop/                    # L2 teleoperation: causal SE(3) trajectory, 3D task features & pouring safety
 │   └── primitives/                # Registered RGB-D, mask-depth PCA pose, content-addressed hashing
 ├── native/bundletrack/            # Deterministic C++/CUDA BundleTrack sources & patch series (0001–0004)
 ├── benchmarks/                    # Reproducible evaluation receipts, ablation scripts, and table generators

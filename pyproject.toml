@@ -27,6 +27,18 @@ dependencies = [
     "scipy>=1.11.0",
 ]
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "opencv-python-headless>=4.8.0",
+    "pillow>=10.0.0",
+]
+test = [
+    "pytest>=8.0.0",
+    "opencv-python-headless>=4.8.0",
+    "pillow>=10.0.0",
+]
+
 [project.urls]
 Homepage = "https://tiwater.github.io/causalpose3d/"
 Repository = "https://github.com/tiwater/causalpose3d"

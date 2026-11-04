@@ -9,17 +9,15 @@ from typing import Iterable, Mapping
 
 import numpy as np
 
-from ticos_vision.perception.bundlesdf_provider import (
+from causalpose3d.primitives.geometry import (
     BundleSDFFrameInput,
     BundleSDFProvider,
     BundleSDFProviderResult,
-)
-from ticos_vision.perception.causal_multicamera_mask_runtime import (
     CausalMulticameraMaskRuntime,
     CausalRuntimeBatchResult,
     CausalRuntimeFrame,
 )
-from ticos_vision.runtime.content_hash import content_sha256
+from causalpose3d.primitives.content_hash import content_sha256
 
 
 @dataclass(frozen=True)

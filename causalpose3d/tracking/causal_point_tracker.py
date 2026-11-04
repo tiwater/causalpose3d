@@ -10,7 +10,7 @@ from typing import Any, Callable, Literal, Mapping
 
 import numpy as np
 
-from ticos_vision.runtime.content_hash import content_sha256
+from causalpose3d.primitives.content_hash import content_sha256
 
 
 def _sha256(value: object, name: str) -> str:

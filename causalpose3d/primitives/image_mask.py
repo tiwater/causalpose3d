@@ -49,3 +49,13 @@ def decode_mask_rle(payload: Any, *, width: int, height: int) -> np.ndarray | No
             return None
         flat[raw_start:end] = True
     return flat.reshape((int(height), int(width)))
+
+
+try:
+    from ticos_vision.perception.image_mask import (  # type: ignore[import-not-found]
+        decode_mask_rle,
+        encode_mask_rle,
+    )
+except Exception:
+    pass
+

@@ -15,8 +15,8 @@ from typing import Any, Mapping, Sequence
 
 import numpy as np
 
-from ticos_vision.perception.mask_depth_pca_pose import tick_is_mask_available
-from ticos_vision.perception.shadow_pose_owner import score_controlled_reanchor_policy
+from causalpose3d.primitives.mask_depth_pca_pose import tick_is_mask_available
+from causalpose3d.primitives.shadow_pose_owner import score_controlled_reanchor_policy
 
 SCHEMA = "ticos.shadow-pose-owner-ab.v1"
 DEFAULT_LATENCY_P50_TOLERANCE_MS = 15.0

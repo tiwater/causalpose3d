@@ -409,7 +409,7 @@ class PinnedBundleTrackSession:
 
     def advance_registered(self, frame: Any) -> Any:
         """Consume the current-observation adapter without disk materialization."""
-        from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
+        from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
         if not isinstance(frame, RegisteredBundleTrackInput):
             raise ValueError("registered BundleTrack input required")
         if self._registered_stream_key is None and self.frame_count:

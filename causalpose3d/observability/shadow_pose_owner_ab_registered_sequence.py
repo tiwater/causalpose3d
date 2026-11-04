@@ -19,7 +19,7 @@ import numpy as np
 from PIL import Image
 
 from causalpose3d.observability.shadow_pose_owner_ab import evaluate_shadow_pose_owner_ab
-from ticos_vision.perception.mask_depth_pca_pose import (
+from causalpose3d.primitives.mask_depth_pca_pose import (
     DEFAULT_MAXIMUM_TRANSLATION_STEP_M,
     DEFAULT_MINIMUM_DEPTH_SUPPORT_PIXELS,
     advance_mask_depth_pca_pose,

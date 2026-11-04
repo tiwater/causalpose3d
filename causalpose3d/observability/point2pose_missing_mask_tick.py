@@ -9,7 +9,7 @@ from collections.abc import Mapping
 import math
 from typing import Any
 
-from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
+from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
 from causalpose3d.observability.shadow_pose_owner_ab import _registered_input_identity
 
 

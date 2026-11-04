@@ -75,20 +75,18 @@ class PendingObservationCpuPreparation:
         if self.materialized:
             return
         started_ns = time.perf_counter_ns()
-        from ticos_replay.bundletrack_live_input import (
+        from causalpose3d.primitives.bundletrack_live_input import (
             PreparedFeatureSourceBinding,
             _immutable,
             _update_array_digest,
         )
-        from ticos_replay.registered_rgbd import rectify_registered_rgbd
-        from ticos_vision.perception.image_mask import encode_mask_rle
-        from ticos_vision.perception.measured_task_features import (
+        from causalpose3d.primitives.geometry import (
             mask_evidence_sha256,
+            observation_digest,
             registered_feature_stream_key,
         )
-        from ticos_vision.runtime.observation_computation_cache import (
-            observation_digest,
-        )
+        from causalpose3d.primitives.image_mask import encode_mask_rle
+        from causalpose3d.primitives.registered_rgbd import rectify_registered_rgbd
 
         rgb, depth, mask, intrinsics, _diagnostics = rectify_registered_rgbd(
             color=self.color,
@@ -209,12 +207,12 @@ def validate_and_create_pending_preparation(
     is violated, before touching SAM2 state. Returns None when the frame is
     not eligible for distorted warm-frame GPU-window overlap.
     """
-    from ticos_replay.bundletrack_live_input import (
+    from causalpose3d.primitives.bundletrack_live_input import (
         RegisteredBundleTrackInput,
         _decode_color_rgb,
         _registration_transform_matrix,
     )
-    from ticos_replay.sam2_observation_session import (
+    from causalpose3d.primitives.sam2_observation_session import (
         SAM2ObservationSession,
         _same_tracker_new_sensor_epoch,
     )
@@ -407,7 +405,7 @@ def complete_evidence_hash_from_prefix(
         or not np.shares_memory(current.color_rgb, pending.frame.color_rgb)
     ):
         return False
-    from ticos_replay.bundletrack_live_input import _update_array_digest
+    from causalpose3d.primitives.bundletrack_live_input import _update_array_digest
 
     started_ns = time.perf_counter_ns()
     if np.shares_memory(current.depth_mm, pending.frame.depth_mm):
@@ -463,8 +461,8 @@ def advance_registered_with_prepared_buffers(
     fallback_advance_registered: Any,
 ) -> Any:
     """Advance PinnedBundleTrackSession using one-shot GPU-window buffers when valid."""
-    from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
-    from ticos_replay.sam2_observation_session import (
+    from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
+    from causalpose3d.primitives.sam2_observation_session import (
         _same_tracker_new_sensor_epoch,
     )
 

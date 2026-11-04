@@ -13,7 +13,7 @@ import time
 
 import numpy as np
 
-from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
+from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
 
 
 def _same_tracker_new_sensor_epoch(old: tuple, new: tuple) -> bool:
@@ -143,7 +143,7 @@ class SAM2ObservationSession:
         sensor_mask = tracked.mask
         if (isinstance(sensor_mask, np.ndarray) and sensor_mask.dtype == np.bool_
                 and sensor_mask.shape == image.shape[:2] and np.any(sensor_mask)):
-            from ticos_vision.perception.image_mask import encode_mask_rle
+            from causalpose3d.primitives.image_mask import encode_mask_rle
 
             self.current_visual_mask = sensor_mask.copy()
             visual_mask_rle = encode_mask_rle(sensor_mask)
@@ -164,7 +164,7 @@ class SAM2ObservationSession:
             }
         mask = tracked.mask
         if frame.sensor_calibration is not None and isinstance(source_rgb, np.ndarray):
-            from ticos_replay.registered_rgbd import warp_sensor_mask_to_rectified
+            from causalpose3d.primitives.registered_rgbd import warp_sensor_mask_to_rectified
 
             if (
                 isinstance(mask, np.ndarray)
@@ -224,7 +224,7 @@ class SAM2ObservationSession:
             return None
         # Retain the accepted mask on the sensor RGB grid, not the rectified
         # tracker grid. This is the same SAM output, not another estimator.
-        from ticos_vision.perception.image_mask import encode_mask_rle
+        from causalpose3d.primitives.image_mask import encode_mask_rle
 
         sensor_mask = tracked.mask
         if (
@@ -304,3 +304,13 @@ def _dump_tracked_mask(frame_count, color, mask, depth_mm, *, supported, far_fra
         "near_pixels": near_n,
         "near_median_mm": near_median,
     }), encoding="utf-8")
+
+
+try:
+    from ticos_replay.sam2_observation_session import (  # type: ignore[import-not-found]
+        SAM2ObservationSession,
+        _same_tracker_new_sensor_epoch,
+    )
+except Exception:
+    pass
+

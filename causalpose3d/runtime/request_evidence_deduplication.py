@@ -32,13 +32,13 @@ from typing import Any, Callable, Iterator
 
 import numpy as np
 
-from ticos_vision.geometry.rgbd_surface import (
+from causalpose3d.primitives.geometry import (
     CameraInfoRecord,
     MaskDepthComponentSelection,
     RegisteredRgbdFrame,
     RegisteredRgbdSurface,
+    observation_digest_scope,
 )
-from ticos_vision.runtime.observation_computation_cache import observation_digest_scope
 
 _VALID_MODES = frozenset({"off", "control", "dedup", "validate"})
 _ACTIVE_SCOPE: ContextVar["_ActiveRequestScope | None"] = ContextVar(

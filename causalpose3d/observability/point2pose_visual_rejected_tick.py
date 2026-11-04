@@ -12,10 +12,10 @@ from typing import Any
 
 import numpy as np
 
-from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
-from ticos_replay.sam2_observation_session import _mask_evidence_sha256
+from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
+from causalpose3d.primitives.sam2_observation_session import _mask_evidence_sha256
 from causalpose3d.observability.shadow_pose_owner_ab import _registered_input_identity
-from ticos_vision.perception.image_mask import decode_mask_rle, encode_mask_rle
+from causalpose3d.primitives.image_mask import decode_mask_rle, encode_mask_rle
 
 
 def make_point2pose_visual_rejected_shadow_tick(

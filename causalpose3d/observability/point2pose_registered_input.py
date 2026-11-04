@@ -13,7 +13,7 @@ from typing import Any
 import cv2
 import numpy as np
 
-from ticos_replay.bundletrack_live_input import RegisteredBundleTrackInput
+from causalpose3d.primitives.bundletrack_live_input import RegisteredBundleTrackInput
 
 
 def _readonly_copy(array: np.ndarray) -> np.ndarray:
