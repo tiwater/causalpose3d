@@ -1,0 +1,41 @@
+{
+  "scope": "selected public development sequence, per-frame reference masks, not cutover evidence",
+  "result": {
+    "sequence": "bleach0",
+    "frames_including_initial": 663,
+    "reference_mask_condition": "same dataset reference mask every frame",
+    "point2pose": {
+      "denominator_excluding_initial": 662,
+      "unavailable_count": 2,
+      "adds_le_10mm_count": 155,
+      "adds_le_20mm_count": 184,
+      "adds_le_10mm_ratio": 0.23413897280966767,
+      "adds_le_20mm_ratio": 0.27794561933534745,
+      "recall_auc_0_to_100mm": 0.7982055104830956
+    },
+    "bundletrack": {
+      "denominator_excluding_initial": 662,
+      "unavailable_count": 7,
+      "adds_le_10mm_count": 301,
+      "adds_le_20mm_count": 467,
+      "adds_le_10mm_ratio": 0.45468277945619334,
+      "adds_le_20mm_ratio": 0.7054380664652568,
+      "recall_auc_0_to_100mm": 0.8509914717525705
+    },
+    "source_sha256": {
+      "manifest": "ce98308e1539de426d3cf521fbd5cf384986ea89e1a4d4c8749b1daaa2ddfb78",
+      "model": "16a19adedddbd49f07df5642abf111626e4c3aa6eb061043310fec6e0c28da15",
+      "point_results": "68dd9630360e6ab11d07b812a1b9ed4704b04a45b7df86e7a81f86c286a0ac72",
+      "bundle_results": "4f317c817da960769b4cdbdf8fb9ebe47e00e0d2c91d35f0f266927d5a886ce0",
+      "prior_reference_audit": "cca3df571a42a3f71689d94a65600d049c1f2634fee59c63f3f60e2f14b85084"
+    }
+  },
+  "limits": [
+    "sorted pose files matched to extracted RGB indices as in author code; physical annotation generation not independently validated",
+    "convex-hull projection agreement can be poor due to occlusion, model mismatch or label association",
+    "reference rotation projected to SO(3), first reference pose aligns tracker gauges offline",
+    "10 mm threshold is post-hoc; failures included in 662-frame denominator",
+    "model vertices are nonuniform and no explicit symmetry-group scoring",
+    "one selected sequence, no independent physical truth or full system latency"
+  ]
+}

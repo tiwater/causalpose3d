@@ -1,0 +1,116 @@
+# EvidenceScene method paper (8 pp.)
+
+`main.tex` is the current 8-page manuscript:
+
+> **EvidenceScene: Observability-Conditioned Pose Tracking and Revisable
+> 3D Scene Reconstruction for Robot Manipulation**
+
+It is a mechanism-focused development study, not a benchmark leaderboard or a
+deployment authorization. It separates:
+
+1. the pinned upstream BundleTrack and Point2Pose implementations;
+2. the EvidenceScene repairs and their controlled ablations; and
+3. the live-authority boundary: the native BundleTrack branch owns the live
+   pose/surface path, while the Point2Pose branch is an offline shadow.
+
+## Scope and evidence status
+
+All quantitative comparisons are development results on already-opened
+recordings. Pose scores use reference masks and reference-assisted
+initialization; surface scores use a CAD or sampled-model reference. They are
+not held-out, blind, or physical-ground-truth results. No result in this
+manuscript authorizes a live pose-estimator cutover.
+
+The complete 31-framework table, additional system-level results, and the
+teleoperation deployment study are in the companion monograph at
+`../evidencescene-monograph/main.tex`. The short paper cites it only for the
+framework table; its own claims are supported by the figures and tables
+vendored here and by the evidence tree in the Ticos Edge repository.
+
+## Build
+
+From this directory:
+
+```sh
+tectonic main.tex
+cp main.pdf evidencescene-short.pdf
+```
+
+The build is self-contained: all figures and table fragments used by
+`main.tex` are checked in under this directory or `../figures/`. The checked-in
+PDF is `evidencescene-short.pdf`.
+
+Build verification: 8 pages, no overfull boxes, no undefined references.
+`\sloppy` is enabled because several code identifiers are long; underfull-box
+warnings are typographic only.
+
+## Assets
+
+| Asset | Role |
+| --- | --- |
+| `pose-table.tex` | YCBInEOAT reference-mask development comparison |
+| `fork-reference-table.tex` | Laval Vicon B/P/F comparison |
+| `anchor-admission-table.tex` | G/R/M graph interventions |
+| `surface-transaction-table.tex` | G/M + S factorial |
+| `budget-transfer-table.tex` | 1,500-point selector transfer |
+| `../figures/fig_cookiejar_paradox.pdf` | availability--surface paradox |
+| `../figures/fig_graph_ablation.pdf` | global-graph switch ablation |
+| `../figures/fig_surface_interaction.pdf` | M x S interaction |
+| `../figures/fig_surface_cdf.pdf` | reference-pose surface counterfactual |
+| `../figures/fig_budget_transfer.pdf` | selector coverage transfer |
+
+The five figure PDFs and `budget-transfer-table.tex` were vendored from the
+Ticos Edge evidence tree so that the manuscript no longer depends on sibling
+experiment directories at compile time.
+
+## Evidence map (Ticos Edge repository)
+
+The authoritative receipts remain in `docs/papers/` of the Ticos Edge
+repository. The most relevant directories are:
+
+- `laval-fork-development-20261030/` — F/G/R/M/S scores, graph audits, surface
+  transactions, and the original figure scripts.
+- `reference-pose-surface-counterfactual-20261101/` — native vs. reference-pose
+  surface attribution.
+- `existing-point-budget-selection-transfer-20261101/` — selector transfer and
+  latency.
+- `composed-native-retention-public-20261101/` — native BundleTrack repair
+  comparison (see the native evidence receipt referenced by the paper).
+- `sam-gpu-window-cpu-overlap-20261102/` and
+  `request-evidence-deduplication-20261102/` — bit-exact runtime ablations.
+- `performance-claim-audit-20261101/` — claim-level verification entry point.
+
+Those directories contain the per-frame scores, input receipts, source patches,
+and replay scripts. They are large (the full tree is multi-gigabyte), so this
+repository vendors only the derived assets needed to build the manuscript.
+
+## Older material
+
+`detailed-evidence.tex` and `detailed-evidence.pdf` preserve the earlier,
+maximally cautious development report. They are not the current submission and
+are retained for provenance. Some table fragments in this directory
+(e.g., `bundletrack-count-values-table.tex`) are unused by `main.tex` and are
+kept as evidence artifacts.
+
+## Pinned upstream versions
+
+- BundleTrack: `ffa67d425240b5b76d2e387a7dd3d3735a7cf1a1`
+- Point2Pose: `51856226610df75e5c06e8de545bd27f7c4ba99c`
+- Project page: <https://tiwater.github.io/evidencescene/>
+
+## Regenerating from evidence
+
+The checked-in tables are the review copy. They can be regenerated offline from
+the vendored receipts:
+
+```sh
+cd ../..
+make tables
+```
+
+`benchmarks/receipts/` contains the ten score files needed by
+`generate_table.py` and `generate_generated_mask_table.py`; both generators
+verify the SHA-256 digest of every receipt before rendering. The full
+per-frame evidence, source patches, and recording-level receipts remain in the
+Ticos Edge tree because they are multi-gigabyte. Do not regenerate a table
+from a changed receipt without recording the new source identity in the paper.

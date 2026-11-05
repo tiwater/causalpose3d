@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="100%" height="auto" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    <linearGradient id="stage1Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#eff6ff"/>
+      <stop offset="100%" stop-color="#dbeafe"/>
+    </linearGradient>
+    <linearGradient id="stage2Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f0fdf4"/>
+      <stop offset="100%" stop-color="#dcfce7"/>
+    </linearGradient>
+    <linearGradient id="stage3Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fefce8"/>
+      <stop offset="100%" stop-color="#fef9c3"/>
+    </linearGradient>
+    <linearGradient id="stage4Grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#faf5ff"/>
+      <stop offset="100%" stop-color="#f3e8ff"/>
+    </linearGradient>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#ca8a04"/>
+    </marker>
+    <filter id="cardShadow" x="-4%" y="-4%" width="108%" height="110%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.07"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="460" rx="16" fill="url(#bgGrad)" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Header Banner -->
+  <rect x="24" y="18" width="1152" height="46" rx="10" fill="#0f172a"/>
+  <text x="44" y="47" fill="#ffffff" font-size="16" font-weight="700" letter-spacing="0.3">EvidenceScene: Observability-Conditioned 3D Scene Reconstruction Architecture</text>
+  <text x="1156" y="46" fill="#93c5fd" font-size="12.5" font-weight="600" text-anchor="end">Zero-Loss Bit-Exact Runtime • Deterministic CUDA • RevisableSurfelMap</text>
+
+  <!-- Stage 1: Concurrent Evidence Ingestion -->
+  <g filter="url(#cardShadow)">
+    <rect x="24" y="82" width="266" height="295" rx="12" fill="url(#stage1Grad)" stroke="#3b82f6" stroke-width="1.8"/>
+    <rect x="24" y="82" width="266" height="38" rx="12" fill="#1d4ed8"/>
+    <text x="157" y="106" fill="#ffffff" font-size="13.5" font-weight="700" text-anchor="middle">1. Zero-Loss RGB-D &amp; Mask Overlap</text>
+
+    <rect x="38" y="132" width="238" height="58" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2"/>
+    <text x="50" y="152" fill="#1e3a8a" font-size="12" font-weight="700">SAM2GpuWindowOverlapScope</text>
+    <text x="50" y="169" fill="#475569" font-size="11">Concurrent CPU preparation during</text>
+    <text x="50" y="183" fill="#475569" font-size="11">SAM2 GPU inference window</text>
+
+    <rect x="38" y="200" width="238" height="62" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2"/>
+    <text x="50" y="220" fill="#1e3a8a" font-size="12" font-weight="700">O(runs) RLE &amp; Evidence Dedup</text>
+    <text x="50" y="237" fill="#475569" font-size="11">Direct run-interval bbox/area/IoU;</text>
+    <text x="50" y="251" fill="#475569" font-size="11">eliminates 240+ dense mask decodes</text>
+
+    <rect x="38" y="272" width="238" height="54" rx="8" fill="#ffffff" stroke="#93c5fd" stroke-width="1.2"/>
+    <text x="50" y="292" fill="#1e3a8a" font-size="12" font-weight="700">Vectorized AprilTag RANSAC + GC</text>
+    <text x="50" y="309" fill="#475569" font-size="11">Batched (B,3,3) SVD &amp; boundary GC</text>
+
+    <rect x="38" y="336" width="238" height="28" rx="6" fill="#dbeafe"/>
+    <text x="157" y="354" fill="#1e40af" font-size="11.5" font-weight="700" text-anchor="middle">p50: 127.8 ms (-17.7%) • 100% Bit-Exact</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="290" y1="228" x2="316" y2="228" stroke="#2563eb" stroke-width="2.8" marker-end="url(#arrowBlue)"/>
+
+  <!-- Stage 2: Deterministic Native Pose & Factor Graph -->
+  <g filter="url(#cardShadow)">
+    <rect x="320" y="82" width="286" height="295" rx="12" fill="url(#stage2Grad)" stroke="#22c55e" stroke-width="1.8"/>
+    <rect x="320" y="82" width="286" height="38" rx="12" fill="#15803d"/>
+    <text x="463" y="106" fill="#ffffff" font-size="13.5" font-weight="700" text-anchor="middle">2. Deterministic Pose &amp; Observability</text>
+
+    <rect x="334" y="132" width="258" height="60" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2"/>
+    <text x="346" y="151" fill="#14532d" font-size="12" font-weight="700">Deterministic Native BundleTrack</text>
+    <text x="346" y="168" fill="#475569" font-size="11">Stable-winner CUDA RANSAC + count</text>
+    <text x="346" y="182" fill="#475569" font-size="11">direction + exact SE(3) inverse cache</text>
+
+    <rect x="334" y="202" width="258" height="64" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2"/>
+    <text x="346" y="221" fill="#14532d" font-size="12" font-weight="700">Causal Factor-Graph Gating (F, G, R)</text>
+    <text x="346" y="238" fill="#475569" font-size="11">Prior-connected admission (G) &amp; Schur</text>
+    <text x="346" y="252" fill="#475569" font-size="11">marginal rank R_i = J_ii^T J_ii - J_iL^T J_LL^+ J_Li</text>
+
+    <rect x="334" y="276" width="258" height="50" rx="8" fill="#ffffff" stroke="#86efac" stroke-width="1.2"/>
+    <text x="346" y="295" fill="#14532d" font-size="12" font-weight="700">Contiguous-NO_BA Frame Retirement</text>
+    <text x="346" y="312" fill="#475569" font-size="11">Retires historical GPU/RAM buffers safely</text>
+
+    <rect x="334" y="336" width="258" height="28" rx="6" fill="#dcfce7"/>
+    <text x="463" y="354" fill="#166534" font-size="11.5" font-weight="700" text-anchor="middle">0.00 mm Repeat Spread • -1.99 GiB RSS</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="606" y1="228" x2="632" y2="228" stroke="#16a34a" stroke-width="2.8" marker-end="url(#arrowGreen)"/>
+
+  <!-- Stage 3: Causal Surface Lineage & RevisableSurfelMap -->
+  <g filter="url(#cardShadow)">
+    <rect x="636" y="82" width="276" height="295" rx="12" fill="url(#stage3Grad)" stroke="#eab308" stroke-width="1.8"/>
+    <rect x="636" y="82" width="276" height="38" rx="12" fill="#a16207"/>
+    <text x="774" y="106" fill="#ffffff" font-size="13.5" font-weight="700" text-anchor="middle">3. Causal Surface &amp; Surfel Selector</text>
+
+    <rect x="650" y="132" width="248" height="58" rx="8" fill="#ffffff" stroke="#fde047" stroke-width="1.2"/>
+    <text x="662" y="151" fill="#713f12" font-size="12" font-weight="700">Feature-Birth Ledger (M) &amp; Rebuild (S)</text>
+    <text x="662" y="168" fill="#475569" font-size="11">Purges ghost surfels from later-rejected</text>
+    <text x="662" y="182" fill="#475569" font-size="11">or Gauge-shifted keyframes</text>
+
+    <rect x="650" y="200" width="248" height="64" rx="8" fill="#ffffff" stroke="#fde047" stroke-width="1.2"/>
+    <text x="662" y="219" fill="#713f12" font-size="12" font-weight="700">RevisableSurfelMap Selector</text>
+    <text x="662" y="236" fill="#475569" font-size="11">Array-native support10/coarse12mm</text>
+    <text x="662" y="250" fill="#475569" font-size="11">1,500-point budget with view diversity</text>
+
+    <rect x="650" y="274" width="248" height="52" rx="8" fill="#ffffff" stroke="#fde047" stroke-width="1.2"/>
+    <text x="662" y="293" fill="#713f12" font-size="12" font-weight="700">Bounded Translation Recovery</text>
+    <text x="662" y="310" fill="#475569" font-size="11">Jump-gate clipped centroid recovery</text>
+
+    <rect x="650" y="336" width="248" height="28" rx="6" fill="#fef08a"/>
+    <text x="774" y="354" fill="#854d0e" font-size="11.5" font-weight="700" text-anchor="middle">C10: 85.10% (+44.5%) • Coverage: 89.97%</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="912" y1="228" x2="938" y2="228" stroke="#ca8a04" stroke-width="2.8" marker-end="url(#arrowAmber)"/>
+
+  <!-- Stage 4: Verified 6D Trajectory & World State -->
+  <g filter="url(#cardShadow)">
+    <rect x="942" y="82" width="234" height="295" rx="12" fill="url(#stage4Grad)" stroke="#a855f7" stroke-width="1.8"/>
+    <rect x="942" y="82" width="234" height="38" rx="12" fill="#6b21a8"/>
+    <text x="1059" y="106" fill="#ffffff" font-size="13.5" font-weight="700" text-anchor="middle">4. Fail-Closed 3D Output</text>
+
+    <rect x="956" y="132" width="206" height="58" rx="8" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.2"/>
+    <text x="968" y="151" fill="#581c87" font-size="12" font-weight="700">Metric 6-DoF Trajectories</text>
+    <text x="968" y="168" fill="#475569" font-size="11">Explicit candidate vs. blocked</text>
+    <text x="968" y="182" fill="#475569" font-size="11">observability receipts</text>
+
+    <rect x="956" y="200" width="206" height="62" rx="8" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.2"/>
+    <text x="968" y="219" fill="#581c87" font-size="12" font-weight="700">Completed Object Surfaces</text>
+    <text x="968" y="236" fill="#475569" font-size="11">Multi-view corroborated surfels</text>
+    <text x="968" y="250" fill="#475569" font-size="11">&amp; task clearance geometry</text>
+
+    <rect x="956" y="272" width="206" height="54" rx="8" fill="#ffffff" stroke="#d8b4fe" stroke-width="1.2"/>
+    <text x="968" y="291" fill="#581c87" font-size="12" font-weight="700">Public Benchmark Audit</text>
+    <text x="968" y="308" fill="#475569" font-size="11">YCBInEOAT &amp; Laval Vicon (704f)</text>
+
+    <rect x="956" y="336" width="206" height="28" rx="6" fill="#f3e8ff"/>
+    <text x="1059" y="354" fill="#6b21a8" font-size="11.5" font-weight="700" text-anchor="middle">96.3% Duty • 26.8 mm Mean ADD</text>
+  </g>
+
+  <!-- Footer Summary Bar -->
+  <rect x="24" y="394" width="1152" height="48" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2"/>
+  <text x="44" y="423" fill="#0f172a" font-size="12.5" font-weight="600">
+    Key Invariant: Every optimization preserves 100% fail-closed observability semantics—no silent last-pose holds, no fabricated geometry, and bit-exact live parity.
+  </text>
+  <text x="1156" y="423" fill="#2563eb" font-size="12.5" font-weight="700" text-anchor="end">
+    https://tiwater.github.io/evidencescene/
+  </text>
+</svg>

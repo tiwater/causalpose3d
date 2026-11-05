@@ -1,0 +1,26 @@
+PYTHON ?= python3
+TECTONIC ?= tectonic
+
+.PHONY: test tables paper paper-short paper-monograph
+
+test:
+	$(PYTHON) -m pytest -q
+
+# Regenerate the checked-in table fragments from the vendored receipts.
+# Receipt hashes are verified by the generators before rendering.
+tables:
+	cd benchmarks && $(PYTHON) generate_table.py > ../papers/evidencescene-short/pose-table.tex
+	cd benchmarks && $(PYTHON) generate_generated_mask_table.py > ../papers/evidencescene-short/generated-mask-table.tex
+	cd benchmarks && $(PYTHON) sequence_summary.py > sequence-summary.json
+
+paper-short:
+	cd papers/evidencescene-short && $(TECTONIC) main.tex
+	cp papers/evidencescene-short/main.pdf papers/evidencescene-short/evidencescene-short.pdf
+	cp papers/evidencescene-short/evidencescene-short.pdf docs/assets/papers/evidencescene-short.pdf
+
+paper-monograph:
+	cd papers/evidencescene-monograph && $(TECTONIC) main.tex
+	cp papers/evidencescene-monograph/main.pdf papers/evidencescene-monograph/evidencescene-monograph.pdf
+	cp papers/evidencescene-monograph/evidencescene-monograph.pdf docs/assets/papers/evidencescene-monograph.pdf
+
+paper: paper-short paper-monograph

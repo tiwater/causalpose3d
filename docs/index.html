@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction</title>
-  <meta name="description" content="CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction with Deterministic Native BundleTrack, Point2Pose Factor-Graph Gating, RevisableSurfelMap, and Zero-Loss Bit-Exact Runtime." />
+  <title>EvidenceScene: Observability-Conditioned 3D Scene Reconstruction for Robot Manipulation</title>
+  <meta name="description" content="EvidenceScene: Observability-Conditioned 3D Scene Reconstruction for Robot Manipulation with Deterministic Native BundleTrack, Point2Pose Factor-Graph Gating, RevisableSurfelMap, and Zero-Loss Bit-Exact Runtime." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -16,7 +16,7 @@
   <nav class="top-nav">
     <div class="nav-container">
       <a href="#" class="nav-brand">
-        <span>CausalPose-3D</span>
+        <span>EvidenceScene</span>
         <span class="nav-badge">v1.0 Research Release</span>
       </a>
       <ul class="nav-links">
@@ -26,7 +26,7 @@
         <li><a href="#visualizations">Visualizations</a></li>
         <li><a href="#papers">Papers</a></li>
         <li><a href="#citation">BibTeX</a></li>
-        <li><a href="https://github.com/tiwater/causalpose3d" target="_blank" rel="noopener">GitHub ↗</a></li>
+        <li><a href="https://github.com/tiwater/evidencescene" target="_blank" rel="noopener">GitHub ↗</a></li>
       </ul>
     </div>
   </nav>
@@ -34,9 +34,9 @@
   <!-- Hero Section -->
   <header class="hero">
     <div class="hero-container">
-      <div class="venue-tag">Technical Monograph &amp; Comparative Benchmark • November 2026</div>
+      <div class="venue-tag">Technical Monograph &amp; Method Paper • November 2026</div>
       <h1 class="hero-title">
-        <span class="gradient-text">CausalPose-3D</span>: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction
+        <span class="gradient-text">EvidenceScene</span>: Observability-Conditioned 3D Scene Reconstruction for Robot Manipulation
       </h1>
 
       <div class="authors-block">
@@ -46,15 +46,15 @@
 
       <!-- Action Buttons -->
       <div class="cta-buttons">
-        <a href="assets/papers/causalpose3d-monograph.pdf" class="btn-pill btn-dark" target="_blank" rel="noopener">
+        <a href="assets/papers/evidencescene-monograph.pdf" class="btn-pill btn-dark" target="_blank" rel="noopener">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0H4zm5.5 1.5v2a1 1 0 0 0 1 1h2l-3-3z"/></svg>
           Monograph PDF (17 pp.)
         </a>
-        <a href="assets/papers/causalpose3d-short.pdf" class="btn-pill btn-blue" target="_blank" rel="noopener">
+        <a href="assets/papers/evidencescene-short.pdf" class="btn-pill btn-blue" target="_blank" rel="noopener">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/></svg>
-          Comparative Paper PDF (8 pp.)
+          Method Paper PDF (8 pp.)
         </a>
-        <a href="https://github.com/tiwater/causalpose3d" class="btn-pill btn-outline" target="_blank" rel="noopener">
+        <a href="https://github.com/tiwater/evidencescene" class="btn-pill btn-outline" target="_blank" rel="noopener">
           <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
           Code &amp; Native CUDA Patches
         </a>
@@ -69,12 +69,12 @@
       <!-- Teaser Visual Banner -->
       <div class="teaser-box">
         <div class="teaser-grid-3">
-          <img src="assets/figures/07-teleop-hud-perspective-frame275.png" alt="CausalPose-3D 3D Perspective Reconstruction" class="zoomable-fig" />
-          <img src="assets/figures/08-teleop-hud-top-xy-bullseye-frame275.png" alt="CausalPose-3D Orthographic Top-XY Bullseye" class="zoomable-fig" />
-          <img src="assets/figures/09-teleop-hud-side-xz-clearance-frame275.png" alt="CausalPose-3D Orthographic Side-XZ Clearance" class="zoomable-fig" />
+          <img src="assets/figures/07-teleop-hud-perspective-frame275.png" alt="EvidenceScene 3D Perspective Reconstruction" class="zoomable-fig" />
+          <img src="assets/figures/08-teleop-hud-top-xy-bullseye-frame275.png" alt="EvidenceScene Orthographic Top-XY Bullseye" class="zoomable-fig" />
+          <img src="assets/figures/09-teleop-hud-side-xz-clearance-frame275.png" alt="EvidenceScene Orthographic Side-XZ Clearance" class="zoomable-fig" />
         </div>
         <p class="caption">
-          <strong>Figure 1: CausalPose-3D online metric 3D reconstruction and 6-DoF object tracking during dexterous manipulation.</strong>
+          <strong>Figure 1: EvidenceScene online metric 3D reconstruction and 6-DoF object tracking during dexterous manipulation.</strong>
           <em>Left:</em> Perspective 3D scene integrating four calibrated RGB-D cameras, AprilTag-anchored support geometry, and persistent object surfaces.
           <em>Center:</em> Orthographic Top-XY bullseye projection driven by corroborated 3D object pose and completed surface geometry.
           <em>Right:</em> Orthographic Side-XZ elevation clearance profile with fail-closed observability gating.
@@ -119,7 +119,7 @@
           Standard 6D object pose and 3D surface reconstruction benchmarks frequently conflate offline batch optimization, unverified last-pose hold heuristics, and non-deterministic GPU correspondence reductions with genuine online tracking observability. When deployed in contact-rich robotic manipulation and teleoperation, silent pose holds and unconditioned factor-graph admissions produce ghost surface artifacts, unbounded memory growth, and uncalibrated trajectory jumps.
         </p>
         <p>
-          We introduce <strong>CausalPose-3D</strong>, a causal observability-conditioned 6D pose tracking and revisable 3D surface reconstruction framework built upon deep architectural optimizations over <strong>BundleTrack</strong> and <strong>Point2Pose</strong>. First, we diagnose and eliminate native C++/CUDA non-determinism in BundleTrack via a deterministic <code>stable-winner</code> RANSAC reduction, correspondence-count direction selection, and full-precision <code>SE(3)</code> inverse caching in <code>CUDACache::storeFrame</code>, driving repeated-execution pose spread to <code>0.00 mm / 0.00°</code> while increasing strict motion-capture successes on Laval Vicon Clock/Jar from <code>135/107</code> to <code>191/136</code> and cutting peak process RSS by up to <code>1,994.0 MiB</code> via guarded contiguous-<code>NO_BA</code> frame retirement.
+          We introduce <strong>EvidenceScene</strong>, an evidence-constrained, observability-conditioned 3D scene reconstruction framework that tracks 6D object pose and maintains a revisable surface representation, built upon deep architectural optimizations over <strong>BundleTrack</strong> and <strong>Point2Pose</strong>. First, we diagnose and eliminate native C++/CUDA non-determinism in BundleTrack via a deterministic <code>stable-winner</code> RANSAC reduction, correspondence-count direction selection, and full-precision <code>SE(3)</code> inverse caching in <code>CUDACache::storeFrame</code>, driving repeated-execution pose spread to <code>0.00 mm / 0.00°</code> while increasing strict motion-capture successes on Laval Vicon Clock/Jar from <code>135/107</code> to <code>191/136</code> and cutting peak process RSS by up to <code>1,994.0 MiB</code> via guarded contiguous-<code>NO_BA</code> frame retirement.
         </p>
         <p>
           Second, we formalize a five-stage causal factor-graph observability and surface lineage stack (<code>F + G + R + M + S</code>) for Point2Pose: solver correctness fixes (<code>F</code>), prior-connected keyframe admission (<code>G</code>), Schur-complement marginal translational rank gating (<code>R</code>), feature-birth observation ledgers (<code>M</code>), and causal surface-history rebuild transactions (<code>S</code>) paired with an array-native <code>RevisableSurfelMap</code> <code>support10/coarse12mm</code> 1,500-point selector that raises 10-view surface corroboration (<code>C₁₀</code>) from <code>40.57%/52.34%</code> to <code>85.10%/85.05%</code>. Finally, we introduce zero-loss concurrent GPU-window CPU overlap (<code>SAM2GpuWindowOverlapScope</code>) and <code>O(runs)</code> integer RLE mask interval arithmetic (<code>RequestEvidenceDeduplicationScope</code>), reducing warm end-to-end p50/p95 latency from <code>155.33/219.06 ms</code> to <code>127.80/153.40 ms</code> with <strong>100% bit-exact output parity</strong>.
@@ -137,7 +137,7 @@
       </div>
 
       <div class="teaser-box">
-        <img src="assets/figures/causalpose3d_architecture.svg" alt="CausalPose-3D System Architecture" style="width:100%;height:auto;border-radius:8px;" />
+        <img src="assets/figures/evidencescene_architecture.svg" alt="EvidenceScene System Architecture" style="width:100%;height:auto;border-radius:8px;" />
       </div>
 
       <div class="pillars-grid">
@@ -209,7 +209,7 @@
       <div id="tab-public-pose" class="tab-panel active">
         <h3>Public RGB-D 6D Pose Benchmark: YCBInEOAT (430 frames) &amp; Laval Vicon Motion Capture (704 frames)</h3>
         <p class="caption" style="margin-top:0.35rem;">
-          Comparison across 704 public evaluation frames. <strong>CausalPose-3D</strong> combines our deterministic native BundleTrack backend (<code>stable-winner</code> + count-selected correspondence direction + exact <code>SE(3)</code> cache + contiguous-<code>NO_BA</code> retirement) with bounded mask-depth translation recovery under a strict fail-closed jump gate.
+          Comparison across 704 public evaluation frames. <strong>EvidenceScene</strong> combines our deterministic native BundleTrack backend (<code>stable-winner</code> + count-selected correspondence direction + exact <code>SE(3)</code> cache + contiguous-<code>NO_BA</code> retirement) with bounded mask-depth translation recovery under a strict fail-closed jump gate.
         </p>
         <div class="table-wrapper">
           <table class="benchmark-table">
@@ -227,7 +227,7 @@
             </thead>
             <tbody>
               <tr class="highlight-row">
-                <td><strong>CausalPose-3D (Composed Native + Bounded Recovery)</strong></td>
+                <td><strong>EvidenceScene (Composed Native + Bounded Recovery)</strong></td>
                 <td>YCBInEOAT (bleach0 + sugar0 + mustard0)</td>
                 <td>430</td>
                 <td><strong>96.3%</strong></td>
@@ -267,7 +267,7 @@
                 <td>0.00 / 0.00°</td>
               </tr>
               <tr class="highlight-row-emerald">
-                <td><strong>CausalPose-3D (Composed Native + Bounded Recovery)</strong></td>
+                <td><strong>EvidenceScene (Composed Native + Bounded Recovery)</strong></td>
                 <td>Laval Vicon Motion Capture (Clock + Jar)</td>
                 <td>274</td>
                 <td><strong>91.2%</strong></td>
@@ -370,7 +370,7 @@
                 <td>Rank-conditioned</td>
               </tr>
               <tr class="highlight-row">
-                <td><strong>CausalPose-3D Full Observability &amp; Lineage Stack</strong></td>
+                <td><strong>EvidenceScene Full Observability &amp; Lineage Stack</strong></td>
                 <td><strong><code>F + G + R + M + S</code></strong></td>
                 <td><strong>0.0%</strong></td>
                 <td><strong>47</strong></td>
@@ -422,9 +422,9 @@
                 <td>Baseline (Unbounded)</td>
               </tr>
               <tr class="highlight-row-emerald">
-                <td><strong>CausalPose-3D <code>support10/coarse12mm</code> + Contiguous-<code>NO_BA</code> Retirement</strong></td>
-                <td><strong>85.10% (+44.53%)</strong></td>
-                <td><strong>85.05% (+32.71%)</strong></td>
+                <td><strong>EvidenceScene <code>support10/coarse12mm</code> + Contiguous-<code>NO_BA</code> Retirement</strong></td>
+                <td><strong>85.10% (+44.53 pp)</strong></td>
+                <td><strong>85.05% (+32.71 pp)</strong></td>
                 <td><strong>89.97% (+18.19%)</strong></td>
                 <td><strong>11.9 views</strong></td>
                 <td><strong>1.48 ms (-33.0%)</strong></td>
@@ -503,7 +503,7 @@
       <div id="tab-31-frameworks" class="tab-panel">
         <h3>Expanded 31-Framework Comparative Landscape (Model-Free, CAD-Based, Detector-Free &amp; Dense SLAM)</h3>
         <p class="caption" style="margin-top:0.35rem;">
-          Architectural and empirical comparison situating <strong>CausalPose-3D</strong> among 31 contemporary 6D pose estimation, correspondence matching, and 3D reconstruction frameworks.
+          Architectural and empirical comparison situating <strong>EvidenceScene</strong> among 31 contemporary 6D pose estimation, correspondence matching, and 3D reconstruction frameworks.
         </p>
         <div class="table-wrapper">
           <table class="benchmark-table">
@@ -520,7 +520,7 @@
             <tbody>
               <tr class="highlight-row">
                 <td><strong>Causal Observability Pose + Surface</strong></td>
-                <td><strong>CausalPose-3D (Ours)</strong></td>
+                <td><strong>EvidenceScene (Ours)</strong></td>
                 <td><span class="badge-pass">Yes (Model-Free)</span></td>
                 <td><span class="badge-pass">Yes (F+G+R+Jump Gate)</span></td>
                 <td><span class="badge-pass">Yes (M+S + RevisableSurfelMap)</span></td>
@@ -562,7 +562,7 @@
           </table>
         </div>
         <div class="claim-callout">
-          <strong>Scientific Claim Boundary:</strong> While <strong>CausalPose-3D</strong> achieves substantial gains in determinism, causal observability gating, multi-view surface corroboration, and zero-loss runtime latency over its upstream BundleTrack and Point2Pose baselines, the empirical evidence does not support declaring the project the best universal 6D pose tracker across all unconstrained regimes (e.g., when a high-resolution watertight CAD model is available a priori for FoundationPose, or under total prolonged four-camera occlusion).
+          <strong>Scientific Claim Boundary:</strong> While <strong>EvidenceScene</strong> achieves substantial gains in determinism, causal observability gating, multi-view surface corroboration, and zero-loss runtime latency over its upstream BundleTrack and Point2Pose baselines, the empirical evidence does not support declaring the project the best universal 6D pose tracker across all unconstrained regimes (e.g., when a high-resolution watertight CAD model is available a priori for FoundationPose, or under total prolonged four-camera occlusion).
         </div>
       </div>
     </div>
@@ -651,23 +651,23 @@
       <div class="pillars-grid">
         <div class="pillar-card">
           <span class="pillar-tag">Full Technical Monograph • 17 Pages</span>
-          <h3>CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction</h3>
+          <h3>EvidenceScene: Observability-Conditioned 3D Scene Reconstruction for Robot Manipulation</h3>
           <p>
             Comprehensive 17-page monograph covering multi-camera RGB-D calibration, deterministic BundleTrack C++/CUDA optimization, Point2Pose <code>F+G+R+M+S</code> factor-graph theory, <code>RevisableSurfelMap</code> selectors, zero-loss GPU/CPU runtime overlap, and 31-framework comparisons.
           </p>
           <div style="margin-top:1rem;">
-            <a href="assets/papers/causalpose3d-monograph.pdf" class="btn-pill btn-dark" target="_blank" rel="noopener">Download Monograph PDF (10.4 MB)</a>
+            <a href="assets/papers/evidencescene-monograph.pdf" class="btn-pill btn-dark" target="_blank" rel="noopener">Download Monograph PDF (10.4 MB)</a>
           </div>
         </div>
 
         <div class="pillar-card">
-          <span class="pillar-tag">Comparative Short Paper • 8 Pages</span>
-          <h3>CausalPose-3D: Comparative Evaluation of Causal 6D Pose &amp; Surface Reconstruction</h3>
+          <span class="pillar-tag">Method Paper • 8 Pages</span>
+          <h3>EvidenceScene: Observability-Conditioned Pose Tracking and Revisable 3D Scene Reconstruction</h3>
           <p>
-            Concise 8-page comparative draft focusing on controlled ablations between BundleTrack, Point2Pose, and <strong>CausalPose-3D</strong> on YCBInEOAT and Laval Vicon motion capture (704 frames, 71 native factor-graph replays) plus zero-loss runtime latency parity.
+            Concise 8-page method paper focusing on controlled ablations between BundleTrack, Point2Pose, and <strong>EvidenceScene</strong> on YCBInEOAT and Laval Vicon motion capture (704 frames, 71 native factor-graph replays) plus zero-loss runtime latency parity.
           </p>
           <div style="margin-top:1rem;">
-            <a href="assets/papers/causalpose3d-short.pdf" class="btn-pill btn-blue" target="_blank" rel="noopener">Download Short Paper PDF (390 KB)</a>
+            <a href="assets/papers/evidencescene-short.pdf" class="btn-pill btn-blue" target="_blank" rel="noopener">Download Method Paper PDF (388 KB)</a>
           </div>
         </div>
       </div>
@@ -679,19 +679,19 @@
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">BibTeX Citation</h2>
-        <p class="section-subtitle">If you find CausalPose-3D, our deterministic BundleTrack CUDA patches, or our Point2Pose observability analysis useful, please cite:</p>
+        <p class="section-subtitle">If you find EvidenceScene, our deterministic BundleTrack CUDA patches, or our Point2Pose observability analysis useful, please cite:</p>
       </div>
 
       <div class="bibtex-wrapper">
         <button id="copy-bibtex-btn" class="copy-btn">Copy BibTeX</button>
-<pre id="bibtex-content">@techreport{tiwater2026causalpose3d,
-  title       = {{CausalPose-3D}: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction},
+<pre id="bibtex-content">@techreport{tiwater2026evidencescene,
+  title       = {{EvidenceScene}: Observability-Conditioned Pose Tracking and Revisable 3D Scene Reconstruction for Robot Manipulation},
   author      = {{Tiwater Research}},
   institution = {Tiwater},
   year        = {2026},
   month       = nov,
-  url         = {https://tiwater.github.io/causalpose3d/},
-  note        = {Open-source code, deterministic BundleTrack CUDA patches, and benchmark receipts at \url{https://github.com/tiwater/causalpose3d}}
+  url         = {https://tiwater.github.io/evidencescene/},
+  note        = {Open-source code, deterministic BundleTrack CUDA patches, and benchmark receipts at \url{https://github.com/tiwater/evidencescene}}
 }</pre>
       </div>
     </div>
@@ -707,10 +707,10 @@
   <footer class="footer">
     <div class="container">
       <p>
-        <strong>CausalPose-3D</strong> • Maintained by <a href="https://github.com/tiwater" target="_blank" rel="noopener">Tiwater Research, Tiwater</a> •
-        <a href="https://github.com/tiwater/causalpose3d" target="_blank" rel="noopener">GitHub Repository</a> •
-        <a href="assets/papers/causalpose3d-monograph.pdf" target="_blank" rel="noopener">Monograph PDF</a> •
-        <a href="assets/papers/causalpose3d-short.pdf" target="_blank" rel="noopener">Comparative Paper PDF</a>
+        <strong>EvidenceScene</strong> • Maintained by <a href="https://github.com/tiwater" target="_blank" rel="noopener">Tiwater Research, Tiwater</a> •
+        <a href="https://github.com/tiwater/evidencescene" target="_blank" rel="noopener">GitHub Repository</a> •
+        <a href="assets/papers/evidencescene-monograph.pdf" target="_blank" rel="noopener">Monograph PDF</a> •
+        <a href="assets/papers/evidencescene-short.pdf" target="_blank" rel="noopener">Method Paper PDF</a>
       </p>
       <p style="margin-top:0.5rem;font-size:0.8rem;color:#64748b;">
         Academic website layout inspired by Nerfies, FoundationPose, and Point2Pose project pages. Licensed under Apache-2.0.

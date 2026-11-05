@@ -1,0 +1,75 @@
+{
+  "scope": "post-hoc descriptive failure-inclusive recalls, two selected public development sequences",
+  "cases": [
+    {
+      "sequence": "cracker_box_reorient",
+      "frames_including_initial": 375,
+      "reference_mask_condition": "same dataset reference mask every frame",
+      "point2pose": {
+        "denominator_excluding_initial": 374,
+        "unavailable_count": 0,
+        "adds_le_10mm_count": 365,
+        "adds_le_20mm_count": 371,
+        "adds_le_10mm_ratio": 0.9759358288770054,
+        "adds_le_20mm_ratio": 0.9919786096256684,
+        "recall_auc_0_to_100mm": 0.9606150481810377
+      },
+      "bundletrack": {
+        "denominator_excluding_initial": 374,
+        "unavailable_count": 1,
+        "adds_le_10mm_count": 373,
+        "adds_le_20mm_count": 373,
+        "adds_le_10mm_ratio": 0.9973262032085561,
+        "adds_le_20mm_ratio": 0.9973262032085561,
+        "recall_auc_0_to_100mm": 0.9516850549160796
+      },
+      "source_sha256": {
+        "manifest": "edf9418bbb8429d443c163c60b05ce370ef81a55f2d17b3ecc6020b878b6a8b0",
+        "model": "a921aae20784135d2fdfac9b93d92f8a01f669dcf15b5a10f98797be5882881f",
+        "point_results": "c907e95aaf949c0fd20aa0256622aa668826b73a1ace2daca5e864c1a9bd5ec8",
+        "bundle_results": "18a47eab9771a749a311529e5a11eeb2f3fbe08df2f23da769422116673d7eb3",
+        "prior_reference_audit": "f9f4738886bc8a19e3adce82fcb212e1adc88fb1f3d7b35fdfaa81b87eec7f9a"
+      }
+    },
+    {
+      "sequence": "mustard0",
+      "frames_including_initial": 737,
+      "reference_mask_condition": "same dataset reference mask every frame",
+      "point2pose": {
+        "denominator_excluding_initial": 736,
+        "unavailable_count": 4,
+        "adds_le_10mm_count": 726,
+        "adds_le_20mm_count": 731,
+        "adds_le_10mm_ratio": 0.9864130434782609,
+        "adds_le_20mm_ratio": 0.9932065217391305,
+        "recall_auc_0_to_100mm": 0.9464832527233795
+      },
+      "bundletrack": {
+        "denominator_excluding_initial": 736,
+        "unavailable_count": 0,
+        "adds_le_10mm_count": 736,
+        "adds_le_20mm_count": 736,
+        "adds_le_10mm_ratio": 1.0,
+        "adds_le_20mm_ratio": 1.0,
+        "recall_auc_0_to_100mm": 0.9510660546456049
+      },
+      "source_sha256": {
+        "manifest": "ef98731c125b27191ced79a5b41d89373d229a6ca65d5b5b080ca1c779c5f0c0",
+        "model": "f156897814cba5889427759c52d76f7d7c7dd7902aef87e38ec898195bbc6d79",
+        "point_results": "c462517160d6e3c15db5a70503802f5adf4afe2085835ddda255dcf23881472e",
+        "bundle_results": "f10528b7cc2c9b9d4d67d68b55dfa45f93dc4ff0029874b6e854075b8cd33cbe",
+        "prior_reference_audit": "eb65589bf3324ce50f91938049b60d8e2e969253f78cc6f3be6a382f1507182a"
+      }
+    }
+  ],
+  "limits": [
+    "first frame omitted because its reference pose sets both offline gauges",
+    "unavailable frames count as failures even if a stale matrix exists",
+    "10 and 20 mm thresholds selected post hoc, not deployment acceptance gates",
+    "AUC integrates recall over 0..100 mm; failures contribute zero",
+    "nearest vertex ADD-S is vertex-weighted and does not enumerate physical symmetry groups",
+    "oracle reference masks, annotated poses and one selected sequence per object",
+    "model used only for offline scoring, not independent reconstruction truth",
+    "no generalization, statistical significance, end-to-end timing or live authority claim"
+  ]
+}

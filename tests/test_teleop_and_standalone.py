@@ -1,4 +1,4 @@
-"""Comprehensive tests for standalone causalpose3d modules and L2 teleop engine."""
+"""Comprehensive tests for standalone evidencescene modules and L2 teleop engine."""
 
 from __future__ import annotations
 
@@ -11,16 +11,16 @@ import sys
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-import causalpose3d
-from causalpose3d.primitives.geometry import CameraInfoRecord
-from causalpose3d.surface import (
+import evidencescene
+from evidencescene.primitives.geometry import CameraInfoRecord
+from evidencescene.surface import (
     ProjectionTarget,
     SurfaceEvidence,
     project_surface_to_camera,
     project_table_aligned_surfaces,
     select_existing_points_shadow,
 )
-from causalpose3d.teleop import (
+from evidencescene.teleop import (
     CausalSe3TrajectoryPredictor,
     MeasuredPointFeature3D,
     evaluate_point_to_aperture_relation,
@@ -32,7 +32,7 @@ from causalpose3d.teleop import (
     propagate_feature_uncertainty_se3,
     verify_l2_pouring_safety_envelope,
 )
-from causalpose3d.tracking import (
+from evidencescene.tracking import (
     BearingPointObservation,
     CausalMetricPointPoseRuntime,
     CausalThreeCameraPoseRuntime,
@@ -55,9 +55,9 @@ class BlockTicos:
             raise ImportError(f"Blocked ticos import: {fullname}")
         return None
 sys.meta_path.insert(0, BlockTicos())
-import causalpose3d
+import evidencescene
 count = 0
-for mod in pkgutil.walk_packages(causalpose3d.__path__, "causalpose3d."):
+for mod in pkgutil.walk_packages(evidencescene.__path__, "evidencescene."):
     importlib.import_module(mod.name)
     count += 1
 assert count >= 34, f"Expected >= 34 submodules, got {count}"

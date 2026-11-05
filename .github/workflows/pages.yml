@@ -1,4 +1,4 @@
-name: Deploy CausalPose-3D Project Page to GitHub Pages
+name: Deploy EvidenceScene Project Page to GitHub Pages
 
 on:
   push:

@@ -1,0 +1,39 @@
+{
+  "scope": "one selected mustard development sequence; shared generated masks, not independent segmentation",
+  "point": {
+    "denominator": 736,
+    "unavailable": 2,
+    "within_10mm": 730,
+    "within_20mm": 733,
+    "auc_0_100mm": 0.9531811375527887
+  },
+  "bundle": {
+    "denominator": 736,
+    "unavailable": 0,
+    "within_10mm": 736,
+    "within_20mm": 736,
+    "auc_0_100mm": 0.9665170813641768
+  },
+  "paired_10mm": {
+    "both": 730,
+    "point_only": 0,
+    "bundle_only": 6,
+    "neither": 0
+  },
+  "lost_frames": [
+    670,
+    693
+  ],
+  "empty_mask_frames": [],
+  "mask_iou_to_eroded_reference_p05_p50_min": [
+    0.5292716932572874,
+    0.6638005159071367,
+    0.4616104868913858
+  ],
+  "mask_iou_below_08": 730,
+  "point_sha256": "c0b5d5b6dd7b071b196b444c3060b40d5f5fdd02d9a2bb6cff4c5a00aedf4ae4",
+  "bundle_sha256": "0e737aeb3cf772d7e835379f1d21bdf4b91b306278ce756892d03ea85834b12e",
+  "manifest_sha256": "ef98731c125b27191ced79a5b41d89373d229a6ca65d5b5b080ca1c779c5f0c0",
+  "reference_audit_sha256": "eb65589bf3324ce50f91938049b60d8e2e969253f78cc6f3be6a382f1507182a",
+  "model_sha256": "f156897814cba5889427759c52d76f7d7c7dd7902aef87e38ec898195bbc6d79"
+}

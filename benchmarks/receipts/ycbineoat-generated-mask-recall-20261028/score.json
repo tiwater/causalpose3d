@@ -1,0 +1,39 @@
+{
+  "scope": "one inspected public development sequence; shared Point2Pose-generated masks",
+  "point2pose": {
+    "denominator_excluding_initial": 374,
+    "unavailable_count": 2,
+    "adds_le_10mm_count": 364,
+    "adds_le_20mm_count": 371,
+    "recall_auc_0_to_100mm": 0.9538314344731605
+  },
+  "bundletrack": {
+    "denominator_excluding_initial": 374,
+    "unavailable_count": 1,
+    "adds_le_10mm_count": 373,
+    "adds_le_20mm_count": 373,
+    "recall_auc_0_to_100mm": 0.9538565008625163
+  },
+  "10mm_paired_outcomes": {
+    "both_pass": 363,
+    "point_only": 1,
+    "bundle_only": 10,
+    "neither": 0
+  },
+  "source_sha256": {
+    "docs/papers/ycbineoat-development-20261028/input-manifest.json": "edf9418bbb8429d443c163c60b05ce370ef81a55f2d17b3ecc6020b878b6a8b0",
+    "docs/papers/ycbineoat-development-20261028/results/score.json": "f9f4738886bc8a19e3adce82fcb212e1adc88fb1f3d7b35fdfaa81b87eec7f9a",
+    "artifacts/public-benchmark-ycbineoat-20261028/models/cracker_ycbv_textured_simple.obj": "a921aae20784135d2fdfac9b93d92f8a01f669dcf15b5a10f98797be5882881f",
+    "artifacts/public-benchmark-ycbineoat-20261028/point2pose-single-seed/results.json": "34798cc8a4c3d7507a212323433d34d678b2b5e11cb288667ed482c7b49e203a",
+    "artifacts/public-benchmark-ycbineoat-20261028/bundletrack-generated-masks/results.json": "016f2dbfdbda684a244f32651fff576563fe96b28ee229992f513a7194b8bba3"
+  },
+  "limits": [
+    "reference gauge aligns first frame; first frame excluded",
+    "thresholds selected post hoc",
+    "Point2Pose generated shared masks; internal boundary bytes not independently captured",
+    "BundleTrack used saved masks even when Point2Pose was lost",
+    "nearest-vertex ADD-S weights mesh vertices and does not enumerate symmetries",
+    "annotated pose is imperfect and model is not a physical scan of the object",
+    "one selected development sequence, no end-to-end timing or cutover evidence"
+  ]
+}

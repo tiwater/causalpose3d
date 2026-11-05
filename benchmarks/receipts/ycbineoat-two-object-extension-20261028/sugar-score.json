@@ -1,0 +1,5029 @@
+{
+  "scope": "prospective public development sequence; reference masks, not official benchmark or live gate",
+  "sequence": "sugar_box_yalehand0",
+  "frames": 1002,
+  "point2pose": {
+    "denominator_excluding_initial": 1001,
+    "unavailable_count": 0,
+    "adds_le_10mm_count": 617,
+    "adds_le_20mm_count": 1000,
+    "recall_auc_0_to_100mm": 0.9151639736801493
+  },
+  "bundletrack": {
+    "denominator_excluding_initial": 1001,
+    "unavailable_count": 1,
+    "adds_le_10mm_count": 794,
+    "adds_le_20mm_count": 1000,
+    "recall_auc_0_to_100mm": 0.9198421819500429
+  },
+  "model_vertices": 7866,
+  "reference_audit_sha256": "cf39e691f05c75fecfe8bd00bb694396bf3722bc297945df5f583b082205c298",
+  "model_sha256": "f57891945ba804703e29b9a8e5744dc60b8b25e8e9e0972cdbcf6c3301dd2cf7",
+  "per_frame": [
+    {
+      "index": 1,
+      "point2pose_adds_mm": 2.384005209571385,
+      "bundletrack_adds_mm": 0.6195993723295457
+    },
+    {
+      "index": 2,
+      "point2pose_adds_mm": 3.2525112387410995,
+      "bundletrack_adds_mm": 1.2323113387017763
+    },
+    {
+      "index": 3,
+      "point2pose_adds_mm": 2.3876710050526664,
+      "bundletrack_adds_mm": 0.6345601339122982
+    },
+    {
+      "index": 4,
+      "point2pose_adds_mm": 3.1801189817418916,
+      "bundletrack_adds_mm": 1.341613119906027
+    },
+    {
+      "index": 5,
+      "point2pose_adds_mm": 2.5706135996352324,
+      "bundletrack_adds_mm": 0.820320609277079
+    },
+    {
+      "index": 6,
+      "point2pose_adds_mm": 2.4579503748904536,
+      "bundletrack_adds_mm": 0.6070955907853697
+    },
+    {
+      "index": 7,
+      "point2pose_adds_mm": 2.648293253476751,
+      "bundletrack_adds_mm": 1.0052055364244055
+    },
+    {
+      "index": 8,
+      "point2pose_adds_mm": 2.002975508388109,
+      "bundletrack_adds_mm": 0.9091827191996967
+    },
+    {
+      "index": 9,
+      "point2pose_adds_mm": 2.25746833856231,
+      "bundletrack_adds_mm": 1.182830489398746
+    },
+    {
+      "index": 10,
+      "point2pose_adds_mm": 2.441958608957122,
+      "bundletrack_adds_mm": 0.9359384727058181
+    },
+    {
+      "index": 11,
+      "point2pose_adds_mm": 3.161488818903701,
+      "bundletrack_adds_mm": 1.3471716035451584
+    },
+    {
+      "index": 12,
+      "point2pose_adds_mm": 3.1259670116803373,
+      "bundletrack_adds_mm": 1.4121636647361353
+    },
+    {
+      "index": 13,
+      "point2pose_adds_mm": 3.0929705049320715,
+      "bundletrack_adds_mm": 1.1390238511404336
+    },
+    {
+      "index": 14,
+      "point2pose_adds_mm": 2.809610855726951,
+      "bundletrack_adds_mm": 1.4674712379628092
+    },
+    {
+      "index": 15,
+      "point2pose_adds_mm": 2.9783450556227793,
+      "bundletrack_adds_mm": 1.3321250355078944
+    },
+    {
+      "index": 16,
+      "point2pose_adds_mm": 2.7482074685564073,
+      "bundletrack_adds_mm": 1.269839576264464
+    },
+    {
+      "index": 17,
+      "point2pose_adds_mm": 2.3529794938879154,
+      "bundletrack_adds_mm": 1.2920647857849792
+    },
+    {
+      "index": 18,
+      "point2pose_adds_mm": 2.5631138151080988,
+      "bundletrack_adds_mm": 1.2279239398084583
+    },
+    {
+      "index": 19,
+      "point2pose_adds_mm": 2.285501932081556,
+      "bundletrack_adds_mm": 1.344409975028552
+    },
+    {
+      "index": 20,
+      "point2pose_adds_mm": 3.1438794270342005,
+      "bundletrack_adds_mm": 1.3631693030201195
+    },
+    {
+      "index": 21,
+      "point2pose_adds_mm": 2.860595269543423,
+      "bundletrack_adds_mm": 1.2921082828589374
+    },
+    {
+      "index": 22,
+      "point2pose_adds_mm": 2.5356353829359133,
+      "bundletrack_adds_mm": 1.2275402763849852
+    },
+    {
+      "index": 23,
+      "point2pose_adds_mm": 3.104317791089874,
+      "bundletrack_adds_mm": 1.551195248794779
+    },
+    {
+      "index": 24,
+      "point2pose_adds_mm": 2.8726145094294773,
+      "bundletrack_adds_mm": 1.3037861163433977
+    },
+    {
+      "index": 25,
+      "point2pose_adds_mm": 3.3504213776063936,
+      "bundletrack_adds_mm": 1.2548285470756353
+    },
+    {
+      "index": 26,
+      "point2pose_adds_mm": 3.388763678712557,
+      "bundletrack_adds_mm": 1.2721882258155883
+    },
+    {
+      "index": 27,
+      "point2pose_adds_mm": 2.8377194022308125,
+      "bundletrack_adds_mm": 1.075719732622758
+    },
+    {
+      "index": 28,
+      "point2pose_adds_mm": 2.8660616847735607,
+      "bundletrack_adds_mm": 1.4766212933163008
+    },
+    {
+      "index": 29,
+      "point2pose_adds_mm": 2.630900342843471,
+      "bundletrack_adds_mm": 1.219322402951892
+    },
+    {
+      "index": 30,
+      "point2pose_adds_mm": 2.8591719678160654,
+      "bundletrack_adds_mm": 1.5387895372588096
+    },
+    {
+      "index": 31,
+      "point2pose_adds_mm": 2.1621751743557516,
+      "bundletrack_adds_mm": 1.096587893267187
+    },
+    {
+      "index": 32,
+      "point2pose_adds_mm": 3.96025696620946,
+      "bundletrack_adds_mm": 3.275417285011381
+    },
+    {
+      "index": 33,
+      "point2pose_adds_mm": 5.018939775760707,
+      "bundletrack_adds_mm": 4.509451024679188
+    },
+    {
+      "index": 34,
+      "point2pose_adds_mm": 4.629533008992609,
+      "bundletrack_adds_mm": 4.20936892468036
+    },
+    {
+      "index": 35,
+      "point2pose_adds_mm": 5.00982681599555,
+      "bundletrack_adds_mm": 4.876093327731583
+    },
+    {
+      "index": 36,
+      "point2pose_adds_mm": 5.104031088396701,
+      "bundletrack_adds_mm": 4.897983839943647
+    },
+    {
+      "index": 37,
+      "point2pose_adds_mm": 4.713011602646896,
+      "bundletrack_adds_mm": 4.944081796254378
+    },
+    {
+      "index": 38,
+      "point2pose_adds_mm": 2.6232870647500928,
+      "bundletrack_adds_mm": 2.3156773251283314
+    },
+    {
+      "index": 39,
+      "point2pose_adds_mm": 2.9238437670060313,
+      "bundletrack_adds_mm": 2.0785617502643516
+    },
+    {
+      "index": 40,
+      "point2pose_adds_mm": 6.629064451281142,
+      "bundletrack_adds_mm": 6.027724904372801
+    },
+    {
+      "index": 41,
+      "point2pose_adds_mm": 6.5768223171009295,
+      "bundletrack_adds_mm": 5.984192743223606
+    },
+    {
+      "index": 42,
+      "point2pose_adds_mm": 3.60970016922628,
+      "bundletrack_adds_mm": 2.1381559927667544
+    },
+    {
+      "index": 43,
+      "point2pose_adds_mm": 3.342127771356085,
+      "bundletrack_adds_mm": 1.7414760049019844
+    },
+    {
+      "index": 44,
+      "point2pose_adds_mm": 3.5678958916307133,
+      "bundletrack_adds_mm": 1.60656946028224
+    },
+    {
+      "index": 45,
+      "point2pose_adds_mm": 3.2319957909180843,
+      "bundletrack_adds_mm": 1.447498849885052
+    },
+    {
+      "index": 46,
+      "point2pose_adds_mm": 3.3885862826549156,
+      "bundletrack_adds_mm": 1.5467364794425307
+    },
+    {
+      "index": 47,
+      "point2pose_adds_mm": 3.496048428674632,
+      "bundletrack_adds_mm": 1.4923910285087993
+    },
+    {
+      "index": 48,
+      "point2pose_adds_mm": 4.168754557367154,
+      "bundletrack_adds_mm": 1.8000009747478347
+    },
+    {
+      "index": 49,
+      "point2pose_adds_mm": 3.6154588906153133,
+      "bundletrack_adds_mm": 2.8428950371370796
+    },
+    {
+      "index": 50,
+      "point2pose_adds_mm": 3.5480296950013397,
+      "bundletrack_adds_mm": 2.711128176495711
+    },
+    {
+      "index": 51,
+      "point2pose_adds_mm": 3.8096255374785666,
+      "bundletrack_adds_mm": 2.872845681658435
+    },
+    {
+      "index": 52,
+      "point2pose_adds_mm": 4.163903501663851,
+      "bundletrack_adds_mm": 2.8046863864035463
+    },
+    {
+      "index": 53,
+      "point2pose_adds_mm": 4.001492818472155,
+      "bundletrack_adds_mm": 2.908634624837031
+    },
+    {
+      "index": 54,
+      "point2pose_adds_mm": 4.072114067916626,
+      "bundletrack_adds_mm": 2.718914637375134
+    },
+    {
+      "index": 55,
+      "point2pose_adds_mm": 3.7746608837503337,
+      "bundletrack_adds_mm": 2.261151494844414
+    },
+    {
+      "index": 56,
+      "point2pose_adds_mm": 4.143320229835626,
+      "bundletrack_adds_mm": 2.4295708250788706
+    },
+    {
+      "index": 57,
+      "point2pose_adds_mm": 4.364779953745789,
+      "bundletrack_adds_mm": 2.2138207243522405
+    },
+    {
+      "index": 58,
+      "point2pose_adds_mm": 4.489314354093769,
+      "bundletrack_adds_mm": 2.5432818730613853
+    },
+    {
+      "index": 59,
+      "point2pose_adds_mm": 4.802871452977546,
+      "bundletrack_adds_mm": 2.9948604839021606
+    },
+    {
+      "index": 60,
+      "point2pose_adds_mm": 4.601768591398796,
+      "bundletrack_adds_mm": 2.7135670187279626
+    },
+    {
+      "index": 61,
+      "point2pose_adds_mm": 4.341425887441245,
+      "bundletrack_adds_mm": 2.3335448836914434
+    },
+    {
+      "index": 62,
+      "point2pose_adds_mm": 4.7542317802543925,
+      "bundletrack_adds_mm": 2.5303322267446533
+    },
+    {
+      "index": 63,
+      "point2pose_adds_mm": 4.5700964892779785,
+      "bundletrack_adds_mm": 2.784090180790327
+    },
+    {
+      "index": 64,
+      "point2pose_adds_mm": 4.377429276094127,
+      "bundletrack_adds_mm": 2.660029814172376
+    },
+    {
+      "index": 65,
+      "point2pose_adds_mm": 4.772569253924966,
+      "bundletrack_adds_mm": 2.737883515793683
+    },
+    {
+      "index": 66,
+      "point2pose_adds_mm": 4.594627099177258,
+      "bundletrack_adds_mm": 2.736867487359857
+    },
+    {
+      "index": 67,
+      "point2pose_adds_mm": 4.478017795947635,
+      "bundletrack_adds_mm": 2.7501263694821243
+    },
+    {
+      "index": 68,
+      "point2pose_adds_mm": 4.6736427380115995,
+      "bundletrack_adds_mm": 2.6845385140460722
+    },
+    {
+      "index": 69,
+      "point2pose_adds_mm": 4.701638968137621,
+      "bundletrack_adds_mm": 2.8399309080003605
+    },
+    {
+      "index": 70,
+      "point2pose_adds_mm": 4.205261332022417,
+      "bundletrack_adds_mm": 2.3224524311313597
+    },
+    {
+      "index": 71,
+      "point2pose_adds_mm": 4.148703875177767,
+      "bundletrack_adds_mm": 2.447784920250438
+    },
+    {
+      "index": 72,
+      "point2pose_adds_mm": 4.3055334772991705,
+      "bundletrack_adds_mm": 2.347408021650523
+    },
+    {
+      "index": 73,
+      "point2pose_adds_mm": 4.376291829707142,
+      "bundletrack_adds_mm": 2.4581432825520397
+    },
+    {
+      "index": 74,
+      "point2pose_adds_mm": 4.6148289189052365,
+      "bundletrack_adds_mm": 2.5843156483673533
+    },
+    {
+      "index": 75,
+      "point2pose_adds_mm": 4.145032486540998,
+      "bundletrack_adds_mm": 2.383577662623831
+    },
+    {
+      "index": 76,
+      "point2pose_adds_mm": 4.101328120763648,
+      "bundletrack_adds_mm": 2.342058416244236
+    },
+    {
+      "index": 77,
+      "point2pose_adds_mm": 3.804628018907298,
+      "bundletrack_adds_mm": 2.2765752751713833
+    },
+    {
+      "index": 78,
+      "point2pose_adds_mm": 4.009077374203021,
+      "bundletrack_adds_mm": 2.131445492820313
+    },
+    {
+      "index": 79,
+      "point2pose_adds_mm": 3.9265562410884343,
+      "bundletrack_adds_mm": 2.061174610895258
+    },
+    {
+      "index": 80,
+      "point2pose_adds_mm": 4.188162945703178,
+      "bundletrack_adds_mm": 2.0615307045908855
+    },
+    {
+      "index": 81,
+      "point2pose_adds_mm": 4.0241133769284545,
+      "bundletrack_adds_mm": 2.049035665508557
+    },
+    {
+      "index": 82,
+      "point2pose_adds_mm": 3.8697349444856073,
+      "bundletrack_adds_mm": 1.9659092440967039
+    },
+    {
+      "index": 83,
+      "point2pose_adds_mm": 3.7772776715387826,
+      "bundletrack_adds_mm": 1.9037752273313677
+    },
+    {
+      "index": 84,
+      "point2pose_adds_mm": 4.132450800363521,
+      "bundletrack_adds_mm": 2.118982496947368
+    },
+    {
+      "index": 85,
+      "point2pose_adds_mm": 4.189902093562419,
+      "bundletrack_adds_mm": 2.439413768126686
+    },
+    {
+      "index": 86,
+      "point2pose_adds_mm": 4.117114859871164,
+      "bundletrack_adds_mm": 2.3196630475193505
+    },
+    {
+      "index": 87,
+      "point2pose_adds_mm": 3.9635400951586583,
+      "bundletrack_adds_mm": 2.1061959293221038
+    },
+    {
+      "index": 88,
+      "point2pose_adds_mm": 4.101386961148581,
+      "bundletrack_adds_mm": 2.391645730891028
+    },
+    {
+      "index": 89,
+      "point2pose_adds_mm": 3.6784461071155703,
+      "bundletrack_adds_mm": 2.0135999179408994
+    },
+    {
+      "index": 90,
+      "point2pose_adds_mm": 4.032909718712342,
+      "bundletrack_adds_mm": 2.5495421849367133
+    },
+    {
+      "index": 91,
+      "point2pose_adds_mm": 3.9137788769546407,
+      "bundletrack_adds_mm": 2.1913695469273655
+    },
+    {
+      "index": 92,
+      "point2pose_adds_mm": 4.0927977348733515,
+      "bundletrack_adds_mm": 2.3990900014681698
+    },
+    {
+      "index": 93,
+      "point2pose_adds_mm": 3.6633800908275806,
+      "bundletrack_adds_mm": 2.0442039438394772
+    },
+    {
+      "index": 94,
+      "point2pose_adds_mm": 4.147634130803898,
+      "bundletrack_adds_mm": 2.5022814668042583
+    },
+    {
+      "index": 95,
+      "point2pose_adds_mm": 3.9853601088382495,
+      "bundletrack_adds_mm": 2.4728591773726545
+    },
+    {
+      "index": 96,
+      "point2pose_adds_mm": 3.784275350210683,
+      "bundletrack_adds_mm": 2.2635971014283527
+    },
+    {
+      "index": 97,
+      "point2pose_adds_mm": 3.539795695085828,
+      "bundletrack_adds_mm": 2.0353479711172953
+    },
+    {
+      "index": 98,
+      "point2pose_adds_mm": 3.685669306518355,
+      "bundletrack_adds_mm": 2.2609585977719036
+    },
+    {
+      "index": 99,
+      "point2pose_adds_mm": 3.5984975489747613,
+      "bundletrack_adds_mm": 2.093455535159505
+    },
+    {
+      "index": 100,
+      "point2pose_adds_mm": 3.4243002049741023,
+      "bundletrack_adds_mm": 1.9891049851867415
+    },
+    {
+      "index": 101,
+      "point2pose_adds_mm": 3.834725055528469,
+      "bundletrack_adds_mm": 2.2951862642663907
+    },
+    {
+      "index": 102,
+      "point2pose_adds_mm": 3.8178682636491357,
+      "bundletrack_adds_mm": 2.269668495064667
+    },
+    {
+      "index": 103,
+      "point2pose_adds_mm": 3.8236587266494255,
+      "bundletrack_adds_mm": 2.4437854977732005
+    },
+    {
+      "index": 104,
+      "point2pose_adds_mm": 3.784306058114412,
+      "bundletrack_adds_mm": 2.4661410551340825
+    },
+    {
+      "index": 105,
+      "point2pose_adds_mm": 3.81304378900738,
+      "bundletrack_adds_mm": 2.5308652018342115
+    },
+    {
+      "index": 106,
+      "point2pose_adds_mm": 3.7223020495555788,
+      "bundletrack_adds_mm": 2.4190937124261764
+    },
+    {
+      "index": 107,
+      "point2pose_adds_mm": 3.7978101532549324,
+      "bundletrack_adds_mm": 2.289344096224078
+    },
+    {
+      "index": 108,
+      "point2pose_adds_mm": 3.6048836913856683,
+      "bundletrack_adds_mm": 2.2512155898573676
+    },
+    {
+      "index": 109,
+      "point2pose_adds_mm": 3.446227789055093,
+      "bundletrack_adds_mm": 2.0411288607606735
+    },
+    {
+      "index": 110,
+      "point2pose_adds_mm": 3.658621433501573,
+      "bundletrack_adds_mm": 2.115269318552964
+    },
+    {
+      "index": 111,
+      "point2pose_adds_mm": 3.4694359729422484,
+      "bundletrack_adds_mm": 2.214887817938834
+    },
+    {
+      "index": 112,
+      "point2pose_adds_mm": 3.6215293391121426,
+      "bundletrack_adds_mm": 2.379322156761556
+    },
+    {
+      "index": 113,
+      "point2pose_adds_mm": 3.5810714604923595,
+      "bundletrack_adds_mm": 2.289874392721305
+    },
+    {
+      "index": 114,
+      "point2pose_adds_mm": 3.251998627492043,
+      "bundletrack_adds_mm": 2.057741457538899
+    },
+    {
+      "index": 115,
+      "point2pose_adds_mm": 4.124363618603468,
+      "bundletrack_adds_mm": 2.524845374023189
+    },
+    {
+      "index": 116,
+      "point2pose_adds_mm": 3.2544204739066065,
+      "bundletrack_adds_mm": 1.8228023268461275
+    },
+    {
+      "index": 117,
+      "point2pose_adds_mm": 3.214618618057431,
+      "bundletrack_adds_mm": 1.9714827815281408
+    },
+    {
+      "index": 118,
+      "point2pose_adds_mm": 3.3947788996016537,
+      "bundletrack_adds_mm": 1.8622684819031354
+    },
+    {
+      "index": 119,
+      "point2pose_adds_mm": 3.7225967630605106,
+      "bundletrack_adds_mm": 2.1898376452854644
+    },
+    {
+      "index": 120,
+      "point2pose_adds_mm": 3.884542674770598,
+      "bundletrack_adds_mm": 2.418719266666249
+    },
+    {
+      "index": 121,
+      "point2pose_adds_mm": 3.784177379034663,
+      "bundletrack_adds_mm": 2.3863005545841993
+    },
+    {
+      "index": 122,
+      "point2pose_adds_mm": 3.7296237393779,
+      "bundletrack_adds_mm": 2.3272726892836237
+    },
+    {
+      "index": 123,
+      "point2pose_adds_mm": 3.3350307574854186,
+      "bundletrack_adds_mm": 1.9037874049741461
+    },
+    {
+      "index": 124,
+      "point2pose_adds_mm": 3.5279086994038407,
+      "bundletrack_adds_mm": 2.356103965697996
+    },
+    {
+      "index": 125,
+      "point2pose_adds_mm": 3.387399879421984,
+      "bundletrack_adds_mm": 1.8710073104857454
+    },
+    {
+      "index": 126,
+      "point2pose_adds_mm": 3.5061429235350983,
+      "bundletrack_adds_mm": 2.260934092934796
+    },
+    {
+      "index": 127,
+      "point2pose_adds_mm": 3.812360707442109,
+      "bundletrack_adds_mm": 2.284998397052652
+    },
+    {
+      "index": 128,
+      "point2pose_adds_mm": 3.1947092312336274,
+      "bundletrack_adds_mm": 1.9095982785546557
+    },
+    {
+      "index": 129,
+      "point2pose_adds_mm": 3.5277218115333264,
+      "bundletrack_adds_mm": 2.0494210317356543
+    },
+    {
+      "index": 130,
+      "point2pose_adds_mm": 4.033102195195642,
+      "bundletrack_adds_mm": 2.250206635356176
+    },
+    {
+      "index": 131,
+      "point2pose_adds_mm": 2.44438808643866,
+      "bundletrack_adds_mm": 2.8625294492226985
+    },
+    {
+      "index": 132,
+      "point2pose_adds_mm": 2.837992658556417,
+      "bundletrack_adds_mm": 2.535317310251592
+    },
+    {
+      "index": 133,
+      "point2pose_adds_mm": 2.9289158912407336,
+      "bundletrack_adds_mm": 2.1954814774435634
+    },
+    {
+      "index": 134,
+      "point2pose_adds_mm": 3.064123984399027,
+      "bundletrack_adds_mm": 2.252784541236673
+    },
+    {
+      "index": 135,
+      "point2pose_adds_mm": 3.1257991275057804,
+      "bundletrack_adds_mm": 2.182342304381739
+    },
+    {
+      "index": 136,
+      "point2pose_adds_mm": 3.056225548188612,
+      "bundletrack_adds_mm": 2.0575695075599905
+    },
+    {
+      "index": 137,
+      "point2pose_adds_mm": 3.0975030150643326,
+      "bundletrack_adds_mm": 2.0896282846787795
+    },
+    {
+      "index": 138,
+      "point2pose_adds_mm": 3.196768544526825,
+      "bundletrack_adds_mm": 1.9004318266525795
+    },
+    {
+      "index": 139,
+      "point2pose_adds_mm": 3.1787045324195193,
+      "bundletrack_adds_mm": 1.7824947938499671
+    },
+    {
+      "index": 140,
+      "point2pose_adds_mm": 3.117698464572542,
+      "bundletrack_adds_mm": 1.8913774129201901
+    },
+    {
+      "index": 141,
+      "point2pose_adds_mm": 3.0076673741159863,
+      "bundletrack_adds_mm": 1.892428531723569
+    },
+    {
+      "index": 142,
+      "point2pose_adds_mm": 3.153887484749746,
+      "bundletrack_adds_mm": 1.5221456708110377
+    },
+    {
+      "index": 143,
+      "point2pose_adds_mm": 5.041213286194234,
+      "bundletrack_adds_mm": 2.0161501303311873
+    },
+    {
+      "index": 144,
+      "point2pose_adds_mm": 5.921119755971445,
+      "bundletrack_adds_mm": 3.0584035092252395
+    },
+    {
+      "index": 145,
+      "point2pose_adds_mm": 4.944007175802597,
+      "bundletrack_adds_mm": 3.8631637455306733
+    },
+    {
+      "index": 146,
+      "point2pose_adds_mm": 4.765748860207543,
+      "bundletrack_adds_mm": 5.511068156148489
+    },
+    {
+      "index": 147,
+      "point2pose_adds_mm": 4.485507444678325,
+      "bundletrack_adds_mm": 5.1541012945652795
+    },
+    {
+      "index": 148,
+      "point2pose_adds_mm": 4.0320265605760985,
+      "bundletrack_adds_mm": 5.382215015793319
+    },
+    {
+      "index": 149,
+      "point2pose_adds_mm": 4.511592278879561,
+      "bundletrack_adds_mm": 6.936096815974623
+    },
+    {
+      "index": 150,
+      "point2pose_adds_mm": 4.888496997463805,
+      "bundletrack_adds_mm": 8.938375811089587
+    },
+    {
+      "index": 151,
+      "point2pose_adds_mm": 5.900809123388692,
+      "bundletrack_adds_mm": 10.804534459441848
+    },
+    {
+      "index": 152,
+      "point2pose_adds_mm": 4.385722472771141,
+      "bundletrack_adds_mm": 7.585817043336662
+    },
+    {
+      "index": 153,
+      "point2pose_adds_mm": 7.546685955169145,
+      "bundletrack_adds_mm": 5.0093921415437555
+    },
+    {
+      "index": 154,
+      "point2pose_adds_mm": 5.48298194435602,
+      "bundletrack_adds_mm": 6.850329436354503
+    },
+    {
+      "index": 155,
+      "point2pose_adds_mm": 3.5426840312094448,
+      "bundletrack_adds_mm": 5.237435437967771
+    },
+    {
+      "index": 156,
+      "point2pose_adds_mm": 4.940521008868856,
+      "bundletrack_adds_mm": 5.650240244648589
+    },
+    {
+      "index": 157,
+      "point2pose_adds_mm": 6.822471530337055,
+      "bundletrack_adds_mm": 4.620166207532609
+    },
+    {
+      "index": 158,
+      "point2pose_adds_mm": 6.444094147197811,
+      "bundletrack_adds_mm": 5.349554906654025
+    },
+    {
+      "index": 159,
+      "point2pose_adds_mm": 9.948246861752736,
+      "bundletrack_adds_mm": 5.800989808140586
+    },
+    {
+      "index": 160,
+      "point2pose_adds_mm": 3.6332110481458813,
+      "bundletrack_adds_mm": 7.4305091157111836
+    },
+    {
+      "index": 161,
+      "point2pose_adds_mm": 7.612762017533621,
+      "bundletrack_adds_mm": 7.095897944046646
+    },
+    {
+      "index": 162,
+      "point2pose_adds_mm": 15.50490823015542,
+      "bundletrack_adds_mm": 4.403712893807921
+    },
+    {
+      "index": 163,
+      "point2pose_adds_mm": 3.7566211239498473,
+      "bundletrack_adds_mm": 4.738959715546408
+    },
+    {
+      "index": 164,
+      "point2pose_adds_mm": 14.231030076398579,
+      "bundletrack_adds_mm": 5.418503543294439
+    },
+    {
+      "index": 165,
+      "point2pose_adds_mm": 4.375345463474496,
+      "bundletrack_adds_mm": 5.000950654185096
+    },
+    {
+      "index": 166,
+      "point2pose_adds_mm": 12.596982267752331,
+      "bundletrack_adds_mm": 4.133368295318245
+    },
+    {
+      "index": 167,
+      "point2pose_adds_mm": 4.467182475582981,
+      "bundletrack_adds_mm": 3.8790119047946607
+    },
+    {
+      "index": 168,
+      "point2pose_adds_mm": 17.36236492533822,
+      "bundletrack_adds_mm": 3.9637148537683635
+    },
+    {
+      "index": 169,
+      "point2pose_adds_mm": 14.261455599822945,
+      "bundletrack_adds_mm": 5.7144424693938465
+    },
+    {
+      "index": 170,
+      "point2pose_adds_mm": 11.881548370057637,
+      "bundletrack_adds_mm": 6.500767308755988
+    },
+    {
+      "index": 171,
+      "point2pose_adds_mm": 13.775879138702972,
+      "bundletrack_adds_mm": 6.232206821606586
+    },
+    {
+      "index": 172,
+      "point2pose_adds_mm": 13.719366075115687,
+      "bundletrack_adds_mm": 6.119169672535852
+    },
+    {
+      "index": 173,
+      "point2pose_adds_mm": 13.8031517641977,
+      "bundletrack_adds_mm": 6.535150530076288
+    },
+    {
+      "index": 174,
+      "point2pose_adds_mm": 12.678027295139918,
+      "bundletrack_adds_mm": 6.007547803490374
+    },
+    {
+      "index": 175,
+      "point2pose_adds_mm": 11.509671700627703,
+      "bundletrack_adds_mm": 6.333098303932289
+    },
+    {
+      "index": 176,
+      "point2pose_adds_mm": 12.795242282610664,
+      "bundletrack_adds_mm": 6.247814654063544
+    },
+    {
+      "index": 177,
+      "point2pose_adds_mm": 15.150649403746437,
+      "bundletrack_adds_mm": 4.097298020190997
+    },
+    {
+      "index": 178,
+      "point2pose_adds_mm": 15.056095466748385,
+      "bundletrack_adds_mm": 3.9023454828555244
+    },
+    {
+      "index": 179,
+      "point2pose_adds_mm": 14.071223849577148,
+      "bundletrack_adds_mm": 4.076023801122325
+    },
+    {
+      "index": 180,
+      "point2pose_adds_mm": 5.525126330579073,
+      "bundletrack_adds_mm": 3.6264484147814797
+    },
+    {
+      "index": 181,
+      "point2pose_adds_mm": 9.587061971843847,
+      "bundletrack_adds_mm": 6.988463227342039
+    },
+    {
+      "index": 182,
+      "point2pose_adds_mm": 10.247365517675101,
+      "bundletrack_adds_mm": 6.168707664034402
+    },
+    {
+      "index": 183,
+      "point2pose_adds_mm": 8.95772471840679,
+      "bundletrack_adds_mm": 7.887305822786451
+    },
+    {
+      "index": 184,
+      "point2pose_adds_mm": 8.606745000754051,
+      "bundletrack_adds_mm": 8.04538665597512
+    },
+    {
+      "index": 185,
+      "point2pose_adds_mm": 11.976539184292422,
+      "bundletrack_adds_mm": 6.528475511299699
+    },
+    {
+      "index": 186,
+      "point2pose_adds_mm": 10.344371302253563,
+      "bundletrack_adds_mm": 6.763417989938629
+    },
+    {
+      "index": 187,
+      "point2pose_adds_mm": 10.137708201305445,
+      "bundletrack_adds_mm": 7.263818975299951
+    },
+    {
+      "index": 188,
+      "point2pose_adds_mm": 15.16441528499866,
+      "bundletrack_adds_mm": 5.8038032138318405
+    },
+    {
+      "index": 189,
+      "point2pose_adds_mm": 10.743116388671643,
+      "bundletrack_adds_mm": 6.194376039790525
+    },
+    {
+      "index": 190,
+      "point2pose_adds_mm": 10.62253206244596,
+      "bundletrack_adds_mm": 6.086115440136603
+    },
+    {
+      "index": 191,
+      "point2pose_adds_mm": 10.547328742054292,
+      "bundletrack_adds_mm": 6.383477201926077
+    },
+    {
+      "index": 192,
+      "point2pose_adds_mm": 10.856592649373038,
+      "bundletrack_adds_mm": 5.904467438983693
+    },
+    {
+      "index": 193,
+      "point2pose_adds_mm": 10.517131996269777,
+      "bundletrack_adds_mm": 6.2580733679679605
+    },
+    {
+      "index": 194,
+      "point2pose_adds_mm": 10.860559702914674,
+      "bundletrack_adds_mm": 7.322077780950715
+    },
+    {
+      "index": 195,
+      "point2pose_adds_mm": 11.111914889780184,
+      "bundletrack_adds_mm": 6.029852136821012
+    },
+    {
+      "index": 196,
+      "point2pose_adds_mm": 12.608582494784319,
+      "bundletrack_adds_mm": 6.796173127346812
+    },
+    {
+      "index": 197,
+      "point2pose_adds_mm": 12.10262423109696,
+      "bundletrack_adds_mm": 6.706159687271966
+    },
+    {
+      "index": 198,
+      "point2pose_adds_mm": 18.85689293062323,
+      "bundletrack_adds_mm": 7.005994662549889
+    },
+    {
+      "index": 199,
+      "point2pose_adds_mm": 16.83721711092277,
+      "bundletrack_adds_mm": 4.846840895146379
+    },
+    {
+      "index": 200,
+      "point2pose_adds_mm": 16.82545272720548,
+      "bundletrack_adds_mm": 5.162615390077425
+    },
+    {
+      "index": 201,
+      "point2pose_adds_mm": 17.10214487689382,
+      "bundletrack_adds_mm": 5.104082516982098
+    },
+    {
+      "index": 202,
+      "point2pose_adds_mm": 16.21424395622751,
+      "bundletrack_adds_mm": 4.837253934171177
+    },
+    {
+      "index": 203,
+      "point2pose_adds_mm": 16.28672892931156,
+      "bundletrack_adds_mm": 4.585854567705658
+    },
+    {
+      "index": 204,
+      "point2pose_adds_mm": 16.339694246870472,
+      "bundletrack_adds_mm": 4.623613334976287
+    },
+    {
+      "index": 205,
+      "point2pose_adds_mm": 16.377060412312954,
+      "bundletrack_adds_mm": 4.895741465287404
+    },
+    {
+      "index": 206,
+      "point2pose_adds_mm": 16.407663077195117,
+      "bundletrack_adds_mm": 4.981136486685243
+    },
+    {
+      "index": 207,
+      "point2pose_adds_mm": 16.34952591320201,
+      "bundletrack_adds_mm": 5.375790621423951
+    },
+    {
+      "index": 208,
+      "point2pose_adds_mm": 16.954899440526823,
+      "bundletrack_adds_mm": 4.925676290740414
+    },
+    {
+      "index": 209,
+      "point2pose_adds_mm": 14.865373238820107,
+      "bundletrack_adds_mm": 2.8231785205460316
+    },
+    {
+      "index": 210,
+      "point2pose_adds_mm": 17.723526909725436,
+      "bundletrack_adds_mm": 5.218895345871359
+    },
+    {
+      "index": 211,
+      "point2pose_adds_mm": 17.571989699152383,
+      "bundletrack_adds_mm": 7.32200269268994
+    },
+    {
+      "index": 212,
+      "point2pose_adds_mm": 18.08930023230487,
+      "bundletrack_adds_mm": 6.818712153982643
+    },
+    {
+      "index": 213,
+      "point2pose_adds_mm": 18.229565660736217,
+      "bundletrack_adds_mm": 6.840784184557854
+    },
+    {
+      "index": 214,
+      "point2pose_adds_mm": 5.43282152010776,
+      "bundletrack_adds_mm": 7.339288883769756
+    },
+    {
+      "index": 215,
+      "point2pose_adds_mm": 5.165437576526503,
+      "bundletrack_adds_mm": 7.425918402357106
+    },
+    {
+      "index": 216,
+      "point2pose_adds_mm": 5.3203263912074386,
+      "bundletrack_adds_mm": 7.382651964798625
+    },
+    {
+      "index": 217,
+      "point2pose_adds_mm": 5.610001733970501,
+      "bundletrack_adds_mm": 7.366669972451424
+    },
+    {
+      "index": 218,
+      "point2pose_adds_mm": 5.1910800771513,
+      "bundletrack_adds_mm": 7.467508648160835
+    },
+    {
+      "index": 219,
+      "point2pose_adds_mm": 8.219685472599613,
+      "bundletrack_adds_mm": 10.491290609609809
+    },
+    {
+      "index": 220,
+      "point2pose_adds_mm": 10.084094650887907,
+      "bundletrack_adds_mm": 11.811749658513902
+    },
+    {
+      "index": 221,
+      "point2pose_adds_mm": 5.345036578807431,
+      "bundletrack_adds_mm": 6.343393431973734
+    },
+    {
+      "index": 222,
+      "point2pose_adds_mm": 4.4085188426777036,
+      "bundletrack_adds_mm": 5.009140855344276
+    },
+    {
+      "index": 223,
+      "point2pose_adds_mm": 4.043707243336856,
+      "bundletrack_adds_mm": 5.370877124432514
+    },
+    {
+      "index": 224,
+      "point2pose_adds_mm": 4.2511302168109575,
+      "bundletrack_adds_mm": 5.114436145617036
+    },
+    {
+      "index": 225,
+      "point2pose_adds_mm": 3.738424124977438,
+      "bundletrack_adds_mm": 5.149138153855073
+    },
+    {
+      "index": 226,
+      "point2pose_adds_mm": 4.35978890140589,
+      "bundletrack_adds_mm": 5.970605561167403
+    },
+    {
+      "index": 227,
+      "point2pose_adds_mm": 3.8680014930047086,
+      "bundletrack_adds_mm": 3.466694605267777
+    },
+    {
+      "index": 228,
+      "point2pose_adds_mm": 3.206273944417798,
+      "bundletrack_adds_mm": 4.544940645893329
+    },
+    {
+      "index": 229,
+      "point2pose_adds_mm": 3.3465236761121906,
+      "bundletrack_adds_mm": 3.6936769359809434
+    },
+    {
+      "index": 230,
+      "point2pose_adds_mm": 4.570784854096326,
+      "bundletrack_adds_mm": 5.159910101602461
+    },
+    {
+      "index": 231,
+      "point2pose_adds_mm": 3.589664981815139,
+      "bundletrack_adds_mm": 4.601700824888258
+    },
+    {
+      "index": 232,
+      "point2pose_adds_mm": 4.291511599652933,
+      "bundletrack_adds_mm": 5.182135472767911
+    },
+    {
+      "index": 233,
+      "point2pose_adds_mm": 5.456495580812065,
+      "bundletrack_adds_mm": 6.304003443573847
+    },
+    {
+      "index": 234,
+      "point2pose_adds_mm": 4.9707034485548895,
+      "bundletrack_adds_mm": 6.553902944181227
+    },
+    {
+      "index": 235,
+      "point2pose_adds_mm": 4.048203340419568,
+      "bundletrack_adds_mm": 5.641014236072118
+    },
+    {
+      "index": 236,
+      "point2pose_adds_mm": 2.684986666183112,
+      "bundletrack_adds_mm": 4.293049057779389
+    },
+    {
+      "index": 237,
+      "point2pose_adds_mm": 4.414013106369406,
+      "bundletrack_adds_mm": 6.000527537894128
+    },
+    {
+      "index": 238,
+      "point2pose_adds_mm": 3.778028525607014,
+      "bundletrack_adds_mm": 5.99657235343351
+    },
+    {
+      "index": 239,
+      "point2pose_adds_mm": 4.568776293441946,
+      "bundletrack_adds_mm": 6.162649925094779
+    },
+    {
+      "index": 240,
+      "point2pose_adds_mm": 3.7009933460117197,
+      "bundletrack_adds_mm": 4.973326156007057
+    },
+    {
+      "index": 241,
+      "point2pose_adds_mm": 4.0586832898183065,
+      "bundletrack_adds_mm": 5.555544968381345
+    },
+    {
+      "index": 242,
+      "point2pose_adds_mm": 4.173427552783614,
+      "bundletrack_adds_mm": 5.5106045569360935
+    },
+    {
+      "index": 243,
+      "point2pose_adds_mm": 3.9770590451206798,
+      "bundletrack_adds_mm": 5.213849466134603
+    },
+    {
+      "index": 244,
+      "point2pose_adds_mm": 4.008189319072337,
+      "bundletrack_adds_mm": 5.492566511194883
+    },
+    {
+      "index": 245,
+      "point2pose_adds_mm": 4.1343758086053155,
+      "bundletrack_adds_mm": 5.425247604416886
+    },
+    {
+      "index": 246,
+      "point2pose_adds_mm": 4.004397301988132,
+      "bundletrack_adds_mm": 5.788071459030593
+    },
+    {
+      "index": 247,
+      "point2pose_adds_mm": 4.1576632534593845,
+      "bundletrack_adds_mm": 5.3346492322667745
+    },
+    {
+      "index": 248,
+      "point2pose_adds_mm": 4.378559549442494,
+      "bundletrack_adds_mm": 5.627663170388117
+    },
+    {
+      "index": 249,
+      "point2pose_adds_mm": 4.092353572175592,
+      "bundletrack_adds_mm": 5.851024286203688
+    },
+    {
+      "index": 250,
+      "point2pose_adds_mm": 4.3384386901530245,
+      "bundletrack_adds_mm": 5.812356059520434
+    },
+    {
+      "index": 251,
+      "point2pose_adds_mm": 4.225046925303769,
+      "bundletrack_adds_mm": 6.02735885689048
+    },
+    {
+      "index": 252,
+      "point2pose_adds_mm": 4.366196991902685,
+      "bundletrack_adds_mm": 6.071648484852561
+    },
+    {
+      "index": 253,
+      "point2pose_adds_mm": 3.444346491549481,
+      "bundletrack_adds_mm": 5.101254782469203
+    },
+    {
+      "index": 254,
+      "point2pose_adds_mm": 4.518318477425678,
+      "bundletrack_adds_mm": 5.877152732781126
+    },
+    {
+      "index": 255,
+      "point2pose_adds_mm": 4.768660677165379,
+      "bundletrack_adds_mm": 6.493976891838396
+    },
+    {
+      "index": 256,
+      "point2pose_adds_mm": 4.999348829049986,
+      "bundletrack_adds_mm": 7.026172107806362
+    },
+    {
+      "index": 257,
+      "point2pose_adds_mm": 4.865246404829852,
+      "bundletrack_adds_mm": 6.753991462317085
+    },
+    {
+      "index": 258,
+      "point2pose_adds_mm": 4.657243108894645,
+      "bundletrack_adds_mm": 6.458214946842829
+    },
+    {
+      "index": 259,
+      "point2pose_adds_mm": 4.961702563115915,
+      "bundletrack_adds_mm": 6.92225832746995
+    },
+    {
+      "index": 260,
+      "point2pose_adds_mm": 4.71400025984108,
+      "bundletrack_adds_mm": 6.354926556000988
+    },
+    {
+      "index": 261,
+      "point2pose_adds_mm": 4.811592155135945,
+      "bundletrack_adds_mm": 6.730590292743735
+    },
+    {
+      "index": 262,
+      "point2pose_adds_mm": 5.11724645665248,
+      "bundletrack_adds_mm": 7.096648157711601
+    },
+    {
+      "index": 263,
+      "point2pose_adds_mm": 4.96207417789316,
+      "bundletrack_adds_mm": 6.945397666624152
+    },
+    {
+      "index": 264,
+      "point2pose_adds_mm": 4.724679075188893,
+      "bundletrack_adds_mm": 6.678006733029865
+    },
+    {
+      "index": 265,
+      "point2pose_adds_mm": 5.0559287067180625,
+      "bundletrack_adds_mm": 6.813012939566941
+    },
+    {
+      "index": 266,
+      "point2pose_adds_mm": 5.13729734700651,
+      "bundletrack_adds_mm": 6.859229293664697
+    },
+    {
+      "index": 267,
+      "point2pose_adds_mm": 5.680509371539486,
+      "bundletrack_adds_mm": 7.277528500451805
+    },
+    {
+      "index": 268,
+      "point2pose_adds_mm": 4.935518729839843,
+      "bundletrack_adds_mm": 6.761591268102379
+    },
+    {
+      "index": 269,
+      "point2pose_adds_mm": 5.580391766380902,
+      "bundletrack_adds_mm": 7.356446842186032
+    },
+    {
+      "index": 270,
+      "point2pose_adds_mm": 5.142907057212631,
+      "bundletrack_adds_mm": 6.918852374454762
+    },
+    {
+      "index": 271,
+      "point2pose_adds_mm": 5.4343390642254645,
+      "bundletrack_adds_mm": 7.642320705825935
+    },
+    {
+      "index": 272,
+      "point2pose_adds_mm": 5.510057574398412,
+      "bundletrack_adds_mm": 7.372003861819713
+    },
+    {
+      "index": 273,
+      "point2pose_adds_mm": 5.031520692028289,
+      "bundletrack_adds_mm": 7.121594690586203
+    },
+    {
+      "index": 274,
+      "point2pose_adds_mm": 5.5223046583203015,
+      "bundletrack_adds_mm": 7.027381145085757
+    },
+    {
+      "index": 275,
+      "point2pose_adds_mm": 5.353481154075132,
+      "bundletrack_adds_mm": 7.260909392560258
+    },
+    {
+      "index": 276,
+      "point2pose_adds_mm": 4.95123150124825,
+      "bundletrack_adds_mm": 6.9467384561869325
+    },
+    {
+      "index": 277,
+      "point2pose_adds_mm": 4.493520824223838,
+      "bundletrack_adds_mm": 6.463098712811552
+    },
+    {
+      "index": 278,
+      "point2pose_adds_mm": 5.034650801867747,
+      "bundletrack_adds_mm": 7.006558096017102
+    },
+    {
+      "index": 279,
+      "point2pose_adds_mm": 5.1966296445319955,
+      "bundletrack_adds_mm": 7.108512276623195
+    },
+    {
+      "index": 280,
+      "point2pose_adds_mm": 5.508529291106513,
+      "bundletrack_adds_mm": 7.338412014664314
+    },
+    {
+      "index": 281,
+      "point2pose_adds_mm": 5.792983611795362,
+      "bundletrack_adds_mm": 7.878451541506086
+    },
+    {
+      "index": 282,
+      "point2pose_adds_mm": 5.643383933154397,
+      "bundletrack_adds_mm": 7.460653256943247
+    },
+    {
+      "index": 283,
+      "point2pose_adds_mm": 6.342982226455765,
+      "bundletrack_adds_mm": 7.069933906018914
+    },
+    {
+      "index": 284,
+      "point2pose_adds_mm": 6.288901867910492,
+      "bundletrack_adds_mm": 7.945708487057829
+    },
+    {
+      "index": 285,
+      "point2pose_adds_mm": 5.89719484995583,
+      "bundletrack_adds_mm": 7.436736126614623
+    },
+    {
+      "index": 286,
+      "point2pose_adds_mm": 5.880514462104433,
+      "bundletrack_adds_mm": 7.505645281051535
+    },
+    {
+      "index": 287,
+      "point2pose_adds_mm": 6.38216067203386,
+      "bundletrack_adds_mm": 7.83144652247229
+    },
+    {
+      "index": 288,
+      "point2pose_adds_mm": 5.7414310697656115,
+      "bundletrack_adds_mm": 7.374967791616412
+    },
+    {
+      "index": 289,
+      "point2pose_adds_mm": 5.868387411728628,
+      "bundletrack_adds_mm": 7.560639135171762
+    },
+    {
+      "index": 290,
+      "point2pose_adds_mm": 5.526174726881723,
+      "bundletrack_adds_mm": 7.021731972551678
+    },
+    {
+      "index": 291,
+      "point2pose_adds_mm": 6.277206151526277,
+      "bundletrack_adds_mm": 7.77002749641433
+    },
+    {
+      "index": 292,
+      "point2pose_adds_mm": 6.4956006695617585,
+      "bundletrack_adds_mm": 8.021688315470872
+    },
+    {
+      "index": 293,
+      "point2pose_adds_mm": 6.721852324296205,
+      "bundletrack_adds_mm": 8.166934537511038
+    },
+    {
+      "index": 294,
+      "point2pose_adds_mm": 6.761125049672456,
+      "bundletrack_adds_mm": 8.263496414460542
+    },
+    {
+      "index": 295,
+      "point2pose_adds_mm": 6.723215360868737,
+      "bundletrack_adds_mm": 8.093697279334938
+    },
+    {
+      "index": 296,
+      "point2pose_adds_mm": 6.917765551155226,
+      "bundletrack_adds_mm": 8.280745539005522
+    },
+    {
+      "index": 297,
+      "point2pose_adds_mm": 6.980244393168305,
+      "bundletrack_adds_mm": 8.358035648460474
+    },
+    {
+      "index": 298,
+      "point2pose_adds_mm": 6.688381301629637,
+      "bundletrack_adds_mm": 8.24538822804217
+    },
+    {
+      "index": 299,
+      "point2pose_adds_mm": 6.741088670378471,
+      "bundletrack_adds_mm": 8.085106854200413
+    },
+    {
+      "index": 300,
+      "point2pose_adds_mm": 7.065686748303899,
+      "bundletrack_adds_mm": 8.31338994695664
+    },
+    {
+      "index": 301,
+      "point2pose_adds_mm": 6.804939417077091,
+      "bundletrack_adds_mm": 8.355698092333657
+    },
+    {
+      "index": 302,
+      "point2pose_adds_mm": 6.9088677199855555,
+      "bundletrack_adds_mm": 8.478869836450825
+    },
+    {
+      "index": 303,
+      "point2pose_adds_mm": 6.768785983234188,
+      "bundletrack_adds_mm": 8.329160077603786
+    },
+    {
+      "index": 304,
+      "point2pose_adds_mm": 7.08821792191967,
+      "bundletrack_adds_mm": 8.464309024097128
+    },
+    {
+      "index": 305,
+      "point2pose_adds_mm": 7.078850077244181,
+      "bundletrack_adds_mm": 8.459511772266096
+    },
+    {
+      "index": 306,
+      "point2pose_adds_mm": 7.062672490494282,
+      "bundletrack_adds_mm": 8.320139726964596
+    },
+    {
+      "index": 307,
+      "point2pose_adds_mm": 6.896153391753081,
+      "bundletrack_adds_mm": 8.277211082882472
+    },
+    {
+      "index": 308,
+      "point2pose_adds_mm": 7.103170459331727,
+      "bundletrack_adds_mm": 8.492367906666258
+    },
+    {
+      "index": 309,
+      "point2pose_adds_mm": 6.833270454085867,
+      "bundletrack_adds_mm": 8.119968028026939
+    },
+    {
+      "index": 310,
+      "point2pose_adds_mm": 7.213825712328744,
+      "bundletrack_adds_mm": 8.584686829319255
+    },
+    {
+      "index": 311,
+      "point2pose_adds_mm": 6.796967080618897,
+      "bundletrack_adds_mm": 8.192995720347223
+    },
+    {
+      "index": 312,
+      "point2pose_adds_mm": 6.720981179678851,
+      "bundletrack_adds_mm": 8.035779417631028
+    },
+    {
+      "index": 313,
+      "point2pose_adds_mm": 6.951906284927725,
+      "bundletrack_adds_mm": 8.254516004203968
+    },
+    {
+      "index": 314,
+      "point2pose_adds_mm": 6.738062207572988,
+      "bundletrack_adds_mm": 8.053731153234121
+    },
+    {
+      "index": 315,
+      "point2pose_adds_mm": 6.7700677052697085,
+      "bundletrack_adds_mm": 8.079297274421574
+    },
+    {
+      "index": 316,
+      "point2pose_adds_mm": 6.946840548812073,
+      "bundletrack_adds_mm": 8.21358956229691
+    },
+    {
+      "index": 317,
+      "point2pose_adds_mm": 6.828542415219083,
+      "bundletrack_adds_mm": 8.06758757802028
+    },
+    {
+      "index": 318,
+      "point2pose_adds_mm": 6.885379784078248,
+      "bundletrack_adds_mm": 8.207065910683832
+    },
+    {
+      "index": 319,
+      "point2pose_adds_mm": 7.042612419393736,
+      "bundletrack_adds_mm": 8.417584897603035
+    },
+    {
+      "index": 320,
+      "point2pose_adds_mm": 6.713874530922865,
+      "bundletrack_adds_mm": 8.166096493019003
+    },
+    {
+      "index": 321,
+      "point2pose_adds_mm": 6.560899623515952,
+      "bundletrack_adds_mm": 7.973732852083682
+    },
+    {
+      "index": 322,
+      "point2pose_adds_mm": 6.926712623648429,
+      "bundletrack_adds_mm": 8.19208044444698
+    },
+    {
+      "index": 323,
+      "point2pose_adds_mm": 7.007059360717733,
+      "bundletrack_adds_mm": 8.365065129015075
+    },
+    {
+      "index": 324,
+      "point2pose_adds_mm": 6.6586638497158255,
+      "bundletrack_adds_mm": 8.007853222002975
+    },
+    {
+      "index": 325,
+      "point2pose_adds_mm": 6.792475454966124,
+      "bundletrack_adds_mm": 8.155187502784964
+    },
+    {
+      "index": 326,
+      "point2pose_adds_mm": 6.9279461127134905,
+      "bundletrack_adds_mm": 8.405942459684638
+    },
+    {
+      "index": 327,
+      "point2pose_adds_mm": 7.0635998518504834,
+      "bundletrack_adds_mm": 8.277323220971313
+    },
+    {
+      "index": 328,
+      "point2pose_adds_mm": 7.096663541172239,
+      "bundletrack_adds_mm": 8.332480499480381
+    },
+    {
+      "index": 329,
+      "point2pose_adds_mm": 6.864205442885912,
+      "bundletrack_adds_mm": 8.260570209968202
+    },
+    {
+      "index": 330,
+      "point2pose_adds_mm": 6.443989480472117,
+      "bundletrack_adds_mm": 7.79902646769786
+    },
+    {
+      "index": 331,
+      "point2pose_adds_mm": 5.902672434200291,
+      "bundletrack_adds_mm": 7.393178887049666
+    },
+    {
+      "index": 332,
+      "point2pose_adds_mm": 5.944799842653515,
+      "bundletrack_adds_mm": 7.33049787349358
+    },
+    {
+      "index": 333,
+      "point2pose_adds_mm": 6.090216553151067,
+      "bundletrack_adds_mm": 7.747250339929018
+    },
+    {
+      "index": 334,
+      "point2pose_adds_mm": 5.812693447844105,
+      "bundletrack_adds_mm": 7.285793551513907
+    },
+    {
+      "index": 335,
+      "point2pose_adds_mm": 6.000375442295022,
+      "bundletrack_adds_mm": 7.693902886961212
+    },
+    {
+      "index": 336,
+      "point2pose_adds_mm": 6.430396166236084,
+      "bundletrack_adds_mm": 7.597471301396637
+    },
+    {
+      "index": 337,
+      "point2pose_adds_mm": 5.981077785163559,
+      "bundletrack_adds_mm": 7.276612698868304
+    },
+    {
+      "index": 338,
+      "point2pose_adds_mm": 6.0970682482055985,
+      "bundletrack_adds_mm": 7.483054874208982
+    },
+    {
+      "index": 339,
+      "point2pose_adds_mm": 5.692495892839177,
+      "bundletrack_adds_mm": 7.332208949408112
+    },
+    {
+      "index": 340,
+      "point2pose_adds_mm": 6.02022933965727,
+      "bundletrack_adds_mm": 7.639021463748774
+    },
+    {
+      "index": 341,
+      "point2pose_adds_mm": 5.861075387837404,
+      "bundletrack_adds_mm": 7.429808414494147
+    },
+    {
+      "index": 342,
+      "point2pose_adds_mm": 6.632206610378036,
+      "bundletrack_adds_mm": 7.915263784773747
+    },
+    {
+      "index": 343,
+      "point2pose_adds_mm": 5.947492018436519,
+      "bundletrack_adds_mm": 7.116865700948502
+    },
+    {
+      "index": 344,
+      "point2pose_adds_mm": 5.534397252429606,
+      "bundletrack_adds_mm": 6.790851964641124
+    },
+    {
+      "index": 345,
+      "point2pose_adds_mm": 6.30611440976316,
+      "bundletrack_adds_mm": 7.903279506904884
+    },
+    {
+      "index": 346,
+      "point2pose_adds_mm": 5.813305079970081,
+      "bundletrack_adds_mm": 7.329752463555677
+    },
+    {
+      "index": 347,
+      "point2pose_adds_mm": 5.81085603599796,
+      "bundletrack_adds_mm": 7.156720887053287
+    },
+    {
+      "index": 348,
+      "point2pose_adds_mm": 6.019308455207342,
+      "bundletrack_adds_mm": 7.139105925023134
+    },
+    {
+      "index": 349,
+      "point2pose_adds_mm": 7.154758992414793,
+      "bundletrack_adds_mm": 7.834904719762972
+    },
+    {
+      "index": 350,
+      "point2pose_adds_mm": 6.390171629454399,
+      "bundletrack_adds_mm": 7.409426915351294
+    },
+    {
+      "index": 351,
+      "point2pose_adds_mm": 6.515988673186405,
+      "bundletrack_adds_mm": 7.7668135431813825
+    },
+    {
+      "index": 352,
+      "point2pose_adds_mm": 6.295278411892299,
+      "bundletrack_adds_mm": 6.990058231816627
+    },
+    {
+      "index": 353,
+      "point2pose_adds_mm": 6.2302549336216835,
+      "bundletrack_adds_mm": 7.793480204504125
+    },
+    {
+      "index": 354,
+      "point2pose_adds_mm": 6.749742389377963,
+      "bundletrack_adds_mm": 7.448712207411719
+    },
+    {
+      "index": 355,
+      "point2pose_adds_mm": 5.899980573201973,
+      "bundletrack_adds_mm": 7.150457663924795
+    },
+    {
+      "index": 356,
+      "point2pose_adds_mm": 6.6267804007567435,
+      "bundletrack_adds_mm": 7.235396576227295
+    },
+    {
+      "index": 357,
+      "point2pose_adds_mm": 6.615034514087508,
+      "bundletrack_adds_mm": 7.125687073120328
+    },
+    {
+      "index": 358,
+      "point2pose_adds_mm": 5.944251740855456,
+      "bundletrack_adds_mm": 7.132681097355917
+    },
+    {
+      "index": 359,
+      "point2pose_adds_mm": 6.412555715482066,
+      "bundletrack_adds_mm": 7.06628167407956
+    },
+    {
+      "index": 360,
+      "point2pose_adds_mm": 5.912713533408763,
+      "bundletrack_adds_mm": 6.989159730959454
+    },
+    {
+      "index": 361,
+      "point2pose_adds_mm": 6.214586808765724,
+      "bundletrack_adds_mm": 7.34833369692548
+    },
+    {
+      "index": 362,
+      "point2pose_adds_mm": 5.926104350361428,
+      "bundletrack_adds_mm": 7.0034898877048075
+    },
+    {
+      "index": 363,
+      "point2pose_adds_mm": 6.303014252257001,
+      "bundletrack_adds_mm": 7.255344284419128
+    },
+    {
+      "index": 364,
+      "point2pose_adds_mm": 6.186959898557805,
+      "bundletrack_adds_mm": 6.880027589470254
+    },
+    {
+      "index": 365,
+      "point2pose_adds_mm": 6.366787453360904,
+      "bundletrack_adds_mm": 7.004918447383513
+    },
+    {
+      "index": 366,
+      "point2pose_adds_mm": 6.462796547266634,
+      "bundletrack_adds_mm": 6.971022185770813
+    },
+    {
+      "index": 367,
+      "point2pose_adds_mm": 6.564107043189382,
+      "bundletrack_adds_mm": 6.939488395812723
+    },
+    {
+      "index": 368,
+      "point2pose_adds_mm": 6.303122854302497,
+      "bundletrack_adds_mm": 6.832106112521911
+    },
+    {
+      "index": 369,
+      "point2pose_adds_mm": 6.729194712045912,
+      "bundletrack_adds_mm": 7.437509950067699
+    },
+    {
+      "index": 370,
+      "point2pose_adds_mm": 6.5060833081364,
+      "bundletrack_adds_mm": 7.001447743901298
+    },
+    {
+      "index": 371,
+      "point2pose_adds_mm": 6.701585573745647,
+      "bundletrack_adds_mm": 7.326449480826425
+    },
+    {
+      "index": 372,
+      "point2pose_adds_mm": 6.415494377694859,
+      "bundletrack_adds_mm": 7.0170743492308905
+    },
+    {
+      "index": 373,
+      "point2pose_adds_mm": 6.6478045765754805,
+      "bundletrack_adds_mm": 7.24253378057111
+    },
+    {
+      "index": 374,
+      "point2pose_adds_mm": 6.765752279170247,
+      "bundletrack_adds_mm": 7.166474574710814
+    },
+    {
+      "index": 375,
+      "point2pose_adds_mm": 6.997298237178074,
+      "bundletrack_adds_mm": 7.498193545457915
+    },
+    {
+      "index": 376,
+      "point2pose_adds_mm": 6.9661371763936595,
+      "bundletrack_adds_mm": 7.496033827656671
+    },
+    {
+      "index": 377,
+      "point2pose_adds_mm": 6.413512436225063,
+      "bundletrack_adds_mm": 6.881330410175308
+    },
+    {
+      "index": 378,
+      "point2pose_adds_mm": 6.591525918625893,
+      "bundletrack_adds_mm": 7.2406810886139725
+    },
+    {
+      "index": 379,
+      "point2pose_adds_mm": 6.344936007579552,
+      "bundletrack_adds_mm": 6.896244400136608
+    },
+    {
+      "index": 380,
+      "point2pose_adds_mm": 7.415033041931694,
+      "bundletrack_adds_mm": 7.336442223104631
+    },
+    {
+      "index": 381,
+      "point2pose_adds_mm": 7.143804348396315,
+      "bundletrack_adds_mm": 7.398579036077008
+    },
+    {
+      "index": 382,
+      "point2pose_adds_mm": 7.234709847628817,
+      "bundletrack_adds_mm": 7.175663656226602
+    },
+    {
+      "index": 383,
+      "point2pose_adds_mm": 7.112954993878315,
+      "bundletrack_adds_mm": 7.173626512223463
+    },
+    {
+      "index": 384,
+      "point2pose_adds_mm": 7.946315614998491,
+      "bundletrack_adds_mm": 7.833753605812463
+    },
+    {
+      "index": 385,
+      "point2pose_adds_mm": 8.174267033210123,
+      "bundletrack_adds_mm": 7.923975030295403
+    },
+    {
+      "index": 386,
+      "point2pose_adds_mm": 8.01868407015633,
+      "bundletrack_adds_mm": 7.840826415238837
+    },
+    {
+      "index": 387,
+      "point2pose_adds_mm": 7.724001254290754,
+      "bundletrack_adds_mm": 7.486053746500231
+    },
+    {
+      "index": 388,
+      "point2pose_adds_mm": 7.797673541402001,
+      "bundletrack_adds_mm": 7.732963694845053
+    },
+    {
+      "index": 389,
+      "point2pose_adds_mm": 7.8286536591809766,
+      "bundletrack_adds_mm": 7.78544078423128
+    },
+    {
+      "index": 390,
+      "point2pose_adds_mm": 7.964716361242227,
+      "bundletrack_adds_mm": 7.902457606815101
+    },
+    {
+      "index": 391,
+      "point2pose_adds_mm": 8.04352470480562,
+      "bundletrack_adds_mm": 7.851956828344282
+    },
+    {
+      "index": 392,
+      "point2pose_adds_mm": 8.406257754343232,
+      "bundletrack_adds_mm": 8.25253178279779
+    },
+    {
+      "index": 393,
+      "point2pose_adds_mm": 9.655467622872726,
+      "bundletrack_adds_mm": 8.401110655946018
+    },
+    {
+      "index": 394,
+      "point2pose_adds_mm": 8.654015263425304,
+      "bundletrack_adds_mm": 8.081015821434569
+    },
+    {
+      "index": 395,
+      "point2pose_adds_mm": 8.59147748366861,
+      "bundletrack_adds_mm": 7.960207954551213
+    },
+    {
+      "index": 396,
+      "point2pose_adds_mm": 8.305780306180873,
+      "bundletrack_adds_mm": 8.057911425620079
+    },
+    {
+      "index": 397,
+      "point2pose_adds_mm": 8.732936540827213,
+      "bundletrack_adds_mm": 8.181644503046842
+    },
+    {
+      "index": 398,
+      "point2pose_adds_mm": 8.414987107035234,
+      "bundletrack_adds_mm": 8.10619365246565
+    },
+    {
+      "index": 399,
+      "point2pose_adds_mm": 8.987651407176532,
+      "bundletrack_adds_mm": 8.443696611282187
+    },
+    {
+      "index": 400,
+      "point2pose_adds_mm": 8.552466596345617,
+      "bundletrack_adds_mm": 8.143828063423499
+    },
+    {
+      "index": 401,
+      "point2pose_adds_mm": 8.400006502162048,
+      "bundletrack_adds_mm": 8.01464717174279
+    },
+    {
+      "index": 402,
+      "point2pose_adds_mm": 8.229180604554378,
+      "bundletrack_adds_mm": 7.907484673607386
+    },
+    {
+      "index": 403,
+      "point2pose_adds_mm": 8.53152770436629,
+      "bundletrack_adds_mm": 8.273864575159806
+    },
+    {
+      "index": 404,
+      "point2pose_adds_mm": 8.631888564374051,
+      "bundletrack_adds_mm": 8.193224587134983
+    },
+    {
+      "index": 405,
+      "point2pose_adds_mm": 8.302161493473516,
+      "bundletrack_adds_mm": 8.210417167794867
+    },
+    {
+      "index": 406,
+      "point2pose_adds_mm": 8.130774658488267,
+      "bundletrack_adds_mm": 8.101802276612963
+    },
+    {
+      "index": 407,
+      "point2pose_adds_mm": 7.835902937098904,
+      "bundletrack_adds_mm": 7.835581816219562
+    },
+    {
+      "index": 408,
+      "point2pose_adds_mm": 8.451899231886197,
+      "bundletrack_adds_mm": 8.340093211280164
+    },
+    {
+      "index": 409,
+      "point2pose_adds_mm": 8.541547915073611,
+      "bundletrack_adds_mm": 8.350629799255607
+    },
+    {
+      "index": 410,
+      "point2pose_adds_mm": 8.075953311178921,
+      "bundletrack_adds_mm": 7.778387113014121
+    },
+    {
+      "index": 411,
+      "point2pose_adds_mm": 8.4289715519714,
+      "bundletrack_adds_mm": 8.135560315036333
+    },
+    {
+      "index": 412,
+      "point2pose_adds_mm": 8.976472438350127,
+      "bundletrack_adds_mm": 8.599097068820946
+    },
+    {
+      "index": 413,
+      "point2pose_adds_mm": 8.952081383402684,
+      "bundletrack_adds_mm": 8.671277156363471
+    },
+    {
+      "index": 414,
+      "point2pose_adds_mm": 9.402602499146218,
+      "bundletrack_adds_mm": 9.39292220512133
+    },
+    {
+      "index": 415,
+      "point2pose_adds_mm": 9.577217842075937,
+      "bundletrack_adds_mm": 9.191101564328518
+    },
+    {
+      "index": 416,
+      "point2pose_adds_mm": 9.11622168215966,
+      "bundletrack_adds_mm": 9.096876182764893
+    },
+    {
+      "index": 417,
+      "point2pose_adds_mm": 9.472228777855467,
+      "bundletrack_adds_mm": 9.654547615565054
+    },
+    {
+      "index": 418,
+      "point2pose_adds_mm": 9.508381744199651,
+      "bundletrack_adds_mm": 9.519051847708354
+    },
+    {
+      "index": 419,
+      "point2pose_adds_mm": 9.936005275291793,
+      "bundletrack_adds_mm": 9.840968809192498
+    },
+    {
+      "index": 420,
+      "point2pose_adds_mm": 10.26065194512938,
+      "bundletrack_adds_mm": 9.978557546119973
+    },
+    {
+      "index": 421,
+      "point2pose_adds_mm": 10.131379528218318,
+      "bundletrack_adds_mm": 10.012367183057979
+    },
+    {
+      "index": 422,
+      "point2pose_adds_mm": 10.015808266041319,
+      "bundletrack_adds_mm": 10.087280677905662
+    },
+    {
+      "index": 423,
+      "point2pose_adds_mm": 9.872141560317301,
+      "bundletrack_adds_mm": 9.914373397967879
+    },
+    {
+      "index": 424,
+      "point2pose_adds_mm": 9.739233674924078,
+      "bundletrack_adds_mm": 9.841900344208462
+    },
+    {
+      "index": 425,
+      "point2pose_adds_mm": 10.208595683314888,
+      "bundletrack_adds_mm": 10.07251479816539
+    },
+    {
+      "index": 426,
+      "point2pose_adds_mm": 9.873077127470598,
+      "bundletrack_adds_mm": 10.023731436168875
+    },
+    {
+      "index": 427,
+      "point2pose_adds_mm": 9.971976337188329,
+      "bundletrack_adds_mm": 9.738255824770313
+    },
+    {
+      "index": 428,
+      "point2pose_adds_mm": 10.277813250927915,
+      "bundletrack_adds_mm": 10.166635205835327
+    },
+    {
+      "index": 429,
+      "point2pose_adds_mm": 9.717863289936487,
+      "bundletrack_adds_mm": 9.529574898621648
+    },
+    {
+      "index": 430,
+      "point2pose_adds_mm": 9.511432346337132,
+      "bundletrack_adds_mm": 9.420738718505348
+    },
+    {
+      "index": 431,
+      "point2pose_adds_mm": 9.77220585433613,
+      "bundletrack_adds_mm": 9.359940158237448
+    },
+    {
+      "index": 432,
+      "point2pose_adds_mm": 9.799707439065955,
+      "bundletrack_adds_mm": 9.719771179101524
+    },
+    {
+      "index": 433,
+      "point2pose_adds_mm": 10.065519487856196,
+      "bundletrack_adds_mm": 9.950420571644834
+    },
+    {
+      "index": 434,
+      "point2pose_adds_mm": 9.460871108580195,
+      "bundletrack_adds_mm": 9.461477539722575
+    },
+    {
+      "index": 435,
+      "point2pose_adds_mm": 9.801235749329859,
+      "bundletrack_adds_mm": 9.665303837443512
+    },
+    {
+      "index": 436,
+      "point2pose_adds_mm": 9.746328739870759,
+      "bundletrack_adds_mm": 9.51310621309526
+    },
+    {
+      "index": 437,
+      "point2pose_adds_mm": 9.910897367230858,
+      "bundletrack_adds_mm": 9.709318292984857
+    },
+    {
+      "index": 438,
+      "point2pose_adds_mm": 10.040021920542232,
+      "bundletrack_adds_mm": 9.806036242997966
+    },
+    {
+      "index": 439,
+      "point2pose_adds_mm": 9.59756785891208,
+      "bundletrack_adds_mm": 9.429031588363538
+    },
+    {
+      "index": 440,
+      "point2pose_adds_mm": 9.946150584183664,
+      "bundletrack_adds_mm": 9.752159940327731
+    },
+    {
+      "index": 441,
+      "point2pose_adds_mm": 9.686738993366816,
+      "bundletrack_adds_mm": 9.518461054440172
+    },
+    {
+      "index": 442,
+      "point2pose_adds_mm": 9.644456216205027,
+      "bundletrack_adds_mm": 9.461778390014631
+    },
+    {
+      "index": 443,
+      "point2pose_adds_mm": 9.445737112016097,
+      "bundletrack_adds_mm": 9.316680477118354
+    },
+    {
+      "index": 444,
+      "point2pose_adds_mm": 9.52103849925367,
+      "bundletrack_adds_mm": 9.387016149768883
+    },
+    {
+      "index": 445,
+      "point2pose_adds_mm": 9.532675896286657,
+      "bundletrack_adds_mm": 9.311571654994102
+    },
+    {
+      "index": 446,
+      "point2pose_adds_mm": 9.501892160325466,
+      "bundletrack_adds_mm": 9.154206196943083
+    },
+    {
+      "index": 447,
+      "point2pose_adds_mm": 9.604672211293394,
+      "bundletrack_adds_mm": 9.339240711185619
+    },
+    {
+      "index": 448,
+      "point2pose_adds_mm": 9.37567969856545,
+      "bundletrack_adds_mm": 9.108064617980208
+    },
+    {
+      "index": 449,
+      "point2pose_adds_mm": 9.29285963868951,
+      "bundletrack_adds_mm": 9.101533347369577
+    },
+    {
+      "index": 450,
+      "point2pose_adds_mm": 9.482272412769246,
+      "bundletrack_adds_mm": 9.368656908083944
+    },
+    {
+      "index": 451,
+      "point2pose_adds_mm": 9.50351060882389,
+      "bundletrack_adds_mm": 9.295947265434531
+    },
+    {
+      "index": 452,
+      "point2pose_adds_mm": 9.5648806555987,
+      "bundletrack_adds_mm": 9.418637027966998
+    },
+    {
+      "index": 453,
+      "point2pose_adds_mm": 9.895129738359131,
+      "bundletrack_adds_mm": 9.662404043636156
+    },
+    {
+      "index": 454,
+      "point2pose_adds_mm": 9.489694782865339,
+      "bundletrack_adds_mm": 9.294437138001546
+    },
+    {
+      "index": 455,
+      "point2pose_adds_mm": 9.263766940064219,
+      "bundletrack_adds_mm": 9.051852348259601
+    },
+    {
+      "index": 456,
+      "point2pose_adds_mm": 9.393181653117693,
+      "bundletrack_adds_mm": 9.23182069449189
+    },
+    {
+      "index": 457,
+      "point2pose_adds_mm": 9.602868517306945,
+      "bundletrack_adds_mm": 9.430300273929733
+    },
+    {
+      "index": 458,
+      "point2pose_adds_mm": 9.626983857766925,
+      "bundletrack_adds_mm": 9.412334809471368
+    },
+    {
+      "index": 459,
+      "point2pose_adds_mm": 9.345882617441926,
+      "bundletrack_adds_mm": 9.083778249211417
+    },
+    {
+      "index": 460,
+      "point2pose_adds_mm": 9.587971819790583,
+      "bundletrack_adds_mm": 9.338855336301023
+    },
+    {
+      "index": 461,
+      "point2pose_adds_mm": 9.572769879834443,
+      "bundletrack_adds_mm": 9.394515459285074
+    },
+    {
+      "index": 462,
+      "point2pose_adds_mm": 9.394802906564706,
+      "bundletrack_adds_mm": 9.080965247027823
+    },
+    {
+      "index": 463,
+      "point2pose_adds_mm": 9.043463607443675,
+      "bundletrack_adds_mm": 8.865626822565407
+    },
+    {
+      "index": 464,
+      "point2pose_adds_mm": 9.547243381607787,
+      "bundletrack_adds_mm": 9.153491170772206
+    },
+    {
+      "index": 465,
+      "point2pose_adds_mm": 10.381557070812196,
+      "bundletrack_adds_mm": 9.79947129867592
+    },
+    {
+      "index": 466,
+      "point2pose_adds_mm": 10.385712155315078,
+      "bundletrack_adds_mm": 9.823325187180716
+    },
+    {
+      "index": 467,
+      "point2pose_adds_mm": 10.671445252770736,
+      "bundletrack_adds_mm": 10.092291085481804
+    },
+    {
+      "index": 468,
+      "point2pose_adds_mm": 10.789692801717793,
+      "bundletrack_adds_mm": 10.294143942320316
+    },
+    {
+      "index": 469,
+      "point2pose_adds_mm": 10.77200158094558,
+      "bundletrack_adds_mm": 10.370371700791273
+    },
+    {
+      "index": 470,
+      "point2pose_adds_mm": 10.326805140029476,
+      "bundletrack_adds_mm": 9.9137691827182
+    },
+    {
+      "index": 471,
+      "point2pose_adds_mm": 10.05083236449366,
+      "bundletrack_adds_mm": 9.625583222370453
+    },
+    {
+      "index": 472,
+      "point2pose_adds_mm": 9.776260874647884,
+      "bundletrack_adds_mm": 9.467421580889772
+    },
+    {
+      "index": 473,
+      "point2pose_adds_mm": 9.690718122181838,
+      "bundletrack_adds_mm": 9.249732177680345
+    },
+    {
+      "index": 474,
+      "point2pose_adds_mm": 9.64646078915478,
+      "bundletrack_adds_mm": 9.321479880661865
+    },
+    {
+      "index": 475,
+      "point2pose_adds_mm": 9.468358715511618,
+      "bundletrack_adds_mm": 9.21846058017198
+    },
+    {
+      "index": 476,
+      "point2pose_adds_mm": 9.445236857897212,
+      "bundletrack_adds_mm": 9.071184338471857
+    },
+    {
+      "index": 477,
+      "point2pose_adds_mm": 9.191119107595263,
+      "bundletrack_adds_mm": 8.792859631167529
+    },
+    {
+      "index": 478,
+      "point2pose_adds_mm": 9.526990810688673,
+      "bundletrack_adds_mm": 9.156513006764143
+    },
+    {
+      "index": 479,
+      "point2pose_adds_mm": 9.532472764852495,
+      "bundletrack_adds_mm": 9.18625258859972
+    },
+    {
+      "index": 480,
+      "point2pose_adds_mm": 9.806290200532215,
+      "bundletrack_adds_mm": 9.42007834320063
+    },
+    {
+      "index": 481,
+      "point2pose_adds_mm": 9.879692029022646,
+      "bundletrack_adds_mm": 9.47101754317457
+    },
+    {
+      "index": 482,
+      "point2pose_adds_mm": 9.526970828655296,
+      "bundletrack_adds_mm": 9.231799739280286
+    },
+    {
+      "index": 483,
+      "point2pose_adds_mm": 9.541227482851,
+      "bundletrack_adds_mm": 9.226306412345604
+    },
+    {
+      "index": 484,
+      "point2pose_adds_mm": 9.498179436656148,
+      "bundletrack_adds_mm": 9.330096655495318
+    },
+    {
+      "index": 485,
+      "point2pose_adds_mm": 9.761461143434682,
+      "bundletrack_adds_mm": 9.367921390195956
+    },
+    {
+      "index": 486,
+      "point2pose_adds_mm": 9.329843658094072,
+      "bundletrack_adds_mm": 8.992171666014274
+    },
+    {
+      "index": 487,
+      "point2pose_adds_mm": 9.169701795162936,
+      "bundletrack_adds_mm": 8.866358705256538
+    },
+    {
+      "index": 488,
+      "point2pose_adds_mm": 9.419464630920782,
+      "bundletrack_adds_mm": 9.12323962228693
+    },
+    {
+      "index": 489,
+      "point2pose_adds_mm": 9.66542318421665,
+      "bundletrack_adds_mm": 9.238156653358335
+    },
+    {
+      "index": 490,
+      "point2pose_adds_mm": 9.593860004438127,
+      "bundletrack_adds_mm": 9.133412857800488
+    },
+    {
+      "index": 491,
+      "point2pose_adds_mm": 9.631954013989793,
+      "bundletrack_adds_mm": 9.259917950195673
+    },
+    {
+      "index": 492,
+      "point2pose_adds_mm": 9.720685287494794,
+      "bundletrack_adds_mm": 9.302647617951521
+    },
+    {
+      "index": 493,
+      "point2pose_adds_mm": 9.451130699126985,
+      "bundletrack_adds_mm": 9.096203267263817
+    },
+    {
+      "index": 494,
+      "point2pose_adds_mm": 9.498240126974364,
+      "bundletrack_adds_mm": 9.24556183756159
+    },
+    {
+      "index": 495,
+      "point2pose_adds_mm": 9.663355255613238,
+      "bundletrack_adds_mm": 9.288324394142144
+    },
+    {
+      "index": 496,
+      "point2pose_adds_mm": 9.289040761095,
+      "bundletrack_adds_mm": 8.991404762090513
+    },
+    {
+      "index": 497,
+      "point2pose_adds_mm": 9.415001613759676,
+      "bundletrack_adds_mm": 9.031776615493252
+    },
+    {
+      "index": 498,
+      "point2pose_adds_mm": 9.341820958749793,
+      "bundletrack_adds_mm": 9.054035529667336
+    },
+    {
+      "index": 499,
+      "point2pose_adds_mm": 9.92125186994032,
+      "bundletrack_adds_mm": 9.641788679848588
+    },
+    {
+      "index": 500,
+      "point2pose_adds_mm": 9.314878340490875,
+      "bundletrack_adds_mm": 9.038628281461833
+    },
+    {
+      "index": 501,
+      "point2pose_adds_mm": 9.456260142417664,
+      "bundletrack_adds_mm": 9.033955500223152
+    },
+    {
+      "index": 502,
+      "point2pose_adds_mm": 9.719861002391003,
+      "bundletrack_adds_mm": 9.443508898455114
+    },
+    {
+      "index": 503,
+      "point2pose_adds_mm": 9.568843915763551,
+      "bundletrack_adds_mm": 9.23206160951838
+    },
+    {
+      "index": 504,
+      "point2pose_adds_mm": 9.310910502300501,
+      "bundletrack_adds_mm": 9.129320292759482
+    },
+    {
+      "index": 505,
+      "point2pose_adds_mm": 9.236433367544777,
+      "bundletrack_adds_mm": 8.913233011592656
+    },
+    {
+      "index": 506,
+      "point2pose_adds_mm": 9.488153086671494,
+      "bundletrack_adds_mm": 9.114342691153954
+    },
+    {
+      "index": 507,
+      "point2pose_adds_mm": 9.47981678376229,
+      "bundletrack_adds_mm": 9.30333486374392
+    },
+    {
+      "index": 508,
+      "point2pose_adds_mm": 9.167343778244472,
+      "bundletrack_adds_mm": 8.969357873087342
+    },
+    {
+      "index": 509,
+      "point2pose_adds_mm": 9.527880185088364,
+      "bundletrack_adds_mm": 9.308160748032071
+    },
+    {
+      "index": 510,
+      "point2pose_adds_mm": 9.748852096544914,
+      "bundletrack_adds_mm": 9.422657863333773
+    },
+    {
+      "index": 511,
+      "point2pose_adds_mm": 9.458934392406887,
+      "bundletrack_adds_mm": 9.141779789154068
+    },
+    {
+      "index": 512,
+      "point2pose_adds_mm": 9.367183198613365,
+      "bundletrack_adds_mm": 9.057758928308232
+    },
+    {
+      "index": 513,
+      "point2pose_adds_mm": 9.152845548904489,
+      "bundletrack_adds_mm": 8.781113437174442
+    },
+    {
+      "index": 514,
+      "point2pose_adds_mm": 9.345358875003024,
+      "bundletrack_adds_mm": 9.103802916448288
+    },
+    {
+      "index": 515,
+      "point2pose_adds_mm": 9.250112630420675,
+      "bundletrack_adds_mm": 8.973958777341196
+    },
+    {
+      "index": 516,
+      "point2pose_adds_mm": 9.412979878786242,
+      "bundletrack_adds_mm": 9.07654282743472
+    },
+    {
+      "index": 517,
+      "point2pose_adds_mm": 9.470823709710475,
+      "bundletrack_adds_mm": 9.199355251221723
+    },
+    {
+      "index": 518,
+      "point2pose_adds_mm": 9.851195480609213,
+      "bundletrack_adds_mm": 9.567824493425379
+    },
+    {
+      "index": 519,
+      "point2pose_adds_mm": 10.050458411044032,
+      "bundletrack_adds_mm": 9.693618437998701
+    },
+    {
+      "index": 520,
+      "point2pose_adds_mm": 10.139116217998343,
+      "bundletrack_adds_mm": 9.896833986653276
+    },
+    {
+      "index": 521,
+      "point2pose_adds_mm": 9.746820836236342,
+      "bundletrack_adds_mm": 9.432176531624313
+    },
+    {
+      "index": 522,
+      "point2pose_adds_mm": 9.634812954007138,
+      "bundletrack_adds_mm": 9.390481149577166
+    },
+    {
+      "index": 523,
+      "point2pose_adds_mm": 10.170772846701583,
+      "bundletrack_adds_mm": 9.77063867362858
+    },
+    {
+      "index": 524,
+      "point2pose_adds_mm": 9.98843733528745,
+      "bundletrack_adds_mm": 9.752382360030731
+    },
+    {
+      "index": 525,
+      "point2pose_adds_mm": 10.344378189093913,
+      "bundletrack_adds_mm": 9.955937996102108
+    },
+    {
+      "index": 526,
+      "point2pose_adds_mm": 9.822316265677683,
+      "bundletrack_adds_mm": 9.478692148552335
+    },
+    {
+      "index": 527,
+      "point2pose_adds_mm": 9.827626273784485,
+      "bundletrack_adds_mm": 9.392580793851726
+    },
+    {
+      "index": 528,
+      "point2pose_adds_mm": 10.33678291416814,
+      "bundletrack_adds_mm": 9.852348095995339
+    },
+    {
+      "index": 529,
+      "point2pose_adds_mm": 10.264187355960448,
+      "bundletrack_adds_mm": 9.820706621111857
+    },
+    {
+      "index": 530,
+      "point2pose_adds_mm": 10.075761322909463,
+      "bundletrack_adds_mm": 9.588353428847565
+    },
+    {
+      "index": 531,
+      "point2pose_adds_mm": 10.331058251170347,
+      "bundletrack_adds_mm": 9.946943144974975
+    },
+    {
+      "index": 532,
+      "point2pose_adds_mm": 10.38286984534967,
+      "bundletrack_adds_mm": 10.039191361410055
+    },
+    {
+      "index": 533,
+      "point2pose_adds_mm": 10.2776124759824,
+      "bundletrack_adds_mm": 9.854897968911214
+    },
+    {
+      "index": 534,
+      "point2pose_adds_mm": 10.22939810971595,
+      "bundletrack_adds_mm": 9.745958787085781
+    },
+    {
+      "index": 535,
+      "point2pose_adds_mm": 10.254004853288778,
+      "bundletrack_adds_mm": 9.82788096712357
+    },
+    {
+      "index": 536,
+      "point2pose_adds_mm": 10.556655793495741,
+      "bundletrack_adds_mm": 10.09939135751891
+    },
+    {
+      "index": 537,
+      "point2pose_adds_mm": 9.93695423012044,
+      "bundletrack_adds_mm": 9.516055075554567
+    },
+    {
+      "index": 538,
+      "point2pose_adds_mm": 10.193847332237493,
+      "bundletrack_adds_mm": 9.689770092066082
+    },
+    {
+      "index": 539,
+      "point2pose_adds_mm": 10.450445474292614,
+      "bundletrack_adds_mm": 10.139799095867298
+    },
+    {
+      "index": 540,
+      "point2pose_adds_mm": 10.701621979706083,
+      "bundletrack_adds_mm": 10.295656828850987
+    },
+    {
+      "index": 541,
+      "point2pose_adds_mm": 9.8840387175021,
+      "bundletrack_adds_mm": 9.73012483227742
+    },
+    {
+      "index": 542,
+      "point2pose_adds_mm": 10.12294624219368,
+      "bundletrack_adds_mm": 9.836526468907149
+    },
+    {
+      "index": 543,
+      "point2pose_adds_mm": 9.901208619564231,
+      "bundletrack_adds_mm": 9.687952484090571
+    },
+    {
+      "index": 544,
+      "point2pose_adds_mm": 9.934520524509557,
+      "bundletrack_adds_mm": 9.573314340594376
+    },
+    {
+      "index": 545,
+      "point2pose_adds_mm": 10.222446764417576,
+      "bundletrack_adds_mm": 9.803835340755173
+    },
+    {
+      "index": 546,
+      "point2pose_adds_mm": 9.831539963089437,
+      "bundletrack_adds_mm": 9.646464715829804
+    },
+    {
+      "index": 547,
+      "point2pose_adds_mm": 10.423439395374032,
+      "bundletrack_adds_mm": 9.983254815104551
+    },
+    {
+      "index": 548,
+      "point2pose_adds_mm": 10.244330804896688,
+      "bundletrack_adds_mm": 9.75099250040611
+    },
+    {
+      "index": 549,
+      "point2pose_adds_mm": 10.07186005855167,
+      "bundletrack_adds_mm": 9.733804948180767
+    },
+    {
+      "index": 550,
+      "point2pose_adds_mm": 10.474498133702538,
+      "bundletrack_adds_mm": 10.20287436196053
+    },
+    {
+      "index": 551,
+      "point2pose_adds_mm": 11.142719850581312,
+      "bundletrack_adds_mm": 10.81890686168669
+    },
+    {
+      "index": 552,
+      "point2pose_adds_mm": 10.782740265720417,
+      "bundletrack_adds_mm": 10.436971078982868
+    },
+    {
+      "index": 553,
+      "point2pose_adds_mm": 10.397630971900293,
+      "bundletrack_adds_mm": 10.164383251142358
+    },
+    {
+      "index": 554,
+      "point2pose_adds_mm": 9.763917619412906,
+      "bundletrack_adds_mm": 9.644668838356042
+    },
+    {
+      "index": 555,
+      "point2pose_adds_mm": 10.762361934723396,
+      "bundletrack_adds_mm": 10.532911341030195
+    },
+    {
+      "index": 556,
+      "point2pose_adds_mm": 10.477145798761015,
+      "bundletrack_adds_mm": 10.113140862332267
+    },
+    {
+      "index": 557,
+      "point2pose_adds_mm": 10.46536625844496,
+      "bundletrack_adds_mm": 10.044096797151386
+    },
+    {
+      "index": 558,
+      "point2pose_adds_mm": 10.547109138447551,
+      "bundletrack_adds_mm": 10.271319892073159
+    },
+    {
+      "index": 559,
+      "point2pose_adds_mm": 10.651576855892918,
+      "bundletrack_adds_mm": 10.462663457009027
+    },
+    {
+      "index": 560,
+      "point2pose_adds_mm": 11.021738438634557,
+      "bundletrack_adds_mm": 10.682790066183362
+    },
+    {
+      "index": 561,
+      "point2pose_adds_mm": 10.59937699065666,
+      "bundletrack_adds_mm": 10.601091685756025
+    },
+    {
+      "index": 562,
+      "point2pose_adds_mm": 10.31062545609013,
+      "bundletrack_adds_mm": 9.927088559149071
+    },
+    {
+      "index": 563,
+      "point2pose_adds_mm": 10.474107988867086,
+      "bundletrack_adds_mm": 10.358215238940328
+    },
+    {
+      "index": 564,
+      "point2pose_adds_mm": 10.258185921122086,
+      "bundletrack_adds_mm": 10.065575551031865
+    },
+    {
+      "index": 565,
+      "point2pose_adds_mm": 10.98544822364164,
+      "bundletrack_adds_mm": 10.6692443034383
+    },
+    {
+      "index": 566,
+      "point2pose_adds_mm": 10.877201673445008,
+      "bundletrack_adds_mm": 10.469194360082115
+    },
+    {
+      "index": 567,
+      "point2pose_adds_mm": 10.992266042219752,
+      "bundletrack_adds_mm": 10.413141122322637
+    },
+    {
+      "index": 568,
+      "point2pose_adds_mm": 10.403227757632644,
+      "bundletrack_adds_mm": 9.967823715844371
+    },
+    {
+      "index": 569,
+      "point2pose_adds_mm": 10.635336946733219,
+      "bundletrack_adds_mm": 10.347056893956884
+    },
+    {
+      "index": 570,
+      "point2pose_adds_mm": 10.388288887820858,
+      "bundletrack_adds_mm": 10.094004743443639
+    },
+    {
+      "index": 571,
+      "point2pose_adds_mm": 10.2193709425846,
+      "bundletrack_adds_mm": 10.156236858589871
+    },
+    {
+      "index": 572,
+      "point2pose_adds_mm": 10.59803319763696,
+      "bundletrack_adds_mm": 10.624195842025019
+    },
+    {
+      "index": 573,
+      "point2pose_adds_mm": 10.559635261069054,
+      "bundletrack_adds_mm": 10.527772837149366
+    },
+    {
+      "index": 574,
+      "point2pose_adds_mm": 10.452737066477882,
+      "bundletrack_adds_mm": 10.386583168419651
+    },
+    {
+      "index": 575,
+      "point2pose_adds_mm": 10.412485392359608,
+      "bundletrack_adds_mm": 10.417668454785307
+    },
+    {
+      "index": 576,
+      "point2pose_adds_mm": 10.391621612702425,
+      "bundletrack_adds_mm": 10.412298346100101
+    },
+    {
+      "index": 577,
+      "point2pose_adds_mm": 10.926297127463737,
+      "bundletrack_adds_mm": 10.9125753750459
+    },
+    {
+      "index": 578,
+      "point2pose_adds_mm": 10.44240197528334,
+      "bundletrack_adds_mm": 10.523543786576226
+    },
+    {
+      "index": 579,
+      "point2pose_adds_mm": 10.359359150429464,
+      "bundletrack_adds_mm": 10.148388167657973
+    },
+    {
+      "index": 580,
+      "point2pose_adds_mm": 10.487847811981963,
+      "bundletrack_adds_mm": 10.339215124401733
+    },
+    {
+      "index": 581,
+      "point2pose_adds_mm": 10.581249086847833,
+      "bundletrack_adds_mm": 10.53300349292869
+    },
+    {
+      "index": 582,
+      "point2pose_adds_mm": 10.99727801744319,
+      "bundletrack_adds_mm": 10.729798932091779
+    },
+    {
+      "index": 583,
+      "point2pose_adds_mm": 10.815397082152614,
+      "bundletrack_adds_mm": 10.863268965265028
+    },
+    {
+      "index": 584,
+      "point2pose_adds_mm": 11.133769312256412,
+      "bundletrack_adds_mm": 11.045920283844417
+    },
+    {
+      "index": 585,
+      "point2pose_adds_mm": 10.861531893766104,
+      "bundletrack_adds_mm": 10.62546501693326
+    },
+    {
+      "index": 586,
+      "point2pose_adds_mm": 11.204474948165206,
+      "bundletrack_adds_mm": 10.999451133111451
+    },
+    {
+      "index": 587,
+      "point2pose_adds_mm": 10.67045020031209,
+      "bundletrack_adds_mm": 10.446659945899427
+    },
+    {
+      "index": 588,
+      "point2pose_adds_mm": 10.79690970174168,
+      "bundletrack_adds_mm": 10.551536651802316
+    },
+    {
+      "index": 589,
+      "point2pose_adds_mm": 10.429790177257441,
+      "bundletrack_adds_mm": 10.054002690291313
+    },
+    {
+      "index": 590,
+      "point2pose_adds_mm": 10.633587031043163,
+      "bundletrack_adds_mm": 10.482408409226196
+    },
+    {
+      "index": 591,
+      "point2pose_adds_mm": 10.656830516514542,
+      "bundletrack_adds_mm": 10.619745179076878
+    },
+    {
+      "index": 592,
+      "point2pose_adds_mm": 9.903777618936035,
+      "bundletrack_adds_mm": 9.784402640987658
+    },
+    {
+      "index": 593,
+      "point2pose_adds_mm": 10.42759885127462,
+      "bundletrack_adds_mm": 10.338220240710308
+    },
+    {
+      "index": 594,
+      "point2pose_adds_mm": 10.33504597840044,
+      "bundletrack_adds_mm": 10.17946096161
+    },
+    {
+      "index": 595,
+      "point2pose_adds_mm": 10.357307192629149,
+      "bundletrack_adds_mm": 10.268748842220505
+    },
+    {
+      "index": 596,
+      "point2pose_adds_mm": 10.11760900630694,
+      "bundletrack_adds_mm": 10.056243765639172
+    },
+    {
+      "index": 597,
+      "point2pose_adds_mm": 10.108612709146927,
+      "bundletrack_adds_mm": 9.937605626687198
+    },
+    {
+      "index": 598,
+      "point2pose_adds_mm": 10.114970969709631,
+      "bundletrack_adds_mm": 9.976234911279915
+    },
+    {
+      "index": 599,
+      "point2pose_adds_mm": 9.919878610611196,
+      "bundletrack_adds_mm": 9.93704925404309
+    },
+    {
+      "index": 600,
+      "point2pose_adds_mm": 10.624039883838524,
+      "bundletrack_adds_mm": 10.463311496859259
+    },
+    {
+      "index": 601,
+      "point2pose_adds_mm": 10.194614034564967,
+      "bundletrack_adds_mm": 10.229361069753176
+    },
+    {
+      "index": 602,
+      "point2pose_adds_mm": 10.286100463461802,
+      "bundletrack_adds_mm": 10.332827175057652
+    },
+    {
+      "index": 603,
+      "point2pose_adds_mm": 9.921111652185271,
+      "bundletrack_adds_mm": 9.810680674454778
+    },
+    {
+      "index": 604,
+      "point2pose_adds_mm": 10.351534967649501,
+      "bundletrack_adds_mm": 10.076224580722084
+    },
+    {
+      "index": 605,
+      "point2pose_adds_mm": 9.873812405410058,
+      "bundletrack_adds_mm": 9.633077300789035
+    },
+    {
+      "index": 606,
+      "point2pose_adds_mm": 9.796282146267082,
+      "bundletrack_adds_mm": 9.498933125221146
+    },
+    {
+      "index": 607,
+      "point2pose_adds_mm": 9.882695184495798,
+      "bundletrack_adds_mm": 9.695896861457243
+    },
+    {
+      "index": 608,
+      "point2pose_adds_mm": 10.43133110688827,
+      "bundletrack_adds_mm": 10.400980821946288
+    },
+    {
+      "index": 609,
+      "point2pose_adds_mm": 10.365997457682536,
+      "bundletrack_adds_mm": 10.154361809353132
+    },
+    {
+      "index": 610,
+      "point2pose_adds_mm": 9.672022476544456,
+      "bundletrack_adds_mm": 9.423878706181386
+    },
+    {
+      "index": 611,
+      "point2pose_adds_mm": 9.826276650533256,
+      "bundletrack_adds_mm": 9.5614894040698
+    },
+    {
+      "index": 612,
+      "point2pose_adds_mm": 10.351797905963373,
+      "bundletrack_adds_mm": 10.256407007476213
+    },
+    {
+      "index": 613,
+      "point2pose_adds_mm": 10.894128154597409,
+      "bundletrack_adds_mm": 10.390088400892427
+    },
+    {
+      "index": 614,
+      "point2pose_adds_mm": 10.244425114347093,
+      "bundletrack_adds_mm": 10.082273138836408
+    },
+    {
+      "index": 615,
+      "point2pose_adds_mm": 10.14361845809783,
+      "bundletrack_adds_mm": 9.777820050777583
+    },
+    {
+      "index": 616,
+      "point2pose_adds_mm": 10.379090194726732,
+      "bundletrack_adds_mm": 10.300055297720368
+    },
+    {
+      "index": 617,
+      "point2pose_adds_mm": 10.54869353183656,
+      "bundletrack_adds_mm": 10.306122940617138
+    },
+    {
+      "index": 618,
+      "point2pose_adds_mm": 9.525346421624706,
+      "bundletrack_adds_mm": 9.726833094128635
+    },
+    {
+      "index": 619,
+      "point2pose_adds_mm": 9.802267290672601,
+      "bundletrack_adds_mm": 9.883467530740706
+    },
+    {
+      "index": 620,
+      "point2pose_adds_mm": 9.652288599379593,
+      "bundletrack_adds_mm": 9.628260330371925
+    },
+    {
+      "index": 621,
+      "point2pose_adds_mm": 10.294583973532617,
+      "bundletrack_adds_mm": 10.253090169133884
+    },
+    {
+      "index": 622,
+      "point2pose_adds_mm": 9.760577871680098,
+      "bundletrack_adds_mm": 9.887047593903212
+    },
+    {
+      "index": 623,
+      "point2pose_adds_mm": 9.537472222743581,
+      "bundletrack_adds_mm": 9.441599816547567
+    },
+    {
+      "index": 624,
+      "point2pose_adds_mm": 9.610423810649667,
+      "bundletrack_adds_mm": 9.365101829164855
+    },
+    {
+      "index": 625,
+      "point2pose_adds_mm": 10.174072783893784,
+      "bundletrack_adds_mm": 9.893302141027906
+    },
+    {
+      "index": 626,
+      "point2pose_adds_mm": 10.121157560877277,
+      "bundletrack_adds_mm": 9.7835792990031
+    },
+    {
+      "index": 627,
+      "point2pose_adds_mm": 10.917037535149456,
+      "bundletrack_adds_mm": 10.441895316780277
+    },
+    {
+      "index": 628,
+      "point2pose_adds_mm": 10.66465421860182,
+      "bundletrack_adds_mm": 10.249387321278602
+    },
+    {
+      "index": 629,
+      "point2pose_adds_mm": 9.943703711971796,
+      "bundletrack_adds_mm": 9.599510934708247
+    },
+    {
+      "index": 630,
+      "point2pose_adds_mm": 9.982639439536998,
+      "bundletrack_adds_mm": 9.76820242023992
+    },
+    {
+      "index": 631,
+      "point2pose_adds_mm": 9.768829655349355,
+      "bundletrack_adds_mm": 9.404283148001186
+    },
+    {
+      "index": 632,
+      "point2pose_adds_mm": 10.088887945513918,
+      "bundletrack_adds_mm": 9.75939549335001
+    },
+    {
+      "index": 633,
+      "point2pose_adds_mm": 10.361257752194923,
+      "bundletrack_adds_mm": 10.140084107414367
+    },
+    {
+      "index": 634,
+      "point2pose_adds_mm": 10.78364962697357,
+      "bundletrack_adds_mm": 10.024289271578343
+    },
+    {
+      "index": 635,
+      "point2pose_adds_mm": 11.582154114841094,
+      "bundletrack_adds_mm": 11.322234480092954
+    },
+    {
+      "index": 636,
+      "point2pose_adds_mm": 11.872147556083487,
+      "bundletrack_adds_mm": 10.906569667307988
+    },
+    {
+      "index": 637,
+      "point2pose_adds_mm": 11.756410454085499,
+      "bundletrack_adds_mm": 11.273859636193091
+    },
+    {
+      "index": 638,
+      "point2pose_adds_mm": 11.266959090066633,
+      "bundletrack_adds_mm": 11.148563202237877
+    },
+    {
+      "index": 639,
+      "point2pose_adds_mm": 11.124288812989139,
+      "bundletrack_adds_mm": 10.526267071109718
+    },
+    {
+      "index": 640,
+      "point2pose_adds_mm": 10.657718967296068,
+      "bundletrack_adds_mm": 10.419966757754327
+    },
+    {
+      "index": 641,
+      "point2pose_adds_mm": 10.110553155924457,
+      "bundletrack_adds_mm": 9.933984333994959
+    },
+    {
+      "index": 642,
+      "point2pose_adds_mm": 10.282934439616527,
+      "bundletrack_adds_mm": 10.0052275919628
+    },
+    {
+      "index": 643,
+      "point2pose_adds_mm": 10.2545904690999,
+      "bundletrack_adds_mm": 9.959748124871039
+    },
+    {
+      "index": 644,
+      "point2pose_adds_mm": 10.909400176068068,
+      "bundletrack_adds_mm": 10.443267357197419
+    },
+    {
+      "index": 645,
+      "point2pose_adds_mm": 11.167697669151375,
+      "bundletrack_adds_mm": 10.817603772286153
+    },
+    {
+      "index": 646,
+      "point2pose_adds_mm": 10.99841188034771,
+      "bundletrack_adds_mm": 10.821204226405154
+    },
+    {
+      "index": 647,
+      "point2pose_adds_mm": 11.343250859314582,
+      "bundletrack_adds_mm": 10.667518867028688
+    },
+    {
+      "index": 648,
+      "point2pose_adds_mm": 11.04957437916796,
+      "bundletrack_adds_mm": 10.718030529592584
+    },
+    {
+      "index": 649,
+      "point2pose_adds_mm": 10.838375492674736,
+      "bundletrack_adds_mm": 10.431170883533479
+    },
+    {
+      "index": 650,
+      "point2pose_adds_mm": 10.337917260191645,
+      "bundletrack_adds_mm": 9.97493318364382
+    },
+    {
+      "index": 651,
+      "point2pose_adds_mm": 10.278801461917471,
+      "bundletrack_adds_mm": 9.914135256120572
+    },
+    {
+      "index": 652,
+      "point2pose_adds_mm": 10.197679208343082,
+      "bundletrack_adds_mm": 9.646299340004663
+    },
+    {
+      "index": 653,
+      "point2pose_adds_mm": 10.24640736411476,
+      "bundletrack_adds_mm": 9.723916731244932
+    },
+    {
+      "index": 654,
+      "point2pose_adds_mm": 9.823053543212541,
+      "bundletrack_adds_mm": 9.716658097212925
+    },
+    {
+      "index": 655,
+      "point2pose_adds_mm": 10.343223788703863,
+      "bundletrack_adds_mm": 10.102974712621387
+    },
+    {
+      "index": 656,
+      "point2pose_adds_mm": 10.466823371574353,
+      "bundletrack_adds_mm": 10.057754534482674
+    },
+    {
+      "index": 657,
+      "point2pose_adds_mm": 11.170448812103636,
+      "bundletrack_adds_mm": 10.365984202498638
+    },
+    {
+      "index": 658,
+      "point2pose_adds_mm": 10.869934696353251,
+      "bundletrack_adds_mm": 10.162275544458883
+    },
+    {
+      "index": 659,
+      "point2pose_adds_mm": 10.553641256127396,
+      "bundletrack_adds_mm": 10.195614024348055
+    },
+    {
+      "index": 660,
+      "point2pose_adds_mm": 10.37178396863604,
+      "bundletrack_adds_mm": 10.153665674479907
+    },
+    {
+      "index": 661,
+      "point2pose_adds_mm": 10.19593132482222,
+      "bundletrack_adds_mm": 9.873936877607875
+    },
+    {
+      "index": 662,
+      "point2pose_adds_mm": 10.710896785838452,
+      "bundletrack_adds_mm": 10.276798422811572
+    },
+    {
+      "index": 663,
+      "point2pose_adds_mm": 10.528285838873561,
+      "bundletrack_adds_mm": 10.15169094628676
+    },
+    {
+      "index": 664,
+      "point2pose_adds_mm": 10.627964610828691,
+      "bundletrack_adds_mm": 9.98647279663357
+    },
+    {
+      "index": 665,
+      "point2pose_adds_mm": 10.31383928878948,
+      "bundletrack_adds_mm": 9.916092736644739
+    },
+    {
+      "index": 666,
+      "point2pose_adds_mm": 10.648112406514402,
+      "bundletrack_adds_mm": 10.311368929337535
+    },
+    {
+      "index": 667,
+      "point2pose_adds_mm": 10.495635631664143,
+      "bundletrack_adds_mm": 10.122301887659678
+    },
+    {
+      "index": 668,
+      "point2pose_adds_mm": 10.409944454976028,
+      "bundletrack_adds_mm": 10.112067649109282
+    },
+    {
+      "index": 669,
+      "point2pose_adds_mm": 10.597119421017887,
+      "bundletrack_adds_mm": 10.341355069178316
+    },
+    {
+      "index": 670,
+      "point2pose_adds_mm": 9.851655212707705,
+      "bundletrack_adds_mm": 9.658306533178342
+    },
+    {
+      "index": 671,
+      "point2pose_adds_mm": 9.768105493539574,
+      "bundletrack_adds_mm": 9.609648456728344
+    },
+    {
+      "index": 672,
+      "point2pose_adds_mm": 10.309049883170205,
+      "bundletrack_adds_mm": 9.821632758214838
+    },
+    {
+      "index": 673,
+      "point2pose_adds_mm": 9.96202592069268,
+      "bundletrack_adds_mm": 9.616117526535653
+    },
+    {
+      "index": 674,
+      "point2pose_adds_mm": 10.065600500143756,
+      "bundletrack_adds_mm": 9.873369003998274
+    },
+    {
+      "index": 675,
+      "point2pose_adds_mm": 10.668780202621981,
+      "bundletrack_adds_mm": 10.317899995534649
+    },
+    {
+      "index": 676,
+      "point2pose_adds_mm": 10.290673585245072,
+      "bundletrack_adds_mm": 9.965213828914726
+    },
+    {
+      "index": 677,
+      "point2pose_adds_mm": 10.677818672677516,
+      "bundletrack_adds_mm": 10.41431429960727
+    },
+    {
+      "index": 678,
+      "point2pose_adds_mm": 10.241330198075453,
+      "bundletrack_adds_mm": 9.864541212274407
+    },
+    {
+      "index": 679,
+      "point2pose_adds_mm": 10.816130448807758,
+      "bundletrack_adds_mm": 10.039391087439903
+    },
+    {
+      "index": 680,
+      "point2pose_adds_mm": 10.360179245047778,
+      "bundletrack_adds_mm": 9.743100658545506
+    },
+    {
+      "index": 681,
+      "point2pose_adds_mm": 10.429700246443906,
+      "bundletrack_adds_mm": 9.866466975849582
+    },
+    {
+      "index": 682,
+      "point2pose_adds_mm": 10.139990979425086,
+      "bundletrack_adds_mm": 9.630633269748985
+    },
+    {
+      "index": 683,
+      "point2pose_adds_mm": 10.639311408329094,
+      "bundletrack_adds_mm": 9.619358016101382
+    },
+    {
+      "index": 684,
+      "point2pose_adds_mm": 10.180994498783537,
+      "bundletrack_adds_mm": 9.87565852307473
+    },
+    {
+      "index": 685,
+      "point2pose_adds_mm": 10.637119885272629,
+      "bundletrack_adds_mm": 10.322825806991304
+    },
+    {
+      "index": 686,
+      "point2pose_adds_mm": 10.487560479324666,
+      "bundletrack_adds_mm": 10.279420363674904
+    },
+    {
+      "index": 687,
+      "point2pose_adds_mm": 10.900658435734758,
+      "bundletrack_adds_mm": 10.404207288243503
+    },
+    {
+      "index": 688,
+      "point2pose_adds_mm": 10.640167468433253,
+      "bundletrack_adds_mm": 10.159342490227894
+    },
+    {
+      "index": 689,
+      "point2pose_adds_mm": 10.201046107144354,
+      "bundletrack_adds_mm": 9.808480134792704
+    },
+    {
+      "index": 690,
+      "point2pose_adds_mm": 10.391123189564015,
+      "bundletrack_adds_mm": 9.916941113891038
+    },
+    {
+      "index": 691,
+      "point2pose_adds_mm": 10.238406420457729,
+      "bundletrack_adds_mm": 9.608197693699386
+    },
+    {
+      "index": 692,
+      "point2pose_adds_mm": 10.517742339030205,
+      "bundletrack_adds_mm": 9.739227278435907
+    },
+    {
+      "index": 693,
+      "point2pose_adds_mm": 10.483981505501264,
+      "bundletrack_adds_mm": 10.091267993067826
+    },
+    {
+      "index": 694,
+      "point2pose_adds_mm": 10.512530517470221,
+      "bundletrack_adds_mm": 10.048068786980819
+    },
+    {
+      "index": 695,
+      "point2pose_adds_mm": 10.967088557960135,
+      "bundletrack_adds_mm": 10.463835985328583
+    },
+    {
+      "index": 696,
+      "point2pose_adds_mm": 11.071446024357208,
+      "bundletrack_adds_mm": 10.442813830924157
+    },
+    {
+      "index": 697,
+      "point2pose_adds_mm": 11.003515161516631,
+      "bundletrack_adds_mm": 10.474475651056588
+    },
+    {
+      "index": 698,
+      "point2pose_adds_mm": 10.68989065600498,
+      "bundletrack_adds_mm": 10.141930511423396
+    },
+    {
+      "index": 699,
+      "point2pose_adds_mm": 9.981087053717854,
+      "bundletrack_adds_mm": 9.504737647484248
+    },
+    {
+      "index": 700,
+      "point2pose_adds_mm": 10.00709893597217,
+      "bundletrack_adds_mm": 9.567538901163138
+    },
+    {
+      "index": 701,
+      "point2pose_adds_mm": 9.78317023981315,
+      "bundletrack_adds_mm": 9.46025246141348
+    },
+    {
+      "index": 702,
+      "point2pose_adds_mm": 10.291872252129998,
+      "bundletrack_adds_mm": 9.859952585909074
+    },
+    {
+      "index": 703,
+      "point2pose_adds_mm": 10.414317341724368,
+      "bundletrack_adds_mm": 9.969884244480161
+    },
+    {
+      "index": 704,
+      "point2pose_adds_mm": 10.474164192772559,
+      "bundletrack_adds_mm": 10.022850502657429
+    },
+    {
+      "index": 705,
+      "point2pose_adds_mm": 10.956068393107177,
+      "bundletrack_adds_mm": 10.446203736199594
+    },
+    {
+      "index": 706,
+      "point2pose_adds_mm": 10.80239595644095,
+      "bundletrack_adds_mm": 10.147393163476599
+    },
+    {
+      "index": 707,
+      "point2pose_adds_mm": 10.728951418894567,
+      "bundletrack_adds_mm": 10.12976129362074
+    },
+    {
+      "index": 708,
+      "point2pose_adds_mm": 9.92418595700516,
+      "bundletrack_adds_mm": 9.425630438572322
+    },
+    {
+      "index": 709,
+      "point2pose_adds_mm": 10.321007641630965,
+      "bundletrack_adds_mm": 10.000600451067363
+    },
+    {
+      "index": 710,
+      "point2pose_adds_mm": 10.443743201425722,
+      "bundletrack_adds_mm": 10.003051395059513
+    },
+    {
+      "index": 711,
+      "point2pose_adds_mm": 10.072904950939215,
+      "bundletrack_adds_mm": 9.621988776808736
+    },
+    {
+      "index": 712,
+      "point2pose_adds_mm": 10.440579169004627,
+      "bundletrack_adds_mm": 9.923830487452546
+    },
+    {
+      "index": 713,
+      "point2pose_adds_mm": 9.841283969662092,
+      "bundletrack_adds_mm": 9.18782962672334
+    },
+    {
+      "index": 714,
+      "point2pose_adds_mm": 9.887641970188838,
+      "bundletrack_adds_mm": 9.486081199470917
+    },
+    {
+      "index": 715,
+      "point2pose_adds_mm": 10.539127224958813,
+      "bundletrack_adds_mm": 9.983789401687478
+    },
+    {
+      "index": 716,
+      "point2pose_adds_mm": 10.535138307326843,
+      "bundletrack_adds_mm": 9.91918637325511
+    },
+    {
+      "index": 717,
+      "point2pose_adds_mm": 10.219030064028395,
+      "bundletrack_adds_mm": 9.67245133555071
+    },
+    {
+      "index": 718,
+      "point2pose_adds_mm": 10.266642575971176,
+      "bundletrack_adds_mm": 9.834559947258635
+    },
+    {
+      "index": 719,
+      "point2pose_adds_mm": 9.8932614809441,
+      "bundletrack_adds_mm": 9.359552728929529
+    },
+    {
+      "index": 720,
+      "point2pose_adds_mm": 9.953477382932267,
+      "bundletrack_adds_mm": 9.536258680016704
+    },
+    {
+      "index": 721,
+      "point2pose_adds_mm": 10.005907823874507,
+      "bundletrack_adds_mm": 9.476358034474986
+    },
+    {
+      "index": 722,
+      "point2pose_adds_mm": 10.40490452092285,
+      "bundletrack_adds_mm": 9.771590626011633
+    },
+    {
+      "index": 723,
+      "point2pose_adds_mm": 10.667797143024277,
+      "bundletrack_adds_mm": 10.045563702057464
+    },
+    {
+      "index": 724,
+      "point2pose_adds_mm": 10.185176463716864,
+      "bundletrack_adds_mm": 9.565345924334876
+    },
+    {
+      "index": 725,
+      "point2pose_adds_mm": 10.344859859304432,
+      "bundletrack_adds_mm": 9.752185697949107
+    },
+    {
+      "index": 726,
+      "point2pose_adds_mm": 9.648737039387006,
+      "bundletrack_adds_mm": 9.14265106644708
+    },
+    {
+      "index": 727,
+      "point2pose_adds_mm": 9.88517887471602,
+      "bundletrack_adds_mm": 9.34445270125199
+    },
+    {
+      "index": 728,
+      "point2pose_adds_mm": 9.932246145774322,
+      "bundletrack_adds_mm": 9.358478900990626
+    },
+    {
+      "index": 729,
+      "point2pose_adds_mm": 10.034655850856792,
+      "bundletrack_adds_mm": 9.482111069904244
+    },
+    {
+      "index": 730,
+      "point2pose_adds_mm": 9.91115856930898,
+      "bundletrack_adds_mm": 9.342575839247573
+    },
+    {
+      "index": 731,
+      "point2pose_adds_mm": 9.724719290317589,
+      "bundletrack_adds_mm": 9.206821112568422
+    },
+    {
+      "index": 732,
+      "point2pose_adds_mm": 9.698353909718723,
+      "bundletrack_adds_mm": 9.236483827346436
+    },
+    {
+      "index": 733,
+      "point2pose_adds_mm": 10.038715207510537,
+      "bundletrack_adds_mm": 9.530461739577333
+    },
+    {
+      "index": 734,
+      "point2pose_adds_mm": 9.839417704833355,
+      "bundletrack_adds_mm": 9.468369140194028
+    },
+    {
+      "index": 735,
+      "point2pose_adds_mm": 9.557398886015712,
+      "bundletrack_adds_mm": 9.022829604051358
+    },
+    {
+      "index": 736,
+      "point2pose_adds_mm": 9.253310559183559,
+      "bundletrack_adds_mm": 8.957552482175993
+    },
+    {
+      "index": 737,
+      "point2pose_adds_mm": 9.80120316617704,
+      "bundletrack_adds_mm": 9.420616962991414
+    },
+    {
+      "index": 738,
+      "point2pose_adds_mm": 9.750059278913632,
+      "bundletrack_adds_mm": 9.22541109893504
+    },
+    {
+      "index": 739,
+      "point2pose_adds_mm": 9.732172012406224,
+      "bundletrack_adds_mm": 9.301910457044288
+    },
+    {
+      "index": 740,
+      "point2pose_adds_mm": 9.541491859971924,
+      "bundletrack_adds_mm": 8.874470442096204
+    },
+    {
+      "index": 741,
+      "point2pose_adds_mm": 10.104641863128421,
+      "bundletrack_adds_mm": 9.568151184209759
+    },
+    {
+      "index": 742,
+      "point2pose_adds_mm": 9.663695057805855,
+      "bundletrack_adds_mm": 9.101646164302647
+    },
+    {
+      "index": 743,
+      "point2pose_adds_mm": 9.942448503183268,
+      "bundletrack_adds_mm": 9.592098052959374
+    },
+    {
+      "index": 744,
+      "point2pose_adds_mm": 10.006666544198636,
+      "bundletrack_adds_mm": 9.403351524274829
+    },
+    {
+      "index": 745,
+      "point2pose_adds_mm": 9.745758937170969,
+      "bundletrack_adds_mm": 9.282421373777987
+    },
+    {
+      "index": 746,
+      "point2pose_adds_mm": 10.154100798433554,
+      "bundletrack_adds_mm": 9.678040739775632
+    },
+    {
+      "index": 747,
+      "point2pose_adds_mm": 9.702147749962606,
+      "bundletrack_adds_mm": 9.179468903548608
+    },
+    {
+      "index": 748,
+      "point2pose_adds_mm": 10.052463340615192,
+      "bundletrack_adds_mm": 9.558256575823933
+    },
+    {
+      "index": 749,
+      "point2pose_adds_mm": 9.615459839123835,
+      "bundletrack_adds_mm": 9.137749269048205
+    },
+    {
+      "index": 750,
+      "point2pose_adds_mm": 9.873091083541494,
+      "bundletrack_adds_mm": 9.382123933876207
+    },
+    {
+      "index": 751,
+      "point2pose_adds_mm": 9.894815670467795,
+      "bundletrack_adds_mm": 9.400687784115703
+    },
+    {
+      "index": 752,
+      "point2pose_adds_mm": 9.488486000472255,
+      "bundletrack_adds_mm": 8.973236836002739
+    },
+    {
+      "index": 753,
+      "point2pose_adds_mm": 9.98053297022393,
+      "bundletrack_adds_mm": 9.29734808380771
+    },
+    {
+      "index": 754,
+      "point2pose_adds_mm": 10.046222069497121,
+      "bundletrack_adds_mm": 9.534529794176926
+    },
+    {
+      "index": 755,
+      "point2pose_adds_mm": 10.357895400560045,
+      "bundletrack_adds_mm": 9.934343939573706
+    },
+    {
+      "index": 756,
+      "point2pose_adds_mm": 10.233481034769317,
+      "bundletrack_adds_mm": 9.790196503371192
+    },
+    {
+      "index": 757,
+      "point2pose_adds_mm": 10.378407858702866,
+      "bundletrack_adds_mm": 9.879002090745468
+    },
+    {
+      "index": 758,
+      "point2pose_adds_mm": 10.392024223815847,
+      "bundletrack_adds_mm": 9.811430905960984
+    },
+    {
+      "index": 759,
+      "point2pose_adds_mm": 10.366554350181278,
+      "bundletrack_adds_mm": 9.799365969631518
+    },
+    {
+      "index": 760,
+      "point2pose_adds_mm": 10.202534708883187,
+      "bundletrack_adds_mm": 9.74378724729525
+    },
+    {
+      "index": 761,
+      "point2pose_adds_mm": 10.390888638256861,
+      "bundletrack_adds_mm": 10.036381641024308
+    },
+    {
+      "index": 762,
+      "point2pose_adds_mm": 10.314791775824865,
+      "bundletrack_adds_mm": 9.777780267413634
+    },
+    {
+      "index": 763,
+      "point2pose_adds_mm": 9.963898669804664,
+      "bundletrack_adds_mm": 9.596505708841203
+    },
+    {
+      "index": 764,
+      "point2pose_adds_mm": 9.894559627654642,
+      "bundletrack_adds_mm": 9.44514494018599
+    },
+    {
+      "index": 765,
+      "point2pose_adds_mm": 10.232484184496316,
+      "bundletrack_adds_mm": 9.689666874869044
+    },
+    {
+      "index": 766,
+      "point2pose_adds_mm": 9.965977525418904,
+      "bundletrack_adds_mm": 9.431728728426439
+    },
+    {
+      "index": 767,
+      "point2pose_adds_mm": 10.025602884209324,
+      "bundletrack_adds_mm": 9.437307855197178
+    },
+    {
+      "index": 768,
+      "point2pose_adds_mm": 10.716921077164724,
+      "bundletrack_adds_mm": 10.128661593665788
+    },
+    {
+      "index": 769,
+      "point2pose_adds_mm": 10.502223257484781,
+      "bundletrack_adds_mm": 9.895527723147195
+    },
+    {
+      "index": 770,
+      "point2pose_adds_mm": 10.750818733510263,
+      "bundletrack_adds_mm": 10.18944545458993
+    },
+    {
+      "index": 771,
+      "point2pose_adds_mm": 10.771665412197855,
+      "bundletrack_adds_mm": 10.336984805888237
+    },
+    {
+      "index": 772,
+      "point2pose_adds_mm": 10.90004319251106,
+      "bundletrack_adds_mm": 10.304805611172863
+    },
+    {
+      "index": 773,
+      "point2pose_adds_mm": 10.998547792208075,
+      "bundletrack_adds_mm": 10.546152775529778
+    },
+    {
+      "index": 774,
+      "point2pose_adds_mm": 10.58906244689073,
+      "bundletrack_adds_mm": 9.952735078626544
+    },
+    {
+      "index": 775,
+      "point2pose_adds_mm": 10.619266104754777,
+      "bundletrack_adds_mm": 10.014826747789066
+    },
+    {
+      "index": 776,
+      "point2pose_adds_mm": 10.615735779494951,
+      "bundletrack_adds_mm": 10.106792112100415
+    },
+    {
+      "index": 777,
+      "point2pose_adds_mm": 10.660357811438473,
+      "bundletrack_adds_mm": 10.198029598573775
+    },
+    {
+      "index": 778,
+      "point2pose_adds_mm": 10.253642002555065,
+      "bundletrack_adds_mm": 9.774465530072556
+    },
+    {
+      "index": 779,
+      "point2pose_adds_mm": 10.427083635202543,
+      "bundletrack_adds_mm": 9.8197261248305
+    },
+    {
+      "index": 780,
+      "point2pose_adds_mm": 10.443855974377266,
+      "bundletrack_adds_mm": 9.95111171241885
+    },
+    {
+      "index": 781,
+      "point2pose_adds_mm": 10.663627878476126,
+      "bundletrack_adds_mm": 10.189448396094745
+    },
+    {
+      "index": 782,
+      "point2pose_adds_mm": 10.386618427345763,
+      "bundletrack_adds_mm": 9.7895604157223
+    },
+    {
+      "index": 783,
+      "point2pose_adds_mm": 9.691228316534769,
+      "bundletrack_adds_mm": 9.13258416691881
+    },
+    {
+      "index": 784,
+      "point2pose_adds_mm": 10.201579285762303,
+      "bundletrack_adds_mm": 9.613647373352325
+    },
+    {
+      "index": 785,
+      "point2pose_adds_mm": 10.0114951251693,
+      "bundletrack_adds_mm": 9.47758181797577
+    },
+    {
+      "index": 786,
+      "point2pose_adds_mm": 9.988132368369353,
+      "bundletrack_adds_mm": 9.625563176323514
+    },
+    {
+      "index": 787,
+      "point2pose_adds_mm": 9.857906221460246,
+      "bundletrack_adds_mm": 9.055453200832304
+    },
+    {
+      "index": 788,
+      "point2pose_adds_mm": 9.985473473550284,
+      "bundletrack_adds_mm": 9.425562718600252
+    },
+    {
+      "index": 789,
+      "point2pose_adds_mm": 9.679311656698937,
+      "bundletrack_adds_mm": 9.122127608817985
+    },
+    {
+      "index": 790,
+      "point2pose_adds_mm": 10.006847255547816,
+      "bundletrack_adds_mm": 9.370933911515708
+    },
+    {
+      "index": 791,
+      "point2pose_adds_mm": 9.771214911102701,
+      "bundletrack_adds_mm": 9.194433271148588
+    },
+    {
+      "index": 792,
+      "point2pose_adds_mm": 9.55123687233637,
+      "bundletrack_adds_mm": 8.981568179768365
+    },
+    {
+      "index": 793,
+      "point2pose_adds_mm": 9.515385396057262,
+      "bundletrack_adds_mm": 9.162526297582415
+    },
+    {
+      "index": 794,
+      "point2pose_adds_mm": 9.658229086180402,
+      "bundletrack_adds_mm": 9.244327068553808
+    },
+    {
+      "index": 795,
+      "point2pose_adds_mm": 9.799603700941455,
+      "bundletrack_adds_mm": 9.352185571823025
+    },
+    {
+      "index": 796,
+      "point2pose_adds_mm": 9.616944073001584,
+      "bundletrack_adds_mm": 9.11107882667879
+    },
+    {
+      "index": 797,
+      "point2pose_adds_mm": 9.67618835171472,
+      "bundletrack_adds_mm": 9.323552329445645
+    },
+    {
+      "index": 798,
+      "point2pose_adds_mm": 9.867291161420688,
+      "bundletrack_adds_mm": 9.359559171152343
+    },
+    {
+      "index": 799,
+      "point2pose_adds_mm": 9.673992884067523,
+      "bundletrack_adds_mm": 9.13830787216392
+    },
+    {
+      "index": 800,
+      "point2pose_adds_mm": 10.116059282709555,
+      "bundletrack_adds_mm": 9.690561424064224
+    },
+    {
+      "index": 801,
+      "point2pose_adds_mm": 9.242197059640416,
+      "bundletrack_adds_mm": 8.89327693917608
+    },
+    {
+      "index": 802,
+      "point2pose_adds_mm": 9.733348637785587,
+      "bundletrack_adds_mm": 9.2737524630374
+    },
+    {
+      "index": 803,
+      "point2pose_adds_mm": 9.70249874453921,
+      "bundletrack_adds_mm": 9.274277157859803
+    },
+    {
+      "index": 804,
+      "point2pose_adds_mm": 9.588598165401473,
+      "bundletrack_adds_mm": 9.25138759901346
+    },
+    {
+      "index": 805,
+      "point2pose_adds_mm": 10.162888284151515,
+      "bundletrack_adds_mm": 9.634940691152494
+    },
+    {
+      "index": 806,
+      "point2pose_adds_mm": 9.43289443048762,
+      "bundletrack_adds_mm": 9.082406793886376
+    },
+    {
+      "index": 807,
+      "point2pose_adds_mm": 10.390240138470492,
+      "bundletrack_adds_mm": 9.972179093140738
+    },
+    {
+      "index": 808,
+      "point2pose_adds_mm": 10.464987985335261,
+      "bundletrack_adds_mm": 9.784463276391849
+    },
+    {
+      "index": 809,
+      "point2pose_adds_mm": 10.057214904760462,
+      "bundletrack_adds_mm": 10.255758651016988
+    },
+    {
+      "index": 810,
+      "point2pose_adds_mm": 9.522109786794022,
+      "bundletrack_adds_mm": 9.772446532679288
+    },
+    {
+      "index": 811,
+      "point2pose_adds_mm": 12.968485134361702,
+      "bundletrack_adds_mm": 9.807793878905112
+    },
+    {
+      "index": 812,
+      "point2pose_adds_mm": 9.708444253080918,
+      "bundletrack_adds_mm": 9.895922581632874
+    },
+    {
+      "index": 813,
+      "point2pose_adds_mm": 9.630735771993072,
+      "bundletrack_adds_mm": 10.012254642959512
+    },
+    {
+      "index": 814,
+      "point2pose_adds_mm": 9.66953426990269,
+      "bundletrack_adds_mm": 10.02593403553753
+    },
+    {
+      "index": 815,
+      "point2pose_adds_mm": 9.573245644460432,
+      "bundletrack_adds_mm": 10.052775881838844
+    },
+    {
+      "index": 816,
+      "point2pose_adds_mm": 9.524991176814247,
+      "bundletrack_adds_mm": 9.938948426138408
+    },
+    {
+      "index": 817,
+      "point2pose_adds_mm": 10.236865699408924,
+      "bundletrack_adds_mm": 10.355570635942415
+    },
+    {
+      "index": 818,
+      "point2pose_adds_mm": 9.631006032332856,
+      "bundletrack_adds_mm": 9.889718823494334
+    },
+    {
+      "index": 819,
+      "point2pose_adds_mm": 9.445225027466046,
+      "bundletrack_adds_mm": 9.717722361973284
+    },
+    {
+      "index": 820,
+      "point2pose_adds_mm": 10.073783648460026,
+      "bundletrack_adds_mm": 9.743542790242913
+    },
+    {
+      "index": 821,
+      "point2pose_adds_mm": 9.616716468428809,
+      "bundletrack_adds_mm": 9.986105827708705
+    },
+    {
+      "index": 822,
+      "point2pose_adds_mm": 9.969075618796015,
+      "bundletrack_adds_mm": 9.960008792752244
+    },
+    {
+      "index": 823,
+      "point2pose_adds_mm": 10.276515877154283,
+      "bundletrack_adds_mm": 10.657426961903099
+    },
+    {
+      "index": 824,
+      "point2pose_adds_mm": 10.170832624033203,
+      "bundletrack_adds_mm": 10.629442721469816
+    },
+    {
+      "index": 825,
+      "point2pose_adds_mm": 9.937860247700744,
+      "bundletrack_adds_mm": 10.207130126198585
+    },
+    {
+      "index": 826,
+      "point2pose_adds_mm": 10.10264560792986,
+      "bundletrack_adds_mm": 10.277347757636164
+    },
+    {
+      "index": 827,
+      "point2pose_adds_mm": 9.76998595298358,
+      "bundletrack_adds_mm": 9.732312501891794
+    },
+    {
+      "index": 828,
+      "point2pose_adds_mm": 9.754945251118569,
+      "bundletrack_adds_mm": 10.23393235219539
+    },
+    {
+      "index": 829,
+      "point2pose_adds_mm": 10.237324523452136,
+      "bundletrack_adds_mm": 10.674389061751116
+    },
+    {
+      "index": 830,
+      "point2pose_adds_mm": 10.834156455686944,
+      "bundletrack_adds_mm": 11.130373982391294
+    },
+    {
+      "index": 831,
+      "point2pose_adds_mm": 9.816279534611908,
+      "bundletrack_adds_mm": 10.043371361344414
+    },
+    {
+      "index": 832,
+      "point2pose_adds_mm": 10.304907484676635,
+      "bundletrack_adds_mm": 10.779676757870693
+    },
+    {
+      "index": 833,
+      "point2pose_adds_mm": 10.25145442222517,
+      "bundletrack_adds_mm": 10.701953567363649
+    },
+    {
+      "index": 834,
+      "point2pose_adds_mm": 10.023774986867675,
+      "bundletrack_adds_mm": 10.3621659777486
+    },
+    {
+      "index": 835,
+      "point2pose_adds_mm": 11.200756731189355,
+      "bundletrack_adds_mm": 11.190713538446532
+    },
+    {
+      "index": 836,
+      "point2pose_adds_mm": 10.756092044435801,
+      "bundletrack_adds_mm": 10.821905510777503
+    },
+    {
+      "index": 837,
+      "point2pose_adds_mm": 10.703108183683984,
+      "bundletrack_adds_mm": 10.950328992105755
+    },
+    {
+      "index": 838,
+      "point2pose_adds_mm": 10.759764895704034,
+      "bundletrack_adds_mm": 10.716107456038367
+    },
+    {
+      "index": 839,
+      "point2pose_adds_mm": 10.982086979491283,
+      "bundletrack_adds_mm": 11.072488368898126
+    },
+    {
+      "index": 840,
+      "point2pose_adds_mm": 10.777771408280634,
+      "bundletrack_adds_mm": 10.93579965880577
+    },
+    {
+      "index": 841,
+      "point2pose_adds_mm": 10.09160183397503,
+      "bundletrack_adds_mm": 10.040728781024901
+    },
+    {
+      "index": 842,
+      "point2pose_adds_mm": 10.990664647631057,
+      "bundletrack_adds_mm": 11.043159214581852
+    },
+    {
+      "index": 843,
+      "point2pose_adds_mm": 7.9142337225170545,
+      "bundletrack_adds_mm": 6.831130694216862
+    },
+    {
+      "index": 844,
+      "point2pose_adds_mm": 10.443887093031943,
+      "bundletrack_adds_mm": 10.281109446680999
+    },
+    {
+      "index": 845,
+      "point2pose_adds_mm": 11.281522933900986,
+      "bundletrack_adds_mm": 11.24937971070525
+    },
+    {
+      "index": 846,
+      "point2pose_adds_mm": 14.3178212656731,
+      "bundletrack_adds_mm": 11.16159099688167
+    },
+    {
+      "index": 847,
+      "point2pose_adds_mm": 11.111231281247013,
+      "bundletrack_adds_mm": 10.808849004482177
+    },
+    {
+      "index": 848,
+      "point2pose_adds_mm": 10.670177150246952,
+      "bundletrack_adds_mm": 10.433725887643433
+    },
+    {
+      "index": 849,
+      "point2pose_adds_mm": 10.665516046751955,
+      "bundletrack_adds_mm": 10.403047051511304
+    },
+    {
+      "index": 850,
+      "point2pose_adds_mm": 11.003304081824853,
+      "bundletrack_adds_mm": 10.814406482090218
+    },
+    {
+      "index": 851,
+      "point2pose_adds_mm": 10.732889328470343,
+      "bundletrack_adds_mm": 10.499225251467696
+    },
+    {
+      "index": 852,
+      "point2pose_adds_mm": 10.74574574187223,
+      "bundletrack_adds_mm": 10.532572511692035
+    },
+    {
+      "index": 853,
+      "point2pose_adds_mm": 11.249622195449444,
+      "bundletrack_adds_mm": 10.793129566140632
+    },
+    {
+      "index": 854,
+      "point2pose_adds_mm": 11.009642302018303,
+      "bundletrack_adds_mm": 10.597798704364372
+    },
+    {
+      "index": 855,
+      "point2pose_adds_mm": 11.155233314878172,
+      "bundletrack_adds_mm": 10.928321826948206
+    },
+    {
+      "index": 856,
+      "point2pose_adds_mm": 10.400645650655841,
+      "bundletrack_adds_mm": 10.222071017285675
+    },
+    {
+      "index": 857,
+      "point2pose_adds_mm": 9.873887719454453,
+      "bundletrack_adds_mm": 9.811452131079582
+    },
+    {
+      "index": 858,
+      "point2pose_adds_mm": 10.321287213283055,
+      "bundletrack_adds_mm": 10.169767060383625
+    },
+    {
+      "index": 859,
+      "point2pose_adds_mm": 10.527546641555745,
+      "bundletrack_adds_mm": 10.187175282189775
+    },
+    {
+      "index": 860,
+      "point2pose_adds_mm": 10.109044462743146,
+      "bundletrack_adds_mm": 10.009059982515225
+    },
+    {
+      "index": 861,
+      "point2pose_adds_mm": 9.835187118349626,
+      "bundletrack_adds_mm": 9.573674668391778
+    },
+    {
+      "index": 862,
+      "point2pose_adds_mm": 10.324481887563287,
+      "bundletrack_adds_mm": 9.84156524633731
+    },
+    {
+      "index": 863,
+      "point2pose_adds_mm": 10.39370398461208,
+      "bundletrack_adds_mm": 10.172433201356842
+    },
+    {
+      "index": 864,
+      "point2pose_adds_mm": 10.778668895621538,
+      "bundletrack_adds_mm": 10.302804280764946
+    },
+    {
+      "index": 865,
+      "point2pose_adds_mm": 10.494733376376715,
+      "bundletrack_adds_mm": 10.146940704225337
+    },
+    {
+      "index": 866,
+      "point2pose_adds_mm": 10.891473797991852,
+      "bundletrack_adds_mm": 10.383598519272814
+    },
+    {
+      "index": 867,
+      "point2pose_adds_mm": 10.595289674558867,
+      "bundletrack_adds_mm": 10.175690662103948
+    },
+    {
+      "index": 868,
+      "point2pose_adds_mm": 10.715788613416207,
+      "bundletrack_adds_mm": 10.313576128356138
+    },
+    {
+      "index": 869,
+      "point2pose_adds_mm": 10.512055099181847,
+      "bundletrack_adds_mm": 10.225623060409674
+    },
+    {
+      "index": 870,
+      "point2pose_adds_mm": 10.81378103624316,
+      "bundletrack_adds_mm": 10.415468489412122
+    },
+    {
+      "index": 871,
+      "point2pose_adds_mm": 10.686960228072449,
+      "bundletrack_adds_mm": 10.115461451967798
+    },
+    {
+      "index": 872,
+      "point2pose_adds_mm": 10.44753394478495,
+      "bundletrack_adds_mm": 10.138538424955932
+    },
+    {
+      "index": 873,
+      "point2pose_adds_mm": 10.40472093660346,
+      "bundletrack_adds_mm": 10.096366337542465
+    },
+    {
+      "index": 874,
+      "point2pose_adds_mm": 10.168556398642172,
+      "bundletrack_adds_mm": 9.811771499845623
+    },
+    {
+      "index": 875,
+      "point2pose_adds_mm": 10.487455461117165,
+      "bundletrack_adds_mm": 10.221908819328503
+    },
+    {
+      "index": 876,
+      "point2pose_adds_mm": 10.753823109574736,
+      "bundletrack_adds_mm": 10.592398460614113
+    },
+    {
+      "index": 877,
+      "point2pose_adds_mm": 10.792280394900777,
+      "bundletrack_adds_mm": 10.391502548081553
+    },
+    {
+      "index": 878,
+      "point2pose_adds_mm": 10.673554808056545,
+      "bundletrack_adds_mm": 10.424069980119974
+    },
+    {
+      "index": 879,
+      "point2pose_adds_mm": 11.040004453168141,
+      "bundletrack_adds_mm": 10.713890403861583
+    },
+    {
+      "index": 880,
+      "point2pose_adds_mm": 10.571306278569374,
+      "bundletrack_adds_mm": 10.334852187440084
+    },
+    {
+      "index": 881,
+      "point2pose_adds_mm": 10.26248649966643,
+      "bundletrack_adds_mm": 9.842058790599875
+    },
+    {
+      "index": 882,
+      "point2pose_adds_mm": 9.846010317336424,
+      "bundletrack_adds_mm": 9.458259534729486
+    },
+    {
+      "index": 883,
+      "point2pose_adds_mm": 10.301273243626326,
+      "bundletrack_adds_mm": 9.840217772961248
+    },
+    {
+      "index": 884,
+      "point2pose_adds_mm": 10.017311620156676,
+      "bundletrack_adds_mm": 9.748097517856213
+    },
+    {
+      "index": 885,
+      "point2pose_adds_mm": 10.140856221543729,
+      "bundletrack_adds_mm": 9.826324547159553
+    },
+    {
+      "index": 886,
+      "point2pose_adds_mm": 10.527258735560983,
+      "bundletrack_adds_mm": 10.142863512627418
+    },
+    {
+      "index": 887,
+      "point2pose_adds_mm": 10.665353347080117,
+      "bundletrack_adds_mm": 10.102665257606965
+    },
+    {
+      "index": 888,
+      "point2pose_adds_mm": 10.375159831464304,
+      "bundletrack_adds_mm": 10.08644505181566
+    },
+    {
+      "index": 889,
+      "point2pose_adds_mm": 10.882268357775922,
+      "bundletrack_adds_mm": 10.44012177368489
+    },
+    {
+      "index": 890,
+      "point2pose_adds_mm": 10.558563239077198,
+      "bundletrack_adds_mm": 10.156138569630558
+    },
+    {
+      "index": 891,
+      "point2pose_adds_mm": 10.848195056757806,
+      "bundletrack_adds_mm": 10.393420885113288
+    },
+    {
+      "index": 892,
+      "point2pose_adds_mm": 10.709862076477359,
+      "bundletrack_adds_mm": 10.110093872308067
+    },
+    {
+      "index": 893,
+      "point2pose_adds_mm": 9.932842509859695,
+      "bundletrack_adds_mm": 9.36626249240861
+    },
+    {
+      "index": 894,
+      "point2pose_adds_mm": 10.282465342842062,
+      "bundletrack_adds_mm": 9.7998898446912
+    },
+    {
+      "index": 895,
+      "point2pose_adds_mm": 10.096386927283184,
+      "bundletrack_adds_mm": 9.633739716488488
+    },
+    {
+      "index": 896,
+      "point2pose_adds_mm": 11.671553537945611,
+      "bundletrack_adds_mm": 9.842580159526126
+    },
+    {
+      "index": 897,
+      "point2pose_adds_mm": 10.348151612652982,
+      "bundletrack_adds_mm": 9.900012827366734
+    },
+    {
+      "index": 898,
+      "point2pose_adds_mm": 9.745800357344098,
+      "bundletrack_adds_mm": 9.5711611388892
+    },
+    {
+      "index": 899,
+      "point2pose_adds_mm": 10.118715460347994,
+      "bundletrack_adds_mm": 9.959842292018953
+    },
+    {
+      "index": 900,
+      "point2pose_adds_mm": 10.625619566870688,
+      "bundletrack_adds_mm": 10.362837194320576
+    },
+    {
+      "index": 901,
+      "point2pose_adds_mm": 10.038562573293913,
+      "bundletrack_adds_mm": 9.821413114028179
+    },
+    {
+      "index": 902,
+      "point2pose_adds_mm": 10.13770232455994,
+      "bundletrack_adds_mm": 9.820646059035557
+    },
+    {
+      "index": 903,
+      "point2pose_adds_mm": 10.572106928918693,
+      "bundletrack_adds_mm": 10.181217680177866
+    },
+    {
+      "index": 904,
+      "point2pose_adds_mm": 10.425344409194107,
+      "bundletrack_adds_mm": 9.873638916453135
+    },
+    {
+      "index": 905,
+      "point2pose_adds_mm": 9.969644210037535,
+      "bundletrack_adds_mm": 9.485951215959801
+    },
+    {
+      "index": 906,
+      "point2pose_adds_mm": 10.005142163121242,
+      "bundletrack_adds_mm": 9.67512576227272
+    },
+    {
+      "index": 907,
+      "point2pose_adds_mm": 9.951485405886705,
+      "bundletrack_adds_mm": 9.69532337303194
+    },
+    {
+      "index": 908,
+      "point2pose_adds_mm": 10.408259899431222,
+      "bundletrack_adds_mm": 9.997150067178028
+    },
+    {
+      "index": 909,
+      "point2pose_adds_mm": 10.092058653969668,
+      "bundletrack_adds_mm": 9.761868208726566
+    },
+    {
+      "index": 910,
+      "point2pose_adds_mm": 9.890837078135535,
+      "bundletrack_adds_mm": 9.540781453200964
+    },
+    {
+      "index": 911,
+      "point2pose_adds_mm": 10.316777149118462,
+      "bundletrack_adds_mm": 10.110597028388765
+    },
+    {
+      "index": 912,
+      "point2pose_adds_mm": 10.650729059707261,
+      "bundletrack_adds_mm": 10.070670022015976
+    },
+    {
+      "index": 913,
+      "point2pose_adds_mm": 10.358020433402281,
+      "bundletrack_adds_mm": 9.87390827927422
+    },
+    {
+      "index": 914,
+      "point2pose_adds_mm": 10.124842760054763,
+      "bundletrack_adds_mm": 9.677440629036022
+    },
+    {
+      "index": 915,
+      "point2pose_adds_mm": 10.081638669224468,
+      "bundletrack_adds_mm": 9.712589619859287
+    },
+    {
+      "index": 916,
+      "point2pose_adds_mm": 10.339669502882828,
+      "bundletrack_adds_mm": 9.777804647522244
+    },
+    {
+      "index": 917,
+      "point2pose_adds_mm": 10.300454196968383,
+      "bundletrack_adds_mm": 9.816134388802363
+    },
+    {
+      "index": 918,
+      "point2pose_adds_mm": 10.290898280600226,
+      "bundletrack_adds_mm": 9.975685389370538
+    },
+    {
+      "index": 919,
+      "point2pose_adds_mm": 10.22116880854738,
+      "bundletrack_adds_mm": 9.842692692478181
+    },
+    {
+      "index": 920,
+      "point2pose_adds_mm": 10.068494972319035,
+      "bundletrack_adds_mm": 9.941341240666592
+    },
+    {
+      "index": 921,
+      "point2pose_adds_mm": 10.03531720388906,
+      "bundletrack_adds_mm": 9.817578557441829
+    },
+    {
+      "index": 922,
+      "point2pose_adds_mm": 10.305010902649984,
+      "bundletrack_adds_mm": 9.884635241857875
+    },
+    {
+      "index": 923,
+      "point2pose_adds_mm": 10.073744850597173,
+      "bundletrack_adds_mm": 9.717618305299663
+    },
+    {
+      "index": 924,
+      "point2pose_adds_mm": 10.350097237111992,
+      "bundletrack_adds_mm": 10.05939764739373
+    },
+    {
+      "index": 925,
+      "point2pose_adds_mm": 10.129863987645324,
+      "bundletrack_adds_mm": 9.774230650541991
+    },
+    {
+      "index": 926,
+      "point2pose_adds_mm": 10.47924292884454,
+      "bundletrack_adds_mm": 10.064611328933772
+    },
+    {
+      "index": 927,
+      "point2pose_adds_mm": 10.190278790044964,
+      "bundletrack_adds_mm": 9.973825740033936
+    },
+    {
+      "index": 928,
+      "point2pose_adds_mm": 9.829103577527318,
+      "bundletrack_adds_mm": 9.577096769426715
+    },
+    {
+      "index": 929,
+      "point2pose_adds_mm": 10.025679888045376,
+      "bundletrack_adds_mm": 9.891118076482996
+    },
+    {
+      "index": 930,
+      "point2pose_adds_mm": 10.007250003186906,
+      "bundletrack_adds_mm": 9.706287734875188
+    },
+    {
+      "index": 931,
+      "point2pose_adds_mm": 10.068883805604361,
+      "bundletrack_adds_mm": 9.76323564070228
+    },
+    {
+      "index": 932,
+      "point2pose_adds_mm": 9.719488537781737,
+      "bundletrack_adds_mm": 9.661656941682491
+    },
+    {
+      "index": 933,
+      "point2pose_adds_mm": 9.924284211395728,
+      "bundletrack_adds_mm": 9.802895738665823
+    },
+    {
+      "index": 934,
+      "point2pose_adds_mm": 9.861746651902399,
+      "bundletrack_adds_mm": 9.757040271313908
+    },
+    {
+      "index": 935,
+      "point2pose_adds_mm": 9.992365993828166,
+      "bundletrack_adds_mm": 9.620999119320615
+    },
+    {
+      "index": 936,
+      "point2pose_adds_mm": 9.82556701128264,
+      "bundletrack_adds_mm": 9.592112597740558
+    },
+    {
+      "index": 937,
+      "point2pose_adds_mm": 10.154708873634315,
+      "bundletrack_adds_mm": 9.825568788310093
+    },
+    {
+      "index": 938,
+      "point2pose_adds_mm": 9.831299032935434,
+      "bundletrack_adds_mm": 9.785470851353903
+    },
+    {
+      "index": 939,
+      "point2pose_adds_mm": 9.9295316669962,
+      "bundletrack_adds_mm": 9.558475487593523
+    },
+    {
+      "index": 940,
+      "point2pose_adds_mm": 10.00121256924357,
+      "bundletrack_adds_mm": 9.711650483285204
+    },
+    {
+      "index": 941,
+      "point2pose_adds_mm": 10.197057509589332,
+      "bundletrack_adds_mm": 10.004497539731299
+    },
+    {
+      "index": 942,
+      "point2pose_adds_mm": 9.966856021863643,
+      "bundletrack_adds_mm": 9.71126756666077
+    },
+    {
+      "index": 943,
+      "point2pose_adds_mm": 10.09346596203187,
+      "bundletrack_adds_mm": 9.799698899847797
+    },
+    {
+      "index": 944,
+      "point2pose_adds_mm": 9.95487242722577,
+      "bundletrack_adds_mm": 9.848157285388506
+    },
+    {
+      "index": 945,
+      "point2pose_adds_mm": 10.09157250518687,
+      "bundletrack_adds_mm": 9.750951854199998
+    },
+    {
+      "index": 946,
+      "point2pose_adds_mm": 10.354501615333406,
+      "bundletrack_adds_mm": 10.131858103320123
+    },
+    {
+      "index": 947,
+      "point2pose_adds_mm": 10.331304082998784,
+      "bundletrack_adds_mm": 10.091652280435502
+    },
+    {
+      "index": 948,
+      "point2pose_adds_mm": 9.89046951167961,
+      "bundletrack_adds_mm": 9.491528808238014
+    },
+    {
+      "index": 949,
+      "point2pose_adds_mm": 10.009247694531672,
+      "bundletrack_adds_mm": 9.521111900510274
+    },
+    {
+      "index": 950,
+      "point2pose_adds_mm": 9.908795981267513,
+      "bundletrack_adds_mm": 9.466319553330521
+    },
+    {
+      "index": 951,
+      "point2pose_adds_mm": 10.185608109635867,
+      "bundletrack_adds_mm": 9.655111554281483
+    },
+    {
+      "index": 952,
+      "point2pose_adds_mm": 9.809115037206686,
+      "bundletrack_adds_mm": 9.706107978505619
+    },
+    {
+      "index": 953,
+      "point2pose_adds_mm": 10.168247691532239,
+      "bundletrack_adds_mm": 9.85266564271312
+    },
+    {
+      "index": 954,
+      "point2pose_adds_mm": 9.89808887528221,
+      "bundletrack_adds_mm": 9.578080739358718
+    },
+    {
+      "index": 955,
+      "point2pose_adds_mm": 9.935088453731176,
+      "bundletrack_adds_mm": 9.820480064595108
+    },
+    {
+      "index": 956,
+      "point2pose_adds_mm": 10.045014487447167,
+      "bundletrack_adds_mm": 9.792026250205922
+    },
+    {
+      "index": 957,
+      "point2pose_adds_mm": 9.810078432253954,
+      "bundletrack_adds_mm": 9.326575556777998
+    },
+    {
+      "index": 958,
+      "point2pose_adds_mm": 11.190116899721135,
+      "bundletrack_adds_mm": 10.39580860410835
+    },
+    {
+      "index": 959,
+      "point2pose_adds_mm": 8.854172222377304,
+      "bundletrack_adds_mm": 9.054420607482905
+    },
+    {
+      "index": 960,
+      "point2pose_adds_mm": 10.559822801464268,
+      "bundletrack_adds_mm": 8.066543079493359
+    },
+    {
+      "index": 961,
+      "point2pose_adds_mm": 7.956553200218772,
+      "bundletrack_adds_mm": 7.996874529072517
+    },
+    {
+      "index": 962,
+      "point2pose_adds_mm": 7.494773537450961,
+      "bundletrack_adds_mm": 6.083501714380872
+    },
+    {
+      "index": 963,
+      "point2pose_adds_mm": 7.598456241870034,
+      "bundletrack_adds_mm": 5.671739265978388
+    },
+    {
+      "index": 964,
+      "point2pose_adds_mm": 17.17370486949061,
+      "bundletrack_adds_mm": 17.29892921662057
+    },
+    {
+      "index": 965,
+      "point2pose_adds_mm": 9.834581187651805,
+      "bundletrack_adds_mm": null
+    },
+    {
+      "index": 966,
+      "point2pose_adds_mm": 11.847505929234266,
+      "bundletrack_adds_mm": 12.841580408991096
+    },
+    {
+      "index": 967,
+      "point2pose_adds_mm": 10.016270993048895,
+      "bundletrack_adds_mm": 10.167500461077049
+    },
+    {
+      "index": 968,
+      "point2pose_adds_mm": 32.167269415162515,
+      "bundletrack_adds_mm": 8.90649753342522
+    },
+    {
+      "index": 969,
+      "point2pose_adds_mm": 12.36715189988544,
+      "bundletrack_adds_mm": 9.027097597004342
+    },
+    {
+      "index": 970,
+      "point2pose_adds_mm": 8.605001193919028,
+      "bundletrack_adds_mm": 9.124546457556983
+    },
+    {
+      "index": 971,
+      "point2pose_adds_mm": 8.831990398305388,
+      "bundletrack_adds_mm": 9.027311845613681
+    },
+    {
+      "index": 972,
+      "point2pose_adds_mm": 8.71136839034532,
+      "bundletrack_adds_mm": 8.937562311178748
+    },
+    {
+      "index": 973,
+      "point2pose_adds_mm": 8.379016949927822,
+      "bundletrack_adds_mm": 8.798716737572672
+    },
+    {
+      "index": 974,
+      "point2pose_adds_mm": 8.85178926629977,
+      "bundletrack_adds_mm": 9.109880272359234
+    },
+    {
+      "index": 975,
+      "point2pose_adds_mm": 8.35942961291321,
+      "bundletrack_adds_mm": 8.87546767963663
+    },
+    {
+      "index": 976,
+      "point2pose_adds_mm": 8.321930727308647,
+      "bundletrack_adds_mm": 8.81360825568341
+    },
+    {
+      "index": 977,
+      "point2pose_adds_mm": 8.301867815900762,
+      "bundletrack_adds_mm": 8.899380066611617
+    },
+    {
+      "index": 978,
+      "point2pose_adds_mm": 8.458278990107152,
+      "bundletrack_adds_mm": 8.902320538315971
+    },
+    {
+      "index": 979,
+      "point2pose_adds_mm": 8.599986881446569,
+      "bundletrack_adds_mm": 9.192353436367144
+    },
+    {
+      "index": 980,
+      "point2pose_adds_mm": 8.342314112892486,
+      "bundletrack_adds_mm": 8.987741446829473
+    },
+    {
+      "index": 981,
+      "point2pose_adds_mm": 8.537197321619194,
+      "bundletrack_adds_mm": 9.059821791144964
+    },
+    {
+      "index": 982,
+      "point2pose_adds_mm": 8.257363235524977,
+      "bundletrack_adds_mm": 8.942464046612738
+    },
+    {
+      "index": 983,
+      "point2pose_adds_mm": 8.464989387941953,
+      "bundletrack_adds_mm": 8.968883716448989
+    },
+    {
+      "index": 984,
+      "point2pose_adds_mm": 8.460618906381919,
+      "bundletrack_adds_mm": 9.041178852131038
+    },
+    {
+      "index": 985,
+      "point2pose_adds_mm": 8.468948865263881,
+      "bundletrack_adds_mm": 9.086631903072085
+    },
+    {
+      "index": 986,
+      "point2pose_adds_mm": 8.524948012363042,
+      "bundletrack_adds_mm": 8.945399982884705
+    },
+    {
+      "index": 987,
+      "point2pose_adds_mm": 8.37849498744334,
+      "bundletrack_adds_mm": 9.069863484683413
+    },
+    {
+      "index": 988,
+      "point2pose_adds_mm": 8.392483843820596,
+      "bundletrack_adds_mm": 9.050840639743988
+    },
+    {
+      "index": 989,
+      "point2pose_adds_mm": 7.977410214498385,
+      "bundletrack_adds_mm": 8.780354386252705
+    },
+    {
+      "index": 990,
+      "point2pose_adds_mm": 8.616659935722312,
+      "bundletrack_adds_mm": 9.116772121383432
+    },
+    {
+      "index": 991,
+      "point2pose_adds_mm": 8.432272234309174,
+      "bundletrack_adds_mm": 9.163057341409198
+    },
+    {
+      "index": 992,
+      "point2pose_adds_mm": 8.407771945141587,
+      "bundletrack_adds_mm": 8.865257572708286
+    },
+    {
+      "index": 993,
+      "point2pose_adds_mm": 8.278852760355885,
+      "bundletrack_adds_mm": 8.970699186809972
+    },
+    {
+      "index": 994,
+      "point2pose_adds_mm": 8.329138660382245,
+      "bundletrack_adds_mm": 9.190344658654308
+    },
+    {
+      "index": 995,
+      "point2pose_adds_mm": 8.333708577799474,
+      "bundletrack_adds_mm": 8.889648440929072
+    },
+    {
+      "index": 996,
+      "point2pose_adds_mm": 8.577719748713784,
+      "bundletrack_adds_mm": 9.049729314729303
+    },
+    {
+      "index": 997,
+      "point2pose_adds_mm": 8.503004783909807,
+      "bundletrack_adds_mm": 9.080367417322483
+    },
+    {
+      "index": 998,
+      "point2pose_adds_mm": 8.166920245553895,
+      "bundletrack_adds_mm": 8.983099706228598
+    },
+    {
+      "index": 999,
+      "point2pose_adds_mm": 8.238134065376489,
+      "bundletrack_adds_mm": 8.996736416708899
+    },
+    {
+      "index": 1000,
+      "point2pose_adds_mm": 8.193080351846216,
+      "bundletrack_adds_mm": 8.929229769041074
+    },
+    {
+      "index": 1001,
+      "point2pose_adds_mm": 8.739331710338444,
+      "bundletrack_adds_mm": 9.068873207365687
+    }
+  ]
+}

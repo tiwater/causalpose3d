@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "causalpose3d"
-version = "1.0.0"
-description = "CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction"
+name = "evidencescene"
+version = "2.0.0"
+description = "EvidenceScene: Observability-Conditioned 3D Scene Reconstruction for Robot Manipulation"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }
@@ -14,7 +14,9 @@ authors = [
 ]
 keywords = [
     "6D-pose-tracking",
+    "3D-scene-reconstruction",
     "3D-surface-reconstruction",
+    "teleoperation",
     "factor-graph-observability",
     "BundleTrack",
     "Point2Pose",
@@ -40,10 +42,10 @@ test = [
 ]
 
 [project.urls]
-Homepage = "https://tiwater.github.io/causalpose3d/"
-Repository = "https://github.com/tiwater/causalpose3d"
-Documentation = "https://tiwater.github.io/causalpose3d/"
-Paper = "https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-monograph.pdf"
+Homepage = "https://tiwater.github.io/evidencescene/"
+Repository = "https://github.com/tiwater/evidencescene"
+Documentation = "https://tiwater.github.io/evidencescene/"
+Paper = "https://tiwater.github.io/evidencescene/assets/papers/evidencescene-monograph.pdf"
 
 [tool.setuptools.packages.find]
-include = ["causalpose3d*"]
+include = ["evidencescene*"]

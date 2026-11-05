@@ -1,0 +1,51 @@
+{
+  "scope": "one selected bleach development sequence; shared generated masks, not independent segmentation",
+  "point": {
+    "denominator": 662,
+    "unavailable": 12,
+    "within_10mm": 155,
+    "within_20mm": 158,
+    "auc_0_100mm": 0.5323963717878683
+  },
+  "bundle": {
+    "denominator": 662,
+    "unavailable": 6,
+    "within_10mm": 644,
+    "within_20mm": 655,
+    "auc_0_100mm": 0.9286634018987079
+  },
+  "paired_10mm": {
+    "both": 155,
+    "point_only": 0,
+    "bundle_only": 489,
+    "neither": 18
+  },
+  "lost_frames": [
+    20,
+    158,
+    159,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    662
+  ],
+  "empty_mask_frames": [
+    662
+  ],
+  "mask_iou_to_eroded_reference_p05_p50_min": [
+    0.3711486429991599,
+    0.46744011976047906,
+    0.0
+  ],
+  "mask_iou_below_08": 658,
+  "point_sha256": "24a57e126e69490a8b0949e8c6ce49472efe29e896db308e034f3343d2ce828e",
+  "bundle_sha256": "7c38d38e247f485b08e36060b637840076c776c8f52267a860b65b11f4b26e0c",
+  "manifest_sha256": "ce98308e1539de426d3cf521fbd5cf384986ea89e1a4d4c8749b1daaa2ddfb78",
+  "reference_audit_sha256": "cca3df571a42a3f71689d94a65600d049c1f2634fee59c63f3f60e2f14b85084",
+  "model_sha256": "16a19adedddbd49f07df5642abf111626e4c3aa6eb061043310fec6e0c28da15"
+}

@@ -1,17 +1,16 @@
 <div align="center">
 
-# CausalPose-3D: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction from RGB-D Video
+# EvidenceScene: Observability-Conditioned 3D Scene Reconstruction for Robot Manipulation
 
 **[Tiwater Research](https://github.com/tiwater)**
 
-[![Project Page](https://img.shields.io/badge/Project_Page-tiwater.github.io%2Fcausalpose3d-2563eb?style=flat-square&logo=googlechrome&logoColor=white)](https://tiwater.github.io/causalpose3d/)
-[![Monograph Preprint](https://img.shields.io/badge/Paper-Monograph_(17_pp.)-b31b1b?style=flat-square&logo=arxiv&logoColor=white)](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-monograph.pdf)
-[![Short Paper](https://img.shields.io/badge/Paper-Comparative_Study_(8_pp.)-059669?style=flat-square&logo=arxiv&logoColor=white)](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-short.pdf)
-[![CI](https://img.shields.io/github/actions/workflow/status/tiwater/causalpose3d/ci.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI)](https://github.com/tiwater/causalpose3d/actions/workflows/ci.yml)
-[![Release](https://img.shields.io/badge/Release-v1.0.0-0f172a?style=flat-square&logo=github)](https://github.com/tiwater/causalpose3d/releases/tag/v1.0.0)
+[![Project Page](https://img.shields.io/badge/Project_Page-tiwater.github.io%2Fevidencescene-2563eb?style=flat-square&logo=googlechrome&logoColor=white)](https://tiwater.github.io/evidencescene/)
+[![Monograph Preprint](https://img.shields.io/badge/Paper-Monograph_(17_pp.)-b31b1b?style=flat-square&logo=arxiv&logoColor=white)](https://tiwater.github.io/evidencescene/assets/papers/evidencescene-monograph.pdf)
+[![Method Paper](https://img.shields.io/badge/Paper-Method_Paper_(8_pp.)-059669?style=flat-square&logo=arxiv&logoColor=white)](https://tiwater.github.io/evidencescene/assets/papers/evidencescene-short.pdf)
+[![CI](https://img.shields.io/github/actions/workflow/status/tiwater/evidencescene/ci.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI)](https://github.com/tiwater/evidencescene/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache_2.0-d97706?style=flat-square)](LICENSE)
 
-[**Project Page**](https://tiwater.github.io/causalpose3d/) • [**Monograph (PDF)**](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-monograph.pdf) • [**Short Paper (PDF)**](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-short.pdf) • [**Method**](#-methodology) • [**Benchmarks**](#-experimental-evaluation) • [**Quick Start**](#-installation--usage) • [**Citation**](#-citation)
+[**Project Page**](https://tiwater.github.io/evidencescene/) • [**Monograph (PDF)**](https://tiwater.github.io/evidencescene/assets/papers/evidencescene-monograph.pdf) • [**Method Paper (PDF)**](https://tiwater.github.io/evidencescene/assets/papers/evidencescene-short.pdf) • [**Method**](#-methodology) • [**Benchmarks**](#-experimental-evaluation) • [**Quick Start**](#-installation--usage) • [**Citation**](#-citation)
 
 </div>
 
@@ -31,9 +30,9 @@
         <sub><b>(b) Lineage-Indexed Surfel Completion</b><br/>Multi-view corroborated object surface (<code>C₁₀ = 85.1%</code>) under continuous motion.</sub>
       </td>
       <td align="center" width="33%">
-        <img src="docs/assets/figures/07-teleop-hud-perspective-frame275.png" alt="Causal 6DoF Pose Tracking and Spatial Verification" width="100%"/>
+        <img src="docs/assets/figures/07-teleop-hud-perspective-frame275.png" alt="Observability-Verified 6DoF Pose Tracking and Spatial Verification" width="100%"/>
         <br/>
-        <sub><b>(c) Causal Observability Verification</b><br/>Fail-closed 6DoF pose tracking and metric clearance envelope during manipulation.</sub>
+        <sub><b>(c) Observability Verification</b><br/>Fail-closed 6DoF pose tracking and metric clearance envelope during manipulation.</sub>
       </td>
     </tr>
   </table>
@@ -43,59 +42,59 @@
 
 Model-free 6D object pose tracking and online 3D surface reconstruction from streaming RGB-D video remain fundamentally fragile under severe occlusion, rapid articulated motion, depth sensor dropout, and weak geometric observability. Existing keyframe-graph trackers (e.g., *BundleTrack*) suffer from non-deterministic GPU RANSAC hypothesis reduction, single-precision $\mathrm{SE}(3)$ inversion drift, and unbounded memory growth, whereas point-track factor graphs (e.g., *Point2Pose*) frequently admit under-constrained keyframes that corrupt global gauge consistency and poison downstream surface fusion.
 
-We present **CausalPose-3D**, a causal observability-conditioned framework for 6D object pose estimation and revisable 3D surface reconstruction. **CausalPose-3D** introduces four tightly coupled contributions:
+We present **EvidenceScene**, an evidence-constrained, observability-conditioned framework for 3D scene reconstruction: it tracks 6D object pose and maintains a revisable surface representation. **EvidenceScene** introduces four tightly coupled contributions:
 1. **Deterministic $\mathrm{SE}(3)$ Pose Graph Optimization:** A race-free CUDA correspondence reduction scheme and exact orthonormal $\mathrm{SE}(3)$ pose-cache inversion that eliminate run-to-run trajectory variance (`18.4 mm / 4.72°` $\rightarrow$ **`0.00 mm / 0.00°`**) while bounding GPU/host memory via contiguous non-optimized frame retirement.
 2. **Schur-Complement Factor-Graph Observability ($F + G + R$):** A causal admission gate that evaluates the marginal translational precision block $R_i$ via the Schur complement prior to graph insertion, rejecting rank-deficient or gauge-disconnected observations before optimization.
-3. **Lineage-Indexed Revisable Surfel Reconstruction ($M + S$):** A persistent 3D surface representation (`RevisableSurfelMap`) that binds every fused surfel to its originating keyframe lineage, supporting atomic surface-history rebuild transactions upon pose graph revision and a two-stage view-diversity selector (`support10/coarse12mm`) that improves 10-view surface corroboration ($C_{10}$) by **`+44.53%`** on YCBInEOAT and **`+32.71%`** on Laval Vicon.
+3. **Lineage-Indexed Revisable Surfel Reconstruction ($M + S$):** A persistent 3D surface representation (`RevisableSurfelMap`) that binds every fused surfel to its originating keyframe lineage, supporting atomic surface-history rebuild transactions upon pose graph revision and a two-stage view-diversity selector (`support10/coarse12mm`) that raises 10-view surface corroboration ($C_{10}$) from `40.57%` to `85.10%` on YCBInEOAT and from `52.34%` to `85.05%` on Laval Vicon (absolute gains of 44.53 and 32.71 percentage points).
 4. **Asynchronous GPU/CPU Window Overlap & $O(\text{runs})$ Mask Algebra:** A zero-loss runtime execution engine that overlaps CPU geometric preparation with GPU video segmentation and operates directly on compressed run-length encoded (RLE) masks in $O(R)$ time, achieving **`100%` bit-exact equivalence** with a **`72.9%`** reduction in host tracking overhead.
 
 ---
 
 ## 🔥 News
 
-- **[2026-11]** Released [**CausalPose-3D v1.0.0**](https://github.com/tiwater/causalpose3d/releases/tag/v1.0.0), including the core Python library (`causalpose3d`), deterministic C++/CUDA BundleTrack patches (`native/bundletrack/`), benchmark evaluation suites, and full LaTeX sources for both manuscripts.
-- **[2026-11]** Launched the interactive [Project Page](https://tiwater.github.io/causalpose3d/) and released the 17-page [Technical Monograph](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-monograph.pdf) and 8-page [Comparative Paper](https://tiwater.github.io/causalpose3d/assets/papers/causalpose3d-short.pdf).
+- **[2026-11]** Renamed the project from CausalPose-3D to **EvidenceScene** (v2.0.0), including the core Python library (`evidencescene`), deterministic C++/CUDA BundleTrack patches (`native/bundletrack/`), benchmark evaluation suites, and full LaTeX sources for both manuscripts.
+- **[2026-11]** Updated the [Project Page](https://tiwater.github.io/evidencescene/), the 17-page [Technical Monograph](https://tiwater.github.io/evidencescene/assets/papers/evidencescene-monograph.pdf), and the 8-page [Method Paper](https://tiwater.github.io/evidencescene/assets/papers/evidencescene-short.pdf) to the EvidenceScene name.
 
 ---
 
 ## 🧠 Methodology
 
 <div align="center">
-  <img src="docs/assets/figures/causalpose3d_architecture.svg" alt="CausalPose-3D System Architecture" width="96%"/>
+  <img src="docs/assets/figures/evidencescene_architecture.svg" alt="EvidenceScene System Architecture" width="96%"/>
   <br/>
-  <sub><b>Figure 1: Overview of the CausalPose-3D architecture.</b> Streaming RGB-D frames and video segmentation masks are processed through an overlapped GPU/CPU frontend using $O(\text{runs})$ RLE mask algebra, routed through causal observability gates ($\mathrm{SE}(3)$ deterministic BundleTrack or Schur-complement gated Point2Pose $F+G+R$), and fused into a lineage-indexed <code>RevisableSurfelMap</code> ($M+S$) with two-stage view-diversity selection.</sub>
+  <sub><b>Figure 1: Overview of the EvidenceScene architecture.</b> Streaming RGB-D frames and video segmentation masks are processed through an overlapped GPU/CPU frontend using $O(\text{runs})$ RLE mask algebra, routed through causal observability gates ($\mathrm{SE}(3)$ deterministic BundleTrack or Schur-complement gated Point2Pose $F+G+R$), and fused into a lineage-indexed <code>RevisableSurfelMap</code> ($M+S$) with two-stage view-diversity selection.</sub>
 </div>
 
-### 1. Deterministic Native $\mathrm{SE}(3)$ Pose Graph (`native/bundletrack/` & `causalpose3d.tracking`)
-Standard GPU RANSAC loops in correspondence-based 6D trackers rely on non-associative floating-point atomics and thread-scheduling order, causing identical RGB-D sequences to diverge across runs. Furthermore, inverting cached camera poses via generic $4\times 4$ single-precision LU decomposition (`Eigen::Matrix4f::inverse()`) accumulates non-orthonormal drift over long trajectories. **CausalPose-3D** enforces strict determinism and numerical closure:
+### 1. Deterministic Native $\mathrm{SE}(3)$ Pose Graph (`native/bundletrack/` & `evidencescene.tracking`)
+Standard GPU RANSAC loops in correspondence-based 6D trackers rely on non-associative floating-point atomics and thread-scheduling order, causing identical RGB-D sequences to diverge across runs. Furthermore, inverting cached camera poses via generic $4\times 4$ single-precision LU decomposition (`Eigen::Matrix4f::inverse()`) accumulates non-orthonormal drift over long trajectories. **EvidenceScene** enforces strict determinism and numerical closure:
 - **Lexicographic CUDA Hypothesis Reduction:** Replaces atomic winner-take-all updates with a deterministic reduction keyed on $(\text{inlier\_count}, -\text{residual\_L1}, \text{hypothesis\_id})$ and selects bidirectional correspondence pairs by valid geometric correspondence support.
 - **Exact Orthonormal $\mathrm{SE}(3)$ Inversion:** Enforces analytical group inversion on $\mathrm{SE}(3)$ inside `CUDACache::storeFrame`:
   $$\mathbf{T}^{-1} = \begin{bmatrix} \mathbf{R}^\top & -\mathbf{R}^\top \mathbf{t} \\ \mathbf{0}^\top & 1 \end{bmatrix}, \quad \mathbf{R} \in \mathrm{SO}(3), \; \mathbf{t} \in \mathbb{R}^3$$
   eliminating single-precision matrix inversion drift and increasing strict tracking completions on Laval Vicon 6DoF from `135 / 107` to **`191 / 136`** frames.
 - **Contiguous Non-Optimized Frame Retirement:** Retires heavy GPU/host image and point-cloud buffers for frames outside the active sliding Bundle Adjustment (BA) window while preserving keyframe index topology, reducing peak memory footprint by **`0.93–1.99 GiB`** with zero trajectory deviation.
 
-### 2. Causal Factor-Graph Observability (`causalpose3d.observability`)
-In point-track factor graphs (*Point2Pose*), admitting frames with degenerate 3D track geometry or disconnected feature tracks introduces rank deficiency into the Levenberg–Marquardt normal equations. **CausalPose-3D** enforces three causal admission conditions ($F + G + R$) at every timestamp $t$:
+### 2. Causal Factor-Graph Observability (`evidencescene.observability`)
+In point-track factor graphs (*Point2Pose*), admitting frames with degenerate 3D track geometry or disconnected feature tracks introduces rank deficiency into the Levenberg–Marquardt normal equations. **EvidenceScene** enforces three causal admission conditions ($F + G + R$) at every timestamp $t$:
 - **Gauge & Solver Consistency ($F$) and Prior-Connected Admission ($G$):** Requires every candidate keyframe to share a minimum number of verified metric 3D tracks with the anchored pose-graph component.
 - **Schur-Complement Marginal Translational Rank Gate ($R$):** Partitioning the linearized normal equations between the candidate frame translation $\delta\mathbf{t}_i \in \mathbb{R}^3$ and landmark/rotation variables $\mathcal{L}$, we evaluate the marginal translational information matrix via the Schur complement:
   $$\mathbf{R}_i = \mathbf{J}_{ii}^\top \mathbf{J}_{ii} - \mathbf{J}_{i\mathcal{L}}^\top \left(\mathbf{J}_{\mathcal{L}\mathcal{L}}\right)^\dagger \mathbf{J}_{\mathcal{L}i} \in \mathbb{S}_+^{3\times 3}$$
   A frame is admitted as an authoritative pose node if and only if $\sigma_{\min}(\mathbf{R}_i) \ge \tau_{\text{rank}}$ and $\kappa(\mathbf{R}_i) \le \kappa_{\max}$, preventing ill-conditioned depth observations from corrupting global trajectory estimates.
 
-### 3. Lineage-Indexed Revisable Surfel Reconstruction (`causalpose3d.surface`)
-Naive TSDF or point-cloud accumulation permanently bakes transient pose errors into the 3D model. **CausalPose-3D** maintains a **Lineage-Indexed Revisable Surfel Map** (`RevisableSurfelMap` & `CausalObjectSurface`):
+### 3. Lineage-Indexed Revisable Surfel Reconstruction (`evidencescene.surface`)
+Naive TSDF or point-cloud accumulation permanently bakes transient pose errors into the 3D model. **EvidenceScene** maintains a **Lineage-Indexed Revisable Surfel Map** (`RevisableSurfelMap` & `CausalObjectSurface`):
 - **Birth-Keyframe Lineage ($M$) & Atomic Surface Rebuild ($S$):** Each surfel $s_k$ records its originating keyframe index, multi-view observation count $c_k$, and directional viewpoint bitmask. Whenever the pose graph prunes an outlier keyframe or refines historical poses beyond a metric threshold, `CausalObjectSurface` executes an atomic surface-history transaction that purges invalidated lineage surfels and re-embeds surviving observations in the updated object gauge.
 - **Two-Stage View-Diversity Selector (`support10/coarse12mm`):** Given a fixed downstream point budget $N_{\max} = 1,500$, uniform striding or fine voxel downsampling discards high-confidence multi-view geometry. Our two-stage vectorized selector first retains surfels corroborated across $c_k \ge 10$ distinct viewing intervals, and then allocates remaining capacity across a coarse $12\,\mathrm{mm}$ 3D spatial lattice to guarantee full geometric envelope coverage.
 
-### 4. Overlapped GPU/CPU Execution & $O(\text{runs})$ RLE Algebra (`causalpose3d.runtime`)
+### 4. Overlapped GPU/CPU Execution & $O(\text{runs})$ RLE Algebra (`evidencescene.runtime`)
 To sustain real-time closed-loop perception without sacrificing bit-exactness:
 - **$O(\text{runs})$ Run-Length Mask Algebra:** Binary segmentation masks are represented as sorted 1D run intervals $\mathcal{R} = \{[s_m, e_m)\}_{m=1}^{R}$. Area, 2D centroid, bounding box, and pairwise mask IoU ($\mathcal{R}_A \cap \mathcal{R}_B$) are computed directly over run intervals in $O(R_A + R_B)$ time without materializing $H \times W$ boolean arrays.
 - **GPU Window Overlap (`SAM2GpuWindowOverlapScope`):** Schedules deterministic CPU depth registration and RLE feature extraction concurrently within the asynchronous CUDA execution window of SAM 2 mask propagation.
 
-### 5. Causal $\mathrm{SE}(3)$ Trajectory Prediction & L2 Teleoperation Safety (`causalpose3d.teleop`)
+### 5. Causal $\mathrm{SE}(3)$ Trajectory Prediction & L2 Teleoperation Safety (`evidencescene.teleop`)
 To support fail-closed **L2 Teleoperation Assistance** (e.g., precision pouring and container alignment) without acausal lookahead or unsafe false-positive guidance:
 - **Multi-Horizon $\mathrm{SE}(3)$ Prediction & $C^1$-Continuous Re-Acquisition Blending (`CausalSe3TrajectoryPredictor`):** Extrapolates object poses across $100 / 250 / 500\,\mathrm{ms}$ horizons on $\mathrm{SE}(3)$ with strictly monotonic 95% confidence bounds ($\Delta t_1 < \Delta t_2 \implies w_{95}(\Delta t_1) < w_{95}(\Delta t_2)$). Upon re-acquisition after an occlusion gap, a cubic Hermite $C^1$ join blender transitions from the pre-join trajectory with zero position jump (`position_join_jump = 0.0 m`) and bounded velocity innovation.
-- **3D Task-Feature Rim Consensus & First-Order $\mathrm{SE}(3)$ Covariance Propagation (`causalpose3d.teleop.task_features`):** Fits 3D container apertures (`MeasuredCircularAperture3D`) via iterative Huber SVD plane estimation, 8-sector boundary quantile selection, and 256-hypothesis 3-point RANSAC consensus (`compare_circle_consensus_3d`), and propagates object-local feature uncertainty (`MeasuredPointFeature3D`) through the right-trivialized $\mathrm{SE}(3)$ Jacobian $\boldsymbol{\Sigma}_{\mathbf{p},W} = \mathbf{J}_{\mathbf{p}}\boldsymbol{\Sigma}_{\xi}\mathbf{J}_{\mathbf{p}}^\top + \mathbf{R}\boldsymbol{\Sigma}_{O}\mathbf{R}^\top$.
-- **Ballistic Liquid Stream Locus & Fail-Closed Rim-Clearance Gate (`causalpose3d.teleop.pouring_safety`):** Models the 3D parabolic liquid stream $\mathbf{x}(s) = \mathbf{p}_{\text{out}} + v_0 \mathbf{d}_{\text{out}} s + \frac{1}{2}\mathbf{g} s^2$, analytically propagates $(\boldsymbol{\Sigma}_{\mathbf{p}}, \sigma_\theta^2, \sigma_{v_0}^2)$ onto the target container's aperture plane to obtain the 95% landing uncertainty ellipse, and enforces a fail-closed rim-clearance envelope across all predicted horizons while outputting a minimum-norm shared-control guidance vector $\Delta\mathbf{p}_{\text{assist}}$.
+- **3D Task-Feature Rim Consensus & First-Order $\mathrm{SE}(3)$ Covariance Propagation (`evidencescene.teleop.task_features`):** Fits 3D container apertures (`MeasuredCircularAperture3D`) via iterative Huber SVD plane estimation, 8-sector boundary quantile selection, and 256-hypothesis 3-point RANSAC consensus (`compare_circle_consensus_3d`), and propagates object-local feature uncertainty (`MeasuredPointFeature3D`) through the right-trivialized $\mathrm{SE}(3)$ Jacobian $\boldsymbol{\Sigma}_{\mathbf{p},W} = \mathbf{J}_{\mathbf{p}}\boldsymbol{\Sigma}_{\xi}\mathbf{J}_{\mathbf{p}}^\top + \mathbf{R}\boldsymbol{\Sigma}_{O}\mathbf{R}^\top$.
+- **Ballistic Liquid Stream Locus & Fail-Closed Rim-Clearance Gate (`evidencescene.teleop.pouring_safety`):** Models the 3D parabolic liquid stream $\mathbf{x}(s) = \mathbf{p}_{\text{out}} + v_0 \mathbf{d}_{\text{out}} s + \frac{1}{2}\mathbf{g} s^2$, analytically propagates $(\boldsymbol{\Sigma}_{\mathbf{p}}, \sigma_\theta^2, \sigma_{v_0}^2)$ onto the target container's aperture plane to obtain the 95% landing uncertainty ellipse, and enforces a fail-closed rim-clearance envelope across all predicted horizons while outputting a minimum-norm shared-control guidance vector $\Delta\mathbf{p}_{\text{assist}}$.
 
 ---
 
@@ -103,17 +102,17 @@ To support fail-closed **L2 Teleoperation Assistance** (e.g., precision pouring 
 
 ### 1. 6D Pose Tracking & Surface Reconstruction Benchmarks
 
-We evaluate **CausalPose-3D** against upstream and deterministic variants of *BundleTrack* and *Point2Pose* on standard manipulation benchmarks (**YCBInEOAT**: `bleach0`, `sugar_box0`, `mustard0`; **Laval Vicon 6DoF**: `Clock`, `Jar`) under identical RGB-D and segmentation inputs.
+We evaluate **EvidenceScene** against upstream and deterministic variants of *BundleTrack* and *Point2Pose* on standard manipulation benchmarks (**YCBInEOAT**: `bleach0`, `sugar_box0`, `mustard0`; **Laval Vicon 6DoF**: `Clock`, `Jar`) under identical RGB-D and segmentation inputs.
 
 | Method | Benchmark | Frames | Candidate Duty ($\uparrow$) | Mean ADD [mm] ($\downarrow$) | Mean ADD-S [mm] ($\downarrow$) | 10-View Corroboration $C_{10}$ ($\uparrow$) | Run-to-Run Spread ($\downarrow$) |
 | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
 | Upstream BundleTrack | YCBInEOAT | 430 | 84.2% | 34.9 | 14.8 | 40.57% | 18.4 mm / 4.72° |
 | Deterministic BundleTrack | YCBInEOAT | 430 | 88.6% | 29.4 | 12.1 | 40.57% | **0.00 mm / 0.00°** |
 | Point2Pose ($F+G+R+M+S$) | YCBInEOAT | 430 | 79.5% | **24.1** | **10.9** | 84.12% | **0.00 mm / 0.00°** |
-| **CausalPose-3D (Ours)** | **YCBInEOAT** | **430** | **96.3%** | 26.8 | 11.4 | **85.10%** | **0.00 mm / 0.00°** |
+| **EvidenceScene (Ours)** | **YCBInEOAT** | **430** | **96.3%** | 26.8 | 11.4 | **85.10%** | **0.00 mm / 0.00°** |
 | Deterministic BundleTrack | Laval Vicon 6DoF | 274 | 85.4% | 48.2 | 19.6 | 52.34% | **0.00 mm / 0.00°** |
 | Point2Pose ($F+G+R+M+S$) | Laval Vicon 6DoF | 274 | 74.8% | **42.3** | **17.8** | 83.60% | **0.00 mm / 0.00°** |
-| **CausalPose-3D (Ours)** | **Laval Vicon 6DoF** | **274** | **91.2%** | 45.7 | 18.9 | **85.05%** | **0.00 mm / 0.00°** |
+| **EvidenceScene (Ours)** | **Laval Vicon 6DoF** | **274** | **91.2%** | 45.7 | 18.9 | **85.05%** | **0.00 mm / 0.00°** |
 
 <div align="center">
   <table>
@@ -161,22 +160,23 @@ Comparison of surface selection policies under a fixed $N_{\max} = 1,500$ surfel
 **Requirements:** Python $\ge 3.10$, NumPy $\ge 1.24$, SciPy $\ge 1.11$, OpenCV $\ge 4.8$, PyTorch $\ge 2.1$ (optional for GPU acceleration).
 
 ```bash
-# Option A: Install directly from the official GitHub Release wheel
-pip install https://github.com/tiwater/causalpose3d/releases/download/v1.0.0/causalpose3d-1.0.0-py3-none-any.whl
-
-# Option B: Clone and install in editable mode for research & development
-git clone https://github.com/tiwater/causalpose3d.git
-cd causalpose3d
+# Clone and install in editable mode for research & development
+git clone https://github.com/tiwater/evidencescene.git
+cd evidencescene
 pip install -e ".[dev]"
 pytest
+
+# A v2.0.0 release wheel will be published at
+# https://github.com/tiwater/evidencescene/releases
+
 ```
 
 ### 2. Quick Start: Python API
 
 ```python
 import numpy as np
-from causalpose3d.surface import RevisableSurfelMap, measured_free_space_margin
-from causalpose3d.primitives.image_mask import encode_mask_rle, decode_mask_rle
+from evidencescene.surface import RevisableSurfelMap, measured_free_space_margin
+from evidencescene.primitives.image_mask import encode_mask_rle, decode_mask_rle
 
 # 1. Compact Row-Major Run-Length Mask Encoding (O(runs))
 mask = np.zeros((480, 640), dtype=bool)
@@ -201,7 +201,7 @@ points_m, obs_support, cam_support = surfel_map.snapshot(
 print(f"Fused surfels: {len(points_m)}, multi-view support: {obs_support.tolist()}")
 
 # 3. Fail-Closed L2 Teleoperation Pouring Safety Verification
-from causalpose3d.teleop import (
+from evidencescene.teleop import (
     MeasuredPointFeature3D,
     fit_circular_aperture_3d,
     verify_l2_pouring_safety_envelope,
@@ -244,14 +244,21 @@ git apply patches/0004-select-dense-direction-by-count.patch
 
 ```bash
 # Regenerate quantitative sequence summaries and LaTeX benchmark tables
+# (receipts are vendored under benchmarks/receipts/; hashes are checked)
 python3 benchmarks/sequence_summary.py
 python3 benchmarks/generate_table.py
+python3 benchmarks/generate_generated_mask_table.py
 
-# Compile the 8-page Comparative Study (papers/causalpose3d-short/main.tex)
-tectonic papers/causalpose3d-short/main.tex
+# Or use the Makefile shortcuts
+make tables        # regenerate the checked-in table fragments
+make paper-short   # build papers/evidencescene-short/evidencescene-short.pdf
+make paper         # build both manuscripts
 
-# Compile the 17-page Technical Monograph (papers/causalpose3d-monograph/main.tex)
-tectonic papers/causalpose3d-monograph/main.tex
+# Compile the 8-page method paper (self-contained: figures are vendored)
+cd papers/evidencescene-short && tectonic main.tex && cd ../..
+
+# Compile the 17-page Technical Monograph
+cd papers/evidencescene-monograph && tectonic main.tex && cd ../..
 ```
 
 ---
@@ -259,8 +266,8 @@ tectonic papers/causalpose3d-monograph/main.tex
 ## 📂 Repository Organization
 
 ```text
-causalpose3d/
-├── causalpose3d/                  # Core Python library (100% standalone)
+evidencescene/
+├── evidencescene/                  # Core Python library (100% standalone)
 │   ├── surface/                   # RevisableSurfelMap, CausalObjectSurface (M, S), multi-camera surface fusion
 │   ├── tracking/                  # PinnedBundleTrackRunner, 3-camera pose runtime, constrained Top XY refinement
 │   ├── observability/             # Point2Pose F/G/R Schur-complement gating & pose-owner A/B evaluators
@@ -270,9 +277,9 @@ causalpose3d/
 ├── native/bundletrack/            # Deterministic C++/CUDA BundleTrack sources & patch series (0001–0004)
 ├── benchmarks/                    # Reproducible evaluation receipts, ablation scripts, and table generators
 ├── papers/                        # LaTeX sources, figures, and compiled PDFs for both manuscripts
-│   ├── causalpose3d-monograph/    # 17-page full technical monograph
-│   └── causalpose3d-short/        # 8-page comparative paper
-├── docs/                          # Academic project page (https://tiwater.github.io/causalpose3d/)
+│   ├── evidencescene-monograph/    # 17-page full technical monograph
+│   └── evidencescene-short/        # 8-page method paper
+├── docs/                          # Academic project page (https://tiwater.github.io/evidencescene/)
 └── tests/                         # Unit and regression test suite
 ```
 
@@ -280,15 +287,15 @@ causalpose3d/
 
 ## 🔖 Citation
 
-If you find **CausalPose-3D**, our deterministic C++/CUDA BundleTrack patches, or our factor-graph observability analysis useful in your research, please cite:
+If you find **EvidenceScene**, our deterministic C++/CUDA BundleTrack patches, or our factor-graph observability analysis useful in your research, please cite:
 
 ```bibtex
-@article{tiwater2026causalpose3d,
-  title   = {{CausalPose-3D}: Causal Observability-Conditioned 6D Pose Tracking and 3D Surface Reconstruction from {RGB-D} Video},
+@article{tiwater2026evidencescene,
+  title   = {{EvidenceScene}: Observability-Conditioned Pose Tracking and Revisable 3D Scene Reconstruction for Robot Manipulation},
   author  = {{Tiwater Research}},
   journal = {arXiv preprint},
   year    = {2026},
-  url     = {https://tiwater.github.io/causalpose3d/}
+  url     = {https://tiwater.github.io/evidencescene/}
 }
 ```
 

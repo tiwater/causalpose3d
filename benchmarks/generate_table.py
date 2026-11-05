@@ -1,9 +1,10 @@
 """Build the manuscript's primary table from committed local score receipts."""
 import hashlib
 import json
+import os
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[3]
-P=ROOT/'docs/papers'
+ROOT=Path(__file__).resolve().parents[1]
+P=Path(os.environ.get('TICOS_PAPERS_DIR', ROOT/'benchmarks'/'receipts'))
 def read(relative, digest):
  data=(P/relative).read_bytes()
  if hashlib.sha256(data).hexdigest()!=digest:raise ValueError(f'score changed: {relative}')
