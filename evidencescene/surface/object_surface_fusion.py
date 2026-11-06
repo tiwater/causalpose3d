@@ -256,10 +256,17 @@ class RevisableSurfelMap:
             raise ValueError('surface voxel budget exceeded')
         for key, i in indices.items():
             if support[i]:
-                cameras = (
-                    {camera: int(counts[i]) for camera, counts in camera_counts.items() if counts[i]}
-                    if dense else sparse_cameras[i]
-                )
+                if dense:
+                    # A dict comprehension is measurably slower here because
+                    # this loop runs once per touched voxel.  The explicit
+                    # loop produces the same camera-count dict.
+                    cameras = {}
+                    for camera, counts in camera_counts.items():
+                        count = int(counts[i])
+                        if count:
+                            cameras[camera] = count
+                else:
+                    cameras = sparse_cameras[i]
                 old = old_values[i]
                 if old is None:
                     self._totals[key] = [sums[i].copy(), int(support[i]), cameras]

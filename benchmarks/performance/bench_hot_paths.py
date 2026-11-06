@@ -85,6 +85,30 @@ def _voxel_centroid_benchmark() -> dict:
     return {"case": "voxel_centroids_60k_points", **result}
 
 
+def _update_benchmark() -> dict:
+    grid = np.indices((40, 40, 40)).reshape(3, -1).T[:60_000]
+    points = grid.astype(np.float64) * 0.004
+    samples = []
+    for _ in range(8):
+        surfel_map = RevisableSurfelMap(
+            voxel_size_m=0.004,
+            maximum_voxels=100_000,
+            maximum_live_bytes=512 * 1024 * 1024,
+        )
+        start = time.perf_counter()
+        surfel_map.update({"chest": ("chest", points)})
+        samples.append((time.perf_counter() - start) * 1000.0)
+        surfel_map.close()
+    ordered = sorted(samples)
+    return {
+        "case": "surface_update_60k_points",
+        "median_ms": round(statistics.median(samples), 4),
+        "p95_ms": round(ordered[min(len(ordered) - 1, int(0.95 * len(ordered)))], 4),
+        "min_ms": round(min(samples), 4),
+        "repeat": len(samples),
+    }
+
+
 def _consensus_benchmark() -> dict:
     rng = np.random.default_rng(3)
     angles = np.linspace(0.0, 2.0 * np.pi, 400, endpoint=False)
@@ -126,6 +150,7 @@ def main() -> None:
         "numpy": np.__version__,
         "results": [
             _snapshot_benchmark(),
+            _update_benchmark(),
             _voxel_centroid_benchmark(),
             _consensus_benchmark(),
             _aperture_benchmark(),
