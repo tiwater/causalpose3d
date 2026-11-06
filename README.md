@@ -153,6 +153,30 @@ Comparison of surface selection policies under a fixed $N_{\max} = 1,500$ surfel
 
 ---
 
+## ⏱️ Performance benchmark (`kernel-v1`)
+
+The reproducible kernel benchmark lives in
+[`benchmarks/performance/`](benchmarks/performance/). It measures seven
+deterministic, output-preserving hot paths and records an output digest for
+each one, so a faster version cannot silently change the result.
+
+```sh
+make perf                 # run the suite
+make benchmark-versions   # compare 04a1b6b (pre-optimization) with HEAD
+```
+
+The checked-in comparison
+[`04a1b6b_vs_6c0e8f4.md`](benchmarks/performance/results/04a1b6b_vs_6c0e8f4.md)
+reports a **1.65x geometric-mean speed-up** across the seven workloads with
+**all output digests identical** on the recorded host. This is a kernel
+microbenchmark, not recorded-session endpoint latency or accuracy evidence.
+For cross-system comparison, use the strict
+[`system-performance.v1`](benchmarks/performance/system_schema.json) schema and
+`compare_systems.py`; do not compare BundleTrack/Point2Pose system latencies to
+kernel timings.
+
+---
+
 ## 🛠️ Installation & Usage
 
 ### 1. Python Package Installation

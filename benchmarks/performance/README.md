@@ -86,13 +86,16 @@ Same host, Python 3.10.12, NumPy 1.21.5, warm process.
 
 | Case | Before | After | Speed-up |
 | --- | ---: | ---: | ---: |
-| `surface_snapshot_60k_budget_1500` | 19.8 ms | 8.6 ms | 2.3x |
-| `surface_update_60k_points` | 70.4 ms | 58.3 ms | 1.2x |
-| `voxel_centroids_60k_points` | 10.5 ms | 6.0 ms | 1.7x |
-| `rle_box_centroid_480x640` | 0.094 ms | 0.091 ms | 1.0x |
-| `surface_selection_60k_budget_1500` | 15.48 ms | 15.51 ms | 1.0x |
-| `circle_consensus_400_points_256_hypotheses` | 4.49 ms | 1.76 ms | 2.6x |
-| `circular_aperture_fit_400_points` | 4.43 ms | 1.51 ms | 2.9x |
+| `surface_snapshot_60k_budget_1500` | 20.48 ms | 8.77 ms | 2.33x |
+| `surface_update_60k_points` | 72.99 ms | 62.02 ms | 1.18x |
+| `voxel_centroids_60k_points` | 10.33 ms | 6.06 ms | 1.70x |
+| `rle_box_centroid_480x640` | 0.092 ms | 0.093 ms | 0.99x |
+| `surface_selection_60k_budget_1500` | 15.52 ms | 15.46 ms | 1.00x |
+| `circle_consensus_400_points_256_hypotheses` | 4.45 ms | 1.75 ms | 2.55x |
+| `circular_aperture_fit_400_points` | 4.35 ms | 1.52 ms | 2.87x |
+
+The RLE and selection workloads are unchanged within run-to-run noise; the report
+keeps them visible rather than hiding non-improvements.
 
 These are kernel microbenchmarks on one host. They do not establish end-to-end
 latency, live-site acceptance or a production cutover. Report the CPU, Python,
