@@ -31,7 +31,10 @@ from evidencescene.surface.object_surface_fusion import (
     RevisableSurfelMap,
     observation_voxel_centroids,
 )
-from evidencescene.teleop.task_features import compare_circle_consensus_3d
+from evidencescene.teleop.task_features import (
+    compare_circle_consensus_3d,
+    fit_circular_aperture_3d,
+)
 
 
 def _timed_ms(function, *, repeat: int, warmup: int = 3) -> dict[str, float]:
@@ -98,6 +101,24 @@ def _consensus_benchmark() -> dict:
     return {"case": "circle_consensus_400_points_256_hypotheses", **result}
 
 
+def _aperture_benchmark() -> dict:
+    rng = np.random.default_rng(3)
+    angles = np.linspace(0.0, 2.0 * np.pi, 400, endpoint=False)
+    rim = np.column_stack(
+        [
+            0.04 * np.cos(angles),
+            0.04 * np.sin(angles),
+            np.zeros_like(angles),
+        ]
+    )
+    rim += rng.normal(0.0, 0.0005, rim.shape)
+    result = _timed_ms(
+        lambda: fit_circular_aperture_3d(rim),
+        repeat=30,
+    )
+    return {"case": "circular_aperture_fit_400_points", **result}
+
+
 def main() -> None:
     payload = {
         "scope": "synthetic microbenchmark; not recorded-session endpoint latency",
@@ -107,6 +128,7 @@ def main() -> None:
             _snapshot_benchmark(),
             _voxel_centroid_benchmark(),
             _consensus_benchmark(),
+            _aperture_benchmark(),
         ],
     }
     print(json.dumps(payload, indent=2, sort_keys=True))

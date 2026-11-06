@@ -20,9 +20,10 @@ checked-in benchmark.
 
 | Case | Before | After | Speed-up |
 | --- | ---: | ---: | ---: |
-| `RevisableSurfelMap.snapshot`, 60k voxels, 1,500-point budget | 19.6 ms | 8.6 ms | 2.3x |
+| `RevisableSurfelMap.snapshot`, 60k voxels, 1,500-point budget | 19.6 ms | 8.8 ms | 2.2x |
 | `observation_voxel_centroids`, 60k points | 10.4 ms | 6.0 ms | 1.7x |
-| `compare_circle_consensus_3d`, 400 rim points, 256 hypotheses | 4.59 ms | 1.73–2.06 ms | 2.2–2.7x |
+| `compare_circle_consensus_3d`, 400 rim points, 256 hypotheses | 4.59 ms | 1.80 ms | 2.5x |
+| `fit_circular_aperture_3d`, 400 rim points | 4.38 ms | 1.51 ms | 2.9x |
 
 The centroid change replaces `np.add.at` with three `np.bincount` accumulations
 (4.7 ms → 0.34 ms for the accumulation step), preserving exact sums. The
