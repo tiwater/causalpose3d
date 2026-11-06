@@ -71,3 +71,59 @@ def test_rle_run_interval_geometry() -> None:
     assert bbox == (4, 2, 6, 3)
     assert np.isclose(centroid[0], 5.0)
     assert np.isclose(centroid[1], 2.5)
+
+
+def test_surface_snapshot_matches_reference_priority() -> None:
+    import numpy as np
+
+    from evidencescene.surface.object_surface_fusion import RevisableSurfelMap
+
+    base = np.array(
+        [[0.0, 0.0, 0.0], [0.01, 0.0, 0.0], [0.0, 0.01, 0.0], [0.0, 0.0, 0.01]],
+        dtype=np.float64,
+    )
+    surfel_map = RevisableSurfelMap(
+        voxel_size_m=0.005,
+        maximum_voxels=128,
+        maximum_live_bytes=1 << 20,
+    )
+    surfel_map.update({"chest": ("chest", base), "head": ("head", base)})
+    # Add a support-1 and a three-camera voxel to exercise both sort keys.
+    surfel_map.update({"wrist": ("wrist", np.array([[0.02, 0.0, 0.0]]))})
+
+    for budget in (1, 3, 8):
+        points, support, cameras, keys = surfel_map.snapshot(
+            minimum_observation_support=1,
+            maximum_point_count=budget,
+            include_voxel_keys=True,
+        )
+        rows = []
+        for key, value in surfel_map._totals.items():
+            if value[1] >= 1:
+                rows.append((key, value[1], len(value[2]), value[0] / value[1]))
+        rows.sort(key=lambda row: (-row[1], -row[2], row[0][0], row[0][1], row[0][2]))
+        rows = rows[:budget]
+        assert len(points) == len(rows)
+        np.testing.assert_array_equal(keys, np.asarray([row[0] for row in rows]))
+        np.testing.assert_array_equal(support, np.asarray([row[1] for row in rows]))
+        np.testing.assert_array_equal(cameras, np.asarray([row[2] for row in rows]))
+        np.testing.assert_allclose(points, np.asarray([row[3] for row in rows]), rtol=0, atol=0)
+
+
+def test_voxel_centroid_accumulation_is_exact() -> None:
+    import numpy as np
+
+    from evidencescene.surface.object_surface_fusion import observation_voxel_centroids
+
+    rng = np.random.default_rng(11)
+    keys = rng.integers(0, 8, size=(400, 3), dtype=np.int64)
+    points = keys.astype(np.float64) * 0.004 + rng.normal(0.0, 1e-7, (400, 3))
+    unique, centroids = observation_voxel_centroids(points, 0.004)
+    cell_keys = np.floor(points / 0.004).astype(np.int64)
+    groups: dict[tuple[int, int, int], list[np.ndarray]] = {}
+    for key, point in zip(map(tuple, cell_keys.tolist()), points, strict=True):
+        groups.setdefault(key, []).append(point)
+    ordered = sorted(groups)
+    np.testing.assert_array_equal(unique, np.asarray(ordered, dtype=np.int64))
+    expected = np.asarray([np.mean(groups[key], axis=0) for key in ordered])
+    np.testing.assert_array_equal(centroids, expected)

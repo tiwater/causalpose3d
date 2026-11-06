@@ -253,6 +253,7 @@ python3 benchmarks/generate_generated_mask_table.py
 make tables        # regenerate the checked-in table fragments
 make paper-short   # build papers/evidencescene-short/evidencescene-short.pdf
 make paper         # build both manuscripts
+make perf          # synthetic hot-path microbenchmarks (not endpoint latency)
 
 # Compile the 8-page method paper (self-contained: figures are vendored)
 cd papers/evidencescene-short && tectonic main.tex && cd ../..

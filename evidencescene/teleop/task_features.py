@@ -10,6 +10,7 @@ Provides first-principles geometric fitting and uncertainty propagation for:
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import lru_cache
 import math
 from typing import Sequence
 
@@ -175,6 +176,23 @@ def _kasa_circle_fit_2d(xy: np.ndarray) -> tuple[np.ndarray, float, float]:
     return center, radius, rmse
 
 
+@lru_cache(maxsize=32)
+def _circle_consensus_triplets(n: int, max_hypotheses: int) -> np.ndarray:
+    """Deterministic triplets for the rim consensus check.
+
+    The original loop drew one ``Generator.choice`` per hypothesis.  Caching
+    the resulting stream preserves that exact sequence while avoiding the
+    per-call Python RNG overhead on repeated aperture fits.
+    """
+    rng = np.random.default_rng(seed=1729)
+    count = max(1, int(max_hypotheses))
+    indices = np.empty((count, 3), dtype=np.int64)
+    for i in range(count):
+        indices[i] = rng.choice(n, size=3, replace=False)
+    indices.flags.writeable = False
+    return indices
+
+
 def compare_circle_consensus_3d(
     points_2d: np.ndarray,
     *,
@@ -185,55 +203,87 @@ def compare_circle_consensus_3d(
     max_center_discrepancy_m: float = 0.015,
     max_radius_discrepancy_m: float = 0.015,
 ) -> tuple[bool, np.ndarray, float]:
-    """Deterministic 3-point RANSAC circle consensus check against algebraic fit."""
+    """Deterministic 3-point RANSAC circle consensus check against algebraic fit.
+
+    Hypotheses are evaluated in blocks so the residual matrix stays bounded
+    for large rims.  The triplet stream, inlier test, strict tie-breaking and
+    per-hypothesis RMSE are identical to the original scalar loop.
+    """
     pts = np.asarray(points_2d, dtype=np.float64)
     n = len(pts)
     if n < 6:
         return False, fitted_center_2d, fitted_radius_m
 
-    rng = np.random.default_rng(seed=1729)
+    fitted_center = np.asarray(fitted_center_2d, dtype=np.float64)
+    fitted_radius = float(fitted_radius_m)
+    hypotheses = max(1, int(max_hypotheses))
+    triplets = _circle_consensus_triplets(n, hypotheses)
     best_inliers = -1
     best_rmse = math.inf
-    best_center = np.asarray(fitted_center_2d, dtype=np.float64)
-    best_radius = float(fitted_radius_m)
+    best_center: np.ndarray | None = None
+    best_radius: float | None = None
 
-    for _ in range(max(1, int(max_hypotheses))):
-        idx = rng.choice(n, size=3, replace=False)
-        p1, p2, p3 = pts[idx[0]], pts[idx[1]], pts[idx[2]]
-        # Circumcircle of 3 points
-        ax, ay = p1
-        bx, by = p2
-        cx, cy = p3
+    block_size = 64
+    for block_start in range(0, hypotheses, block_size):
+        idx = triplets[block_start:block_start + block_size]
+        p1, p2, p3 = pts[idx[:, 0]], pts[idx[:, 1]], pts[idx[:, 2]]
+        ax, ay = p1[:, 0], p1[:, 1]
+        bx, by = p2[:, 0], p2[:, 1]
+        cx, cy = p3[:, 0], p3[:, 1]
         d = 2.0 * (ax * (by - cy) + bx * (cy - ay) + cx * (ay - by))
-        if abs(d) < 1e-10:
+        valid = np.abs(d) >= 1e-10
+        if not np.any(valid):
             continue
+        # Drop degenerate triples before division so the vectorized circumcenter
+        # uses the same arithmetic as the scalar path.
+        ax, ay = ax[valid], ay[valid]
+        bx, by = bx[valid], by[valid]
+        cx, cy = cx[valid], cy[valid]
+        d = d[valid]
         a2 = ax * ax + ay * ay
         b2 = bx * bx + by * by
         c2 = cx * cx + cy * cy
         ux = (a2 * (by - cy) + b2 * (cy - ay) + c2 * (ay - by)) / d
         uy = (a2 * (cx - bx) + b2 * (ax - cx) + c2 * (bx - ax)) / d
-        center = np.array([ux, uy], dtype=np.float64)
-        radius = float(np.linalg.norm(p1 - center))
-        if not (0.01 <= radius <= 0.35):
+        centers = np.column_stack([ux, uy])
+        p1_valid = p1[valid]
+        radii = np.linalg.norm(p1_valid - centers, axis=1)
+        keep = (radii >= 0.01) & (radii <= 0.35)
+        if not np.any(keep):
             continue
-        residuals = np.abs(np.linalg.norm(pts - center[None, :], axis=1) - radius)
+        centers = centers[keep]
+        radii = radii[keep]
+        residuals = np.abs(
+            np.linalg.norm(pts[None, :, :] - centers[:, None, :], axis=2)
+            - radii[:, None]
+        )
         inliers = residuals <= inlier_threshold_m
-        count = int(np.count_nonzero(inliers))
-        rmse = float(np.mean(residuals[inliers])) if count > 0 else math.inf
-        if count > best_inliers or (count == best_inliers and rmse < best_rmse):
-            best_inliers = count
-            best_rmse = rmse
-            best_center = center
-            best_radius = radius
+        counts = np.count_nonzero(inliers, axis=1)
+        for j in range(len(centers)):
+            count = int(counts[j])
+            if count < best_inliers:
+                continue
+            row = residuals[j][inliers[j]]
+            rmse = float(np.mean(row)) if count > 0 else math.inf
+            if count > best_inliers or (count == best_inliers and rmse < best_rmse):
+                best_inliers = count
+                best_rmse = rmse
+                best_center = centers[j].copy()
+                best_radius = float(radii[j])
 
-    center_diff = float(np.linalg.norm(best_center - fitted_center_2d))
-    radius_diff = abs(best_radius - float(fitted_radius_m))
+    if best_center is None:
+        # No admissible hypothesis: preserve the original fitted values and
+        # the original agreement check (zero discrepancy).
+        best_center = fitted_center.copy()
+        best_radius = fitted_radius
+
+    center_diff = float(np.linalg.norm(best_center - fitted_center))
+    radius_diff = abs(float(best_radius) - fitted_radius)
     agreed = (
         center_diff <= max_center_discrepancy_m
         and radius_diff <= max_radius_discrepancy_m
     )
     return agreed, best_center, best_radius
-
 
 def fit_circular_aperture_3d(
     points_m: np.ndarray,

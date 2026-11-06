@@ -1,10 +1,13 @@
 PYTHON ?= python3
 TECTONIC ?= tectonic
 
-.PHONY: test tables paper paper-short paper-monograph
+.PHONY: test tables paper paper-short paper-monograph perf
 
 test:
 	$(PYTHON) -m pytest -q
+
+perf:
+	$(PYTHON) benchmarks/performance/bench_hot_paths.py
 
 # Regenerate the checked-in table fragments from the vendored receipts.
 # Receipt hashes are verified by the generators before rendering.

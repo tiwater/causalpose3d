@@ -336,3 +336,30 @@ def test_shadow_surface_snapshot_and_multi_camera_pose_runtime() -> None:
     )
     assert pub.published is True
     assert pub.degraded is False
+
+
+def test_circle_consensus_is_deterministic_across_cached_triplets() -> None:
+    from evidencescene.teleop.task_features import compare_circle_consensus_3d
+
+    angles = np.linspace(0.0, 2.0 * np.pi, 400, endpoint=False)
+    rim = np.column_stack([0.04 * np.cos(angles), 0.04 * np.sin(angles)])
+    first = compare_circle_consensus_3d(
+        rim,
+        fitted_center_2d=np.zeros(2),
+        fitted_radius_m=0.04,
+    )
+    second = compare_circle_consensus_3d(
+        rim,
+        fitted_center_2d=np.zeros(2),
+        fitted_radius_m=0.04,
+    )
+    assert first[0] is second[0]
+    np.testing.assert_array_equal(first[1], second[1])
+    assert first[2] == second[2]
+
+    too_few = compare_circle_consensus_3d(
+        rim[:5],
+        fitted_center_2d=np.zeros(2),
+        fitted_radius_m=0.04,
+    )
+    assert too_few[0] is False

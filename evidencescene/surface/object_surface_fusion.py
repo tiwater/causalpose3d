@@ -5,6 +5,7 @@ count. Retiring a native frame commits its last contribution; it does not erase
 the observed surface. Object identity, coordinate gauge and chronology belong
 to the caller. This module estimates neither pose nor unobserved geometry.
 """
+import itertools
 import math
 
 import numpy as np
@@ -128,8 +129,17 @@ def observation_voxel_centroids(raw_points, voxel_size_m):
     counts = np.diff(np.r_[starts, len(keys)])
     inverse = np.empty(len(keys), dtype=np.intp)
     inverse[order] = np.repeat(np.arange(len(starts)), counts)
-    sums = np.zeros((len(unique), 3), dtype=np.float64)
-    np.add.at(sums, inverse, points)
+    if not len(unique):
+        return unique, np.empty((0, 3), dtype=np.float64)
+    # np.add.at is a notoriously slow unbuffered ufunc; bincount performs the
+    # same sequential accumulation in C and is bit-identical for these inputs.
+    sums = np.empty((len(unique), 3), dtype=np.float64)
+    for axis in range(3):
+        sums[:, axis] = np.bincount(
+            inverse,
+            weights=points[:, axis],
+            minlength=len(unique),
+        )
     return unique, sums / counts[:, None]
 
 def _index_surface_events(live, prepared):
@@ -311,14 +321,29 @@ class RevisableSurfelMap:
             raise ValueError("positive surface support and output count required")
         if type(include_voxel_keys) is not bool:
             raise ValueError("explicit voxel-key export boolean required")
-        keys = [key for key, value in self._totals.items()
-                if value[1] >= minimum_observation_support]
+        # One pass over the totals: keep the tuple keys for the deterministic
+        # grid ordering, and build the numeric columns with np.fromiter.  A
+        # direct np.asarray(list_of_tuples) is substantially slower for the
+        # 10k--100k-voxel maps this owner is expected to hold.
+        keys = []
+        support_values = []
+        camera_values = []
+        for key, value in self._totals.items():
+            if value[1] >= minimum_observation_support:
+                keys.append(key)
+                support_values.append(value[1])
+                camera_values.append(len(value[2]))
         if not keys:
             empty = (np.empty((0, 3)), np.empty(0, dtype=np.int64), np.empty(0, dtype=np.int64))
             return (*empty, np.empty((0, 3), dtype=np.int64)) if include_voxel_keys else empty
-        support = np.array([self._totals[k][1] for k in keys], dtype=np.int64)
-        cameras = np.array([len(self._totals[k][2]) for k in keys], dtype=np.int64)
-        grid = np.asarray(keys)
+        count = len(keys)
+        support = np.fromiter(support_values, dtype=np.int64, count=count)
+        cameras = np.fromiter(camera_values, dtype=np.int64, count=count)
+        grid = np.fromiter(
+            itertools.chain.from_iterable(keys),
+            dtype=np.int64,
+            count=count * 3,
+        ).reshape(count, 3)
         if len(keys) > maximum_point_count:
             order = np.lexsort((grid[:, 2], grid[:, 1], grid[:, 0], -support, -cameras))[:maximum_point_count]
         else:
