@@ -1,0 +1,42 @@
+{
+  "environment": {
+    "cpu": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "numpy": "2.5.0",
+    "python": "3.12.13",
+    "torch": "2.8.0+cu128"
+  },
+  "metrics": {
+    "frames": 40,
+    "nonlost_frames": 40,
+    "p50_ms": 30.235,
+    "p50_runs_ms": [
+      30.05,
+      30.235,
+      30.293
+    ],
+    "p95_ms": 33.049,
+    "p95_runs_ms": [
+      34.169,
+      32.676,
+      33.049
+    ],
+    "peak_rss_mb": 2544.8,
+    "peak_rss_runs_mb": [
+      2546.0,
+      2544.8,
+      2533.5
+    ],
+    "repeats": 3
+  },
+  "notes": "Pose tracking only; per-frame reference masks; surface integration disabled. Warm statistics exclude the first --warmup frames. Three independent runs; metrics are the median of run-level statistics.",
+  "protocol": "ycbineoat_bleach0_refmask_40f_v1",
+  "schema": "evidencescene.system-performance.v1",
+  "session": {
+    "frames": 40,
+    "id": "ycbineoat/bleach0",
+    "input_sha256": "39ae471e99f341be2296762e4224b9f12449ff49657c780781aceae5bd798b3b"
+  },
+  "system": "EvidenceScene native BundleTrack branch",
+  "version": "controlled-ycb-v1"
+}

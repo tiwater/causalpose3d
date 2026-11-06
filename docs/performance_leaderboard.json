@@ -1,0 +1,86 @@
+{
+  "schema": "evidencescene.performance-leaderboard.v1",
+  "updated": "2026-11-06",
+  "controlled": {
+    "protocol": "ycbineoat_bleach0_refmask_40f_v1",
+    "session": "YCBInEOAT bleach0",
+    "frames": 40,
+    "input_sha256": "39ae471e99f341be2296762e4224b9f12449ff49657c780781aceae5bd798b3b",
+    "hardware": "NVIDIA RTX 5090 32 GB / AMD Ryzen 7 9800X3D",
+    "software": "Python 3.12.13 / PyTorch 2.8.0+cu128 / CUDA 12.9",
+    "notes": "Same 40 RGB-D frames, same per-frame reference masks, same host and GPU. Metrics are medians of three independent runs; warm statistics exclude the first five frames per run. These are online tracking-stage measurements; neither row includes a full HTTP/ROS transport or a segmenter.",
+    "rows": [
+      {
+        "system": "EvidenceScene native pose branch",
+        "variant": "BundleTrack backend + deterministic patches",
+        "scope": "Pose tracking only; surface integration disabled",
+        "p50_ms": 30.235,
+        "p95_ms": 33.049,
+        "throughput_fps": 33.1,
+        "frames": "40 / 40 candidates",
+        "source": "controlled local run, 2026-11-06",
+        "source_url": "https://github.com/tiwater/evidencescene/blob/main/benchmarks/performance/system_ycb/README.md",
+        "highlight": true,
+        "peak_rss_mb": 2544.8
+      },
+      {
+        "system": "Point2Pose",
+        "variant": "reference masks; segmenter disabled",
+        "scope": "Frontend + local/global graph; SDF global rebuild disabled",
+        "p50_ms": 41.601,
+        "p95_ms": 42.456,
+        "throughput_fps": 24.0,
+        "frames": "40 / 40 non-lost",
+        "source": "controlled local run, 2026-11-06",
+        "source_url": "https://github.com/tiwater/evidencescene/blob/main/benchmarks/performance/system_ycb/README.md",
+        "highlight": false,
+        "peak_rss_mb": 2219.9
+      }
+    ]
+  },
+  "reference": {
+    "notes": "Published or historical numbers from different inputs, scopes and protocols. They are context, not a ranking, and must not be compared numerically to the controlled group above.",
+    "rows": [
+      {
+        "system": "EvidenceScene",
+        "scope": "Warm HTTP endpoint; 40-frame configured pouring sequence",
+        "latency_text": "127.80 / 153.40 ms (p50 / p95)",
+        "hardware": "RTX 5090",
+        "source": "paper Table IX",
+        "source_url": "assets/papers/evidencescene-short.pdf"
+      },
+      {
+        "system": "BundleTrack (upstream)",
+        "scope": "Tracking stage; Laval Clock/Jar",
+        "latency_text": "98.4 / 118.1\u2013122.9 ms (p50 / p95)",
+        "hardware": "RTX 5090",
+        "source": "paper matcher-shadow table",
+        "source_url": "assets/papers/evidencescene-short.pdf"
+      },
+      {
+        "system": "Point2Pose",
+        "scope": "Private two-object worker round trip; 552 frames",
+        "latency_text": "142.97 / 175.96 ms (p50 / p95)",
+        "hardware": "RTX 5090 workstation",
+        "source": "Ticos Edge timing receipt",
+        "source_url": "https://github.com/tiwater/ticos-edge/blob/main/docs/papers/ticos-0804-worker-timing-repeat-20261029/summary.json"
+      },
+      {
+        "system": "BundleSDF",
+        "scope": "Neural SDF tracking/reconstruction; chest/head observations",
+        "latency_text": "97 ms (10.3 fps)",
+        "hardware": "RTX 5090",
+        "source": "monograph framework table",
+        "source_url": "assets/papers/evidencescene-monograph.pdf"
+      },
+      {
+        "system": "FoundationPose",
+        "scope": "Pose initialization/tracking; CAD or reference views",
+        "latency_text": "65\u2013120 ms",
+        "hardware": "RTX 5090",
+        "source": "monograph framework table",
+        "source_url": "assets/papers/evidencescene-monograph.pdf"
+      }
+    ]
+  }
+}

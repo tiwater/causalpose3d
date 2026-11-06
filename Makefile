@@ -1,7 +1,7 @@
 PYTHON ?= python3
 TECTONIC ?= tectonic
 
-.PHONY: test tables paper paper-short paper-monograph perf benchmark-versions
+.PHONY: test tables paper paper-short paper-monograph perf benchmark-versions leaderboard
 
 test:
 	$(PYTHON) -m pytest -q
@@ -11,6 +11,9 @@ perf:
 
 benchmark-versions:
 	./benchmarks/performance/run_versions.sh 04a1b6b HEAD
+
+leaderboard:
+	$(PYTHON) tools/render_performance_leaderboard.py
 
 # Regenerate the checked-in table fragments from the vendored receipts.
 # Receipt hashes are verified by the generators before rendering.

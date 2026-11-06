@@ -142,7 +142,22 @@ schema:
 `session.input_sha256`; mismatched inputs are rejected. The numbers above are
 an illustrative shape, not a new measurement.
 
-The repository does not yet contain runnable BundleTrack/Point2Pose system
-adapters or their frozen input manifests. Producing those numbers requires
-their compiled environments and the recorded RGB-D/masks; that is a separate
-integration step, not something that can be inferred from kernel timings.
+### Controlled YCB system track
+
+The first controlled system comparison is checked in under
+[`system_ycb/`](system_ycb/). It uses the same 40 YCBInEOAT `bleach0` frames,
+per-frame reference masks, host and RTX 5090 for both systems:
+
+| System | p50 | p95 | Throughput | Peak RSS |
+| --- | ---: | ---: | ---: | ---: |
+| EvidenceScene native BundleTrack branch | 30.24 ms | 33.05 ms | 33.1 fps | 2544.8 MB |
+| Point2Pose | 41.60 ms | 42.46 ms | 24.0 fps | 2219.9 MB |
+
+Both use `evidencescene.system-performance.v1`, share the same input SHA-256,
+and pass `compare_systems.py`. The scripts and environment requirements are in
+[`system_ycb/README.md`](system_ycb/README.md). The project page renders these
+controlled rows separately from published reference numbers.
+
+Other systems can be added by producing a `system-performance.v1` result with
+the same protocol and frozen input hash; no kernel timing can be substituted
+for that system-level measurement.

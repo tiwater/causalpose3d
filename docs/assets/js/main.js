@@ -16,6 +16,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Open a specific benchmark tab from the top navigation.
+  document.querySelectorAll("[data-open-tab]").forEach((link) => {
+    link.addEventListener("click", () => {
+      const target = document.querySelector(
+        `.tab-btn[data-tab="${link.getAttribute("data-open-tab")}"]`
+      );
+      if (target) target.click();
+    });
+  });
+
   // 2. Copy BibTeX to Clipboard
   const copyBtn = document.getElementById("copy-bibtex-btn");
   const bibtexCode = document.getElementById("bibtex-content");

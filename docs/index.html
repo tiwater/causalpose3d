@@ -17,12 +17,13 @@
     <div class="nav-container">
       <a href="#" class="nav-brand">
         <span>EvidenceScene</span>
-        <span class="nav-badge">v1.0 Research Release</span>
+        <span class="nav-badge">v2.0.0 Research Release</span>
       </a>
       <ul class="nav-links">
         <li><a href="#abstract">Abstract</a></li>
         <li><a href="#architecture">Architecture</a></li>
         <li><a href="#benchmarks">Benchmarks</a></li>
+        <li><a href="#benchmarks" data-open-tab="tab-performance">Performance</a></li>
         <li><a href="#visualizations">Visualizations</a></li>
         <li><a href="#papers">Papers</a></li>
         <li><a href="#citation">BibTeX</a></li>
@@ -203,6 +204,7 @@
         <button class="tab-btn" data-tab="tab-surface-selector">3. RevisableSurfelMap &amp; Surface Lineage</button>
         <button class="tab-btn" data-tab="tab-runtime-overlap">4. Zero-Loss Runtime Optimization</button>
         <button class="tab-btn" data-tab="tab-31-frameworks">5. 31-Framework Landscape</button>
+        <button class="tab-btn" data-tab="tab-performance">6. Performance &amp; Latency</button>
       </div>
 
       <!-- Tab 1: Public 6D Pose Benchmark -->
@@ -564,6 +566,46 @@
         <div class="claim-callout">
           <strong>Scientific Claim Boundary:</strong> While <strong>EvidenceScene</strong> achieves substantial gains in determinism, causal observability gating, multi-view surface corroboration, and zero-loss runtime latency over its upstream BundleTrack and Point2Pose baselines, the empirical evidence does not support declaring the project the best universal 6D pose tracker across all unconstrained regimes (e.g., when a high-resolution watertight CAD model is available a priori for FoundationPose, or under total prolonged four-camera occlusion).
         </div>
+      </div>
+
+      <!-- Tab 6: Performance & Latency -->
+      <div id="tab-performance" class="tab-panel">
+        <h3>Performance &amp; Latency: Controlled and Reference Measurements</h3>
+        <p class="caption" style="margin-top:0.35rem;">
+          The controlled table uses the same 40 YCBInEOAT <code>bleach0</code> RGB-D frames, per-frame reference masks,
+          host and RTX 5090 for every system. The reference table preserves published or historical numbers with their
+          original scope; it is context, not a cross-protocol ranking.
+        </p>
+        <!-- PERFORMANCE_LEADERBOARD_START -->
+<div class="claim-callout"><strong>How to read this table:</strong> the controlled rows share one frozen input, host and GPU. The reference rows come from different inputs/protocols and are shown only as context — they are not a ranking. Last updated: 2026-11-06. Full protocol and commands: <a href="https://github.com/tiwater/evidencescene/tree/main/benchmarks/performance" target="_blank" rel="noopener">benchmarks/performance</a>.</div>
+
+      <h3>Controlled same-input comparison</h3>
+      <p class="caption" style="margin-top:0.35rem;">
+        Protocol <code>ycbineoat_bleach0_refmask_40f_v1</code> · YCBInEOAT bleach0 · 40 frames ·
+        input SHA-256 <code>39ae471e99f341be…</code><br>
+        NVIDIA RTX 5090 32 GB / AMD Ryzen 7 9800X3D · Python 3.12.13 / PyTorch 2.8.0+cu128 / CUDA 12.9
+      </p>
+      <div class="table-wrapper">
+        <table class="benchmark-table">
+          <thead><tr>
+            <th>System</th><th>Scope</th><th>p50 (ms)</th><th>p95 (ms)</th><th>Throughput (fps)</th><th>Peak RSS (MB)</th><th>Frames</th><th>Source</th>
+          </tr></thead>
+          <tbody><tr class="highlight-row"><td><strong>EvidenceScene native pose branch</strong><br><code>BundleTrack backend + deterministic patches</code></td><td>Pose tracking only; surface integration disabled</td><td><strong>30.23</strong></td><td>33.05</td><td>33.1</td><td>2544.8</td><td>40 / 40 candidates</td><td><a href="https://github.com/tiwater/evidencescene/blob/main/benchmarks/performance/system_ycb/README.md" target="_blank" rel="noopener">controlled local run, 2026-11-06</a></td></tr><tr><td><strong>Point2Pose</strong><br><code>reference masks; segmenter disabled</code></td><td>Frontend + local/global graph; SDF global rebuild disabled</td><td><strong>41.60</strong></td><td>42.46</td><td>24.0</td><td>2219.9</td><td>40 / 40 non-lost</td><td><a href="https://github.com/tiwater/evidencescene/blob/main/benchmarks/performance/system_ycb/README.md" target="_blank" rel="noopener">controlled local run, 2026-11-06</a></td></tr></tbody>
+        </table>
+      </div>
+      <p class="caption">Same 40 RGB-D frames, same per-frame reference masks, same host and GPU. Metrics are medians of three independent runs; warm statistics exclude the first five frames per run. These are online tracking-stage measurements; neither row includes a full HTTP/ROS transport or a segmenter.</p>
+
+      <h3 style="margin-top:2rem;">Reference context (not directly comparable)</h3>
+      <p class="caption" style="margin-top:0.35rem;">Published or historical numbers from different inputs, scopes and protocols. They are context, not a ranking, and must not be compared numerically to the controlled group above.</p>
+      <div class="table-wrapper">
+        <table class="benchmark-table">
+          <thead><tr>
+            <th>System</th><th>Scope / protocol</th><th>Reported latency</th><th>Hardware</th><th>Source</th>
+          </tr></thead>
+          <tbody><tr><td><strong>EvidenceScene</strong></td><td>Warm HTTP endpoint; 40-frame configured pouring sequence</td><td>127.80 / 153.40 ms (p50 / p95)</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-short.pdf" target="_blank" rel="noopener">paper Table IX</a></td></tr><tr><td><strong>BundleTrack (upstream)</strong></td><td>Tracking stage; Laval Clock/Jar</td><td>98.4 / 118.1–122.9 ms (p50 / p95)</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-short.pdf" target="_blank" rel="noopener">paper matcher-shadow table</a></td></tr><tr><td><strong>Point2Pose</strong></td><td>Private two-object worker round trip; 552 frames</td><td>142.97 / 175.96 ms (p50 / p95)</td><td>RTX 5090 workstation</td><td><a href="https://github.com/tiwater/ticos-edge/blob/main/docs/papers/ticos-0804-worker-timing-repeat-20261029/summary.json" target="_blank" rel="noopener">Ticos Edge timing receipt</a></td></tr><tr><td><strong>BundleSDF</strong></td><td>Neural SDF tracking/reconstruction; chest/head observations</td><td>97 ms (10.3 fps)</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-monograph.pdf" target="_blank" rel="noopener">monograph framework table</a></td></tr><tr><td><strong>FoundationPose</strong></td><td>Pose initialization/tracking; CAD or reference views</td><td>65–120 ms</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-monograph.pdf" target="_blank" rel="noopener">monograph framework table</a></td></tr></tbody>
+        </table>
+      </div>
+<!-- PERFORMANCE_LEADERBOARD_END -->
       </div>
     </div>
   </section>
