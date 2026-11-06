@@ -1,0 +1,97 @@
+{
+  "benchmark_id": "kernel-v1",
+  "environment": {
+    "cpu": "AMD Ryzen 7 9800X3D 8-Core Processor",
+    "numpy": "1.21.5",
+    "platform": "Linux-6.8.0-106-generic-x86_64-with-glibc2.35",
+    "python": "3.10.12"
+  },
+  "label": "6c0e8f4",
+  "package": {
+    "git_sha": "6c0e8f4fe0ff415c8563b11c24ce77ad7ab7a831",
+    "name": "evidencescene",
+    "root": "/tmp/tmp.yX3Ep0f30l/candidate",
+    "version": "2.0.0"
+  },
+  "results": [
+    {
+      "case": "surface_snapshot_60k_budget_1500",
+      "direction": "lower_is_better",
+      "median_ms": 8.7707,
+      "min_ms": 8.7392,
+      "output_digest": "5e31afc691b2d668",
+      "p95_ms": 8.8398,
+      "repeat": 20,
+      "status": "ok",
+      "unit": "ms"
+    },
+    {
+      "case": "surface_update_60k_points",
+      "direction": "lower_is_better",
+      "median_ms": 62.0171,
+      "min_ms": 57.6833,
+      "output_digest": "172b9afe2175136b",
+      "p95_ms": 66.351,
+      "repeat": 8,
+      "status": "ok",
+      "unit": "ms"
+    },
+    {
+      "case": "voxel_centroids_60k_points",
+      "direction": "lower_is_better",
+      "median_ms": 6.0615,
+      "min_ms": 6.0076,
+      "output_digest": "dc12d7d3c7710735",
+      "p95_ms": 6.091,
+      "repeat": 20,
+      "status": "ok",
+      "unit": "ms"
+    },
+    {
+      "case": "rle_box_centroid_480x640",
+      "direction": "lower_is_better",
+      "median_ms": 0.093,
+      "min_ms": 0.0924,
+      "output_digest": "c5b032dda981175c",
+      "p95_ms": 0.0949,
+      "repeat": 30,
+      "status": "ok",
+      "unit": "ms"
+    },
+    {
+      "case": "surface_selection_60k_budget_1500",
+      "direction": "lower_is_better",
+      "median_ms": 15.4548,
+      "min_ms": 15.3352,
+      "output_digest": "85defb03dd4a50ea",
+      "p95_ms": 15.948,
+      "repeat": 20,
+      "status": "ok",
+      "unit": "ms"
+    },
+    {
+      "case": "circle_consensus_400_points_256_hypotheses",
+      "direction": "lower_is_better",
+      "median_ms": 1.7449,
+      "min_ms": 1.7382,
+      "output_digest": "7a888c264566affb",
+      "p95_ms": 1.7626,
+      "repeat": 50,
+      "status": "ok",
+      "unit": "ms"
+    },
+    {
+      "case": "circular_aperture_fit_400_points",
+      "direction": "lower_is_better",
+      "median_ms": 1.5172,
+      "min_ms": 1.5091,
+      "output_digest": "ddbb2bb3e9b9e719",
+      "p95_ms": 1.5365,
+      "repeat": 30,
+      "status": "ok",
+      "unit": "ms"
+    }
+  ],
+  "schema": "evidencescene.performance-benchmark.v1",
+  "scope": "synthetic kernel microbenchmark; not recorded-session endpoint latency and not a pose/surface accuracy evaluation"
+}

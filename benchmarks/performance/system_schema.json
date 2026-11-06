@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tiwater.github.io/evidencescene/system-performance.v1.json",
+  "title": "EvidenceScene system performance result",
+  "type": "object",
+  "required": ["schema", "system", "version", "protocol", "session", "environment", "metrics"],
+  "properties": {
+    "schema": {"const": "evidencescene.system-performance.v1"},
+    "system": {"type": "string", "minLength": 1},
+    "version": {"type": "string", "minLength": 1},
+    "protocol": {"type": "string", "minLength": 1},
+    "session": {
+      "type": "object",
+      "required": ["id", "frames", "input_sha256"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "frames": {"type": "integer", "minimum": 1},
+        "input_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": true
+    },
+    "environment": {
+      "type": "object",
+      "required": ["cpu", "gpu", "python", "numpy"],
+      "properties": {
+        "cpu": {"type": "string"},
+        "gpu": {"type": "string"},
+        "python": {"type": "string"},
+        "numpy": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["p50_ms", "p95_ms"],
+      "properties": {
+        "p50_ms": {"type": ["number", "null"], "minimum": 0},
+        "p95_ms": {"type": ["number", "null"], "minimum": 0},
+        "peak_rss_mb": {"type": ["number", "null"], "minimum": 0},
+        "nonlost_frames": {"type": ["integer", "null"], "minimum": 0},
+        "output_digest": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "notes": {"type": "string"}
+  },
+  "additionalProperties": true
+}

@@ -254,6 +254,7 @@ make tables        # regenerate the checked-in table fragments
 make paper-short   # build papers/evidencescene-short/evidencescene-short.pdf
 make paper         # build both manuscripts
 make perf          # synthetic hot-path microbenchmarks (not endpoint latency)
+make benchmark-versions  # compare the current tree with 04a1b6b
 
 # Compile the 8-page method paper (self-contained: figures are vendored)
 cd papers/evidencescene-short && tectonic main.tex && cd ../..
