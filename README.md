@@ -170,10 +170,11 @@ The checked-in comparison
 reports a **1.65x geometric-mean speed-up** across the seven workloads with
 **all output digests identical** on the recorded host. This is a kernel
 microbenchmark, not recorded-session endpoint latency or accuracy evidence.
-For cross-system comparison, use the strict
-[`system-performance.v1`](benchmarks/performance/system_schema.json) schema and
-`compare_systems.py`; do not compare BundleTrack/Point2Pose system latencies to
-kernel timings.
+Cross-system comparisons are kept outside the product path as dated,
+manually produced snapshots under
+[`benchmarks/competitors/`](benchmarks/competitors/); they are not run by CI
+and are not package dependencies. Do not compare BundleTrack/Point2Pose system
+latencies to kernel timings.
 
 ---
 

@@ -13,7 +13,7 @@ import cv2
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parents[2]))  # repository root
+sys.path.insert(0, str(HERE.parents[3]))  # repository root
 sys.path.insert(0, str(HERE))
 from common import base_metadata, frame_stems, p50_p95, write_result
 

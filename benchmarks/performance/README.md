@@ -142,22 +142,14 @@ schema:
 `session.input_sha256`; mismatched inputs are rejected. The numbers above are
 an illustrative shape, not a new measurement.
 
-### Controlled YCB system track
+### External competitor snapshots
 
-The first controlled system comparison is checked in under
-[`system_ycb/`](system_ycb/). It uses the same 40 YCBInEOAT `bleach0` frames,
-per-frame reference masks, host and RTX 5090 for both systems:
+Competitor measurements are kept out of the product benchmark path. They live
+under [`../competitors/`](../competitors/) as dated, manually produced snapshots
+with frozen inputs and provenance. They are not run by CI and are not package
+dependencies. The first snapshot is
+[`2026-11-06-ycb`](../competitors/2026-11-06-ycb/).
 
-| System | p50 | p95 | Throughput | Peak RSS |
-| --- | ---: | ---: | ---: | ---: |
-| EvidenceScene native BundleTrack branch | 30.24 ms | 33.05 ms | 33.1 fps | 2544.8 MB |
-| Point2Pose | 41.60 ms | 42.46 ms | 24.0 fps | 2219.9 MB |
-
-Both use `evidencescene.system-performance.v1`, share the same input SHA-256,
-and pass `compare_systems.py`. The scripts and environment requirements are in
-[`system_ycb/README.md`](system_ycb/README.md). The project page renders these
-controlled rows separately from published reference numbers.
-
-Other systems can be added by producing a `system-performance.v1` result with
-the same protocol and frozen input hash; no kernel timing can be substituted
-for that system-level measurement.
+`compare_systems.py` remains a generic tool for explicitly selected snapshots;
+it is not wired into CI. Do not substitute kernel timings for a system
+comparison.

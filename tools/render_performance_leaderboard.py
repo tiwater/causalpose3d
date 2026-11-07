@@ -1,8 +1,8 @@
-"""Render the homepage performance leaderboard from checked-in JSON.
+"""Render EvidenceScene's own performance dashboard from checked-in JSON.
 
-The generated block lives between two HTML comments in ``docs/index.html``.
-Keeping the data separate makes every number traceable and lets a version
-comparison be updated without hand-editing table markup.
+Competitor comparisons are intentionally not rendered as a live table: they
+live as dated, isolated snapshots under ``benchmarks/competitors/`` and are
+linked, not continuously integrated.
 """
 
 from __future__ import annotations
@@ -32,64 +32,47 @@ def _link(text: str, url: str) -> str:
     return f'<a href="{safe_url}" target="_blank" rel="noopener">{safe_text}</a>' if url else safe_text
 
 
-def _controlled_table(section: dict) -> str:
-    rows = []
-    for row in section["rows"]:
-        css = ' class="highlight-row"' if row.get("highlight") else ""
-        rows.append(
-            f"<tr{css}>"
-            f"<td><strong>{html.escape(row['system'])}</strong><br><code>{html.escape(row.get('variant', ''))}</code></td>"
-            f"<td>{html.escape(row['scope'])}</td>"
-            f"<td><strong>{_fmt(row.get('p50_ms'))}</strong></td>"
-            f"<td>{_fmt(row.get('p95_ms'))}</td>"
-            f"<td>{_fmt(row.get('throughput_fps'), 1)}</td>"
-            f"<td>{_fmt(row.get('peak_rss_mb'), 1)}</td>"
-            f"<td>{html.escape(row.get('frames', ''))}</td>"
-            f"<td>{_link(row.get('source', 'source'), row.get('source_url', ''))}</td>"
-            "</tr>"
-        )
-    return f"""
-      <h3>Controlled same-input comparison</h3>
-      <p class="caption" style="margin-top:0.35rem;">
-        Protocol <code>{html.escape(section['protocol'])}</code> · {html.escape(section['session'])} · {section['frames']} frames ·
-        input SHA-256 <code>{html.escape(section['input_sha256'][:16])}…</code><br>
-        {html.escape(section['hardware'])} · {html.escape(section['software'])}
-      </p>
-      <div class="table-wrapper">
-        <table class="benchmark-table">
-          <thead><tr>
-            <th>System</th><th>Scope</th><th>p50 (ms)</th><th>p95 (ms)</th><th>Throughput (fps)</th><th>Peak RSS (MB)</th><th>Frames</th><th>Source</th>
-          </tr></thead>
-          <tbody>{''.join(rows)}</tbody>
-        </table>
-      </div>
-      <p class="caption">{html.escape(section['notes'])}</p>
-"""
-
-
-def _reference_table(section: dict) -> str:
+def _kernel_table(section: dict) -> str:
     rows = []
     for row in section["rows"]:
         rows.append(
             "<tr>"
-            f"<td><strong>{html.escape(row['system'])}</strong></td>"
-            f"<td>{html.escape(row['scope'])}</td>"
-            f"<td>{html.escape(row.get('latency_text', 'n/a'))}</td>"
-            f"<td>{html.escape(row.get('hardware', ''))}</td>"
-            f"<td>{_link(row.get('source', 'source'), row.get('source_url', ''))}</td>"
+            f"<td><code>{html.escape(row['case'])}</code></td>"
+            f"<td>{_fmt(row['baseline_ms'], 3)}</td>"
+            f"<td><strong>{_fmt(row['candidate_ms'], 3)}</strong></td>"
+            f"<td>{_fmt(row['speedup'], 2)}x</td>"
             "</tr>"
         )
     return f"""
-      <h3 style="margin-top:2rem;">Reference context (not directly comparable)</h3>
-      <p class="caption" style="margin-top:0.35rem;">{html.escape(section['notes'])}</p>
+      <h3>EvidenceScene kernel performance (<code>{html.escape(section['protocol'])}</code>)</h3>
+      <p class="caption" style="margin-top:0.35rem;">
+        Baseline <code>{html.escape(section['baseline'])}</code> → candidate <code>{html.escape(section['candidate_label'])}</code>
+        (<code>{html.escape(section['candidate'])}</code>). Median latency in milliseconds; higher speed-up is better.
+      </p>
       <div class="table-wrapper">
         <table class="benchmark-table">
           <thead><tr>
-            <th>System</th><th>Scope / protocol</th><th>Reported latency</th><th>Hardware</th><th>Source</th>
+            <th>Workload</th><th>Baseline (ms)</th><th>Current (ms)</th><th>Speed-up</th>
           </tr></thead>
           <tbody>{''.join(rows)}</tbody>
         </table>
       </div>
+      <p class="caption">
+        Geometric-mean speed-up: <strong>{_fmt(section['geomean_speedup'], 2)}x</strong>;
+        output digests: <strong>{html.escape(section['output_parity'])}</strong>.
+        {html.escape(section['notes'])}
+      </p>
+"""
+
+
+def _external_snapshot(section: dict) -> str:
+    return f"""
+      <h3 style="margin-top:2rem;">External competitor snapshot</h3>
+      <p class="caption" style="margin-top:0.35rem;">
+        {_link(f"Snapshot {section['date']}", section['url'])} ·
+        protocol <code>{html.escape(section['protocol'])}</code>.
+        {html.escape(section['note'])}
+      </p>
 """
 
 
@@ -97,14 +80,12 @@ def render() -> str:
     data = json.loads(DATA.read_text())
     return (
         '<div class="claim-callout">'
-        "<strong>How to read this table:</strong> the controlled rows share one frozen input, host and GPU. "
-        "The reference rows come from different inputs/protocols and are shown only as context — they are not a ranking. "
-        f'Last updated: {html.escape(data["updated"])}. '
-        'Full protocol and commands: '
-        '<a href="https://github.com/tiwater/evidencescene/tree/main/benchmarks/performance" target="_blank" rel="noopener">benchmarks/performance</a>.'
+        "<strong>Scope:</strong> this dashboard reports EvidenceScene's own regression and version performance. "
+        "Competitor comparisons are dated, isolated snapshots — not CI jobs, package dependencies or a live leaderboard. "
+        f'Last updated: {html.escape(data["updated"])}.'
         "</div>\n"
-        + _controlled_table(data["controlled"])
-        + _reference_table(data["reference"])
+        + _kernel_table(data["kernel"])
+        + _external_snapshot(data["external_snapshot"])
     )
 
 

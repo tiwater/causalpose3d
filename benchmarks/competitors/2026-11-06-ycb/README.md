@@ -47,14 +47,14 @@ the package under test.
 
 ```bash
 # Cached pinned BundleTrack build + dependency-prefix marker
-python3 benchmarks/performance/system_ycb/run_bundletrack.py \
+python3 benchmarks/competitors/2026-11-06-ycb/run_bundletrack.py \
   --sequence /path/to/YCBInEOAT/bleach0 \
   --source-root /home/hugh/.cache/ticos-bundlesdf/runtime-pinned-20260714 \
   --build-root /home/hugh/.cache/ticos-bundlesdf/BundleTrack-build-pinned \
   --dependency-prefix /home/hugh/.cache/ticos-bundlesdf/dependency-prefix-v1 \
   --checkpoint /home/hugh/.cache/ticos-bundlesdf/runtime-pinned-20260714/BundleTrack/LoFTR/weights/outdoor_ds.ckpt \
   --frames 40 \
-  --out benchmarks/performance/system_ycb/results/bundletrack-ycb-bleach0-40f.json
+  --out benchmarks/competitors/2026-11-06-ycb/results/bundletrack-ycb-bleach0-40f.json
 ```
 
 The cached build is `ffa67d425240` plus the deterministic EvidenceScene patches;
@@ -65,12 +65,12 @@ it is the native pose branch, not a claim of unmodified upstream BundleTrack.
 ```bash
 # Python 3.12 environment with torch 2.8, gtsam 4.3, tapnet, LightGlue,
 # segment-anything-2-real-time and omegaconf.
-python3 benchmarks/performance/system_ycb/run_point2pose.py \
+python3 benchmarks/competitors/2026-11-06-ycb/run_point2pose.py \
   --sequence /path/to/YCBInEOAT/bleach0 \
   --point2pose-root /path/to/point-to-pose \
   --checkpoint /path/to/point-to-pose/checkpoints/tapir/causal_bootstapir_checkpoint.pt \
   --frames 40 \
-  --out benchmarks/performance/system_ycb/results/point2pose-ycb-bleach0-40f.json
+  --out benchmarks/competitors/2026-11-06-ycb/results/point2pose-ycb-bleach0-40f.json
 ```
 
 Pinned Point2Pose commit: `51856226610df75e5c06e8de545bd27f7c4ba99c`.
@@ -81,9 +81,9 @@ BootsTAPIR checkpoint SHA-256:
 
 ```bash
 python3 benchmarks/performance/compare_systems.py \
-  benchmarks/performance/system_ycb/results/bundletrack-ycb-bleach0-40f.json \
-  benchmarks/performance/system_ycb/results/point2pose-ycb-bleach0-40f.json \
-  --out benchmarks/performance/system_ycb/results/compare.md
+  benchmarks/competitors/2026-11-06-ycb/results/bundletrack-ycb-bleach0-40f.json \
+  benchmarks/competitors/2026-11-06-ycb/results/point2pose-ycb-bleach0-40f.json \
+  --out benchmarks/competitors/2026-11-06-ycb/results/compare.md
 ```
 
 ## Limits
