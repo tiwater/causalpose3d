@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_dashboard_tracks_own_metrics_and_external_snapshot_separately() -> None:
+def test_dashboard_keeps_own_and_external_data_separate() -> None:
     data = json.loads((ROOT / "docs" / "performance_leaderboard.json").read_text())
     assert data["schema"] == "evidencescene.performance-dashboard.v1"
     kernel = data["kernel"]
@@ -18,22 +18,28 @@ def test_dashboard_tracks_own_metrics_and_external_snapshot_separately() -> None
     for row in kernel["rows"]:
         assert row["baseline_ms"] > 0 and row["candidate_ms"] > 0
         assert row["speedup"] > 0
+
     snapshot = data["external_snapshot"]
     assert re.fullmatch(r"\d{4}-\d{2}-\d{2}", snapshot["date"])
-    assert snapshot["protocol"]
-    assert snapshot["url"].startswith("https://")
+    controlled = snapshot["controlled"]
+    assert controlled["protocol"] == "ycbineoat_bleach0_refmask_40f_v1"
+    assert re.fullmatch(r"[0-9a-f]{64}", controlled["input_sha256"])
+    assert len(controlled["rows"]) >= 2
+    for row in controlled["rows"]:
+        assert row["p50_ms"] > 0 and row["p95_ms"] >= row["p50_ms"]
+    assert len(snapshot["reference"]["rows"]) >= 4
     assert "not run by CI" in snapshot["note"]
 
 
-def test_homepage_renders_own_dashboard_without_live_competitor_table() -> None:
+def test_homepage_renders_own_and_dated_external_tables() -> None:
     page = (ROOT / "docs" / "index.html").read_text()
-    assert "PERFORMANCE_LEADERBOARD_START" in page
-    assert "PERFORMANCE_LEADERBOARD_END" in page
     block = page.split("PERFORMANCE_LEADERBOARD_START", 1)[1].split(
         "PERFORMANCE_LEADERBOARD_END", 1
     )[0]
     assert "EvidenceScene kernel performance" in block
     assert "External competitor snapshot" in block
-    assert "Controlled same-input comparison" not in block
-    for competitor in ("BundleSDF", "FoundationPose"):
-        assert competitor not in block
+    assert "Controlled same-input subset" in block
+    assert "Reference context" in block
+    assert "ycbineoat_bleach0_refmask_40f_v1" in block
+    assert "BundleSDF" in block
+    assert "FoundationPose" in block

@@ -577,7 +577,7 @@
           or a permanently maintained leaderboard.
         </p>
         <!-- PERFORMANCE_LEADERBOARD_START -->
-<div class="claim-callout"><strong>Scope:</strong> this dashboard reports EvidenceScene's own regression and version performance. Competitor comparisons are dated, isolated snapshots — not CI jobs, package dependencies or a live leaderboard. Last updated: 2026-11-06.</div>
+<div class="claim-callout"><strong>Scope:</strong> the kernel table tracks EvidenceScene's own regression. The competitor table is a dated, manually produced snapshot — not a CI job, package dependency or maintained leaderboard. Last updated: 2026-11-06.</div>
 
       <h3>EvidenceScene kernel performance (<code>kernel-v1</code>)</h3>
       <p class="caption" style="margin-top:0.35rem;">
@@ -598,12 +598,38 @@
         Synthetic kernel microbenchmarks; not recorded-session endpoint latency. Warm statistics on the recorded host. Every row compares the same output digest.
       </p>
 
-      <h3 style="margin-top:2rem;">External competitor snapshot</h3>
+      <h3 style="margin-top:2rem;">External competitor snapshot (2026-11-06)</h3>
       <p class="caption" style="margin-top:0.35rem;">
-        <a href="https://github.com/tiwater/evidencescene/blob/main/benchmarks/competitors/2026-11-06-ycb/README.md" target="_blank" rel="noopener">Snapshot 2026-11-06</a> ·
-        protocol <code>ycbineoat_bleach0_refmask_40f_v1</code>.
-        Competitor comparison is a manually produced, dated snapshot. It is not run by CI, not a package dependency and not a maintained leaderboard.
+        <a href="https://github.com/tiwater/evidencescene/blob/main/benchmarks/competitors/2026-11-06-ycb/README.md" target="_blank" rel="noopener">Snapshot protocol and commands</a>. Competitor comparisons are manually produced, dated snapshots. They are not run by CI, not package dependencies and not a maintained leaderboard.
       </p>
+      
+      <h4 style="margin-top:1.25rem;">Controlled same-input subset</h4>
+      <p class="caption" style="margin-top:0.25rem;">
+        Protocol <code>ycbineoat_bleach0_refmask_40f_v1</code> · input SHA-256
+        <code>39ae471e99f341be…</code><br>
+        NVIDIA RTX 5090 32 GB / AMD Ryzen 7 9800X3D · Python 3.12.13 / PyTorch 2.8.0+cu128 / CUDA 12.9
+      </p>
+      <div class="table-wrapper">
+        <table class="benchmark-table">
+          <thead><tr>
+            <th>System</th><th>Scope</th><th>p50 (ms)</th><th>p95 (ms)</th><th>Throughput (fps)</th><th>Peak RSS (MB)</th><th>Frames</th>
+          </tr></thead>
+          <tbody><tr class="highlight-row"><td><strong>EvidenceScene native pose branch</strong><br><code>BundleTrack backend + deterministic patches</code></td><td>Pose tracking only; surface integration disabled</td><td><strong>30.23</strong></td><td>33.05</td><td>33.1</td><td>2544.8</td><td>40 / 40 candidates</td></tr><tr><td><strong>Point2Pose</strong><br><code>reference masks; segmenter disabled</code></td><td>Frontend + local/global graph; SDF global rebuild disabled</td><td><strong>41.60</strong></td><td>42.46</td><td>24.0</td><td>2219.9</td><td>40 / 40 non-lost</td></tr></tbody>
+        </table>
+      </div>
+
+      
+      <h4 style="margin-top:1.5rem;">Reference context (not directly comparable)</h4>
+      <p class="caption" style="margin-top:0.25rem;">Published or historical numbers from different inputs, scopes and protocols. They are context, not a ranking, and must not be compared numerically to the controlled group.</p>
+      <div class="table-wrapper">
+        <table class="benchmark-table">
+          <thead><tr>
+            <th>System</th><th>Scope / protocol</th><th>Reported latency</th><th>Hardware</th><th>Source</th>
+          </tr></thead>
+          <tbody><tr><td><strong>EvidenceScene</strong></td><td>Warm HTTP endpoint; 40-frame configured pouring sequence</td><td>127.80 / 153.40 ms (p50 / p95)</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-short.pdf" target="_blank" rel="noopener">paper Table IX</a></td></tr><tr><td><strong>BundleTrack (upstream)</strong></td><td>Tracking stage; Laval Clock/Jar</td><td>98.4 / 118.1–122.9 ms (p50 / p95)</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-short.pdf" target="_blank" rel="noopener">paper matcher-shadow table</a></td></tr><tr><td><strong>Point2Pose</strong></td><td>Private two-object worker round trip; 552 frames</td><td>142.97 / 175.96 ms (p50 / p95)</td><td>RTX 5090 workstation</td><td><a href="https://github.com/tiwater/ticos-edge/blob/main/docs/papers/ticos-0804-worker-timing-repeat-20261029/summary.json" target="_blank" rel="noopener">Ticos Edge timing receipt</a></td></tr><tr><td><strong>BundleSDF</strong></td><td>Neural SDF tracking/reconstruction; chest/head observations</td><td>97 ms (10.3 fps)</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-monograph.pdf" target="_blank" rel="noopener">monograph framework table</a></td></tr><tr><td><strong>FoundationPose</strong></td><td>Pose initialization/tracking; CAD or reference views</td><td>65–120 ms</td><td>RTX 5090</td><td><a href="assets/papers/evidencescene-monograph.pdf" target="_blank" rel="noopener">monograph framework table</a></td></tr></tbody>
+        </table>
+      </div>
+
 <!-- PERFORMANCE_LEADERBOARD_END -->
       </div>
     </div>

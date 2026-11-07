@@ -1,8 +1,8 @@
-"""Render EvidenceScene's own performance dashboard from checked-in JSON.
+"""Render EvidenceScene's homepage performance dashboard from checked-in JSON.
 
-Competitor comparisons are intentionally not rendered as a live table: they
-live as dated, isolated snapshots under ``benchmarks/competitors/`` and are
-linked, not continuously integrated.
+EvidenceScene's own kernel regression is the live dashboard. Competitor rows
+are a dated, manually produced snapshot under ``benchmarks/competitors/`` and
+are not run by CI or packaged as dependencies.
 """
 
 from __future__ import annotations
@@ -65,14 +65,73 @@ def _kernel_table(section: dict) -> str:
 """
 
 
+def _controlled_table(section: dict) -> str:
+    rows = []
+    for row in section["rows"]:
+        css = ' class="highlight-row"' if row.get("highlight") else ""
+        rows.append(
+            f"<tr{css}>"
+            f"<td><strong>{html.escape(row['system'])}</strong><br><code>{html.escape(row.get('variant', ''))}</code></td>"
+            f"<td>{html.escape(row['scope'])}</td>"
+            f"<td><strong>{_fmt(row.get('p50_ms'))}</strong></td>"
+            f"<td>{_fmt(row.get('p95_ms'))}</td>"
+            f"<td>{_fmt(row.get('throughput_fps'), 1)}</td>"
+            f"<td>{_fmt(row.get('peak_rss_mb'), 1)}</td>"
+            f"<td>{html.escape(row.get('frames', ''))}</td>"
+            "</tr>"
+        )
+    return f"""
+      <h4 style="margin-top:1.25rem;">Controlled same-input subset</h4>
+      <p class="caption" style="margin-top:0.25rem;">
+        Protocol <code>{html.escape(section['protocol'])}</code> · input SHA-256
+        <code>{html.escape(section['input_sha256'][:16])}…</code><br>
+        {html.escape(section['hardware'])} · {html.escape(section['software'])}
+      </p>
+      <div class="table-wrapper">
+        <table class="benchmark-table">
+          <thead><tr>
+            <th>System</th><th>Scope</th><th>p50 (ms)</th><th>p95 (ms)</th><th>Throughput (fps)</th><th>Peak RSS (MB)</th><th>Frames</th>
+          </tr></thead>
+          <tbody>{''.join(rows)}</tbody>
+        </table>
+      </div>
+"""
+
+
+def _reference_table(section: dict) -> str:
+    rows = []
+    for row in section["rows"]:
+        rows.append(
+            "<tr>"
+            f"<td><strong>{html.escape(row['system'])}</strong></td>"
+            f"<td>{html.escape(row['scope'])}</td>"
+            f"<td>{html.escape(row.get('latency_text', 'n/a'))}</td>"
+            f"<td>{html.escape(row.get('hardware', ''))}</td>"
+            f"<td>{_link(row.get('source', 'source'), row.get('source_url', ''))}</td>"
+            "</tr>"
+        )
+    return f"""
+      <h4 style="margin-top:1.5rem;">Reference context (not directly comparable)</h4>
+      <p class="caption" style="margin-top:0.25rem;">{html.escape(section['note'])}</p>
+      <div class="table-wrapper">
+        <table class="benchmark-table">
+          <thead><tr>
+            <th>System</th><th>Scope / protocol</th><th>Reported latency</th><th>Hardware</th><th>Source</th>
+          </tr></thead>
+          <tbody>{''.join(rows)}</tbody>
+        </table>
+      </div>
+"""
+
+
 def _external_snapshot(section: dict) -> str:
     return f"""
-      <h3 style="margin-top:2rem;">External competitor snapshot</h3>
+      <h3 style="margin-top:2rem;">External competitor snapshot ({html.escape(section['date'])})</h3>
       <p class="caption" style="margin-top:0.35rem;">
-        {_link(f"Snapshot {section['date']}", section['url'])} ·
-        protocol <code>{html.escape(section['protocol'])}</code>.
-        {html.escape(section['note'])}
+        {_link('Snapshot protocol and commands', section['url'])}. {html.escape(section['note'])}
       </p>
+      {_controlled_table(section['controlled'])}
+      {_reference_table(section['reference'])}
 """
 
 
@@ -80,8 +139,8 @@ def render() -> str:
     data = json.loads(DATA.read_text())
     return (
         '<div class="claim-callout">'
-        "<strong>Scope:</strong> this dashboard reports EvidenceScene's own regression and version performance. "
-        "Competitor comparisons are dated, isolated snapshots — not CI jobs, package dependencies or a live leaderboard. "
+        "<strong>Scope:</strong> the kernel table tracks EvidenceScene's own regression. "
+        "The competitor table is a dated, manually produced snapshot — not a CI job, package dependency or maintained leaderboard. "
         f'Last updated: {html.escape(data["updated"])}.'
         "</div>\n"
         + _kernel_table(data["kernel"])
